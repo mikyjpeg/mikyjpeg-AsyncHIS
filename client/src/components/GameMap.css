@@ -1,0 +1,59 @@
+.game-map-container {
+    min-height: 100vh;
+    background: #2c3e50;
+    padding: 20px;
+    color: white;
+}
+
+.game-map-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.game-map-wrapper h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #ecf0f1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.map-container {
+    overflow: auto;
+    max-height: calc(100vh - 100px);
+    border: 2px solid #34495e;
+    border-radius: 8px;
+    background: #34495e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.game-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.error-message {
+    padding: 20px;
+    color: #fc8181;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.debug-info {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #cbd5e0;
+}
+
+.debug-info a {
+    color: #90cdf4;
+    text-decoration: none;
+}
+
+.debug-info a:hover {
+    text-decoration: underline;
+} 

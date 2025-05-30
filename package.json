@@ -1,7 +1,7 @@
 {
   "name": "asynchis",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Discord bot",
   "homepage": "https://github.com/mikyjpeg/AsyncHIS#readme",
   "bugs": {
     "url": "https://github.com/mikyjpeg/AsyncHIS/issues"
@@ -13,11 +13,24 @@
   "license": "MIT",
   "author": "Michele Pegoraro",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev:bot": "nodemon --config nodemon.json src/index.js",
+    "dev:client": "cd client && npm start",
+    "dev": "concurrently --names \"BOT,CLIENT\" --prefix-colors \"cyan.bold,green.bold\" --kill-others \"npm run dev:bot\" \"npm run dev:client\"",
+    "install:all": "npm install && cd client && npm install"
   },
   "dependencies": {
-    "discord.js": "^14.19.3"
+    "cors": "^2.8.5",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.28.0",
+    "nodemon": "^3.1.0"
   }
 }

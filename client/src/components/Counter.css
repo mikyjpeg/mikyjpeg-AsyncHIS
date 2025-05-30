@@ -1,0 +1,104 @@
+.counter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.counter-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.counter-card:hover {
+    transform: translateY(-5px);
+}
+
+.counter-card h2 {
+    color: #4a5568;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.counter-value {
+    font-size: 4em;
+    font-weight: bold;
+    color: #4c51bf;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: pulse 1s ease-in-out;
+}
+
+.counter-description {
+    color: #718096;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.counter-description code {
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #4a5568;
+    font-family: monospace;
+}
+
+.increment-button {
+    background: #4c51bf;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.increment-button:hover {
+    background: #434190;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 81, 191, 0.2);
+}
+
+.increment-button:active {
+    transform: translateY(0);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4c51bf;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+.counter-card.error {
+    border: 2px solid #fc8181;
+}
+
+.counter-card.error p {
+    color: #e53e3e;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+} 

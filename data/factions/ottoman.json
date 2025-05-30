@@ -1,0 +1,10 @@
+{
+    "name": "Ottoman",
+    "discordUserId": null,
+    "discordUsername": null,
+    "cardsPerTurn": 5,
+    "victoryPoints": 0,
+    "ruler": "Suleiman",
+    "isActive": false,
+    "lastUpdated": "2025-05-30T23:04:23.502Z"
+}

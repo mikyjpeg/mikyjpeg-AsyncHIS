@@ -1,0 +1,10 @@
+{
+    "name": "England",
+    "discordUserId": null,
+    "discordUsername": null,
+    "cardsPerTurn": 4,
+    "victoryPoints": 0,
+    "ruler": "Henry VIII",
+    "isActive": false,
+    "lastUpdated": "2025-05-30T23:52:23.683Z"
+}

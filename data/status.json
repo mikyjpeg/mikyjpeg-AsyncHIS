@@ -1,0 +1,68 @@
+{
+  "turn": 1,
+  "phase": "setup",
+  "activePlayer": null,
+  "currentCardIndex": 0,
+  "playedCards": {
+    "turn1": [],
+    "turn2": [],
+    "turn3": [],
+    "turn4": [],
+    "turn5": [],
+    "turn6": [],
+    "turn7": [],
+    "turn8": []
+  },
+  "victoryPoints": {
+    "ottoman": 0,
+    "hapsburg": 0,
+    "england": 0,
+    "france": 0,
+    "papacy": 0,
+    "protestant": 0
+  },
+  "passedPowers": [],
+  "diplomacy": {
+    "ottoman": {
+      "wars": [],
+      "alliances": []
+    },
+    "hapsburg": {
+      "wars": [],
+      "alliances": []
+    },
+    "england": {
+      "wars": [],
+      "alliances": []
+    },
+    "france": {
+      "wars": [],
+      "alliances": []
+    },
+    "papacy": {
+      "wars": [],
+      "alliances": []
+    },
+    "protestant": {
+      "wars": [],
+      "alliances": []
+    },
+    "venice": {
+      "wars": [],
+      "alliances": []
+    },
+    "scotland": {
+      "wars": [],
+      "alliances": []
+    },
+    "genoa": {
+      "wars": [],
+      "alliances": []
+    },
+    "hungary": {
+      "wars": [],
+      "alliances": []
+    }
+  },
+  "lastUpdated": "2025-05-30T22:47:54.351Z"
+}
