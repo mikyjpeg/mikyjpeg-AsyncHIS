@@ -1,0 +1,23 @@
+{
+  "name": "asynchis",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/mikyjpeg/AsyncHIS#readme",
+  "bugs": {
+    "url": "https://github.com/mikyjpeg/AsyncHIS/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mikyjpeg/AsyncHIS.git"
+  },
+  "license": "MIT",
+  "author": "Michele Pegoraro",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3"
+  }
+}
