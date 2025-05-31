@@ -1,0 +1,51 @@
+{
+  "name": "Barbary Coast",
+  "adjacentZones": ["Atlantic Ocean","Gulf of Lyon","Tyrrhenian Sea","Ionian Sea", "North African Coast"],
+  "adjacentPorts": ["Gibraltar","Cartagena","Oran","Tunis","Algiers","Cagliari","Palma"],
+  "fleets": [
+    {
+      "owningPower": "Hapsburg",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    },
+    {
+      "owningPower": "France",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    },
+    {
+      "owningPower": "Papacy",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    },
+    {
+      "owningPower": "Ottoman",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": [],
+      "corsairs": 0
+    },
+    {
+      "owningPower": "Venice",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    },
+    {
+      "owningPower": "Genoa",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    },
+    {
+      "owningPower": "Scotland",
+      "squadrons": 0,
+      "interceptable": false,
+      "leaders": []
+    }
+  ],
+  "hasPiracyToken": false
+}
