@@ -5,6 +5,7 @@ const path = require('path');
 const { token } = require('./config.js');
 const { GameState, POWERS } = require('./game/gameState');
 const factionManager = require('./game/factionManager');
+const spaceManager = require('./game/spaceManager');
 
 // Create Express app
 const app = express();
@@ -79,10 +80,10 @@ function print(message) {
 // Helper function to safely send a reply
 async function safeReply(message, content) {
     try {
-        print('SafeReply - Attempting to send: ' + content);
+        console.log('SafeReply - Attempting to send:', content);
         return await message.channel.send(`${message.author}: ${content}`);
     } catch (error) {
-        print('SafeReply - Error: ' + error.message);
+        console.error('SafeReply - Error:', error.message);
         // Don't throw, just return false to indicate failure
         return false;
     }
@@ -120,7 +121,7 @@ client.on('messageCreate', async message => {
     const args = message.content.split(' ');
     const command = args[0].toLowerCase();
 
-    print('Processing command: ' + command + ' from user: ' + message.author.username);
+    console.log(`Processing command: ${command} from user: ${message.author.username}`);
 
     try {
         switch (command) {
@@ -135,7 +136,10 @@ client.on('messageCreate', async message => {
 - !start - Start a new game
 - !join [power] - Join the game as a power (Ottoman, Hapsburg, England, France, Papacy, or Protestant)
 - !leave [power] - Give up control of a power
-- !status - Show current game status`);
+- !status - Show current game status
+- !control [space] [power] - Take control of a space with a power
+- !uncontrol [space] - Remove control of a space
+- !controlled [power] - List all spaces controlled by a power`);
                 break;
 
             case '!start':
@@ -152,21 +156,21 @@ client.on('messageCreate', async message => {
                 try {
                     const powerInput = args.slice(1).join(' ').replace(/[\[\]]/g, '');
                     const powerName = powerInput.charAt(0).toUpperCase() + powerInput.slice(1).toLowerCase();
-                    print('User ' + message.author.username + ' attempting to join as ' + powerName);
+                    console.log(`User ${message.author.username} attempting to join as ${powerName}`);
                     
                     await GameState.assignPower(message.author.id, message.author.username, powerName);
-                    print('Successfully assigned ' + powerName + ' to ' + message.author.username);
+                    console.log(`Successfully assigned ${powerName} to ${message.author.username}`);
                     
-                    print('>>> BEFORE SAFE REPLY - JOIN <<<');
+                    console.log('>>> BEFORE SAFE REPLY - JOIN <<<');
                     const joinReplySuccess = await safeReply(message, `Successfully assigned ${powerName} to ${message.author.username}`);
-                    print('>>> AFTER SAFE REPLY - JOIN: ' + (joinReplySuccess ? 'SUCCESS' : 'FAILED') + ' <<<');
+                    console.log('>>> AFTER SAFE REPLY - JOIN:', joinReplySuccess ? 'SUCCESS' : 'FAILED', '<<<');
                     
                 } catch (error) {
-                    print('Error in join command: ' + error.message);
+                    console.error('Error in join command:', error.message);
                     try {
                         await message.channel.send(`Error: ${error.message}`);
                     } catch (msgError) {
-                        print('Failed to send error message: ' + msgError.message);
+                        console.error('Failed to send error message:', msgError.message);
                     }
                 }
                 break;
@@ -179,21 +183,21 @@ client.on('messageCreate', async message => {
                 try {
                     const leaveInput = args.slice(1).join(' ').replace(/[\[\]]/g, '');
                     const leavePowerName = leaveInput.charAt(0).toUpperCase() + leaveInput.slice(1).toLowerCase();
-                    print('User ' + message.author.username + ' attempting to leave ' + leavePowerName);
+                    console.log(`User ${message.author.username} attempting to leave ${leavePowerName}`);
                     
                     await GameState.leavePower(message.author.id, leavePowerName);
-                    print('Successfully removed ' + message.author.username + ' from ' + leavePowerName);
+                    console.log(`Successfully removed ${message.author.username} from ${leavePowerName}`);
                     
-                    print('>>> BEFORE SAFE REPLY - LEAVE <<<');
+                    console.log('>>> BEFORE SAFE REPLY - LEAVE <<<');
                     const leaveReplySuccess = await safeReply(message, `Successfully removed ${message.author.username} from ${leavePowerName}`);
-                    print('>>> AFTER SAFE REPLY - LEAVE: ' + (leaveReplySuccess ? 'SUCCESS' : 'FAILED') + ' <<<');
+                    console.log('>>> AFTER SAFE REPLY - LEAVE:', leaveReplySuccess ? 'SUCCESS' : 'FAILED', '<<<');
                     
                 } catch (error) {
-                    print('Error in leave command: ' + error.message);
+                    console.error('Error in leave command:', error.message);
                     try {
                         await message.channel.send(`Error: ${error.message}`);
                     } catch (msgError) {
-                        print('Failed to send error message: ' + msgError.message);
+                        console.error('Failed to send error message:', msgError.message);
                     }
                 }
                 break;
@@ -203,13 +207,81 @@ client.on('messageCreate', async message => {
                 const statusMessage = await formatGameStatus();
                 await safeReply(message, statusMessage);
                 break;
+
+            case '!control':
+                if (args.length < 3) {
+                    await safeReply(message, 'Please specify both the space name and the power that will control it. Usage: !control [space] [power]');
+                    break;
+                }
+                try {
+                    const spaceName = args[1];
+                    const powerName = args.slice(2).join(' ');
+                    
+                    // Validate that the user can control this power
+                    await spaceManager.validateUserControl(message.author.id, powerName, factionManager);
+                    
+                    console.log(`Attempting to set ${powerName} control over ${spaceName}`);
+                    await spaceManager.takeControl(spaceName, powerName, message.author.id);
+                    await safeReply(message, `Successfully set ${powerName} control over ${spaceName}`);
+                } catch (error) {
+                    console.error('Error in control command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!uncontrol':
+                if (args.length < 2) {
+                    await safeReply(message, 'Please specify the space name. Usage: !uncontrol [space]');
+                    break;
+                }
+                try {
+                    const spaceName = args[1];
+                    
+                    // Get the space to check who controls it
+                    const space = await spaceManager.getSpace(spaceName);
+                    if (space.controllingPower) {
+                        // Validate that the user controls the power that controls the space
+                        await spaceManager.validateUserControl(message.author.id, space.controllingPower, factionManager);
+                    }
+                    
+                    console.log(`Attempting to remove control from ${spaceName}`);
+                    await spaceManager.removeControl(spaceName);
+                    await safeReply(message, `Successfully removed control from ${spaceName}`);
+                } catch (error) {
+                    console.error('Error in uncontrol command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!controlled':
+                if (args.length < 2) {
+                    await safeReply(message, 'Please specify the power to check. Usage: !controlled [power]');
+                    break;
+                }
+                try {
+                    const powerName = args.slice(1).join(' ');
+                    const controlledSpaces = await spaceManager.getControlledSpaces(powerName);
+                    
+                    if (controlledSpaces.length === 0) {
+                        await safeReply(message, `${powerName} does not control any spaces.`);
+                    } else {
+                        const spacesList = controlledSpaces
+                            .map(space => `- ${space.name}${space.type === 'key' || space.type === 'fortress' || space.type === 'capital' ? ` (${space.type})` : ''}`)
+                            .join('\n');
+                        await safeReply(message, `Spaces controlled by ${powerName}:\n${spacesList}`);
+                    }
+                } catch (error) {
+                    console.error('Error in controlled command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
         }
     } catch (error) {
-        print('Command error: ' + error.message);
+        console.error('Command error:', error.message);
         try {
             await message.channel.send(`Error: ${error.message}`);
         } catch (msgError) {
-            print('Failed to send error message: ' + msgError.message);
+            console.error('Failed to send error message:', msgError.message);
         }
     }
 });

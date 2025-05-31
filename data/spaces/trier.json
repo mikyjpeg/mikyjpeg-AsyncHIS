@@ -1,0 +1,12 @@
+{
+  "name": "Trier",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "electorate",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

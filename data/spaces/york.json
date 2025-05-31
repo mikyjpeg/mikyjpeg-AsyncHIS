@@ -1,0 +1,13 @@
+{
+  "name": "York",
+  "homePower": "England",
+  "language": "english",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

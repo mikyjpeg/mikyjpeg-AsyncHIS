@@ -1,0 +1,12 @@
+{
+  "name": "Brest",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

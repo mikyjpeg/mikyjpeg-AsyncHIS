@@ -1,0 +1,13 @@
+{
+  "name": "Antwerp",
+  "homePower": "Hapsburg",
+  "language": "null",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

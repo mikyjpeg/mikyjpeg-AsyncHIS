@@ -1,0 +1,12 @@
+{
+  "name": "Linz",
+  "homePower": "Hapsburg",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Stirling",
+  "homePower": "Scotland",
+  "language": "english",
+  "type": "fortress",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

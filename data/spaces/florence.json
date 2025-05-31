@@ -1,0 +1,13 @@
+{
+  "name": "Florence",
+  "homePower": "Independent",
+  "language": "italian",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

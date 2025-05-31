@@ -1,0 +1,13 @@
+{
+  "name": "Istanbul",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "capital",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

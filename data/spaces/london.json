@@ -1,0 +1,13 @@
+{
+  "name": "London",
+  "homePower": "England",
+  "language": "english",
+  "type": "capital",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

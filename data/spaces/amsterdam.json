@@ -1,0 +1,12 @@
+{
+  "name": "Amsterdam",
+  "homePower": "Hapsburg",
+  "language": "null",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

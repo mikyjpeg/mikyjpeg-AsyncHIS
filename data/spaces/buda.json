@@ -1,0 +1,13 @@
+{
+  "name": "Buda",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

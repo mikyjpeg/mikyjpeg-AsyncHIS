@@ -1,0 +1,12 @@
+{
+  "name": "Bucharest",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

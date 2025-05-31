@@ -1,0 +1,13 @@
+{
+  "name": "Marseille",
+  "homePower": "France",
+  "language": "french",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

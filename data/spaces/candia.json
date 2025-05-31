@@ -1,0 +1,13 @@
+{
+  "name": "Candia",
+  "homePower": "Venice",
+  "language": "other",
+  "type": "fortress",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

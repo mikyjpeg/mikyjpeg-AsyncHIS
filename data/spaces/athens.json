@@ -1,0 +1,13 @@
+{
+  "name": "Athens",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Tours",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

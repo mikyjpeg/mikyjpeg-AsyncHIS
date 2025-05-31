@@ -1,0 +1,12 @@
+{
+  "name": "Tripoli",
+  "homePower": "Mixed",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Navarre",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

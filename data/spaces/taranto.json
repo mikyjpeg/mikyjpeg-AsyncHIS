@@ -1,0 +1,12 @@
+{
+  "name": "Taranto",
+  "homePower": "Hapsburg",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

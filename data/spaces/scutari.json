@@ -1,0 +1,13 @@
+{
+  "name": "Scutari",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "fortress",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Varna",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

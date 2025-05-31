@@ -1,0 +1,12 @@
+{
+  "name": "Glasgow",
+  "homePower": "Scotland",
+  "language": "english",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

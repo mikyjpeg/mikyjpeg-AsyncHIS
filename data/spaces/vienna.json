@@ -1,0 +1,13 @@
+{
+  "name": "Vienna",
+  "homePower": "Hapsburg",
+  "language": "german",
+  "type": "capital",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Paris",
+  "homePower": "France",
+  "language": "french",
+  "type": "capital",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

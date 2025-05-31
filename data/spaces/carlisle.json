@@ -1,0 +1,12 @@
+{
+  "name": "Carlisle",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

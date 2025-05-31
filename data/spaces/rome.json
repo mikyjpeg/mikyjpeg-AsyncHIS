@@ -1,0 +1,13 @@
+{
+  "name": "Rome",
+  "homePower": "Papacy",
+  "language": "italian",
+  "type": "capital",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}

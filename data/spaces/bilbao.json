@@ -1,0 +1,12 @@
+{
+  "name": "Bilbao",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": []
+}

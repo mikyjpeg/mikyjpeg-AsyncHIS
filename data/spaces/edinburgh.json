@@ -1,0 +1,13 @@
+{
+  "name": "Edinburgh",
+  "homePower": "Scotland",
+  "language": "english",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "troops": 0,
+  "leaders": [],
+  "underSiege": false
+}
