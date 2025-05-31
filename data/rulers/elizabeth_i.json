@@ -1,0 +1,11 @@
+{
+  "name": "Elizabeth I",
+  "faction": "England",
+  "battleRating": 0,
+  "commandRating": 0,
+  "adminRating": 2,
+  "cardBonus": 1,
+  "isCurrentRuler": false,
+  "excommunicated": false,
+  "otherinfo": "English armies are protestant"
+}

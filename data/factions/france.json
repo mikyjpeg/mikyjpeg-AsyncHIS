@@ -8,5 +8,8 @@
   "isActive": false,
   "lastUpdated": "2025-05-30T23:24:46.063Z",
   "alliances": [],
-  "atWarWith": []
+  "atWarWith": [],
+  "cardModifier": 0,
+  "bonusVP": [],
+  "bonusVPTotal": 0
 }

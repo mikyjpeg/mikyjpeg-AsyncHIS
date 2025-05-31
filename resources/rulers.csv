@@ -1,0 +1,15 @@
+name,faction,battleRating,CommandRating,adminRating,cardBonus,isCurrentRuler,excommunicated,otherinfo
+Henry VIII,England,1,8,1,1,true,false,Ignore English troops in Reformation/Counter Reformation rolls
+Suleiman,Ottoman,2,12,2,0,true,false,
+Martin Luther,Protestant,0,0,2,0,true,false,
+Francis I,France,1,8,1,1,true,false,
+Leo X,Papacy,0,0,0,0,true,false,
+Charles V,Hapsburg,2,10,2,0,true,false,
+Elizabeth I,England,0,0,2,1,false,false,English armies are protestant
+Edward VI,England,0,0,1,0,false,false,English armies are protestant
+Clement VII,Papacy,0,0,1,0,false,false,
+Paul III,Papacy,0,0,1,1,false,false,
+Hervy,France,0,0,1,0,false,false,
+Calvin,Protestant,0,0,1,0,false,false,
+Mary I,England,0,0,1,0,false,false,
+Julius III,Papacy,0,0,0,1,false,false,
