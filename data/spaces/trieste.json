@@ -1,11 +1,11 @@
 {
-  "name": "Córdoba",
+  "name": "Trieste",
   "homePower": "Hapsburg",
-  "language": "spanish",
+  "language": "italian",
   "type": "space",
-  "hasPorts": false,
+  "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Venice","Graz","Agram","Zara"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

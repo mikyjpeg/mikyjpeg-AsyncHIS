@@ -5,7 +5,7 @@
   "type": "fortress",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Edinburgh","Glasgow"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

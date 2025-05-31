@@ -5,7 +5,7 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Boulogne","Orléans","St. Quentin","Rouen","Dijon","St. Dizier"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

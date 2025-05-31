@@ -5,7 +5,7 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Madrid","Corunna","Bilbao"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

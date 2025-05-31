@@ -5,7 +5,7 @@
   "type": "electorate",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Brandenburg","Leipzig","Prague","Breslau","Magdeburg"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

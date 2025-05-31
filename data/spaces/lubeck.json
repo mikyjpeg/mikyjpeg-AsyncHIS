@@ -1,11 +1,11 @@
 {
-  "name": "Lubeck",
+  "name": "Lübeck",
   "homePower": "Protestant",
   "language": "german",
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Stettin","Hamburg","Magdeburg","Brandenburg"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

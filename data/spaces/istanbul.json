@@ -5,7 +5,7 @@
   "type": "capital",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Edirne","Varna"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

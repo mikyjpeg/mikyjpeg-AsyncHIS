@@ -5,8 +5,8 @@
   "type": "electorate",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Worms","Nuremberg","Regensburg","Salzburg"],
+  "passConnectedTo": ["Innsbruck"],
   "troops": 0,
   "leaders": []
 }

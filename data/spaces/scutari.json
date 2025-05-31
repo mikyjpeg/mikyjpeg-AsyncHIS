@@ -5,8 +5,8 @@
   "type": "fortress",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Ragusa","Durazzo"],
+  "passConnectedTo": ["Nezh"],
   "troops": 0,
   "leaders": [],
   "underSiege": false

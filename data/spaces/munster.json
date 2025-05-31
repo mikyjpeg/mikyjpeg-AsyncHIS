@@ -5,7 +5,7 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Bremen","Cologne","Amsterdam","Kassel"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

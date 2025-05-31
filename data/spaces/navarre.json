@@ -5,8 +5,8 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Bilbao","Zaragoza"],
+  "passConnectedTo": ["Bordeaux"],
   "troops": 0,
   "leaders": [],
   "underSiege": false

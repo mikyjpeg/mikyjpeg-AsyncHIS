@@ -5,7 +5,7 @@
   "type": "fortress",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Seville","Granada"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

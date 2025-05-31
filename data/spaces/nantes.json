@@ -5,7 +5,7 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Brest","Rouen","Tours","Bordeaux"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

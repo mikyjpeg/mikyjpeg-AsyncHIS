@@ -1,11 +1,11 @@
 {
-  "name": "Zürich",
-  "homePower": "Independent",
-  "language": "german",
+  "name": "Córdoba",
+  "homePower": "Hapsburg",
+  "language": "spanish",
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Madrid","Seville","Granada"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

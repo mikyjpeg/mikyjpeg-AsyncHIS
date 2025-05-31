@@ -5,7 +5,7 @@
   "type": "fortress",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Antwerp","Liege","St. Quentin","St. Dizier","Calais"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

@@ -5,8 +5,8 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Turin","Florence","Pavia","Siena"],
+  "passConnectedTo": ["Nice"],
   "troops": 0,
   "leaders": [],
   "underSiege": false

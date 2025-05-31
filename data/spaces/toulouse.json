@@ -5,8 +5,8 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Bordeaux","Avignon"],
+  "passConnectedTo": ["Barcelona"],
   "troops": 0,
   "leaders": []
 }

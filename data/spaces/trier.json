@@ -5,7 +5,7 @@
   "type": "electorate",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Liege","Mainz","Metz"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

@@ -16,7 +16,7 @@ England,Plymouth,english,space,true
 France,Rouen,french,key,true
 France,Boulogne,french,space,true
 France,Paris,french,capital,false
-France,Orleans,french,space,false
+France,Orléans,french,space,false
 France,Tours,french,space,false
 France,Dijon,french,space,false
 France,Lyon,french,key,false
@@ -49,6 +49,7 @@ Hapsburg,Navarre,spanish,key,false
 Hapsburg,Antwerp,null,key,true
 Hapsburg,Amsterdam,null,space,true
 Hapsburg,Brussels,french,fortress,false
+Hapsburg,Trieste,italian,space,true
 Protestant,Bremen,german,space,true
 Protestant,Hamburg,german,space,true
 Protestant,Lubeck,german,space,true

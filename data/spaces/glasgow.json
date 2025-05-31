@@ -5,7 +5,7 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Stirling","Edinburgh","Carlisle"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

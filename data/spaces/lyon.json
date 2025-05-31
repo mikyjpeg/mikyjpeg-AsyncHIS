@@ -5,7 +5,7 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Geneva","Limoges","Dijon","Avignon","Orléans","Grenoble"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

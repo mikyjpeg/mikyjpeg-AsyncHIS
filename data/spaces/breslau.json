@@ -5,7 +5,7 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Brandenburg","Brunn","Wittenberg"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": []

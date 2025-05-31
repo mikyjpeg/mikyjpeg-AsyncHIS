@@ -5,7 +5,7 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Brunn","Linz","Pressburg","Graz"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

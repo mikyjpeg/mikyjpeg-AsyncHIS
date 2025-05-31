@@ -5,8 +5,8 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
-  "passConnectedTo": [],
+  "connectedTo": ["Larissa","Edirne"],
+  "passConnectedTo": ["Sofia"],
   "troops": 0,
   "leaders": [],
   "underSiege": false

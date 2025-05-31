@@ -5,7 +5,7 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Gibraltar","Córdoba"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

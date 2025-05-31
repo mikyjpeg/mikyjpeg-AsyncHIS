@@ -5,7 +5,7 @@
   "type": "capital",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Portsmouth","Bristol","Lincoln","Norwich","Shrewsbury"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

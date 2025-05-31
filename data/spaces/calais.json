@@ -1,12 +1,13 @@
 {
-  "name": "Wales",
+  "name": "Calais",
   "homePower": "England",
   "language": "english",
-  "type": "space",
+  "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Shrewsbury","Bristol"],
+  "connectedTo": ["Antwerp","Brussels","Boulogne"],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "underSiege": false
 }

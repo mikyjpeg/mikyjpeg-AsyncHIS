@@ -5,7 +5,7 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Varna","Istanbul","Sofia","Salonika"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],

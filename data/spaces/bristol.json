@@ -5,7 +5,7 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": [],
+  "connectedTo": ["Wales","Plymouth","London","Portsmouth","Shrewsbury"],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
