@@ -7,7 +7,7 @@ class RulerSuccessionManager {
             'England': [
                 ['Henry VIII', 'Edward VI'],
                 ['Henry VIII', 'Mary I'],
-                ['Henry VIII', 'Elizabeth I'],
+                ['Edward VI', 'Mary I'],
                 ['Mary I', 'Elizabeth I']
             ],
             'Papacy': [
@@ -22,6 +22,9 @@ class RulerSuccessionManager {
                 ['Martin Luther', 'Calvin']
             ]
         };
+
+        // Define factions that require explicit successor specification
+        this.factionsRequiringSuccessor = ['England'];
     }
 
     async getCurrentRuler(faction) {
@@ -40,29 +43,80 @@ class RulerSuccessionManager {
         }
     }
 
-    async getNextRuler(faction, currentRulerName) {
+    requiresSuccessorSpecification(faction) {
+        return this.factionsRequiringSuccessor.includes(faction);
+    }
+
+    async getValidSuccessors(faction, currentRulerName) {
         const successionPaths = this.successionPaths[faction];
         if (!successionPaths) {
             throw new Error(`No succession path defined for faction: ${faction}`);
         }
 
-        // Find the succession path that starts with the current ruler
+        // Find all succession paths that start with the current ruler
+        const validPaths = successionPaths.filter(path => path[0] === currentRulerName);
+        if (validPaths.length === 0) {
+            throw new Error(`No valid succession paths found for ${currentRulerName} in ${faction}`);
+        }
+
+        // Return array of possible successors
+        return validPaths.map(path => path[1]);
+    }
+
+    async validateSuccession(faction, currentRulerName, newRulerName) {
+        const validPaths = this.successionPaths[faction];
+        if (!validPaths) {
+            throw new Error(`No succession path defined for faction: ${faction}`);
+        }
+
+        const isValidPath = validPaths.some(
+            path => path[0] === currentRulerName && path[1] === newRulerName
+        );
+
+        if (!isValidPath) {
+            const validSuccessors = await this.getValidSuccessors(faction, currentRulerName);
+            throw new Error(
+                `Invalid succession path. ${currentRulerName} can only be succeeded by: ${validSuccessors.join(', ')}`
+            );
+        }
+
+        return true;
+    }
+
+    async getNextRuler(faction, currentRulerName, specifiedSuccessor = null) {
+        const successionPaths = this.successionPaths[faction];
+        if (!successionPaths) {
+            throw new Error(`No succession path defined for faction: ${faction}`);
+        }
+
+        if (this.requiresSuccessorSpecification(faction)) {
+            if (!specifiedSuccessor) {
+                const validSuccessors = await this.getValidSuccessors(faction, currentRulerName);
+                throw new Error(
+                    `For ${faction}, you must specify the successor. Valid successors for ${currentRulerName} are: ${validSuccessors.join(', ')}`
+                );
+            }
+            // Validate the specified successor
+            await this.validateSuccession(faction, currentRulerName, specifiedSuccessor);
+            return specifiedSuccessor;
+        }
+
+        // For other factions, use the automatic succession
         const validPath = successionPaths.find(path => path[0] === currentRulerName);
         if (!validPath) {
             throw new Error(`No valid succession path found for ${currentRulerName} in ${faction}`);
         }
 
-        // Return the next ruler in the path
         return validPath[1];
     }
 
-    async changeRuler(faction) {
+    async changeRuler(faction, specifiedSuccessor = null) {
         try {
             // Get current ruler
             const currentRuler = await this.getCurrentRuler(faction);
             
             // Get next ruler name
-            const nextRulerName = await this.getNextRuler(faction, currentRuler.name);
+            const nextRulerName = await this.getNextRuler(faction, currentRuler.name, specifiedSuccessor);
             
             // Update current ruler's status
             currentRuler.isCurrentRuler = false;

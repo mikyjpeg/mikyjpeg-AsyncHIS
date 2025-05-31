@@ -158,5 +158,52 @@
     "success": true,
     "errorMessage": null,
     "undone": true
+  },
+  {
+    "commandId": 9,
+    "timestamp": "2025-05-31T22:31:41.315Z",
+    "username": "mikyjpeg",
+    "command": "!new_ruler England Mary I",
+    "type": "ruler_change",
+    "data": {
+      "faction": "England Mary I"
+    },
+    "success": false,
+    "errorMessage": "Invalid faction. Valid factions are: England, Papacy, France, Protestant",
+    "undone": false
+  },
+  {
+    "commandId": 10,
+    "timestamp": "2025-05-31T22:34:49.525Z",
+    "username": "mikyjpeg",
+    "command": "!new_ruler England Mary I",
+    "type": "ruler_change",
+    "data": {
+      "oldRuler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "newRuler": {
+        "name": "Mary I",
+        "faction": "England",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
   }
 ]
