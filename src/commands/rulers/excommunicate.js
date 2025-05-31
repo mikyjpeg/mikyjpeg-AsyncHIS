@@ -11,6 +11,7 @@ module.exports = {
         }
 
         const rulerName = args.join(' ');
+        const commandString = `!excommunicate ${rulerName}`;
 
         try {
             // Check if excommunication is possible and get the reason
@@ -20,6 +21,7 @@ module.exports = {
                 await commandHistory.addToHistory(
                     createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { rulerName }),
                     message.author.username,
+                    commandString,
                     false,
                     validation.reason
                 );
@@ -32,7 +34,8 @@ module.exports = {
             // Record successful command in history
             const historyEntry = await commandHistory.addToHistory(
                 createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { ruler: result.ruler }),
-                message.author.username
+                message.author.username,
+                commandString
             );
 
             return `${rulerName} has been excommunicated (Command ID: ${historyEntry.commandId}). Reason: ${validation.reason}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
@@ -41,6 +44,7 @@ module.exports = {
             await commandHistory.addToHistory(
                 createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { rulerName }),
                 message.author.username,
+                commandString,
                 false,
                 error.message
             );

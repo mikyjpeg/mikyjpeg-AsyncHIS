@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "commandId": 1,
+    "timestamp": "2025-05-31T22:14:09.748Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "faction": "France"
+    },
+    "success": false,
+    "errorMessage": "Failed to change ruler for France: Ruler \"Henry II\" not found",
+    "undone": false
+  },
+  {
+    "commandId": 2,
+    "timestamp": "2025-05-31T22:14:36.674Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "faction": "Leo X"
+    },
+    "success": false,
+    "errorMessage": "Invalid faction. Valid factions are: England, Papacy, France, Protestant",
+    "undone": false
+  },
+  {
+    "commandId": 3,
+    "timestamp": "2025-05-31T22:16:15.986Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "faction": "France"
+    },
+    "success": false,
+    "errorMessage": "Failed to change ruler for France: Error getting current ruler for France: No current ruler found for France",
+    "undone": false
+  },
+  {
+    "commandId": 4,
+    "timestamp": "2025-05-31T22:16:48.564Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "oldRuler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": null
+      },
+      "newRuler": {
+        "name": "Henry II",
+        "faction": "France",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 5,
+    "timestamp": "2025-05-31T22:18:10.486Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "faction": "Leo X"
+    },
+    "success": false,
+    "errorMessage": "Invalid faction. Valid factions are: England, Papacy, France, Protestant",
+    "undone": false
+  },
+  {
+    "commandId": 6,
+    "timestamp": "2025-05-31T22:18:32.158Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "faction": "Leo X"
+    },
+    "success": false,
+    "errorMessage": "Invalid faction. Valid factions are: England, Papacy, France, Protestant",
+    "undone": false
+  },
+  {
+    "commandId": 7,
+    "timestamp": "2025-05-31T22:19:36.299Z",
+    "username": "mikyjpeg",
+    "type": "ruler_change",
+    "data": {
+      "oldRuler": {
+        "name": "Leo X",
+        "faction": "Papacy",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 0,
+        "cardBonus": 0,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": null
+      },
+      "newRuler": {
+        "name": "Clement VII",
+        "faction": "Papacy",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 8,
+    "timestamp": "2025-05-31T22:24:36.409Z",
+    "username": "mikyjpeg",
+    "command": "!new_ruler England",
+    "type": "ruler_change",
+    "data": {
+      "oldRuler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "newRuler": {
+        "name": "Edward VI",
+        "faction": "England",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": "English armies are protestant"
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  }
+]

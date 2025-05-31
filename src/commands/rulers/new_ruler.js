@@ -12,6 +12,7 @@ module.exports = {
         }
 
         const faction = args.join(' ');
+        const commandString = `!new_ruler ${faction}`;
         
         try {
             // Validate faction
@@ -21,6 +22,7 @@ module.exports = {
                 await commandHistory.addToHistory(
                     createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, { faction }),
                     message.author.username,
+                    commandString,
                     false,
                     `Invalid faction. Valid factions are: ${validFactions.join(', ')}`
                 );
@@ -36,7 +38,8 @@ module.exports = {
                     oldRuler: result.oldRuler,
                     newRuler: result.newRuler
                 }),
-                message.author.username
+                message.author.username,
+                commandString
             );
             
             return `Ruler change successful for ${faction} (Command ID: ${historyEntry.commandId}):\n${result.oldRuler.name} -> ${result.newRuler.name}`;
@@ -47,6 +50,7 @@ module.exports = {
                 await commandHistory.addToHistory(
                     createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, { faction }),
                     message.author.username,
+                    commandString,
                     false,
                     error.message
                 );

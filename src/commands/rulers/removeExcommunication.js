@@ -11,15 +11,30 @@ module.exports = {
         }
 
         const rulerName = args.join(' ');
+        const commandString = `!remove_excommunication ${rulerName}`;
 
-        // Remove excommunication
-        const result = await rulerManager.removeExcommunication(rulerName);
-        
-        // Record in history
-        commandHistory.addToHistory(createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, {
-            ruler: result.ruler
-        }));
+        try {
+            // Remove excommunication
+            const result = await rulerManager.removeExcommunication(rulerName);
+            
+            // Record successful command in history
+            const historyEntry = await commandHistory.addToHistory(
+                createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, { ruler: result.ruler }),
+                message.author.username,
+                commandString
+            );
 
-        return `Excommunication has been removed from ${rulerName}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
+            return `Excommunication has been removed from ${rulerName}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
+        } catch (error) {
+            // Record error in history
+            await commandHistory.addToHistory(
+                createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, { rulerName }),
+                message.author.username,
+                commandString,
+                false,
+                error.message
+            );
+            throw error;
+        }
     }
 }; 

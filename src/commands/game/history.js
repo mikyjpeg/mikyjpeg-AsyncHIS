@@ -20,6 +20,7 @@ module.exports = {
                 const error = entry.errorMessage ? `\n    Error: ${entry.errorMessage}` : '';
                 
                 return `[${entry.commandId}] ${date} - ${entry.username}\n` +
+                       `    Command: ${entry.command}\n` +
                        `    Type: ${entry.type}\n` +
                        `    Status: ${status}${error}`;
             }).join('\n\n');

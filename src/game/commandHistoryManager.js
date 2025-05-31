@@ -30,7 +30,7 @@ class CommandHistoryManager {
         await fs.writeFile(this.auditFilePath, JSON.stringify(history, null, 2));
     }
 
-    async addToHistory(commandEntry, username, success = true, errorMessage = null) {
+    async addToHistory(commandEntry, username, commandString, success = true, errorMessage = null) {
         const history = await this.readAuditFile();
         this.lastCommandId++;
 
@@ -38,6 +38,7 @@ class CommandHistoryManager {
             commandId: this.lastCommandId,
             timestamp: new Date().toISOString(),
             username,
+            command: commandString,
             type: commandEntry.type,
             data: commandEntry.data,
             success,
