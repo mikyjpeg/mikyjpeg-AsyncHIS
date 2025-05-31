@@ -1,10 +1,12 @@
 {
-    "name": "England",
-    "discordUserId": "311483939711746048",
-    "discordUsername": "mikyjpeg",
-    "cardsPerTurn": 4,
-    "victoryPoints": 0,
-    "ruler": "Henry VIII",
-    "isActive": true,
-    "lastUpdated": "2025-05-30T23:54:04.911Z"
+  "name": "England",
+  "discordUserId": "311483939711746048",
+  "discordUsername": "mikyjpeg",
+  "cardsPerTurn": 4,
+  "victoryPoints": 0,
+  "ruler": "Henry VIII",
+  "isActive": true,
+  "lastUpdated": "2025-05-30T23:54:04.911Z",
+  "alliances": [],
+  "atWarWith": []
 }

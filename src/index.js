@@ -6,6 +6,7 @@ const { token } = require('./config.js');
 const { GameState, POWERS } = require('./game/gameState');
 const factionManager = require('./game/factionManager');
 const spaceManager = require('./game/spaceManager');
+const diplomacyManager = require('./game/diplomacyManager');
 
 // Create Express app
 const app = express();
@@ -139,7 +140,11 @@ client.on('messageCreate', async message => {
 - !status - Show current game status
 - !control [space] [power] - Take control of a space with a power
 - !uncontrol [space] - Remove control of a space
-- !controlled [power] - List all spaces controlled by a power`);
+- !controlled [power] - List all spaces controlled by a power
+- !declare_war [power1] [power2] - Declare war between two powers
+- !make_peace [power1] [power2] - Make peace between two powers
+- !ally [power1] [power2] - Form an alliance between two powers
+- !break_alliance [power1] [power2] - Break an alliance between two powers`);
                 break;
 
             case '!start':
@@ -272,6 +277,78 @@ client.on('messageCreate', async message => {
                     }
                 } catch (error) {
                     console.error('Error in controlled command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!declare_war':
+                if (args.length < 3) {
+                    await safeReply(message, 'Please specify both powers. Usage: !declare_war [power1] [power2]');
+                    break;
+                }
+                try {
+                    const power1 = args[1];
+                    const power2 = args[2];
+                    console.log(`Attempting to declare war between ${power1} and ${power2}`);
+                    
+                    await diplomacyManager.declareWar(power1, power2);
+                    await safeReply(message, `War declared between ${power1} and ${power2}!`);
+                } catch (error) {
+                    console.error('Error in declare_war command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!make_peace':
+                if (args.length < 3) {
+                    await safeReply(message, 'Please specify both powers. Usage: !make_peace [power1] [power2]');
+                    break;
+                }
+                try {
+                    const power1 = args[1];
+                    const power2 = args[2];
+                    console.log(`Attempting to make peace between ${power1} and ${power2}`);
+                    
+                    await diplomacyManager.makePeace(power1, power2);
+                    await safeReply(message, `Peace established between ${power1} and ${power2}!`);
+                } catch (error) {
+                    console.error('Error in make_peace command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!ally':
+                if (args.length < 3) {
+                    await safeReply(message, 'Please specify both powers. Usage: !ally [power1] [power2]');
+                    break;
+                }
+                try {
+                    const power1 = args[1];
+                    const power2 = args[2];
+                    console.log(`Attempting to form alliance between ${power1} and ${power2}`);
+                    
+                    await diplomacyManager.declareAlliance(power1, power2);
+                    await safeReply(message, `Alliance formed between ${power1} and ${power2}!`);
+                } catch (error) {
+                    console.error('Error in ally command:', error.message);
+                    await message.channel.send(`Error: ${error.message}`);
+                }
+                break;
+
+            case '!break_alliance':
+                if (args.length < 3) {
+                    await safeReply(message, 'Please specify both powers. Usage: !break_alliance [power1] [power2]');
+                    break;
+                }
+                try {
+                    const power1 = args[1];
+                    const power2 = args[2];
+                    console.log(`Attempting to break alliance between ${power1} and ${power2}`);
+                    
+                    await diplomacyManager.removeAlliance(power1, power2);
+                    await safeReply(message, `Alliance broken between ${power1} and ${power2}!`);
+                } catch (error) {
+                    console.error('Error in break_alliance command:', error.message);
                     await message.channel.send(`Error: ${error.message}`);
                 }
                 break;
