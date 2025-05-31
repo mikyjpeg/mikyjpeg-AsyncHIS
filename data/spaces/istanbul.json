@@ -10,9 +10,8 @@
     "Varna"
   ],
   "passConnectedTo": [],
-  "troops": 0,
-  "leaders": [],
   "underSiege": false,
   "jesuiteUniversity": false,
-  "reformers": []
+  "reformers": [],
+  "formations": []
 }

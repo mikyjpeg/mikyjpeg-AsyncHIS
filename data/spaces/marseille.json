@@ -10,10 +10,9 @@
     "Nice"
   ],
   "passConnectedTo": [],
-  "troops": 0,
-  "leaders": [],
   "underSiege": false,
   "jesuiteUniversity": false,
   "catholic": true,
-  "reformers": []
+  "reformers": [],
+  "formations": []
 }

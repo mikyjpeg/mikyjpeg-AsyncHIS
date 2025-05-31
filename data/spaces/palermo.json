@@ -9,9 +9,8 @@
     "Messina"
   ],
   "passConnectedTo": [],
-  "troops": 0,
-  "leaders": [],
   "jesuiteUniversity": false,
   "catholic": true,
-  "reformers": []
+  "reformers": [],
+  "formations": []
 }

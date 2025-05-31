@@ -99,7 +99,9 @@ class CommandHistoryManager {
 const COMMAND_TYPES = {
     EXCOMMUNICATION: 'excommunication',
     REMOVE_EXCOMMUNICATION: 'remove_excommunication',
-    RULER_CHANGE: 'ruler_change'
+    RULER_CHANGE: 'ruler_change',
+    ADD_FORMATION: 'add_formation',
+    REMOVE_FORMATION: 'remove_formation'
 };
 
 // Factory for creating command history entries
