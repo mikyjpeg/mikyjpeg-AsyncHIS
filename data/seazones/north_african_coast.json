@@ -1,7 +1,10 @@
 {
   "name": "North African Coast",
-  "adjacentZones": ["Ionian Sea","Aegean Sea","Barbary Coast"],
-  "adjacentPorts": ["Tunis","Malta","Candia","Rhodes"],
+  "adjacentZones": [
+    "Ionian Sea",
+    "Aegean Sea",
+    "Barbary Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,11 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Tunis",
+    "Malta",
+    "Candia",
+    "Rhodes"
+  ]
 }

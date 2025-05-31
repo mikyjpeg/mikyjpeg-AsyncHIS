@@ -1,7 +1,8 @@
 {
   "name": "Black Sea",
-  "adjacentZones": ["Aegean Sea"],
-  "adjacentPorts": ["Varna","Istanbul"],
+  "adjacentZones": [
+    "Aegean Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +48,9 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Varna",
+    "Istanbul"
+  ]
 }

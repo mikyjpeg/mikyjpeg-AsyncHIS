@@ -1,7 +1,9 @@
 {
   "name": "Atlantic Ocean",
-  "adjacentZones": ["Bay of Biscay","Barbary Coast"],
-  "adjacentPorts": ["Seville","Gibraltar","Corunna"],
+  "adjacentZones": [
+    "Bay of Biscay",
+    "Barbary Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +49,10 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Seville",
+    "Gibraltar",
+    "Corunna"
+  ]
 }

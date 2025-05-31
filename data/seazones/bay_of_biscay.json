@@ -1,7 +1,10 @@
 {
   "name": "Bay of Biscay",
-  "adjacentZones": ["Atlantic Ocean","Irish Sea","English Channel"],
-  "adjacentPorts": ["Brest","Nantes","Bordeaux","Corunna"],
+  "adjacentZones": [
+    "Atlantic Ocean",
+    "Irish Sea",
+    "English Channel"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,11 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Brest",
+    "Nantes",
+    "Bordeaux",
+    "Corunna"
+  ]
 }

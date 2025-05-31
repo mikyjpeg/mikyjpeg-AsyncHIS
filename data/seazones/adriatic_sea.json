@@ -1,7 +1,8 @@
 {
   "name": "Adriatic Sea",
-  "adjacentZones": ["Ionian Sea"],
-  "adjacentPorts": ["Trieste","Venice","Ravenna","Ancona","Ragusa","Scutari","Durazzo","Corfu"],
+  "adjacentZones": [
+    "Ionian Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +48,15 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Trieste",
+    "Venice",
+    "Ravenna",
+    "Ancona",
+    "Ragusa",
+    "Scutari",
+    "Durazzo",
+    "Corfu"
+  ]
 }

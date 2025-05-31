@@ -1,7 +1,10 @@
 {
   "name": "Irish Sea",
-  "adjacentZones": ["Bay of Biscay","English Channel","North Sea"],
-  "adjacentPorts": ["Glasgow"],
+  "adjacentZones": [
+    "Bay of Biscay",
+    "English Channel",
+    "North Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,8 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Glasgow"
+  ]
 }

@@ -1,7 +1,10 @@
 {
   "name": "Aegean Sea",
-  "adjacentZones": ["Ionian Sea","Black Sea","North African Coast"],
-  "adjacentPorts": ["Coron","Athens","Salonika","Istanbul","Rhodes","Candia"],
+  "adjacentZones": [
+    "Ionian Sea",
+    "Black Sea",
+    "North African Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,13 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Coron",
+    "Athens",
+    "Salonika",
+    "Istanbul",
+    "Rhodes",
+    "Candia"
+  ]
 }

@@ -1,7 +1,9 @@
 {
   "name": "Gulf of Lyon",
-  "adjacentZones": ["Barbary Coast","Tyrrhenian Sea"],
-  "adjacentPorts": ["Cartagena","Valencia","Barcelona","Palma","Marseille","Nice","Genoa","Bastia"],
+  "adjacentZones": [
+    "Barbary Coast",
+    "Tyrrhenian Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +49,15 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Cartagena",
+    "Valencia",
+    "Barcelona",
+    "Palma",
+    "Marseille",
+    "Nice",
+    "Genoa",
+    "Bastia"
+  ]
 }

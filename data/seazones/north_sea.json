@@ -1,7 +1,10 @@
 {
   "name": "North Sea",
-  "adjacentZones": ["Baltic Sea","English Channel","Irish Sea"],
-  "adjacentPorts": ["Bremen","Hamburg","Amsterdam","Antwerp","Calais","London","Norwich","Edinburgh","Berwick"],
+  "adjacentZones": [
+    "Baltic Sea",
+    "English Channel",
+    "Irish Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,16 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Bremen",
+    "Hamburg",
+    "Amsterdam",
+    "Antwerp",
+    "Calais",
+    "London",
+    "Norwich",
+    "Edinburgh",
+    "Berwick"
+  ]
 }

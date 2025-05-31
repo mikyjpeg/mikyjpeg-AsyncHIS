@@ -1,7 +1,10 @@
 {
   "name": "Tyrrhenian Sea",
-  "adjacentZones": ["Gulf of Lyon","Ionian Sea","Barbary Coast"],
-  "adjacentPorts": ["Genoa","Bastia","Cagliari","Palermo","Naples","Rome","Messina"],
+  "adjacentZones": [
+    "Gulf of Lyon",
+    "Ionian Sea",
+    "Barbary Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,14 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Genoa",
+    "Bastia",
+    "Cagliari",
+    "Palermo",
+    "Naples",
+    "Rome",
+    "Messina"
+  ]
 }

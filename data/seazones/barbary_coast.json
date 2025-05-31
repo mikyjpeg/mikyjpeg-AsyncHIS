@@ -1,7 +1,12 @@
 {
   "name": "Barbary Coast",
-  "adjacentZones": ["Atlantic Ocean","Gulf of Lyon","Tyrrhenian Sea","Ionian Sea", "North African Coast"],
-  "adjacentPorts": ["Gibraltar","Cartagena","Oran","Tunis","Algiers","Cagliari","Palma"],
+  "adjacentZones": [
+    "Atlantic Ocean",
+    "Gulf of Lyon",
+    "Tyrrhenian Sea",
+    "Ionian Sea",
+    "North African Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +52,14 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Gibraltar",
+    "Cartagena",
+    "Oran",
+    "Tunis",
+    "Algiers",
+    "Cagliari",
+    "Palma"
+  ]
 }

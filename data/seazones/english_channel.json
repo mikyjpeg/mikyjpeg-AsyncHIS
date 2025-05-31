@@ -1,7 +1,10 @@
 {
   "name": "English Channel",
-  "adjacentZones": ["Bay of Biscay","Irish Sea","North Sea"],
-  "adjacentPorts": ["Brest","Plymouth","Portsmouth","Calais","Boulogne","Rouen"],
+  "adjacentZones": [
+    "Bay of Biscay",
+    "Irish Sea",
+    "North Sea"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +50,13 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Brest",
+    "Plymouth",
+    "Portsmouth",
+    "Calais",
+    "Boulogne",
+    "Rouen"
+  ]
 }

@@ -1,7 +1,11 @@
 {
   "name": "Ionian Sea",
-  "adjacentZones": ["Adriatic Sea","Aegean Sea","North African Coast","Barbary Coast"],
-  "adjacentPorts": ["Taranto","Corfu","Lepanto","Coron","Malta","Messina"],
+  "adjacentZones": [
+    "Adriatic Sea",
+    "Aegean Sea",
+    "North African Coast",
+    "Barbary Coast"
+  ],
   "fleets": [
     {
       "owningPower": "Hapsburg",
@@ -47,5 +51,13 @@
       "leaders": []
     }
   ],
-  "hasPiracyToken": false
+  "hasPiracyToken": false,
+  "ports": [
+    "Taranto",
+    "Corfu",
+    "Lepanto",
+    "Coron",
+    "Malta",
+    "Messina"
+  ]
 }
