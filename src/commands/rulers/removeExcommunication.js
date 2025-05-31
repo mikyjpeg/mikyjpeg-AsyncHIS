@@ -1,4 +1,5 @@
 const rulerManager = require('../../game/rulerManager');
+const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
 
 module.exports = {
     name: 'remove_excommunication',
@@ -12,7 +13,13 @@ module.exports = {
         const rulerName = args.join(' ');
 
         // Remove excommunication
-        await rulerManager.removeExcommunication(rulerName);
-        return `Excommunication has been removed from ${rulerName}`;
+        const result = await rulerManager.removeExcommunication(rulerName);
+        
+        // Record in history
+        commandHistory.addToHistory(createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, {
+            ruler: result.ruler
+        }));
+
+        return `Excommunication has been removed from ${rulerName}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
     }
 }; 

@@ -26,6 +26,23 @@ class RulerManager {
         }
     }
 
+    async getFactionRulers(faction) {
+        try {
+            const files = await fs.readdir(this.rulersDir);
+            const rulers = await Promise.all(
+                files
+                    .filter(f => f.endsWith('.json'))
+                    .map(async f => {
+                        const data = await fs.readFile(path.join(this.rulersDir, f), 'utf8');
+                        return JSON.parse(data);
+                    })
+            );
+            return rulers.filter(ruler => ruler.faction === faction);
+        } catch (error) {
+            throw new Error(`Error getting rulers for faction ${faction}: ${error.message}`);
+        }
+    }
+
     async updateRuler(rulerName, rulerData) {
         const filePath = path.join(this.rulersDir, `${rulerName.toLowerCase().replace(/\s+/g, '_')}.json`);
         await fs.writeFile(filePath, JSON.stringify(rulerData, null, 2));
@@ -102,9 +119,20 @@ class RulerManager {
             throw new Error(`${rulerName} is already excommunicated`);
         }
 
+        // Update ruler's excommunication status
         ruler.excommunicated = true;
         await this.updateRuler(rulerName, ruler);
-        return ruler;
+
+        // Update faction's card modifier
+        const faction = await diplomacyManager.getFaction(ruler.faction);
+        faction.cardModifier = (faction.cardModifier || 0) - 1;
+        await diplomacyManager.updateFaction(ruler.faction, faction);
+
+        return {
+            ruler,
+            cardModifierChange: -1,
+            newCardModifier: faction.cardModifier
+        };
     }
 
     async removeExcommunication(rulerName) {
@@ -113,9 +141,20 @@ class RulerManager {
             throw new Error(`${rulerName} is not excommunicated`);
         }
 
+        // Update ruler's excommunication status
         ruler.excommunicated = false;
         await this.updateRuler(rulerName, ruler);
-        return ruler;
+
+        // Update faction's card modifier
+        const faction = await diplomacyManager.getFaction(ruler.faction);
+        faction.cardModifier = (faction.cardModifier || 0) + 1;
+        await diplomacyManager.updateFaction(ruler.faction, faction);
+
+        return {
+            ruler,
+            cardModifierChange: 1,
+            newCardModifier: faction.cardModifier
+        };
     }
 }
 
