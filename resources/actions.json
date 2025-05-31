@@ -1,0 +1,262 @@
+[
+    {
+    "action": "Move formation in clear",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": 1,
+    "England": 1,
+    "France": 1,
+    "Papacy": 1,
+    "Protestant": 1
+    },
+    "section": 13,
+    "description": "Cost is per space entered. 4 units allowed in formation (Exception: with leaders, limit is sum of command values of 1 or 2 leaders). If enemy space is entered, field battle initiated at no additional cost. If enter enemy fortified space with 4 or fewer defending troops, defenders can withdraw into fortifications and be placed under siege."
+    },
+    {
+    "action": "Move formation over pass",
+    "cost": {
+    "Ottoman": 2,
+    "Hapsburg": 2,
+    "England": 2,
+    "France": 2,
+    "Papacy": 2,
+    "Protestant": 2
+    },
+    "section": 13,
+    "description": "Cost is to enter the space across the pass. Stacking limit, combat, and siege work the same as in 'Move formation in clear'."
+    },
+    {
+    "action": "Naval move",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": 1,
+    "England": 1,
+    "France": 1,
+    "Papacy": 1,
+    "Protestant": 1
+    },
+    "section": 16,
+    "description": "Cost is to move ALL friendly naval units to an adjacent port or sea zone. If enter a sea zone or port with enemy naval units, naval combat is initiated."
+    },
+    {
+    "action": "Buy mercenary",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": 1,
+    "England": 1,
+    "France": 1,
+    "Papacy": 1,
+    "Protestant": "-"
+    },
+    "section": 17,
+    "description": "Raise 1 mercenary in any home space (friendly-controlled and not enemy occupied)."
+    },
+    {
+    "action": "Raise regular troop",
+    "cost": {
+    "Ottoman": 2,
+    "Hapsburg": 2,
+    "England": 2,
+    "France": 2,
+    "Papacy": 2,
+    "Protestant": "-"
+    },
+    "section": 17,
+    "description": "Raise 1 regular in any home space (friendly-controlled and not enemy occupied)."
+    },
+    {
+    "action": "Raise cavalry (Sipahi)",
+    "cost": {
+    "Ottoman": 2,
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 17,
+    "description": "Raise 1 cavalry in any home space (friendly-controlled and not enemy occupied)."
+    },
+    {
+    "action": "Build naval squadron",
+    "cost": {
+    "Ottoman": 2,
+    "Hapsburg": 2,
+    "England": 2,
+    "France": 2,
+    "Papacy": 2,
+    "Protestant": "-"
+    },
+    "section": 17,
+    "description": "Raise 1 naval squadron in any home port (friendly-controlled and not enemy occupied)."
+    },
+    {
+    "action": "Build corsair",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 17,
+    "description": "Raise 1 corsair at Algiers or in any home port (friendly-controlled and not enemy occupied)."
+    },
+    {
+    "action": "Assault / foreign war",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": 1,
+    "England": 1,
+    "France": 1,
+    "Papacy": 1,
+    "Protestant": 1
+    },
+    "section": 17,
+    "description": "Assault a fortress that had been placed under siege in a previous impulse. (Or Ottoman or English player resolves a Foreign War)."
+    },
+    {
+    "action": "Control unfortified space",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": 1,
+    "England": 1,
+    "France": 1,
+    "Papacy": 1,
+    "Protestant": 1
+    },
+    "section": 17,
+    "description": "Flip control on unfortified space if either (a) friendly land units are in the space, or (b) friendly land units are adjacent and no enemy units are adjacent to the space. Action also used to remove unrest."
+    },
+    {
+    "action": "Initiate piracy in sea zone",
+    "cost": {
+    "Ottoman": 1,
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 16,
+    "description": "Resolve a pirate raid in a sea zone containing one or more Ottoman corsairs. Target is a port or naval squadron of another power (other than Papacy, if not at war with Ottomans). Maximum 4 times per turn."
+    },
+    {
+    "action": "Explore",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": 2,
+    "England": 2,
+    "France": 2,
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 20,
+    "description": "Place the 'Exploration Underway' marker for this power in the Crossing Atlantic Box. Resolve Voyage of Exploration at the end of turn."
+    },
+    {
+    "action": "Colonize",
+    "cost": {
+    "Ottoman": 2,
+    "Hapsburg": 3,
+    "England": 3,
+    "France": 2,
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 20,
+    "description": "Add a colony in the New World (limit 3 for Hapsburgs, 2 for England, 2 for France). Cost is 2 CP for Hapsburgs, 3 for others."
+    },
+    {
+    "action": "Conquer",
+    "cost": {
+    "Ottoman": 4,
+    "Hapsburg": 4,
+    "England": 4,
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": "-"
+    },
+    "section": 20,
+    "description": "If Hapsburgs, place their 'Conquest Underway' marker in the Crossing Atlantic Box. If England or France, place and evaluate conquest marker there. Resolve Voyage of Conquest at the end of turn."
+    },
+    {
+    "action": "Translate scripture",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": 1
+    },
+    "section": 18,
+    "description": "Protestant player moves New Testament or Bible marker for one language one space further on track. If translation is complete, Protestant makes 6 Reformation attempts in that language zone. Reformation attempts in that language zone."
+    },
+    {
+    "action": "Publish treatise",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": 3,
+    "France": "-",
+    "Papacy": "-",
+    "Protestant": 2
+    },
+    "section": 18,
+    "description": "Protestant: 2 Reformation attempts targeting one language zone (2 CP). England: 2 Reformation attempts in English language zone (3 CP)."
+    },
+    {
+    "action": "Call theological debate",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": 3,
+    "Protestant": 3
+    },
+    "section": 18,
+    "description": "Initiate theological debate in one language zone."
+    },
+    {
+    "action": "Build Saint Peter's",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": 1,
+    "Protestant": "-"
+    },
+    "section": 18,
+    "description": "Papal player moves St Peter's construction marker one space on track. If reaches rightmost space, add 1 VP and reset marker to 0 CP."
+    },
+    {
+    "action": "Burn books",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": 2,
+    "Protestant": "-"
+    },
+    "section": 18,
+    "description": "Papal player makes 2 Counter Reformation attempts targeting 1 language zone."
+    },
+    {
+    "action": "Found Jesuit university",
+    "cost": {
+    "Ottoman": "-",
+    "Hapsburg": "-",
+    "England": "-",
+    "France": "-",
+    "Papacy": 3,
+    "Protestant": "-"
+    },
+    "section": 18,
+    "description": "Add a Jesuit university to any Catholic space on the map."
+    }
+    ]

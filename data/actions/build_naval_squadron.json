@@ -1,0 +1,30 @@
+{
+  "name": "Build naval squadron",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 17,
+  "description": "Raise 1 naval squadron in any home port (friendly-controlled and not enemy occupied)."
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Colonize",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 3
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 3
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 20,
+  "description": "Add a colony in the New World (limit 3 for Hapsburgs, 2 for England, 2 for France). Cost is 2 CP for Hapsburgs, 3 for others."
+}

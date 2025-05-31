@@ -1,0 +1,26 @@
+{
+  "name": "Build Saint Peter's",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 18,
+  "description": "Papal player moves St Peter's construction marker one space on track. If reaches rightmost space, add 1 VP and reset marker to 0 CP."
+}

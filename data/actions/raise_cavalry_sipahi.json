@@ -1,0 +1,26 @@
+{
+  "name": "Raise cavalry (Sipahi)",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 17,
+  "description": "Raise 1 cavalry in any home space (friendly-controlled and not enemy occupied)."
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Naval move",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 1
+    }
+  },
+  "rulesSection": 16,
+  "description": "Cost is to move ALL friendly naval units to an adjacent port or sea zone. If enter a sea zone or port with enemy naval units, naval combat is initiated."
+}
