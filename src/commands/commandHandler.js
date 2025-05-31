@@ -4,7 +4,7 @@ const path = require('path');
 class CommandHandler {
     constructor() {
         this.commands = new Map();
-        this.commandCategories = ['diplomacy', 'spaces', 'game'];
+        this.commandCategories = ['diplomacy', 'spaces', 'game', 'religion'];
     }
 
     async loadCommands() {
