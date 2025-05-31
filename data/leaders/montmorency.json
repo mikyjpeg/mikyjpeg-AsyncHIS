@@ -1,0 +1,9 @@
+{
+  "name": "Montmorency",
+  "power": "France",
+  "battleRating": 1,
+  "commandRating": 6,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

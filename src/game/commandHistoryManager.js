@@ -101,7 +101,9 @@ const COMMAND_TYPES = {
     REMOVE_EXCOMMUNICATION: 'remove_excommunication',
     RULER_CHANGE: 'ruler_change',
     ADD_FORMATION: 'add_formation',
-    REMOVE_FORMATION: 'remove_formation'
+    REMOVE_FORMATION: 'remove_formation',
+    CAPTURE_LEADER: 'capture_leader',
+    RELEASE_LEADER: 'release_leader'
 };
 
 // Factory for creating command history entries

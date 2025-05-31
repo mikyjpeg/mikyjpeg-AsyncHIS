@@ -1,0 +1,19 @@
+name,power,battleRating,commandRating,type,isCaptured,isActive
+Andrea Doria,Genoa,2,0,naval,false,true
+Duke of Alva,Hapsburg,1,6,land,false,true
+Ferdinand,Hapsburg,1,6,land,false,true
+Charles V,Hapsburg,2,10,land,false,true
+Henry II,France,0,8,land,false,true
+Montmorency,France,1,6,land,false,true
+Francis I,France,1,8,land,false,true
+Brandon,England,1,6,land,false,true
+Henry VIII,England,1,8,land,false,true
+Dudley,England,0,6,land,false,true
+Dragut,Ottoman,1,2,naval,false,true
+Barbarossa,Ottoman,2,1,naval,false,true
+Suleiman,Ottoman,2,12,land,false,true
+Ibrahim,Ottoman,1,6,land,false,true
+John Frederick,Protestant,0,6,land,false,false
+Renegade,Independent,1,6,land,false,false
+Philip of Hesse,Protestant,0,6,land,false,false
+Maurice of Sax,Hapsburg,1,6,land,false,false

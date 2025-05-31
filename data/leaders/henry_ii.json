@@ -1,0 +1,9 @@
+{
+  "name": "Henry II",
+  "power": "France",
+  "battleRating": 0,
+  "commandRating": 8,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

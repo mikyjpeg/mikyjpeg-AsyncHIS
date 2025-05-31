@@ -1,0 +1,9 @@
+{
+  "name": "Philip of Hesse",
+  "power": "Protestant",
+  "battleRating": 0,
+  "commandRating": 6,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": false
+}

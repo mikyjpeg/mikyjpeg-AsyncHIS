@@ -1,0 +1,9 @@
+{
+  "name": "Andrea Doria",
+  "power": "Genoa",
+  "battleRating": 2,
+  "commandRating": 0,
+  "type": "naval",
+  "isCaptured": false,
+  "isActive": true
+}

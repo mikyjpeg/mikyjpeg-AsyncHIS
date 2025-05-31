@@ -1,0 +1,9 @@
+{
+  "name": "Maurice of Sax",
+  "power": "Hapsburg",
+  "battleRating": 1,
+  "commandRating": 6,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": false
+}
