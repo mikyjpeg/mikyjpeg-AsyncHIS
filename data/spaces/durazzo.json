@@ -5,8 +5,14 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Scutari"],
-  "passConnectedTo": ["Larissa"],
+  "connectedTo": [
+    "Scutari"
+  ],
+  "passConnectedTo": [
+    "Larissa"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

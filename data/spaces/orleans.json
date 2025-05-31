@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Paris","Dijon","Lyon","Tours"],
+  "connectedTo": [
+    "Paris",
+    "Dijon",
+    "Lyon",
+    "Tours"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

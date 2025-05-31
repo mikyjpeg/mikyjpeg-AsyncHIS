@@ -5,9 +5,16 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Stirling","Glasgow","Berwick"],
+  "connectedTo": [
+    "Stirling",
+    "Glasgow",
+    "Berwick"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

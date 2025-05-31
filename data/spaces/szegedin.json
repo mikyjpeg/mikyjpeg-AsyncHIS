@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Buda","Belgrade"],
-  "passConnectedTo": ["Nicopolis"],
+  "connectedTo": [
+    "Buda",
+    "Belgrade"
+  ],
+  "passConnectedTo": [
+    "Nicopolis"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

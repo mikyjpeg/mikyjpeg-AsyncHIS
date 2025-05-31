@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Belgrade","Sofia"],
-  "passConnectedTo": ["Scutari"],
+  "connectedTo": [
+    "Belgrade",
+    "Sofia"
+  ],
+  "passConnectedTo": [
+    "Scutari"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

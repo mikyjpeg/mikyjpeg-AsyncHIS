@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Brandenburg","Brunn","Wittenberg"],
+  "connectedTo": [
+    "Brandenburg",
+    "Brunn",
+    "Wittenberg"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

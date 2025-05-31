@@ -5,9 +5,17 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Trent","Pavia","Modena","Turin"],
+  "connectedTo": [
+    "Trent",
+    "Pavia",
+    "Modena",
+    "Turin"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

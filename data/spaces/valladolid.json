@@ -5,9 +5,16 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Madrid","Corunna","Bilbao"],
+  "connectedTo": [
+    "Madrid",
+    "Corunna",
+    "Bilbao"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

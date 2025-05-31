@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Mainz","Nuremberg","Strasbourg","Augsburg"],
+  "connectedTo": [
+    "Mainz",
+    "Nuremberg",
+    "Strasbourg",
+    "Augsburg"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

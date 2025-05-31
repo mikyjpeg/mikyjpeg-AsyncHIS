@@ -5,8 +5,17 @@
   "type": "electorate",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Trier","Cologne","Kassel","Nuremberg","Worms"],
+  "connectedTo": [
+    "Trier",
+    "Cologne",
+    "Kassel",
+    "Nuremberg",
+    "Worms"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

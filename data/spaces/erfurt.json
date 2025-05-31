@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Kassel","Leipzig","Magdeburg"],
+  "connectedTo": [
+    "Kassel",
+    "Leipzig",
+    "Magdeburg"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

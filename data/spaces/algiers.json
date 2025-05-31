@@ -9,5 +9,7 @@
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": []
 }

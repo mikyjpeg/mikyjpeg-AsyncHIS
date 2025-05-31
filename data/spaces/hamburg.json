@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Bremen","Brunswick","Lübeck"],
+  "connectedTo": [
+    "Bremen",
+    "Brunswick",
+    "Lübeck"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

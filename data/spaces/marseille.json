@@ -5,9 +5,15 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Avignon","Nice"],
+  "connectedTo": [
+    "Avignon",
+    "Nice"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

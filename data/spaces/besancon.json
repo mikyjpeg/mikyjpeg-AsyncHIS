@@ -5,9 +5,18 @@
   "type": "fortress",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Metz","Strasbourg","Basel","Geneva","Dijon"],
+  "connectedTo": [
+    "Metz",
+    "Strasbourg",
+    "Basel",
+    "Geneva",
+    "Dijon"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

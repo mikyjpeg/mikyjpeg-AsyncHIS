@@ -5,8 +5,18 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Milan","Genoa","Pavia"],
-  "passConnectedTo": ["Grenoble","Geneva"],
+  "connectedTo": [
+    "Milan",
+    "Genoa",
+    "Pavia"
+  ],
+  "passConnectedTo": [
+    "Grenoble",
+    "Geneva"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

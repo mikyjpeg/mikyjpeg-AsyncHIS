@@ -5,9 +5,16 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Larissa","Edirne"],
-  "passConnectedTo": ["Sofia"],
+  "connectedTo": [
+    "Larissa",
+    "Edirne"
+  ],
+  "passConnectedTo": [
+    "Sofia"
+  ],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": []
 }

@@ -5,8 +5,18 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Besancon","Basel","Lyon","Grenoble"],
-  "passConnectedTo": ["Turin"],
+  "connectedTo": [
+    "Besancon",
+    "Basel",
+    "Lyon",
+    "Grenoble"
+  ],
+  "passConnectedTo": [
+    "Turin"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

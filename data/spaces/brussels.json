@@ -5,9 +5,18 @@
   "type": "fortress",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Antwerp","Liege","St. Quentin","St. Dizier","Calais"],
+  "connectedTo": [
+    "Antwerp",
+    "Liege",
+    "St. Quentin",
+    "St. Dizier",
+    "Calais"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

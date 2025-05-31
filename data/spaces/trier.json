@@ -5,8 +5,15 @@
   "type": "electorate",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Liege","Mainz","Metz"],
+  "connectedTo": [
+    "Liege",
+    "Mainz",
+    "Metz"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

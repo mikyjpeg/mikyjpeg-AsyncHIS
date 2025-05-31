@@ -5,8 +5,14 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Bucharest","Edirne","Istanbul"],
+  "connectedTo": [
+    "Bucharest",
+    "Edirne",
+    "Istanbul"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

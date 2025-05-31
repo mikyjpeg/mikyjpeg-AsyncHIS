@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Salonika","Lepanto","Athens"],
-  "passConnectedTo": ["Durazzo"],
+  "connectedTo": [
+    "Salonika",
+    "Lepanto",
+    "Athens"
+  ],
+  "passConnectedTo": [
+    "Durazzo"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

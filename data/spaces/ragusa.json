@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Zara","Scutari"],
-  "passConnectedTo": ["Belgrade"],
+  "connectedTo": [
+    "Zara",
+    "Scutari"
+  ],
+  "passConnectedTo": [
+    "Belgrade"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

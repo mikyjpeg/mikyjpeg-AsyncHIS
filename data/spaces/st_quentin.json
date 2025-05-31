@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Boulogne","Brussels","St. Dizier","Paris"],
+  "connectedTo": [
+    "Boulogne",
+    "Brussels",
+    "St. Dizier",
+    "Paris"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

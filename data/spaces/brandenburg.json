@@ -5,8 +5,17 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Stettin","Lübeck","Magdeburg","Wittenberg","Breslau"],
+  "connectedTo": [
+    "Stettin",
+    "Lübeck",
+    "Magdeburg",
+    "Wittenberg",
+    "Breslau"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

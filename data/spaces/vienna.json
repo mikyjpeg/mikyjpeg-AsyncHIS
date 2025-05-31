@@ -5,9 +5,17 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Brunn","Linz","Pressburg","Graz"],
+  "connectedTo": [
+    "Brunn",
+    "Linz",
+    "Pressburg",
+    "Graz"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

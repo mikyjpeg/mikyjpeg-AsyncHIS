@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Barcelona","Madrid","Cartagena"],
+  "connectedTo": [
+    "Barcelona",
+    "Madrid",
+    "Cartagena"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

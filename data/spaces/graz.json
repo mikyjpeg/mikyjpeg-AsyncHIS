@@ -5,8 +5,18 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Vienna","Agram","Trieste","Mohacs"],
-  "passConnectedTo": ["Salzburg"],
+  "connectedTo": [
+    "Vienna",
+    "Agram",
+    "Trieste",
+    "Mohacs"
+  ],
+  "passConnectedTo": [
+    "Salzburg"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

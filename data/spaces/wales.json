@@ -5,8 +5,14 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Shrewsbury","Bristol"],
+  "connectedTo": [
+    "Shrewsbury",
+    "Bristol"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

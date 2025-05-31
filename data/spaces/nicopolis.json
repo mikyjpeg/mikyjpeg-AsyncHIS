@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Belgrade","Bucharest"],
-  "passConnectedTo": ["Szegedin","Sofia"],
+  "connectedTo": [
+    "Belgrade",
+    "Bucharest"
+  ],
+  "passConnectedTo": [
+    "Szegedin",
+    "Sofia"
+  ],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

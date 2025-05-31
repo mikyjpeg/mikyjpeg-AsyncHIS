@@ -5,9 +5,16 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Varna","Istanbul","Sofia","Salonika"],
+  "connectedTo": [
+    "Varna",
+    "Istanbul",
+    "Sofia",
+    "Salonika"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": []
 }

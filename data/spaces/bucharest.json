@@ -5,8 +5,13 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Nicoolis","Varna"],
+  "connectedTo": [
+    "Nicoolis",
+    "Varna"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "reformers": []
 }

@@ -5,8 +5,16 @@
   "type": "space",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Stettin","Hamburg","Magdeburg","Brandenburg"],
+  "connectedTo": [
+    "Stettin",
+    "Hamburg",
+    "Magdeburg",
+    "Brandenburg"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

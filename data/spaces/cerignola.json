@@ -5,8 +5,15 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Ancona","Rome","Taranto"],
+  "connectedTo": [
+    "Ancona",
+    "Rome",
+    "Taranto"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

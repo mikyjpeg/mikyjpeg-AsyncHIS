@@ -5,9 +5,15 @@
   "type": "fortress",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Seville","Granada"],
+  "connectedTo": [
+    "Seville",
+    "Granada"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

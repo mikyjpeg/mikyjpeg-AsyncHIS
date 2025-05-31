@@ -5,9 +5,18 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Wales","Plymouth","London","Portsmouth","Shrewsbury"],
+  "connectedTo": [
+    "Wales",
+    "Plymouth",
+    "London",
+    "Portsmouth",
+    "Shrewsbury"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

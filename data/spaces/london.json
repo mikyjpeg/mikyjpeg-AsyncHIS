@@ -5,9 +5,18 @@
   "type": "capital",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Portsmouth","Bristol","Lincoln","Norwich","Shrewsbury"],
+  "connectedTo": [
+    "Portsmouth",
+    "Bristol",
+    "Lincoln",
+    "Norwich",
+    "Shrewsbury"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

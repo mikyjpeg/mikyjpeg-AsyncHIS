@@ -5,9 +5,18 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Zaragoza","Valencia"],
-  "passConnectedTo": ["Avignon","Toulouse"],
+  "connectedTo": [
+    "Zaragoza",
+    "Valencia"
+  ],
+  "passConnectedTo": [
+    "Avignon",
+    "Toulouse"
+  ],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

@@ -5,9 +5,17 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Amsterdam","Calais","Brussels","Liege"],
+  "connectedTo": [
+    "Amsterdam",
+    "Calais",
+    "Brussels",
+    "Liege"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

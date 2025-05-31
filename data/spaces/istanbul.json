@@ -5,9 +5,14 @@
   "type": "capital",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Edirne","Varna"],
+  "connectedTo": [
+    "Edirne",
+    "Varna"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": []
 }

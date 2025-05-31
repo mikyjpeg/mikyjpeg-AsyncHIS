@@ -5,8 +5,17 @@
   "type": "space",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Carlisle","London","Wales","York","Bristol"],
+  "connectedTo": [
+    "Carlisle",
+    "London",
+    "Wales",
+    "York",
+    "Bristol"
+  ],
   "passConnectedTo": [],
   "troops": 0,
-  "leaders": []
+  "leaders": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

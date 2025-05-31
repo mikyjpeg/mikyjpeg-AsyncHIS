@@ -5,9 +5,17 @@
   "type": "capital",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Siena","Ancona","Cerignola","Naples"],
+  "connectedTo": [
+    "Siena",
+    "Ancona",
+    "Cerignola",
+    "Naples"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

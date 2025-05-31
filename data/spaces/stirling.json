@@ -5,9 +5,15 @@
   "type": "fortress",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Edinburgh","Glasgow"],
+  "connectedTo": [
+    "Edinburgh",
+    "Glasgow"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

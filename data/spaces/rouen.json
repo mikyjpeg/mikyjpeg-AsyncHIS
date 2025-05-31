@@ -5,9 +5,17 @@
   "type": "key",
   "hasPorts": true,
   "controllingPower": null,
-  "connectedTo": ["Boulogne","Paris","Tours","Nantes"],
+  "connectedTo": [
+    "Boulogne",
+    "Paris",
+    "Tours",
+    "Nantes"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

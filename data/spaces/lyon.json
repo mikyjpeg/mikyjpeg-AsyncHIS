@@ -5,9 +5,19 @@
   "type": "key",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Geneva","Limoges","Dijon","Avignon","Orléans","Grenoble"],
+  "connectedTo": [
+    "Geneva",
+    "Limoges",
+    "Dijon",
+    "Avignon",
+    "Orléans",
+    "Grenoble"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }

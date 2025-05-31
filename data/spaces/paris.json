@@ -5,9 +5,19 @@
   "type": "capital",
   "hasPorts": false,
   "controllingPower": null,
-  "connectedTo": ["Boulogne","Orléans","St. Quentin","Rouen","Dijon","St. Dizier"],
+  "connectedTo": [
+    "Boulogne",
+    "Orléans",
+    "St. Quentin",
+    "Rouen",
+    "Dijon",
+    "St. Dizier"
+  ],
   "passConnectedTo": [],
   "troops": 0,
   "leaders": [],
-  "underSiege": false
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": []
 }
