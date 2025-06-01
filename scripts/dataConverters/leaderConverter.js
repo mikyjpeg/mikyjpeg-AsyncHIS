@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const csv = require('csv-parse/sync');
 
-async function convertLeadersData() {
+async function convertLeaders() {
     try {
         // Read the CSV file
         const csvData = await fs.readFile(path.join(__dirname, '../../resources/leaders.csv'), 'utf8');
@@ -39,7 +39,8 @@ async function convertLeadersData() {
         console.log('Leader data conversion completed successfully!');
     } catch (error) {
         console.error('Error converting leader data:', error);
+        throw error;
     }
 }
 
-convertLeadersData(); 
+module.exports = { convertLeaders }; 

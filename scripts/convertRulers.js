@@ -1,4 +1,4 @@
-const { convertRulers } = require('../src/utils/rulerConverter');
+const { convertRulers } = require('./dataConverters/rulerConverter');
 
 console.log('Starting ruler conversion...');
 convertRulers()

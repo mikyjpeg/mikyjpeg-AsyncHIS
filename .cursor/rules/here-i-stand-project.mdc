@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+This is the context of the work we're doing: this is a discord bot (developed using discord.js) and a React website at the same time to play the game Here I Stand by GMT in asynchronous mode. The idea is to maintain a state within the data folder in form of json data that are updated. The website should showcase an updated version of the board based on the state.
+Here I Stand (HIS) rules are loaded as a pdf in resources/HIS_RULES_2023-Final.pdf
+HIS official site is https://www.gmtgames.com/p-917-here-i-stand-500th-anniversary-reprint-edition-2nd-printing.aspx 
+
+We're maintaining bot commands in src/commands with managers for the various area in src/game.
+In scripts/ there are script to manipulate the state, or import from files, as una tantum. Ideally should be deleted eventually.
