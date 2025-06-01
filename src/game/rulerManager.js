@@ -157,6 +157,41 @@ class RulerManager {
             newCardModifier: faction.cardModifier
         };
     }
+
+    async getAllRulers() {
+        try {
+            const files = await fs.readdir(this.rulersDir);
+            const rulers = await Promise.all(
+                files
+                    .filter(f => f.endsWith('.json'))
+                    .map(async f => {
+                        const data = await fs.readFile(path.join(this.rulersDir, f), 'utf8');
+                        return JSON.parse(data);
+                    })
+            );
+            return rulers;
+        } catch (error) {
+            throw new Error(`Error getting all rulers: ${error.message}`);
+        }
+    }
+
+    async getRulersByPower(power) {
+        try {
+            const allRulers = await this.getAllRulers();
+            return allRulers.filter(ruler => ruler.faction === power);
+        } catch (error) {
+            throw new Error(`Error getting rulers for power ${power}: ${error.message}`);
+        }
+    }
+
+    async getCurrentRuler(power) {
+        try {
+            const rulers = await this.getRulersByPower(power);
+            return rulers.find(ruler => ruler.isCurrentRuler);
+        } catch (error) {
+            throw new Error(`Error getting current ruler for ${power}: ${error.message}`);
+        }
+    }
 }
 
 module.exports = new RulerManager(); 

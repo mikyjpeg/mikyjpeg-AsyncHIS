@@ -9,3 +9,5 @@ HIS official site is https://www.gmtgames.com/p-917-here-i-stand-500th-anniversa
 
 We're maintaining bot commands in src/commands with managers for the various area in src/game.
 In scripts/ there are script to manipulate the state, or import from files, as una tantum. Ideally should be deleted eventually.
+
+The game cover both political and religious control. Religious control is managed in space with the boolean field "catholic". By default is true at the start of the game, but can change to false when the space is converted to Protestantism. The field is missing from spaces that are out of scope, as all the Ottoman home spaces.

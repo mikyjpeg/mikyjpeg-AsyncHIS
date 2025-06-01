@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { POWERS } = require('../../game/gameState');
-const rulerManager = require('../../game/rulerManager');
+const rulerSuccessionManager = require('../../game/rulerSuccessionManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
@@ -27,29 +27,14 @@ module.exports = {
         const successorName = interaction.options.getString('name');
         
         try {
-            // Get current ruler
-            const currentRuler = await rulerManager.getCurrentRuler(power);
-            if (!currentRuler) {
-                await interaction.editReply(`No current ruler found for ${power}`);
+            // Validate the faction has defined succession rules
+            if (!rulerSuccessionManager.isValidFaction(power)) {
+                await interaction.editReply(`No succession rules defined for ${power}`);
                 return;
             }
 
-            // Get or generate successor
-            const successor = successorName ? 
-                await rulerManager.createRuler(power, successorName) :
-                await rulerManager.getNextInLine(power);
-
-            if (!successor) {
-                await interaction.editReply(`Failed to find or create successor for ${power}`);
-                return;
-            }
-
-            // Update rulers
-            currentRuler.isCurrentRuler = false;
-            successor.isCurrentRuler = true;
-
-            await rulerManager.updateRuler(currentRuler.name, currentRuler);
-            await rulerManager.updateRuler(successor.name, successor);
+            // Change ruler using succession manager
+            const { oldRuler, newRuler } = await rulerSuccessionManager.changeRuler(power, successorName);
             
             // Record in history
             const historyEntry = await commandHistory.recordSlashCommand(
@@ -57,13 +42,13 @@ module.exports = {
                 COMMAND_TYPES.RULER_CHANGE,
                 {
                     power,
-                    oldRuler: currentRuler,
-                    newRuler: successor
+                    oldRuler,
+                    newRuler
                 }
             );
 
             await interaction.editReply(
-                `${power}'s ruler changed from ${currentRuler.name} to ${successor.name} ` +
+                `${power}'s ruler changed from ${oldRuler.name} to ${newRuler.name} ` +
                 `(Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {

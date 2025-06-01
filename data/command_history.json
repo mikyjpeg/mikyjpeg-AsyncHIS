@@ -773,5 +773,142 @@
     "success": true,
     "errorMessage": null,
     "undone": true
+  },
+  {
+    "commandId": 37,
+    "timestamp": "2025-06-01T23:05:11.740Z",
+    "username": "mikyjpeg",
+    "command": "/new_ruler power:Papacy",
+    "type": "ruler_change",
+    "data": {
+      "power": "Papacy",
+      "oldRuler": {
+        "name": "Leo X",
+        "faction": "Papacy",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 0,
+        "cardBonus": 0,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": null
+      },
+      "newRuler": {
+        "name": "Clement VII",
+        "faction": "Papacy",
+        "battleRating": 0,
+        "commandRating": 0,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 38,
+    "timestamp": "2025-06-01T23:05:34.112Z",
+    "username": "mikyjpeg",
+    "command": "/new_ruler power:England name:Mary I",
+    "type": "ruler_change",
+    "data": {
+      "power": "England",
+      "oldRuler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "newRuler": {
+        "name": "Mary I",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 1,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 39,
+    "timestamp": "2025-06-01T23:05:56.273Z",
+    "username": "mikyjpeg",
+    "command": "/new_ruler power:England name:Elizabeth I",
+    "type": "ruler_change",
+    "data": {
+      "power": "England",
+      "oldRuler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "newRuler": {
+        "name": "Elizabeth I",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 1,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 40,
+    "timestamp": "2025-06-01T23:16:04.743Z",
+    "username": "mikyjpeg",
+    "command": "/new_ruler power:England name:Mary I",
+    "type": "ruler_change",
+    "data": {
+      "power": "England",
+      "oldRuler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": false,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "newRuler": {
+        "name": "Mary I",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 1,
+        "adminRating": 1,
+        "cardBonus": 0,
+        "isCurrentRuler": true,
+        "excommunicated": false
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
   }
 ]
