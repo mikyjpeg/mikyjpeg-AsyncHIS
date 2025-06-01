@@ -1,48 +1,59 @@
+const { SlashCommandBuilder } = require('discord.js');
 const leaderManager = require('../../game/leaderManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'release_leader',
-    description: 'Release a captured leader from a faction\'s captives.',
-    usage: '!release_leader [leader_name] [releasing_faction]',
-    async execute(message, args) {
-        if (args.length < 2) {
-            throw new Error('Please provide leader name and releasing faction. Usage: !release_leader [leader_name] [releasing_faction]');
-        }
-
-        const leaderName = args[0];
-        const releasingFaction = args[1];
+    data: new SlashCommandBuilder()
+        .setName('release_leader')
+        .setDescription('Release a captured leader')
+        .addStringOption(option =>
+            option.setName('leader')
+                .setDescription('Name of the leader to release')
+                .setRequired(true)),
         
-        const commandString = `!release_leader ${args.join(' ')}`;
-
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const leaderName = interaction.options.getString('leader');
+        
         try {
+            // Get leader data
+            const leader = await leaderManager.getLeader(leaderName);
+            if (!leader) {
+                await interaction.editReply(`Leader ${leaderName} not found`);
+                return;
+            }
+
+            // Check if leader is actually captured
+            if (!leader.capturedBy) {
+                await interaction.editReply(`${leaderName} is not captured`);
+                return;
+            }
+
+            // Store captor for history
+            const previousCaptor = leader.capturedBy;
+
             // Release the leader
-            const { leader, faction } = await leaderManager.releaseLeader(leaderName, releasingFaction);
+            leader.capturedBy = null;
+            await leaderManager.updateLeader(leaderName, leader);
             
             // Record in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.RELEASE_LEADER, {
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.RELEASE_LEADER,
+                {
                     leaderName,
-                    releasingFaction
-                }),
-                message.author.username,
-                commandString
+                    previousCaptor,
+                    leaderPower: leader.power
+                }
             );
 
-            return `${leader.name} has been released by ${faction.name} (Command ID: ${historyEntry.commandId})`;
+            await interaction.editReply(`${leaderName} has been released from ${previousCaptor}'s captivity (Command ID: ${historyEntry.commandId})`);
         } catch (error) {
-            // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.RELEASE_LEADER, {
-                    leaderName,
-                    releasingFaction
-                }),
-                message.author.username,
-                commandString,
-                false,
-                error.message
-            );
-            throw error;
+            await interaction.editReply({ 
+                content: `Failed to release leader: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

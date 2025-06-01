@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class FactionManager {
     constructor() {
@@ -9,8 +10,7 @@ class FactionManager {
             discordUserId: null,
             discordUsername: null,
             isActive: false,
-            victoryPoints: 0,
-            lastUpdated: null
+            victoryPoints: 0
         };
     }
 
@@ -27,12 +27,11 @@ class FactionManager {
         const filePath = path.join(this.factionsDir, `${factionName.toLowerCase()}.json`);
         const initialData = {
             ...this.defaultFactionData,
-            name: factionName,
-            lastUpdated: new Date().toISOString()
+            name: factionName
         };
         
         try {
-            await fs.writeFile(filePath, JSON.stringify(initialData, null, 4));
+            await fs.writeFile(filePath, JSON.stringify(initialData, null, FILE_SYSTEM.JSON_INDENT));
             return initialData;
         } catch (error) {
             console.error(`Error initializing faction file ${factionName}:`, error);
@@ -108,10 +107,9 @@ class FactionManager {
             let currentData = await this.getFaction(factionName);
             const updatedData = {
                 ...currentData,
-                ...updates,
-                lastUpdated: new Date().toISOString()
+                ...updates
             };
-            await fs.writeFile(filePath, JSON.stringify(updatedData, null, 4));
+            await fs.writeFile(filePath, JSON.stringify(updatedData, null, FILE_SYSTEM.JSON_INDENT));
             this.factions[factionName.toLowerCase()] = updatedData;
             return updatedData;
         } catch (error) {

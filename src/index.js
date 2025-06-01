@@ -64,50 +64,10 @@ client.once('ready', async () => {
     await commandHandler.loadCommands();
 });
 
-// Helper function to safely send a reply
-async function safeReply(message, content) {
-    try {
-        console.log('SafeReply - Attempting to send:', content);
-        return await message.channel.send(`${message.author}: ${content}`);
-    } catch (error) {
-        console.error('SafeReply - Error:', error.message);
-        // Don't throw, just return false to indicate failure
-        return false;
-    }
-}
-
-// Handle messages
-client.on('messageCreate', async message => {
-    // Ignore messages from bots
-    if (message.author.bot) return;
-
-    // Check if message starts with command prefix
-    if (!message.content.startsWith('!')) return;
-
-    const args = message.content.slice(1).split(' ');
-    const commandName = args.shift().toLowerCase();
-
-    console.log(`Processing command: ${commandName} from user: ${message.author.username}`);
-
-    try {
-        if (commandName === 'help') {
-            const helpMessage = `Available commands:\n${commandHandler.getCommandList()}`;
-            await safeReply(message, helpMessage);
-            return;
-        }
-
-        const response = await commandHandler.executeCommand(commandName, message, args);
-        if (response) {
-            await safeReply(message, response);
-        }
-    } catch (error) {
-        console.error('Command error:', error.message);
-        try {
-            await message.channel.send(`Error: ${error.message}`);
-        } catch (msgError) {
-            console.error('Failed to send error message:', msgError.message);
-        }
-    }
+// Handle slash commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isChatInputCommand()) return;
+    await commandHandler.executeInteraction(interaction);
 });
 
 // Error handling for Discord client

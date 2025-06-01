@@ -19,7 +19,9 @@
     "dev:bot": "nodemon --config nodemon.json src/index.js",
     "dev:client": "cd client && npm start",
     "dev": "concurrently --names \"BOT,CLIENT\" --prefix-colors \"cyan.bold,green.bold\" --kill-others \"npm run dev:bot\" \"npm run dev:client\"",
-    "install:all": "npm install && cd client && npm install"
+    "install:all": "npm install && cd client && npm install",
+    "deploy-commands:dev": "NODE_ENV=development node scripts/deploy-commands.js",
+    "deploy-commands:prod": "NODE_ENV=production node scripts/deploy-commands.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

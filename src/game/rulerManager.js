@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const spaceManager = require('./spaceManager');
 const diplomacyManager = require('./diplomacyManager');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class RulerManager {
     constructor() {
@@ -45,7 +46,7 @@ class RulerManager {
 
     async updateRuler(rulerName, rulerData) {
         const filePath = path.join(this.rulersDir, `${rulerName.toLowerCase().replace(/\s+/g, '_')}.json`);
-        await fs.writeFile(filePath, JSON.stringify(rulerData, null, 2));
+        await fs.writeFile(filePath, JSON.stringify(rulerData, null, FILE_SYSTEM.JSON_INDENT));
     }
 
     async canBeExcommunicated(rulerName) {

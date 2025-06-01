@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { validateAlliance, canRemoveAlliance } = require('./diplomacyRules');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class DiplomacyManager {
     constructor() {
@@ -20,7 +21,7 @@ class DiplomacyManager {
     async updateFaction(factionName, factionData) {
         try {
             const filePath = path.join(this.factionsDir, `${factionName.toLowerCase()}.json`);
-            await fs.writeFile(filePath, JSON.stringify(factionData, null, 2));
+            await fs.writeFile(filePath, JSON.stringify(factionData, null, FILE_SYSTEM.JSON_INDENT));
             return factionData;
         } catch (error) {
             throw new Error(`Failed to update faction "${factionName}": ${error.message}`);

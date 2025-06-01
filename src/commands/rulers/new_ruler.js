@@ -1,84 +1,76 @@
-const rulerSuccessionManager = require('../../game/rulerSuccessionManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { SlashCommandBuilder } = require('discord.js');
+const { POWERS } = require('../../game/gameState');
+const rulerManager = require('../../game/rulerManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'new_ruler',
-    description: 'Change the current ruler of a faction to their successor. For England, you must specify the successor: !new_ruler England [successor_name]',
-    usage: '!new_ruler [faction] [successor_name?]',
-    async execute(message, args) {
-        if (args.length < 1) {
-            const validFactions = rulerSuccessionManager.getValidFactions();
-            throw new Error(`Please specify the faction name. Valid factions are: ${validFactions.join(', ')}\nUsage: !new_ruler [faction] [successor_name?]`);
-        }
-
-        const faction = args[0];
-        const successor = args.length > 1 ? args.slice(1).join(' ') : null;
-        const commandString = `!new_ruler ${faction}${successor ? ' ' + successor : ''}`;
+    data: new SlashCommandBuilder()
+        .setName('new_ruler')
+        .setDescription('Change the ruler of a power')
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('The power getting a new ruler')
+                .setRequired(true)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                }))))
+        .addStringOption(option =>
+            option.setName('name')
+                .setDescription('Name of the new ruler (optional)')
+                .setRequired(false)),
+        
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const power = interaction.options.getString('power');
+        const successorName = interaction.options.getString('name');
         
         try {
-            // Validate faction
-            if (!rulerSuccessionManager.isValidFaction(faction)) {
-                const validFactions = rulerSuccessionManager.getValidFactions();
-                // Record failed attempt in history
-                await commandHistory.addToHistory(
-                    createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, { faction }),
-                    message.author.username,
-                    commandString,
-                    false,
-                    `Invalid faction. Valid factions are: ${validFactions.join(', ')}`
-                );
-                throw new Error(`Invalid faction. Valid factions are: ${validFactions.join(', ')}`);
+            // Get current ruler
+            const currentRuler = await rulerManager.getCurrentRuler(power);
+            if (!currentRuler) {
+                await interaction.editReply(`No current ruler found for ${power}`);
+                return;
             }
 
-            // Get current ruler to check valid successors
-            const currentRuler = await rulerSuccessionManager.getCurrentRuler(faction);
+            // Get or generate successor
+            const successor = successorName ? 
+                await rulerManager.createRuler(power, successorName) :
+                await rulerManager.getNextInLine(power);
 
-            // If faction requires successor but none specified, show valid options
-            if (rulerSuccessionManager.requiresSuccessorSpecification(faction) && !successor) {
-                const validSuccessors = await rulerSuccessionManager.getValidSuccessors(faction, currentRuler.name);
-                const errorMsg = `For ${faction}, you must specify the successor. Valid successors for ${currentRuler.name} are: ${validSuccessors.join(', ')}`;
-                
-                // Record failed attempt in history
-                await commandHistory.addToHistory(
-                    createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, { 
-                        faction,
-                        currentRuler: currentRuler.name
-                    }),
-                    message.author.username,
-                    commandString,
-                    false,
-                    errorMsg
-                );
-                throw new Error(errorMsg);
+            if (!successor) {
+                await interaction.editReply(`Failed to find or create successor for ${power}`);
+                return;
             }
 
-            // Perform ruler change
-            const result = await rulerSuccessionManager.changeRuler(faction, successor);
+            // Update rulers
+            currentRuler.isCurrentRuler = false;
+            successor.isCurrentRuler = true;
+
+            await rulerManager.updateRuler(currentRuler.name, currentRuler);
+            await rulerManager.updateRuler(successor.name, successor);
             
-            // Record successful command in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, {
-                    oldRuler: result.oldRuler,
-                    newRuler: result.newRuler
-                }),
-                message.author.username,
-                commandString
+            // Record in history
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.RULER_CHANGE,
+                {
+                    power,
+                    oldRuler: currentRuler,
+                    newRuler: successor
+                }
             );
-            
-            return `Ruler change successful for ${faction} (Command ID: ${historyEntry.commandId}):\n${result.oldRuler.name} -> ${result.newRuler.name}`;
+
+            await interaction.editReply(
+                `${power}'s ruler changed from ${currentRuler.name} to ${successor.name} ` +
+                `(Command ID: ${historyEntry.commandId})`
+            );
         } catch (error) {
-            // If not already recorded (like for invalid faction or missing successor)
-            if (!error.message.includes('Invalid faction') && !error.message.includes('must specify the successor')) {
-                // Record error in history
-                await commandHistory.addToHistory(
-                    createHistoryEntry(COMMAND_TYPES.RULER_CHANGE, { faction, successor }),
-                    message.author.username,
-                    commandString,
-                    false,
-                    error.message
-                );
-            }
-            throw error;
+            await interaction.editReply({ 
+                content: `Failed to change ruler: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

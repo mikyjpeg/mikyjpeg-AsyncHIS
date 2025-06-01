@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class CommandHistoryManager {
     constructor() {
@@ -27,7 +28,7 @@ class CommandHistoryManager {
     }
 
     async writeAuditFile(history) {
-        await fs.writeFile(this.auditFilePath, JSON.stringify(history, null, 2));
+        await fs.writeFile(this.auditFilePath, JSON.stringify(history, null, FILE_SYSTEM.JSON_INDENT));
     }
 
     async addToHistory(commandEntry, username, commandString, success = true, errorMessage = null) {
@@ -93,6 +94,19 @@ class CommandHistoryManager {
         }
         return history;
     }
+
+    // Helper function for slash commands to record history
+    async recordSlashCommand(interaction, type, data, success = true, errorMessage = null) {
+        const commandString = `/${interaction.commandName} ${interaction.options.data.map(opt => `${opt.name}:${opt.value}`).join(' ')}`;
+        
+        return await this.addToHistory(
+            createHistoryEntry(type, data),
+            interaction.user.username,
+            commandString,
+            success,
+            errorMessage
+        );
+    }
 }
 
 // Command entry structure for different command types
@@ -103,7 +117,16 @@ const COMMAND_TYPES = {
     ADD_FORMATION: 'add_formation',
     REMOVE_FORMATION: 'remove_formation',
     CAPTURE_LEADER: 'capture_leader',
-    RELEASE_LEADER: 'release_leader'
+    RELEASE_LEADER: 'release_leader',
+    CONVERT_SPACE: 'convert_space',
+    ADD_JESUITE: 'add_jesuite',
+    REMOVE_JESUITE: 'remove_jesuite',
+    ADD_REFORMER: 'add_reformer',
+    REMOVE_REFORMER: 'remove_reformer',
+    MAKE_PEACE: 'make_peace',
+    DECLARE_WAR: 'declare_war',
+    FORM_ALLIANCE: 'form_alliance',
+    TAKE_CONTROL: 'take_control'
 };
 
 // Factory for creating command history entries

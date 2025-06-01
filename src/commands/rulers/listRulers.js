@@ -1,47 +1,78 @@
-const fs = require('fs').promises;
-const path = require('path');
+const { SlashCommandBuilder } = require('discord.js');
+const { POWERS } = require('../../game/gameState');
+const rulerManager = require('../../game/rulerManager');
 
 module.exports = {
-    name: 'list_rulers',
-    description: 'List all rulers and their excommunication status',
-    usage: '!list_rulers [faction?]',
-    async execute(message, args) {
-        const rulersDir = path.join(__dirname, '../../../data/rulers');
-        const files = await fs.readdir(rulersDir);
+    data: new SlashCommandBuilder()
+        .setName('list_rulers')
+        .setDescription('List rulers of a power or all powers')
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('Power to list rulers for (optional)')
+                .setRequired(false)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                })))),
         
-        let rulers = await Promise.all(
-            files
-                .filter(f => f.endsWith('.json'))
-                .map(async f => {
-                    const data = await fs.readFile(path.join(rulersDir, f), 'utf8');
-                    return JSON.parse(data);
-                })
-        );
-
-        // If faction is specified, filter by faction
-        if (args.length > 0) {
-            const faction = args.join(' ');
-            rulers = rulers.filter(r => r.faction.toLowerCase() === faction.toLowerCase());
-            if (rulers.length === 0) {
-                return `No rulers found for faction: ${faction}`;
-            }
-        }
-
-        // Sort rulers by faction
-        rulers.sort((a, b) => a.faction.localeCompare(b.faction));
-
-        // Format the output
-        let output = 'Rulers:\n';
-        let currentFaction = '';
+    async execute(interaction) {
+        await interaction.deferReply();
         
-        for (const ruler of rulers) {
-            if (ruler.faction !== currentFaction) {
-                output += `\n${ruler.faction}:\n`;
-                currentFaction = ruler.faction;
-            }
-            output += `  - ${ruler.name}${ruler.excommunicated ? ' (Excommunicated)' : ''}${ruler.isCurrentRuler ? ' (Current)' : ''}\n`;
-        }
+        const power = interaction.options.getString('power');
+        
+        try {
+            let response = '';
+            
+            if (power) {
+                // Get rulers for specific power
+                const rulers = await rulerManager.getRulersByPower(power);
+                if (!rulers || rulers.length === 0) {
+                    await interaction.editReply(`No rulers found for ${power}`);
+                    return;
+                }
 
-        return output;
+                response = `**Rulers of ${power}:**\n`;
+                rulers.forEach(ruler => {
+                    const status = [];
+                    if (ruler.isCurrentRuler) status.push('Current');
+                    if (ruler.excommunicated) status.push('Excommunicated');
+                    
+                    response += `${ruler.name}` + 
+                        (status.length > 0 ? ` (${status.join(', ')})` : '') +
+                        `\n  Battle: ${ruler.battleRating}, Command: ${ruler.commandRating}\n`;
+                });
+            } else {
+                // Get all rulers grouped by power
+                const allRulers = await rulerManager.getAllRulers();
+                const rulersByPower = {};
+                
+                allRulers.forEach(ruler => {
+                    if (!rulersByPower[ruler.power]) {
+                        rulersByPower[ruler.power] = [];
+                    }
+                    rulersByPower[ruler.power].push(ruler);
+                });
+
+                for (const [powerName, rulers] of Object.entries(rulersByPower)) {
+                    response += `\n**${powerName}:**\n`;
+                    rulers.forEach(ruler => {
+                        const status = [];
+                        if (ruler.isCurrentRuler) status.push('Current');
+                        if (ruler.excommunicated) status.push('Excommunicated');
+                        
+                        response += `${ruler.name}` + 
+                            (status.length > 0 ? ` (${status.join(', ')})` : '') +
+                            `\n  Battle: ${ruler.battleRating}, Command: ${ruler.commandRating}\n`;
+                    });
+                }
+            }
+
+            await interaction.editReply(response);
+        } catch (error) {
+            await interaction.editReply({ 
+                content: `Failed to list rulers: ${error.message}`,
+                ephemeral: true 
+            });
+        }
     }
 }; 

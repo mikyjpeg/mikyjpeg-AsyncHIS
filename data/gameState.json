@@ -2,8 +2,9 @@
   "availablePowers": [
     "Hapsburg",
     "Protestant",
-    "Ottoman",
     "France",
-    "Papacy"
-  ]
+    "Papacy",
+    "Ottoman"
+  ],
+  "lastUpdated": "2025-06-01T22:42:23.320Z"
 }

@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 // Define valid powers
 const VALID_POWERS = {
@@ -43,16 +44,8 @@ class SpaceManager {
     }
 
     async updateSpace(spaceName, spaceData) {
-        try {
-            const fileName = `${spaceName.toLowerCase()
-                .replace(/[^a-z0-9]+/g, '_')
-                .replace(/^_+|_+$/g, '')}.json`;
-            const filePath = path.join(this.spacesDir, fileName);
-            await fs.writeFile(filePath, JSON.stringify(spaceData, null, 2));
-            return spaceData;
-        } catch (error) {
-            throw new Error(`Failed to update space "${spaceName}": ${error.message}`);
-        }
+        const filePath = path.join(this.spacesDir, `${spaceName.toLowerCase()}.json`);
+        await fs.writeFile(filePath, JSON.stringify(spaceData, null, FILE_SYSTEM.JSON_INDENT));
     }
 
     async takeControl(spaceName, power, userId) {
@@ -80,7 +73,10 @@ class SpaceManager {
 
         const normalizedPower = power.charAt(0).toUpperCase() + power.slice(1).toLowerCase();
         const allSpaces = await this.getAllSpaces();
-        return allSpaces.filter(space => space.controllingPower === normalizedPower);
+        return allSpaces.filter(space => 
+            space.controllingPower === normalizedPower || 
+            (space.controllingPower === null && space.homePower === normalizedPower)
+        );
     }
 
     async validateUserControl(userId, power, factionManager) {

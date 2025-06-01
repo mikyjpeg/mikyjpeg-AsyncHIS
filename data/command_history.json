@@ -205,5 +205,573 @@
     "success": true,
     "errorMessage": null,
     "undone": true
+  },
+  {
+    "commandId": 11,
+    "timestamp": "2025-06-01T21:42:37.184Z",
+    "username": "mikyjpeg",
+    "command": "/ally power1:France power2:Ottoman",
+    "type": "form_alliance",
+    "data": {
+      "power1": "France",
+      "power2": "Ottoman",
+      "startTurn": 1
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 12,
+    "timestamp": "2025-06-01T21:42:53.294Z",
+    "username": "mikyjpeg",
+    "command": "/excommunicate ruler:Francis I",
+    "type": "excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": true,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 13,
+    "timestamp": "2025-06-01T21:43:10.330Z",
+    "username": "mikyjpeg",
+    "command": "/excommunicate ruler:Henry VIII",
+    "type": "excommunication",
+    "data": {
+      "ruler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": true,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 14,
+    "timestamp": "2025-06-01T21:44:48.967Z",
+    "username": "mikyjpeg",
+    "command": "/remove_excommunication ruler:Henry VIII",
+    "type": "remove_excommunication",
+    "data": {
+      "ruler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 15,
+    "timestamp": "2025-06-01T21:45:14.897Z",
+    "username": "mikyjpeg",
+    "command": "/remove_excommunication ruler:Francis I",
+    "type": "remove_excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 16,
+    "timestamp": "2025-06-01T21:54:00.018Z",
+    "username": "mikyjpeg",
+    "command": "/ally power1:France power2:Ottoman",
+    "type": "form_alliance",
+    "data": {
+      "power1": "France",
+      "power2": "Ottoman",
+      "startTurn": 1,
+      "faction1": {
+        "name": "France",
+        "discordUserId": null,
+        "discordUsername": null,
+        "cardsPerTurn": 5,
+        "victoryPoints": 0,
+        "ruler": "Francis I",
+        "isActive": false,
+        "lastUpdated": "2025-05-30T23:24:46.063Z",
+        "alliances": [
+          "Ottoman"
+        ],
+        "atWarWith": [],
+        "cardModifier": 0,
+        "bonusVP": [],
+        "bonusVPTotal": 0,
+        "captiveLeaders": []
+      },
+      "faction2": {
+        "name": "Ottoman",
+        "discordUserId": null,
+        "discordUsername": null,
+        "cardsPerTurn": 5,
+        "victoryPoints": 0,
+        "ruler": "Suleiman",
+        "isActive": false,
+        "lastUpdated": "2025-05-30T23:04:23.502Z",
+        "alliances": [
+          "France"
+        ],
+        "atWarWith": [],
+        "cardModifier": 0,
+        "bonusVP": [],
+        "bonusVPTotal": 0,
+        "captiveLeaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 17,
+    "timestamp": "2025-06-01T21:54:08.549Z",
+    "username": "mikyjpeg",
+    "command": "/excommunicate ruler:Francis I",
+    "type": "excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": true,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 18,
+    "timestamp": "2025-06-01T21:57:20.004Z",
+    "username": "mikyjpeg",
+    "command": "/remove_excommunication ruler:Francis I",
+    "type": "remove_excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 19,
+    "timestamp": "2025-06-01T21:57:31.189Z",
+    "username": "mikyjpeg",
+    "command": "/excommunicate ruler:Francis I",
+    "type": "excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": true,
+        "otherinfo": null
+      },
+      "reason": "France is allied with the Ottoman Empire"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 20,
+    "timestamp": "2025-06-01T21:57:42.128Z",
+    "username": "mikyjpeg",
+    "command": "/remove_excommunication ruler:Francis I",
+    "type": "remove_excommunication",
+    "data": {
+      "ruler": {
+        "name": "Francis I",
+        "faction": "France",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": false,
+        "otherinfo": null
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 21,
+    "timestamp": "2025-06-01T21:58:08.918Z",
+    "username": "mikyjpeg",
+    "command": "/convert space:London religion:protestant",
+    "type": "convert_space",
+    "data": {
+      "spaceName": "London",
+      "religion": "protestant",
+      "removedJesuiteUniversity": false
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 22,
+    "timestamp": "2025-06-01T21:58:19.068Z",
+    "username": "mikyjpeg",
+    "command": "/excommunicate ruler:Henry VIII",
+    "type": "excommunication",
+    "data": {
+      "ruler": {
+        "name": "Henry VIII",
+        "faction": "England",
+        "battleRating": 1,
+        "commandRating": 8,
+        "adminRating": 1,
+        "cardBonus": 1,
+        "isCurrentRuler": true,
+        "excommunicated": true,
+        "otherinfo": "Ignore English troops in Reformation/Counter Reformation rolls"
+      },
+      "reason": "England has non-Catholic spaces"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 23,
+    "timestamp": "2025-06-01T22:04:04.570Z",
+    "username": "mikyjpeg",
+    "command": "/convert space:London religion:protestant",
+    "type": "convert_space",
+    "data": {
+      "space": {
+        "name": "London",
+        "catholic": true,
+        "protestant": false,
+        "jesuiteUniversity": false
+      },
+      "oldReligion": "Catholic",
+      "newReligion": "Protestant",
+      "removedJesuiteUniversity": false
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 24,
+    "timestamp": "2025-06-01T22:08:00.183Z",
+    "username": "mikyjpeg",
+    "command": "/convert space:London religion:protestant",
+    "type": "convert_space",
+    "data": {
+      "space": {
+        "name": "London",
+        "catholic": true,
+        "jesuiteUniversity": false
+      },
+      "oldReligion": "Catholic",
+      "newReligion": "Protestant",
+      "removedJesuiteUniversity": false
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 25,
+    "timestamp": "2025-06-01T22:10:24.996Z",
+    "username": "mikyjpeg",
+    "command": "/convert space:London religion:protestant",
+    "type": "convert_space",
+    "data": {
+      "space": {
+        "name": "London",
+        "catholic": true,
+        "jesuiteUniversity": false
+      },
+      "oldReligion": "Catholic",
+      "newReligion": "Protestant",
+      "removedJesuiteUniversity": false
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 26,
+    "timestamp": "2025-06-01T22:14:46.607Z",
+    "username": "mikyjpeg",
+    "command": "/break_alliance power1:France power2:Ottoman",
+    "data": {
+      "power1": "France",
+      "power2": "Ottoman",
+      "startTurn": 1,
+      "faction1": {
+        "name": "France",
+        "discordUserId": null,
+        "discordUsername": null,
+        "cardsPerTurn": 5,
+        "victoryPoints": 0,
+        "ruler": "Francis I",
+        "isActive": false,
+        "lastUpdated": "2025-06-01T21:54:00.003Z",
+        "alliances": [],
+        "atWarWith": [],
+        "cardModifier": 0,
+        "bonusVP": [],
+        "bonusVPTotal": 0,
+        "captiveLeaders": []
+      },
+      "faction2": {
+        "name": "Ottoman",
+        "discordUserId": null,
+        "discordUsername": null,
+        "cardsPerTurn": 5,
+        "victoryPoints": 0,
+        "ruler": "Suleiman",
+        "isActive": false,
+        "lastUpdated": "2025-06-01T21:54:00.015Z",
+        "alliances": [],
+        "atWarWith": [],
+        "cardModifier": 0,
+        "bonusVP": [],
+        "bonusVPTotal": 0,
+        "captiveLeaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 27,
+    "timestamp": "2025-06-01T22:22:39.607Z",
+    "username": "mikyjpeg",
+    "command": "/control space:London power:Hapsburg",
+    "type": "take_control",
+    "data": {
+      "spaceName": "London",
+      "power": "Hapsburg"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 28,
+    "timestamp": "2025-06-01T22:25:27.317Z",
+    "username": "mikyjpeg",
+    "command": "/control space:London power:Ottoman",
+    "type": "take_control",
+    "data": {
+      "spaceName": "London",
+      "power": "Ottoman",
+      "previousController": null
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 29,
+    "timestamp": "2025-06-01T22:27:46.063Z",
+    "username": "mikyjpeg",
+    "command": "/control space:London power:Ottoman",
+    "type": "take_control",
+    "data": {
+      "spaceName": "London",
+      "power": "Ottoman",
+      "previousController": null,
+      "homePower": "England"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 30,
+    "timestamp": "2025-06-01T22:28:50.314Z",
+    "username": "mikyjpeg",
+    "command": "/add_formation space:London power:England regulars:4 secondary:2",
+    "type": "add_formation",
+    "data": {
+      "spaceName": "London",
+      "formation": {
+        "power": "England",
+        "regularTroops": 4,
+        "secondaryTroops": 2,
+        "leaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 31,
+    "timestamp": "2025-06-01T22:38:02.096Z",
+    "username": "mikyjpeg",
+    "command": "/control space:London power:Ottoman",
+    "type": "take_control",
+    "data": {
+      "spaceName": "London",
+      "power": "Ottoman",
+      "previousController": null,
+      "homePower": "England"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 32,
+    "timestamp": "2025-06-01T22:39:36.666Z",
+    "username": "mikyjpeg",
+    "command": "/add_formation space:London power:England regulars:2 secondary:0",
+    "type": "add_formation",
+    "data": {
+      "spaceName": "London",
+      "formation": {
+        "power": "England",
+        "regularTroops": 2,
+        "secondaryTroops": 0,
+        "leaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 33,
+    "timestamp": "2025-06-01T22:39:54.508Z",
+    "username": "mikyjpeg",
+    "command": "/remove_formation space:London power:England regulars:1 secondary:0",
+    "type": "remove_formation",
+    "data": {
+      "spaceName": "London",
+      "formation": {
+        "power": "England",
+        "regularTroops": 1,
+        "secondaryTroops": 0,
+        "leaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 34,
+    "timestamp": "2025-06-01T22:40:18.895Z",
+    "username": "mikyjpeg",
+    "command": "/remove_formation space:London power:England regulars:1 secondary:0",
+    "type": "remove_formation",
+    "data": {
+      "spaceName": "London",
+      "formation": {
+        "power": "England",
+        "regularTroops": 1,
+        "secondaryTroops": 0,
+        "leaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 35,
+    "timestamp": "2025-06-01T22:41:02.941Z",
+    "username": "mikyjpeg",
+    "command": "/add_formation space:London power:England regulars:2 secondary:1 leaders:Henry VIII",
+    "type": "add_formation",
+    "data": {
+      "spaceName": "London",
+      "formation": {
+        "power": "England",
+        "regularTroops": 2,
+        "secondaryTroops": 1,
+        "leaders": [
+          "Henry VIII"
+        ]
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 36,
+    "timestamp": "2025-06-01T22:42:35.469Z",
+    "username": "mikyjpeg",
+    "command": "/add_jesuite space:London",
+    "type": "add_jesuite",
+    "data": {
+      "spaceName": "London"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
   }
 ]

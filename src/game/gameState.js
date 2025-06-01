@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const factionManager = require('./factionManager');
 const statusManager = require('./statusManager');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 const POWERS = {
     OTTOMAN: 'Ottoman',
@@ -61,7 +62,7 @@ class GameState {
                 ...state,
                 availablePowers: this.availablePowers
             };
-            await fs.writeFile(this.filepath, JSON.stringify(saveState, null, 2));
+            await fs.writeFile(this.filepath, JSON.stringify(saveState, null, FILE_SYSTEM.JSON_INDENT));
             return saveState;
         } catch (error) {
             console.error('Error saving game state:', error);

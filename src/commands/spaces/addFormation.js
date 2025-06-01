@@ -1,30 +1,58 @@
+const { SlashCommandBuilder } = require('discord.js');
 const formationManager = require('../../game/formationManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const { POWERS } = require('../../game/gameState');
 
 module.exports = {
-    name: 'add_formation',
-    description: 'Add a formation to a space. For Ottoman: [regular_troops] [cavalry]. For others: [regular_troops] [mercenaries].',
-    usage: '!add_formation [space_name] [power] [regular_troops] [mercenaries/cavalry] [...leaders]',
-    async execute(message, args) {
-        if (args.length < 4) {
-            throw new Error('Please provide space name, power, regular troops, and mercenaries/cavalry. Usage: !add_formation [space_name] [power] [regular_troops] [mercenaries/cavalry] [...leaders]');
-        }
-
-        const spaceName = args[0];
-        const power = args[1];
-        const regularTroops = parseInt(args[2]);
-        const secondaryTroops = parseInt(args[3]);
-        const leaders = args.slice(4);
+    data: new SlashCommandBuilder()
+        .setName('add_formation')
+        .setDescription('Add a formation to a space')
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('The space to add the formation to')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('The power that controls the formation')
+                .setRequired(true)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                }))))
+        .addIntegerOption(option =>
+            option.setName('regulars')
+                .setDescription('Number of regular troops')
+                .setRequired(true)
+                .setMinValue(0))
+        .addIntegerOption(option =>
+            option.setName('secondary')
+                .setDescription('Number of mercenaries (or cavalry for Ottoman)')
+                .setRequired(true)
+                .setMinValue(0))
+        .addStringOption(option =>
+            option.setName('leaders')
+                .setDescription('Leaders to add (comma-separated)')
+                .setRequired(false)),
         
-        const commandString = `!add_formation ${args.join(' ')}`;
-
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const spaceName = interaction.options.getString('space');
+        const power = interaction.options.getString('power');
+        const regularTroops = interaction.options.getInteger('regulars');
+        const secondaryTroops = interaction.options.getInteger('secondary');
+        const leadersInput = interaction.options.getString('leaders');
+        const leaders = leadersInput ? leadersInput.split(',').map(l => l.trim()) : [];
+        
         try {
             // Add the formation
             const updatedSpace = await formationManager.addFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
             
             // Record in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.ADD_FORMATION, {
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.ADD_FORMATION,
+                {
                     spaceName,
                     formation: {
                         power,
@@ -32,9 +60,7 @@ module.exports = {
                         secondaryTroops,
                         leaders
                     }
-                }),
-                message.author.username,
-                commandString
+                }
             );
 
             // Format the formation details for display
@@ -44,12 +70,16 @@ module.exports = {
                 `${formation.regulars} regulars and ${formation.mercenaries} mercenaries`;
             const leaderInfo = formation.leaders.length > 0 ? ` with leaders: ${formation.leaders.join(', ')}` : '';
             
-            return `Added formation to ${spaceName} (Command ID: ${historyEntry.commandId}):\n` +
-                   `${formation.power}: ${troopInfo}${leaderInfo}`;
+            await interaction.editReply(
+                `Added formation to ${spaceName} (Command ID: ${historyEntry.commandId}):\n` +
+                `${formation.power}: ${troopInfo}${leaderInfo}`
+            );
         } catch (error) {
             // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.ADD_FORMATION, {
+            await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.ADD_FORMATION,
+                {
                     spaceName,
                     formation: {
                         power,
@@ -57,13 +87,15 @@ module.exports = {
                         secondaryTroops,
                         leaders
                     }
-                }),
-                message.author.username,
-                commandString,
+                },
                 false,
                 error.message
             );
-            throw error;
+            
+            await interaction.editReply({ 
+                content: `Failed to add formation: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

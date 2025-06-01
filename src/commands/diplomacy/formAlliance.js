@@ -1,11 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { GameState, POWERS } = require('../../game/gameState');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
-const factionManager = require('../../game/factionManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ally')
+        .setName('form_alliance')
         .setDescription('Form an alliance between two powers')
         .addStringOption(option =>
             option.setName('power1')
@@ -63,7 +62,7 @@ module.exports = {
                 return;
             }
 
-            // Add the alliance to game state
+            // Add the alliance
             const newAlliance = {
                 power1,
                 power2,
@@ -71,30 +70,12 @@ module.exports = {
             };
             gameState.alliances.push(newAlliance);
             await GameState.save(gameState);
-
-            // Update faction files
-            const faction1 = await factionManager.getFaction(power1);
-            const faction2 = await factionManager.getFaction(power2);
-
-            // Add alliance to each faction
-            if (!faction1.alliances) faction1.alliances = [];
-            if (!faction2.alliances) faction2.alliances = [];
-            
-            faction1.alliances.push(power2);
-            faction2.alliances.push(power1);
-
-            await factionManager.updateFaction(power1, faction1);
-            await factionManager.updateFaction(power2, faction2);
             
             // Record in history
             const historyEntry = await commandHistory.recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.FORM_ALLIANCE,
-                {
-                    ...newAlliance,
-                    faction1,
-                    faction2
-                }
+                newAlliance
             );
 
             await interaction.editReply(`Alliance formed between ${power1} and ${power2} (Command ID: ${historyEntry.commandId})`);

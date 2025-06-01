@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const factionManager = require('./factionManager');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class LeaderManager {
     constructor() {
@@ -19,10 +20,9 @@ class LeaderManager {
         }
     }
 
-    async updateLeader(leader) {
-        const filename = `${leader.name.toLowerCase().replace(/\s+/g, '_')}.json`;
-        const filePath = path.join(this.leadersDir, filename);
-        await fs.writeFile(filePath, JSON.stringify(leader, null, 2));
+    async updateLeader(leaderName, leader) {
+        const filePath = path.join(this.leadersDir, `${leaderName.toLowerCase()}.json`);
+        await fs.writeFile(filePath, JSON.stringify(leader, null, FILE_SYSTEM.JSON_INDENT));
     }
 
     async captureLeader(leaderName, capturingFaction) {
@@ -44,7 +44,7 @@ class LeaderManager {
 
         // Update leader status
         leader.isCaptured = true;
-        await this.updateLeader(leader);
+        await this.updateLeader(leaderName, leader);
 
         // Add leader to faction's captives
         faction.captiveLeaders.push(leaderName);
@@ -72,7 +72,7 @@ class LeaderManager {
 
         // Update leader status
         leader.isCaptured = false;
-        await this.updateLeader(leader);
+        await this.updateLeader(leaderName, leader);
 
         // Remove leader from faction's captives
         faction.captiveLeaders = faction.captiveLeaders.filter(name => name !== leaderName);

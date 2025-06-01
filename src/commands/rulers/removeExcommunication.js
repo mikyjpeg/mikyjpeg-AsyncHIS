@@ -1,40 +1,46 @@
+const { SlashCommandBuilder } = require('discord.js');
 const rulerManager = require('../../game/rulerManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'remove_excommunication',
-    description: 'Remove excommunication from a ruler',
-    usage: '!remove_excommunication [ruler_name]',
-    async execute(message, args) {
-        if (args.length < 1) {
-            throw new Error('Please specify the ruler name. Usage: !remove_excommunication [ruler_name]');
-        }
-
-        const rulerName = args.join(' ');
-        const commandString = `!remove_excommunication ${rulerName}`;
-
+    data: new SlashCommandBuilder()
+        .setName('remove_excommunication')
+        .setDescription('Remove excommunication from a ruler')
+        .addStringOption(option =>
+            option.setName('ruler')
+                .setDescription('Name of the ruler')
+                .setRequired(true)),
+        
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const rulerName = interaction.options.getString('ruler');
+        
         try {
-            // Remove excommunication
+            // Remove excommunication and update card modifiers
             const result = await rulerManager.removeExcommunication(rulerName);
             
-            // Record successful command in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, { ruler: result.ruler }),
-                message.author.username,
-                commandString
+            // Record in history
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.REMOVE_EXCOMMUNICATION,
+                {
+                    ruler: result.ruler
+                }
             );
 
-            return `Excommunication has been removed from ${rulerName}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
+            let response = `Excommunication removed from ${rulerName}`;
+            if (result.cardModifierChange) {
+                response += `\nCard modifier for ${result.ruler.faction}: +${result.cardModifierChange} (now ${result.newCardModifier})`;
+            }
+            response += ` (Command ID: ${historyEntry.commandId})`;
+
+            await interaction.editReply(response);
         } catch (error) {
-            // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.REMOVE_EXCOMMUNICATION, { rulerName }),
-                message.author.username,
-                commandString,
-                false,
-                error.message
-            );
-            throw error;
+            await interaction.editReply({ 
+                content: `Failed to remove excommunication: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

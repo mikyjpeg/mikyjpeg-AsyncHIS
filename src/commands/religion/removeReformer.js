@@ -1,29 +1,56 @@
+const { SlashCommandBuilder } = require('discord.js');
 const spaceManager = require('../../game/spaceManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'remove_reformer',
-    description: 'Remove a reformer from a space',
-    usage: '!remove_reformer [space] [reformer_name]',
-    async execute(message, args) {
-        if (args.length < 2) {
-            throw new Error('Please specify both the space and reformer name. Usage: !remove_reformer [space] [reformer_name]');
-        }
-
-        const spaceName = args[0];
-        const reformerName = args.slice(1).join(' ');
-
-        // Get the space data
-        const space = await spaceManager.getSpace(spaceName);
+    data: new SlashCommandBuilder()
+        .setName('remove_reformer')
+        .setDescription('Remove a reformer from a space')
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('The space to remove the reformer from')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('reformer')
+                .setDescription('Name of the reformer')
+                .setRequired(true)),
         
-        // Check if reformer exists
-        if (!space.reformers.includes(reformerName)) {
-            return `${reformerName} is not a reformer in ${spaceName}`;
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const spaceName = interaction.options.getString('space');
+        const reformerName = interaction.options.getString('reformer');
+        
+        try {
+            // Get the space data
+            const space = await spaceManager.getSpace(spaceName);
+            
+            // Check if reformer exists
+            if (!space.reformers || !space.reformers.includes(reformerName)) {
+                await interaction.editReply(`${reformerName} is not in ${spaceName}`);
+                return;
+            }
+
+            // Remove the reformer
+            space.reformers = space.reformers.filter(r => r !== reformerName);
+            await spaceManager.updateSpace(spaceName, space);
+            
+            // Record in history
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.REMOVE_REFORMER,
+                {
+                    spaceName,
+                    reformerName
+                }
+            );
+
+            await interaction.editReply(`Removed ${reformerName} from ${spaceName} (Command ID: ${historyEntry.commandId})`);
+        } catch (error) {
+            await interaction.editReply({ 
+                content: `Failed to remove reformer: ${error.message}`,
+                ephemeral: true 
+            });
         }
-
-        // Remove the reformer
-        space.reformers = space.reformers.filter(r => r !== reformerName);
-        await spaceManager.updateSpace(spaceName, space);
-
-        return `Removed ${reformerName} as a reformer from ${spaceName}`;
     }
 }; 

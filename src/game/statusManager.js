@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { FILE_SYSTEM } = require('../utils/constants');
 
 class StatusManager {
     constructor() {
@@ -45,7 +46,7 @@ class StatusManager {
     async saveStatus(status) {
         try {
             await fs.mkdir(path.dirname(this.filepath), { recursive: true });
-            await fs.writeFile(this.filepath, JSON.stringify(status, null, 2));
+            await fs.writeFile(this.filepath, JSON.stringify(status, null, FILE_SYSTEM.JSON_INDENT));
             this.status = status;
             return status;
         } catch (error) {

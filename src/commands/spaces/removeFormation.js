@@ -1,30 +1,58 @@
+const { SlashCommandBuilder } = require('discord.js');
 const formationManager = require('../../game/formationManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const { POWERS } = require('../../game/gameState');
 
 module.exports = {
-    name: 'remove_formation',
-    description: 'Remove troops and/or leaders from a formation in a space. For Ottoman: [regular_troops] [cavalry]. For others: [regular_troops] [mercenaries].',
-    usage: '!remove_formation [space_name] [power] [regular_troops] [mercenaries/cavalry] [...leaders]',
-    async execute(message, args) {
-        if (args.length < 4) {
-            throw new Error('Please provide space name, power, regular troops, and mercenaries/cavalry. Usage: !remove_formation [space_name] [power] [regular_troops] [mercenaries/cavalry] [...leaders]');
-        }
-
-        const spaceName = args[0];
-        const power = args[1];
-        const regularTroops = parseInt(args[2]);
-        const secondaryTroops = parseInt(args[3]);
-        const leaders = args.slice(4);
+    data: new SlashCommandBuilder()
+        .setName('remove_formation')
+        .setDescription('Remove troops and/or leaders from a formation')
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('The space to remove from')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('The power that controls the formation')
+                .setRequired(true)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                }))))
+        .addIntegerOption(option =>
+            option.setName('regulars')
+                .setDescription('Number of regular troops to remove')
+                .setRequired(true)
+                .setMinValue(0))
+        .addIntegerOption(option =>
+            option.setName('secondary')
+                .setDescription('Number of mercenaries/cavalry to remove')
+                .setRequired(true)
+                .setMinValue(0))
+        .addStringOption(option =>
+            option.setName('leaders')
+                .setDescription('Leaders to remove (comma-separated)')
+                .setRequired(false)),
         
-        const commandString = `!remove_formation ${args.join(' ')}`;
-
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const spaceName = interaction.options.getString('space');
+        const power = interaction.options.getString('power');
+        const regularTroops = interaction.options.getInteger('regulars');
+        const secondaryTroops = interaction.options.getInteger('secondary');
+        const leadersInput = interaction.options.getString('leaders');
+        const leaders = leadersInput ? leadersInput.split(',').map(l => l.trim()) : [];
+        
         try {
             // Remove from formation
             const updatedSpace = await formationManager.removeFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
             
             // Record in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.REMOVE_FORMATION, {
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.REMOVE_FORMATION,
+                {
                     spaceName,
                     formation: {
                         power,
@@ -32,9 +60,7 @@ module.exports = {
                         secondaryTroops,
                         leaders
                     }
-                }),
-                message.author.username,
-                commandString
+                }
             );
 
             // Check if the formation still exists
@@ -52,16 +78,20 @@ module.exports = {
                 statusMessage = `${power} formation completely removed`;
             }
 
-            return `Removed from ${spaceName} (Command ID: ${historyEntry.commandId}):\n` +
-                   `${power === 'Ottoman' ? 
-                       `${regularTroops} regulars and ${secondaryTroops} cavalry` :
-                       `${regularTroops} regulars and ${secondaryTroops} mercenaries`}` +
-                   `${leaders.length > 0 ? ` and leaders: ${leaders.join(', ')}` : ''}\n` +
-                   statusMessage;
+            await interaction.editReply(
+                `Removed from ${spaceName} (Command ID: ${historyEntry.commandId}):\n` +
+                `${power === 'Ottoman' ? 
+                    `${regularTroops} regulars and ${secondaryTroops} cavalry` :
+                    `${regularTroops} regulars and ${secondaryTroops} mercenaries`}` +
+                `${leaders.length > 0 ? ` and leaders: ${leaders.join(', ')}` : ''}\n` +
+                statusMessage
+            );
         } catch (error) {
             // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.REMOVE_FORMATION, {
+            await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.REMOVE_FORMATION,
+                {
                     spaceName,
                     formation: {
                         power,
@@ -69,13 +99,15 @@ module.exports = {
                         secondaryTroops,
                         leaders
                     }
-                }),
-                message.author.username,
-                commandString,
+                },
                 false,
                 error.message
             );
-            throw error;
+            
+            await interaction.editReply({ 
+                content: `Failed to remove formation: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

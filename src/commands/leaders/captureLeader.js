@@ -1,48 +1,72 @@
+const { SlashCommandBuilder } = require('discord.js');
+const { GameState, POWERS } = require('../../game/gameState');
 const leaderManager = require('../../game/leaderManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'capture_leader',
-    description: 'Capture a leader and add them to a faction\'s captives.',
-    usage: '!capture_leader [leader_name] [capturing_faction]',
-    async execute(message, args) {
-        if (args.length < 2) {
-            throw new Error('Please provide leader name and capturing faction. Usage: !capture_leader [leader_name] [capturing_faction]');
-        }
-
-        const leaderName = args[0];
-        const capturingFaction = args[1];
+    data: new SlashCommandBuilder()
+        .setName('capture_leader')
+        .setDescription('Capture a leader')
+        .addStringOption(option =>
+            option.setName('leader')
+                .setDescription('Name of the leader to capture')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('captor')
+                .setDescription('Power that captured the leader')
+                .setRequired(true)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                })))),
         
-        const commandString = `!capture_leader ${args.join(' ')}`;
-
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const leaderName = interaction.options.getString('leader');
+        const captorPower = interaction.options.getString('captor');
+        
         try {
+            // Get leader data
+            const leader = await leaderManager.getLeader(leaderName);
+            if (!leader) {
+                await interaction.editReply(`Leader ${leaderName} not found`);
+                return;
+            }
+
+            // Check if leader is already captured
+            if (leader.capturedBy) {
+                await interaction.editReply(`${leaderName} is already captured by ${leader.capturedBy}`);
+                return;
+            }
+
+            // Check if captor is trying to capture their own leader
+            if (leader.power === captorPower) {
+                await interaction.editReply(`${captorPower} cannot capture their own leader`);
+                return;
+            }
+
             // Capture the leader
-            const { leader, faction } = await leaderManager.captureLeader(leaderName, capturingFaction);
+            leader.capturedBy = captorPower;
+            await leaderManager.updateLeader(leaderName, leader);
             
             // Record in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.CAPTURE_LEADER, {
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.CAPTURE_LEADER,
+                {
                     leaderName,
-                    capturingFaction
-                }),
-                message.author.username,
-                commandString
+                    captorPower,
+                    leaderPower: leader.power
+                }
             );
 
-            return `${leader.name} has been captured by ${faction.name} (Command ID: ${historyEntry.commandId})`;
+            await interaction.editReply(`${captorPower} has captured ${leaderName} (Command ID: ${historyEntry.commandId})`);
         } catch (error) {
-            // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.CAPTURE_LEADER, {
-                    leaderName,
-                    capturingFaction
-                }),
-                message.author.username,
-                commandString,
-                false,
-                error.message
-            );
-            throw error;
+            await interaction.editReply({ 
+                content: `Failed to capture leader: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

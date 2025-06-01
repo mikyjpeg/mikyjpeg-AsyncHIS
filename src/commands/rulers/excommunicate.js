@@ -1,54 +1,54 @@
+const { SlashCommandBuilder } = require('discord.js');
 const rulerManager = require('../../game/rulerManager');
-const { commandHistory, COMMAND_TYPES, createHistoryEntry } = require('../../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'excommunicate',
-    description: 'Excommunicate a ruler',
-    usage: '!excommunicate [ruler_name]',
-    async execute(message, args) {
-        if (args.length < 1) {
-            throw new Error('Please specify the ruler name. Usage: !excommunicate [ruler_name]');
-        }
-
-        const rulerName = args.join(' ');
-        const commandString = `!excommunicate ${rulerName}`;
-
+    data: new SlashCommandBuilder()
+        .setName('excommunicate')
+        .setDescription('Excommunicate a ruler')
+        .addStringOption(option =>
+            option.setName('ruler')
+                .setDescription('Name of the ruler to excommunicate')
+                .setRequired(true)),
+        
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const rulerName = interaction.options.getString('ruler');
+        
         try {
-            // Check if excommunication is possible and get the reason
+            // First check if ruler can be excommunicated
             const validation = await rulerManager.canBeExcommunicated(rulerName);
             if (!validation.valid) {
-                // Record failed attempt in history
-                await commandHistory.addToHistory(
-                    createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { rulerName }),
-                    message.author.username,
-                    commandString,
-                    false,
-                    validation.reason
-                );
-                return validation.reason;
+                throw new Error(validation.reason);
             }
 
-            // Perform excommunication
+            // Proceed with excommunication
             const result = await rulerManager.excommunicate(rulerName);
             
-            // Record successful command in history
-            const historyEntry = await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { ruler: result.ruler }),
-                message.author.username,
-                commandString
+            // Record in history
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.EXCOMMUNICATION,
+                {
+                    ruler: result.ruler,
+                    reason: validation.reason
+                }
             );
 
-            return `${rulerName} has been excommunicated (Command ID: ${historyEntry.commandId}). Reason: ${validation.reason}\nFaction ${result.ruler.faction}'s card modifier changed by ${result.cardModifierChange} (new value: ${result.newCardModifier})`;
+            let response = `${rulerName} has been excommunicated`;
+            response += `\nReason: ${validation.reason}`;
+            if (result.cardModifierChange) {
+                response += `\nCard modifier for ${result.ruler.faction}: ${result.cardModifierChange} (now ${result.newCardModifier})`;
+            }
+            response += ` (Command ID: ${historyEntry.commandId})`;
+
+            await interaction.editReply(response);
         } catch (error) {
-            // Record error in history
-            await commandHistory.addToHistory(
-                createHistoryEntry(COMMAND_TYPES.EXCOMMUNICATION, { rulerName }),
-                message.author.username,
-                commandString,
-                false,
-                error.message
-            );
-            throw error;
+            await interaction.editReply({ 
+                content: `Failed to excommunicate ruler: ${error.message}`,
+                ephemeral: true 
+            });
         }
     }
 }; 

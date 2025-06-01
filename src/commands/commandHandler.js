@@ -1,9 +1,10 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { Collection } = require('discord.js');
 
 class CommandHandler {
     constructor() {
-        this.commands = new Map();
+        this.commands = new Collection();
         this.commandCategories = ['diplomacy', 'spaces', 'game', 'religion', 'rulers'];
     }
 
@@ -16,11 +17,14 @@ class CommandHandler {
                     if (!file.endsWith('.js')) continue;
 
                     const command = require(path.join(categoryPath, file));
-                    this.commands.set(command.name, {
+                    if (!command.data) continue; // Skip if not a slash command
+                    
+                    this.commands.set(command.data.name, {
                         ...command,
                         category
                     });
-                    console.log(`Loaded command: ${command.name} (${category})`);
+                    
+                    console.log(`Loaded command: ${command.data.name} (${category})`);
                 }
             } catch (error) {
                 console.error(`Error loading commands from ${category}:`, error);
@@ -28,22 +32,32 @@ class CommandHandler {
         }
     }
 
-    getCommand(name) {
-        return this.commands.get(name);
-    }
-
-    async executeCommand(commandName, message, args) {
-        const command = this.getCommand(commandName);
+    async executeInteraction(interaction) {
+        const command = this.commands.get(interaction.commandName);
+        
         if (!command) {
-            throw new Error(`Command "${commandName}" not found`);
+            console.error(`No command matching ${interaction.commandName} was found.`);
+            await interaction.reply({ 
+                content: 'There was an error while executing this command!', 
+                ephemeral: true 
+            });
+            return;
         }
 
         try {
-            const response = await command.execute(message, args);
-            return response;
+            await command.execute(interaction);
         } catch (error) {
-            console.error(`Error executing command ${commandName}:`, error);
-            throw error;
+            console.error(`Error executing ${interaction.commandName}:`, error);
+            const errorMessage = { 
+                content: 'There was an error while executing this command!', 
+                ephemeral: true 
+            };
+            
+            if (interaction.deferred) {
+                await interaction.editReply(errorMessage);
+            } else {
+                await interaction.reply(errorMessage);
+            }
         }
     }
 
@@ -55,7 +69,8 @@ class CommandHandler {
             if (!commandsByCategory[command.category]) {
                 commandsByCategory[command.category] = [];
             }
-            commandsByCategory[command.category].push(`!${name} - ${command.description}`);
+            
+            commandsByCategory[command.category].push(`/${name} - ${command.data.description}`);
         }
 
         // Build the formatted list

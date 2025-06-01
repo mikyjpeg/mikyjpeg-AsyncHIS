@@ -1,21 +1,37 @@
-const { GameState } = require('../../game/gameState');
+const { SlashCommandBuilder } = require('discord.js');
+const { GameState, POWERS } = require('../../game/gameState');
 
 module.exports = {
-    name: 'join',
-    description: 'Join the game as a power',
-    usage: '!join [power]',
-    async execute(message, args) {
-        if (args.length < 1) {
-            return `Please specify a power. Available powers:\n${GameState.availablePowers.map(power => `- ${power}`).join('\n')}`;
+    data: new SlashCommandBuilder()
+        .setName('join')
+        .setDescription('Join the game as a power')
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('The power you want to play as')
+                .setRequired(true)
+                .addChoices(
+                    ...Object.values(POWERS).map(power => ({
+                        name: power,
+                        value: power
+                    }))
+                )),
+        
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const powerName = interaction.options.getString('power');
+        console.log(`User ${interaction.user.username} attempting to join as ${powerName}`);
+        
+        try {
+            await GameState.assignPower(interaction.user.id, interaction.user.username, powerName);
+            console.log(`Successfully assigned ${powerName} to ${interaction.user.username}`);
+            
+            await interaction.editReply(`Successfully assigned ${powerName} to ${interaction.user.username}`);
+        } catch (error) {
+            await interaction.editReply({ 
+                content: `Failed to join as ${powerName}: ${error.message}`,
+                ephemeral: true 
+            });
         }
-
-        const powerInput = args.join(' ').replace(/[\[\]]/g, '');
-        const powerName = powerInput.charAt(0).toUpperCase() + powerInput.slice(1).toLowerCase();
-        console.log(`User ${message.author.username} attempting to join as ${powerName}`);
-        
-        await GameState.assignPower(message.author.id, message.author.username, powerName);
-        console.log(`Successfully assigned ${powerName} to ${message.author.username}`);
-        
-        return `Successfully assigned ${powerName} to ${message.author.username}`;
     }
 }; 

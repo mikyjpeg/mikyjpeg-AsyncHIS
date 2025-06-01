@@ -1,23 +1,66 @@
+const { SlashCommandBuilder } = require('discord.js');
 const spaceManager = require('../../game/spaceManager');
-const factionManager = require('../../game/factionManager');
+const { GameState, POWERS } = require('../../game/gameState');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
-    name: 'control',
-    description: 'Take control of a space with a power',
-    usage: '!control [space] [power]',
-    async execute(message, args) {
-        if (args.length < 2) {
-            throw new Error('Please specify both the space name and the power that will control it. Usage: !control [space] [power]');
-        }
+    data: new SlashCommandBuilder()
+        .setName('control')
+        .setDescription('Change control of a space')
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('The space to change control of')
+                .setRequired(true))
+        .addStringOption(option =>
+            option.setName('power')
+                .setDescription('The power to take control')
+                .setRequired(true)
+                .addChoices(...Object.values(POWERS).map(power => ({
+                    name: power,
+                    value: power
+                })))),
+        
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const spaceName = interaction.options.getString('space');
+        const power = interaction.options.getString('power');
+        
+        try {
+            // Get space data
+            const space = await spaceManager.getSpace(spaceName);
+            if (!space) {
+                await interaction.editReply(`Space ${spaceName} not found`);
+                return;
+            }
 
-        const spaceName = args[0];
-        const powerName = args.slice(1).join(' ');
-        
-        // Validate that the user can control this power
-        await spaceManager.validateUserControl(message.author.id, powerName, factionManager);
-        
-        console.log(`Attempting to set ${powerName} control over ${spaceName}`);
-        await spaceManager.takeControl(spaceName, powerName, message.author.id);
-        return `Successfully set ${powerName} control over ${spaceName}`;
+            // Store previous controller for history
+            const previousController = space.controllingPower;
+
+            // Update control
+            space.controllingPower = power;
+            await spaceManager.updateSpace(spaceName, space);
+            
+            // Record in history
+            const historyEntry = await commandHistory.recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.TAKE_CONTROL,
+                {
+                    spaceName,
+                    power,
+                    previousController,
+                    homePower: space.homePower // Store homePower for better undo messages
+                }
+            );
+
+            // Use homePower as fallback when displaying previous controller
+            const displayPreviousController = previousController || space.homePower;
+            await interaction.editReply(`${power} has taken control of ${spaceName} from ${displayPreviousController} (Command ID: ${historyEntry.commandId})`);
+        } catch (error) {
+            await interaction.editReply({ 
+                content: `Failed to change control: ${error.message}`,
+                ephemeral: true 
+            });
+        }
     }
 }; 

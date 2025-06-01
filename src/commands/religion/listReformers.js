@@ -1,24 +1,46 @@
+const { SlashCommandBuilder } = require('discord.js');
 const spaceManager = require('../../game/spaceManager');
 
 module.exports = {
-    name: 'list_reformers',
-    description: 'List all reformers in a space',
-    usage: '!list_reformers [space]',
-    async execute(message, args) {
-        if (args.length < 1) {
-            throw new Error('Please specify the space. Usage: !list_reformers [space]');
-        }
-
-        const spaceName = args[0];
-
-        // Get the space data
-        const space = await spaceManager.getSpace(spaceName);
+    data: new SlashCommandBuilder()
+        .setName('list_reformers')
+        .setDescription('List all reformers in a space')
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('Name of the space to check')
+                .setRequired(true)),
         
-        if (space.reformers.length === 0) {
-            return `${spaceName} has no reformers`;
-        }
+    async execute(interaction) {
+        await interaction.deferReply();
+        
+        const spaceName = interaction.options.getString('space');
+        
+        try {
+            const space = await spaceManager.getSpace(spaceName);
+            if (!space) {
+                await interaction.editReply(`Space ${spaceName} not found`);
+                return;
+            }
 
-        const reformersList = space.reformers.map(r => `- ${r}`).join('\n');
-        return `Reformers in ${spaceName}:\n${reformersList}`;
+            // Check if space is Catholic
+            if (space.catholic) {
+                await interaction.editReply(`${spaceName} is Catholic and cannot have reformers`);
+                return;
+            }
+
+            // Format reformer list
+            if (!space.reformers || space.reformers.length === 0) {
+                await interaction.editReply(`No reformers in ${spaceName}`);
+                return;
+            }
+
+            const reformerList = space.reformers.join(', ');
+            await interaction.editReply(`Reformers in ${spaceName}:\n${reformerList}`);
+        } catch (error) {
+            await interaction.editReply({ 
+                content: `Failed to list reformers: ${error.message}`,
+                ephemeral: true 
+            });
+        }
     }
 }; 
