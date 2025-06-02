@@ -5,5 +5,7 @@
   "turn": "6",
   "bonus": "+1 die for Counter Reformation within 2 spaces of Regensburg",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

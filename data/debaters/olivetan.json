@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "4",
   "bonus": "Bonus CP for translation in French zone",
-  "language": "french",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "french"
 }

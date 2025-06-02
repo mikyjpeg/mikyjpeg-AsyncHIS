@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "4",
   "bonus": "+1 die for Ref within 2 spaces of Paris",
-  "language": "french",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "french"
 }

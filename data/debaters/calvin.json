@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "4",
   "bonus": "Target 3 French-speaking spaces with a treatise",
-  "language": "french",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "french"
 }

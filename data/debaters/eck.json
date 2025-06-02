@@ -5,5 +5,7 @@
   "turn": "1",
   "bonus": "+1 die in debate attacks",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

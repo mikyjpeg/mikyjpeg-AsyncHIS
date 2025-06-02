@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "2",
   "bonus": "+1 die for Ref within 2 spaces of Zurich",
-  "language": "german",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "german"
 }

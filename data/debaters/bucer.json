@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "1",
   "bonus": "+1 die for Ref withing 2 spaces of Strasburg",
-  "language": "german",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "german"
 }

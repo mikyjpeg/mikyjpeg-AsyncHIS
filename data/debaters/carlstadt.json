@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "1",
   "bonus": "Target 3 German spaces w/treatise; unrest if fails",
-  "language": "german",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "german"
 }

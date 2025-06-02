@@ -11,6 +11,15 @@ const FILE_SYSTEM = {
     JSON_INDENT: 2
 };
 
+// Command types
+const COMMAND_TYPES = {
+    COMMIT_DEBATER: 'commit_debater',
+    UNCOMMIT_DEBATER: 'uncommit_debater',
+    SET_CURRENT_DEBATER: 'set_current_debater',
+    CLEAR_CURRENT_DEBATER: 'clear_current_debater'
+};
+
 module.exports = {
-    FILE_SYSTEM
+    FILE_SYSTEM,
+    COMMAND_TYPES
 }; 

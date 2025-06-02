@@ -28,17 +28,17 @@ async function convertDebaters() {
                 counter: parseInt(record.counter),
                 type: record.type,
                 turn: record.turn.replace('?', ''),  // Remove question marks from turn
-                bonus: record.bonus
+                bonus: record.bonus,
+                isActive: false,
+                isExcommunicated: false,
+                isCommitted: false,
+                isCurrentDebater: false
             };
 
             // Add language only for non-papacy debaters
             if (record.type !== 'papacy') {
                 cleanRecord.language = record.language;
             }
-
-            // Add new fields
-            cleanRecord.isActive = false;
-            cleanRecord.isExcommunicated = false;
 
             // Create filename from debater name (replace spaces with underscores and lowercase)
             const filename = `${record.name.toLowerCase().replace(/\s+/g, '_')}.json`;

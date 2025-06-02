@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "3",
   "bonus": "insert in 2nd round of debate in any zone",
-  "language": "german",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "german"
 }

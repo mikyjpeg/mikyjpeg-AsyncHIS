@@ -5,5 +5,7 @@
   "turn": "6",
   "bonus": "Found Jesuit University for only 2 CP",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

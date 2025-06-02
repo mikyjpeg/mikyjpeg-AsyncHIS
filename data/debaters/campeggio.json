@@ -5,5 +5,7 @@
   "turn": "1",
   "bonus": "Roll die after debate loss if 5 or 6 result is ignored",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

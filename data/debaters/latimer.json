@@ -4,7 +4,9 @@
   "type": "protestant",
   "turn": "4",
   "bonus": "+1 die for Ref attempts in England",
-  "language": "english",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "english"
 }

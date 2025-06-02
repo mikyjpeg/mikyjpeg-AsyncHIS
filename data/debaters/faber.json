@@ -5,5 +5,7 @@
   "turn": "6",
   "bonus": "+2 dice for Contro Reformation against an electorate",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

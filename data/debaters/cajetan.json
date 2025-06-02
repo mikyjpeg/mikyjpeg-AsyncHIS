@@ -5,5 +5,7 @@
   "turn": "1",
   "bonus": "Target 3 spaces with burn books",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

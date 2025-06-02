@@ -5,5 +5,7 @@
   "turn": "7",
   "bonus": "+1 die in debate in English zone if attacker",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }

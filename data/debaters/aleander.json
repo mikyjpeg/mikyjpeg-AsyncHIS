@@ -5,5 +5,7 @@
   "turn": "1",
   "bonus": "If concludes debate winner flips an extra space",
   "isActive": false,
-  "isExcommunicated": false
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
 }
