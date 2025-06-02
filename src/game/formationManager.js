@@ -39,7 +39,7 @@ class FormationManager {
         }
     }
 
-    async validateLeaders(power, leaders) {
+    async validateLeaders(power, leaders, space) {
         for (const leaderName of leaders) {
             const leader = await leaderManager.getLeader(leaderName);
             
@@ -56,6 +56,11 @@ class FormationManager {
             // Check if leader is captured
             if (leader.isCaptured) {
                 throw new Error(`Leader ${leaderName} is currently captured`);
+            }
+
+            // Check if naval leader is in a port space
+            if (leader.type === 'naval' && !space.hasPorts) {
+                throw new Error(`Naval leader ${leaderName} can only be placed in spaces with ports`);
             }
         }
     }
@@ -75,7 +80,7 @@ class FormationManager {
         this.validateFormation(formation);
 
         // Validate leaders belong to power and are active
-        await this.validateLeaders(power, leaders);
+        await this.validateLeaders(power, leaders, space);
 
         // Check if a formation for this power already exists
         const existingIndex = space.formations.findIndex(f => f.power === power);
@@ -128,7 +133,7 @@ class FormationManager {
         }
 
         // Validate leaders belong to power and exist in formation
-        await this.validateLeaders(power, leaders);
+        await this.validateLeaders(power, leaders, space);
         for (const leader of leaders) {
             if (!formation.leaders.includes(leader)) {
                 throw new Error(`Leader ${leader} not found in formation at ${spaceName}`);

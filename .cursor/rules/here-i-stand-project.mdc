@@ -12,3 +12,8 @@ In scripts/ there are script to manipulate the state, or import from files, as u
 
 The game cover both political and religious control. Religious control is managed in space with the boolean field "catholic". By default is true at the start of the game, but can change to false when the space is converted to Protestantism. The field is missing from spaces that are out of scope, as all the Ottoman home spaces.
 
+Factions are defined in data/factions folders. Factions are also often referred to as Power. There are minor powers and major powers.
+Each factions has leaders that are defined in data/leaders. Leaders can be added in spaces via formations.
+Each faction has also rulers, that are defined in data/rulers. There's only a current ruler and we defined ruler succession for all major powers.
+Spaces belongs to europa map and define where formations are and how can they move around.
+

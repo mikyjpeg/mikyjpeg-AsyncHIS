@@ -1,0 +1,319 @@
+{
+    "scenarios": [
+        {
+            "name": "1517",
+            "turns": [1,2,3,4,5,6,7,8,9],
+            "setup": {
+                "factions": [
+                    "england": {
+                        "ruler": "Henry VIII",
+                        "spaces": [
+                            {
+                                "name": "London",
+                                "regulars": 3,
+                                "naval": 1,
+                                "leaders": ["Henry VIII", "Charles Brandon"]
+                            },
+                            {
+                                "name": "Portsmouth",
+                                "naval": 1
+                            },
+                            {
+                                "name": "Bristol",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Calais",
+                                "regulars": 2
+                            },
+                            {
+                                "name": "York",
+                                "regulars": 1
+                            }
+                        ],
+                        "leaders": ["Henry VIII", "John Dudley"],
+                        "maritalStatus": "Catherine of Aragon",
+                        "vp": 9
+                    },
+                    "ottoman": {
+                        "ruler": "Suleiman",
+                        "spaces": [
+                            {
+                                "name": "Istanbul",
+                                "regulars": 7,
+                                "cavalry": 1,
+                                "naval": 1,
+                                "leaders": ["Suleiman", "Ibrahim Pasha"]
+                            },
+                            {
+                                "name": "Edirne",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Salonika",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Athens",
+                                "regulars": 1,
+                                "naval": 1
+                            }
+                        ],
+                        "piracyVP": 0,
+                        "vp": 8
+                    },
+                    "hapsburg": {
+                        "ruler": "Charles V",
+                        "spaces": [
+                            {
+                                "name": "Valladolid",
+                                "regulars": 4,
+                                "leaders": ["Charles V", "Duke of Alva"]
+                            },
+                            {
+                                "name": "Seville",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Barcellona",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Navarre",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Tunis",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Naples",
+                                "regulars": 2,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Besancon",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Brussels",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Vienna",
+                                "regulars": 4,
+                                "leaders": ["Ferdinand"]
+                            },
+                            {
+                                "name": "Antwerp",
+                                "regulars": 3
+                            }
+                        ],
+                        "vp": 9
+                    },
+                    "france": {
+                        "ruler": "Francis I",
+                        "spaces": [
+                            {
+                                "name": "Paris",
+                                "regulars": 4,
+                                "leaders": ["Francis I", "Montmorency"]
+                            },
+                            {
+                                "name": "Rouen",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Bordeaux",
+                                "regulars": 2
+                            },
+                            {
+                                "name": "Lyon",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Marseille",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Turin",
+                                "regulars": 0
+                            },
+                            {
+                                "name": "Milan",
+                                "regulars": 2
+                            }
+                        ],
+                        "chateauxVP": 0,
+                        "vp": 12
+                    },
+                    "papacy": {
+                        "ruler": "Leo X",
+                        "spaces": [
+                            {
+                                "name": "Rome",
+                                "regulars": 1,
+                                "naval": 1
+                            },
+                            {
+                                "name": "Ravenna",
+                                "regulars": 1
+                            }
+                        ],
+                        "debaters": [
+                            "Eck",
+                            "Campeggio",
+                            "Aleander",
+                            "Tetzel",
+                            "Cajetan"
+                        ],
+                        "excommunicated": [],
+                        "stPeterCP": 0,
+                        "stPeterVP": 0,
+                        "vp": 19
+                    },
+                    "protestant": {
+                        "ruler": "Martin Luther",
+                        "spaces": [],
+                        "electorates": [
+                            {
+                                "name": "Wittenberg",
+                                "regulars": 2
+                            },
+                            {
+                                "name": "Augsburg",
+                                "regulars": 2
+                            },
+                            {
+                                "name": "Cologne",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Mainz",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Trier",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Brandenburg",
+                                "regulars": 1
+                            }
+                        ],
+                        "debaters": [
+                            "Luther",
+                            "Melanchthon",
+                            "Bucer",
+                            "Carlstadt"
+                        ],
+                        "translations": [
+                            {
+                                "language": "english",
+                                "newTestament": 0,
+                                "fullBible": 0
+                            },
+                            {
+                                "language": "french",
+                                "newTestament": 0,
+                                "fullBible": 0
+                            },
+                            {
+                                "language": "german",
+                                "newTestament": 0,
+                                "fullBible": 0
+                            }
+                        ],
+                        "vp": 0
+                    },
+                    "venice": {
+                        "ruler": "Leonardo Loredan",
+                        "spaces": [
+                            {
+                                "name": "Venice",
+                                "regulars": 2,
+                                "naval": 3
+                            },
+                            {
+                                "name": "Corfu",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Candia",
+                                "regulars": 1
+                            }
+                        ]
+                    },
+                    "genoa": {
+                        "ruler": "Andrea Doria",
+                        "spaces": [
+                            {
+                                "name": "Genoa",
+                                "regulars": 2,
+                                "naval": 1,
+                                "leaders": ["Andrea Doria"]
+                            }
+                        ]
+                    },
+                    "hungary": {
+                        "ruler": "Louis II",
+                        "spaces": [
+                            {
+                                "name": "Belgrade",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Buda",
+                                "regulars": 5
+                            },
+                            {
+                                "name": "Prague",
+                                "regulars": 1
+                            }
+                        ]
+                    },
+                    "scotland": {
+                        "ruler": "James V",
+                        "spaces": [
+                            {
+                                "name": "Edinburgh",
+                                "regulars": 3,
+                                "naval": 1
+                            }
+                        ]
+                    },
+                    "independents": {
+                        "ruler": "Independent",
+                        "spaces": [
+                            {
+                                "name": "Rhodes",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Metz",
+                                "regulars": 1
+                            },
+                            {
+                                "name": "Florence",
+                                "regulars": 1
+                            }
+                        ]
+                    }
+                ],
+                "wars": [
+                    { "power1": "Hapsburg", "power2": "France" },
+                    { "power1": "France", "power2": "Papacy" },
+                    { "power1": "Ottoman", "power2": "Hungary" },
+                ],
+                "alliances": [],
+                "protestantSpaces": [],
+                "removedCards": []
+            }
+        }
+    ]
+}
