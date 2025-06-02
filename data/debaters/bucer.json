@@ -1,0 +1,10 @@
+{
+  "name": "Bucer",
+  "counter": 2,
+  "type": "protestant",
+  "turn": "1",
+  "bonus": "+1 die for Ref withing 2 spaces of Strasburg",
+  "language": "german",
+  "isActive": false,
+  "isExcommunicated": false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Cranmer",
+  "counter": 3,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "+1 die for Ref within 2 spaces of London",
+  "language": "english",
+  "isActive": false,
+  "isExcommunicated": false
+}

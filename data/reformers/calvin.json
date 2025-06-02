@@ -1,0 +1,7 @@
+{
+  "name": "Calvin",
+  "location": "Geneva",
+  "turn": 4,
+  "isActive": false,
+  "isExcommunicated": false
+}

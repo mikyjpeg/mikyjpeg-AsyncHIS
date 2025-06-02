@@ -1,0 +1,9 @@
+{
+  "name": "Cajetan",
+  "counter": 1,
+  "type": "papacy",
+  "turn": "1",
+  "bonus": "Target 3 spaces with burn books",
+  "isActive": false,
+  "isExcommunicated": false
+}

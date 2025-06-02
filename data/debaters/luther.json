@@ -1,0 +1,10 @@
+{
+  "name": "Luther",
+  "counter": 4,
+  "type": "protestant",
+  "turn": "1",
+  "bonus": "Bonus CP for translation in german zone",
+  "language": "german",
+  "isActive": false,
+  "isExcommunicated": false
+}

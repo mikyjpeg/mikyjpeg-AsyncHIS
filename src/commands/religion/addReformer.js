@@ -1,15 +1,11 @@
 const { SlashCommandBuilder } = require('discord.js');
-const spaceManager = require('../../game/spaceManager');
+const reformerManager = require('../../game/reformerManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('add_reformer')
-        .setDescription('Add a reformer to a space')
-        .addStringOption(option =>
-            option.setName('space')
-                .setDescription('The space to add the reformer to')
-                .setRequired(true))
+        .setDescription('Add a reformer to their designated space')
         .addStringOption(option =>
             option.setName('reformer')
                 .setDescription('Name of the reformer')
@@ -18,45 +14,23 @@ module.exports = {
     async execute(interaction) {
         await interaction.deferReply();
         
-        const spaceName = interaction.options.getString('space');
         const reformerName = interaction.options.getString('reformer');
         
         try {
-            // Get the space data
-            const space = await spaceManager.getSpace(spaceName);
-            
-            // Check if space is Protestant
-            if (space.catholic) {
-                await interaction.editReply(`Cannot add a reformer to ${spaceName} as it is Catholic`);
-                return;
-            }
-
-            // Check if reformer already exists
-            if (space.reformers && space.reformers.includes(reformerName)) {
-                await interaction.editReply(`${reformerName} is already in ${spaceName}`);
-                return;
-            }
-
-            // Initialize reformers array if it doesn't exist
-            if (!space.reformers) {
-                space.reformers = [];
-            }
-
-            // Add the reformer
-            space.reformers.push(reformerName);
-            await spaceManager.updateSpace(spaceName, space);
+            // Add reformer to their designated space
+            const { reformer, space } = await reformerManager.addReformerToSpace(reformerName);
             
             // Record in history
             const historyEntry = await commandHistory.recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_REFORMER,
                 {
-                    spaceName,
-                    reformerName
+                    reformer,
+                    spaceName: space.name
                 }
             );
 
-            await interaction.editReply(`Added ${reformerName} to ${spaceName} (Command ID: ${historyEntry.commandId})`);
+            await interaction.editReply(`Added ${reformerName} to ${space.name} (Command ID: ${historyEntry.commandId})`);
         } catch (error) {
             await interaction.editReply({ 
                 content: `Failed to add reformer: ${error.message}`,

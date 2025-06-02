@@ -1,0 +1,9 @@
+{
+  "name": "Gardiner",
+  "counter": 3,
+  "type": "papacy",
+  "turn": "7",
+  "bonus": "+1 die in debate in English zone if attacker",
+  "isActive": false,
+  "isExcommunicated": false
+}

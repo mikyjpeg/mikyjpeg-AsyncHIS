@@ -5,6 +5,7 @@ const rulerSuccessionManager = require('../../game/rulerSuccessionManager');
 const spaceManager = require('../../game/spaceManager');
 const diplomacyManager = require('../../game/diplomacyManager');
 const victoryPointsManager = require('../../game/victoryPointsManager');
+const reformerManager = require('../../game/reformerManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -30,40 +31,66 @@ module.exports = {
 
             switch (commandToUndo.type) {
                 case COMMAND_TYPES.EXCOMMUNICATION: {
-                    const { ruler } = commandToUndo.data;
-                    
-                    // Get the ruler and faction data
-                    const rulerData = await rulerManager.getRuler(ruler.name);
-                    const faction = await diplomacyManager.getFaction(ruler.faction);
-                    
-                    // Update ruler's excommunication status
-                    rulerData.excommunicated = false;
-                    await rulerManager.updateRuler(ruler.name, rulerData);
-                    
-                    // Restore faction's card modifier
-                    faction.cardModifier = (faction.cardModifier || 0) + 1;
-                    await diplomacyManager.updateFaction(ruler.faction, faction);
-                    
-                    undoMessage = `Undid excommunication of ${ruler.name}\nCard modifier for ${ruler.faction}: +1 (now ${faction.cardModifier})`;
+                    if (commandToUndo.data.ruler) {
+                        const { ruler } = commandToUndo.data;
+                        
+                        // Get the ruler and faction data
+                        const rulerData = await rulerManager.getRuler(ruler.name);
+                        const faction = await diplomacyManager.getFaction(ruler.faction);
+                        
+                        // Update ruler's excommunication status
+                        rulerData.excommunicated = false;
+                        await rulerManager.updateRuler(ruler.name, rulerData);
+                        
+                        // Restore faction's card modifier
+                        faction.cardModifier = (faction.cardModifier || 0) + 1;
+                        await diplomacyManager.updateFaction(ruler.faction, faction);
+                        
+                        undoMessage = `Undid excommunication of ${ruler.name}\nCard modifier for ${ruler.faction}: +1 (now ${faction.cardModifier})`;
+                    } else {
+                        const { reformer } = commandToUndo.data;
+                        
+                        // Get the reformer data
+                        const reformerData = await reformerManager.getReformer(reformer.name);
+                        
+                        // Update reformer's excommunication status
+                        reformerData.isExcommunicated = false;
+                        await reformerManager.updateReformer(reformer.name, reformerData);
+                        
+                        undoMessage = `Undid excommunication of reformer ${reformer.name}`;
+                    }
                     break;
                 }
                 
                 case COMMAND_TYPES.REMOVE_EXCOMMUNICATION: {
-                    const { ruler } = commandToUndo.data;
-                    
-                    // Get the ruler and faction data
-                    const rulerData = await rulerManager.getRuler(ruler.name);
-                    const faction = await diplomacyManager.getFaction(ruler.faction);
-                    
-                    // Update ruler's excommunication status
-                    rulerData.excommunicated = true;
-                    await rulerManager.updateRuler(ruler.name, rulerData);
-                    
-                    // Restore faction's card modifier
-                    faction.cardModifier = (faction.cardModifier || 0) - 1;
-                    await diplomacyManager.updateFaction(ruler.faction, faction);
-                    
-                    undoMessage = `Undid removal of excommunication for ${ruler.name}\nCard modifier for ${ruler.faction}: -1 (now ${faction.cardModifier})`;
+                    if (commandToUndo.data.ruler) {
+                        const { ruler } = commandToUndo.data;
+                        
+                        // Get the ruler and faction data
+                        const rulerData = await rulerManager.getRuler(ruler.name);
+                        const faction = await diplomacyManager.getFaction(ruler.faction);
+                        
+                        // Update ruler's excommunication status
+                        rulerData.excommunicated = true;
+                        await rulerManager.updateRuler(ruler.name, rulerData);
+                        
+                        // Restore faction's card modifier
+                        faction.cardModifier = (faction.cardModifier || 0) - 1;
+                        await diplomacyManager.updateFaction(ruler.faction, faction);
+                        
+                        undoMessage = `Undid removal of excommunication for ${ruler.name}\nCard modifier for ${ruler.faction}: -1 (now ${faction.cardModifier})`;
+                    } else {
+                        const { reformer } = commandToUndo.data;
+                        
+                        // Get the reformer data
+                        const reformerData = await reformerManager.getReformer(reformer.name);
+                        
+                        // Update reformer's excommunication status
+                        reformerData.isExcommunicated = true;
+                        await reformerManager.updateReformer(reformer.name, reformerData);
+                        
+                        undoMessage = `Undid removal of excommunication for reformer ${reformer.name}`;
+                    }
                     break;
                 }
                 
@@ -165,6 +192,33 @@ module.exports = {
                     const { power, oldTotal } = commandToUndo.data;
                     await victoryPointsManager.setVictoryPoints(power, oldTotal);
                     undoMessage = `Restored ${power}'s victory points to ${oldTotal}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.ADD_REFORMER: {
+                    const { reformer, spaceName } = commandToUndo.data;
+                    const space = await spaceManager.getSpace(spaceName);
+                    
+                    // Remove the reformer from the space
+                    space.reformers = space.reformers.filter(r => r !== reformer.name);
+                    await spaceManager.updateSpace(spaceName, space);
+                    
+                    undoMessage = `Removed reformer ${reformer.name} from ${spaceName}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.REMOVE_REFORMER: {
+                    const { reformer, spaceName } = commandToUndo.data;
+                    const space = await spaceManager.getSpace(spaceName);
+                    
+                    // Add the reformer back to the space
+                    if (!space.reformers) {
+                        space.reformers = [];
+                    }
+                    space.reformers.push(reformer.name);
+                    await spaceManager.updateSpace(spaceName, space);
+                    
+                    undoMessage = `Added back reformer ${reformer.name} to ${spaceName}`;
                     break;
                 }
                 

@@ -1,0 +1,9 @@
+{
+  "name": "Tetzel",
+  "counter": 1,
+  "type": "papacy",
+  "turn": "1",
+  "bonus": "1CP to St. Peter with burn books",
+  "isActive": false,
+  "isExcommunicated": false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Zwingli",
+  "counter": 3,
+  "type": "protestant",
+  "turn": "2",
+  "bonus": "+1 die for Ref within 2 spaces of Zurich",
+  "language": "german",
+  "isActive": false,
+  "isExcommunicated": false
+}

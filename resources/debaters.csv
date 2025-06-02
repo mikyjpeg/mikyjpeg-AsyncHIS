@@ -1,0 +1,29 @@
+name,counter,language,type,turn,bonus
+Luther,4,german,protestant,1,Bonus CP for translation in german zone
+Carlstadt,1,german,protestant,1,Target 3 German spaces w/treatise; unrest if fails
+Bucer,2,german,protestant,1,+1 die for Ref withing 2 spaces of Strasburg
+Zwingli,3,german,protestant,2,+1 die for Ref within 2 spaces of Zurich
+Oekolmpdius,2,german,protestant,2,+1 die for Ref within 2 spaces of Basel
+Bullinger,2,german,protestant,3,insert in 2nd round of debate in any zone
+Cranmer,3,english,protestant,4?,+1 die for Ref within 2 spaces of London
+Coverdale,2,english,protestant,4?,Bonus CP for translation in English zone
+Tyndale,2,english,protestant,2,Bonus CP for translation in English zone
+Knox,3,english,protestant,6?,+1 die for Ref in England or Scotland
+Latimer,1,english,protestant,4?,+1 die for Ref attempts in England
+Wishart,1,english,protestant,6,+1 die for Ref attempts in Scotland
+Olivetan,1,french,protestant,4,Bonus CP for translation in French zone
+Cop,2,french,protestant,4,+1 die for Ref within 2 spaces of Paris
+Farel,2,french,protestant,4,+1 die for Ref within 2 spaces of Geneva
+Calvin,4,french,protestant,4,Target 3 French-speaking spaces with a treatise
+Eck,3,na,papacy,1,+1 die in debate attacks
+Faber,3,na,papacy,6,+2 dice for Contro Reformation against an electorate
+Cajetan,1,na,papacy,1,Target 3 spaces with burn books
+Campeggio,2,na,papacy,1,Roll die after debate loss if 5 or 6 result is ignored
+Tetzel,1,na,papacy,1,1CP to St. Peter with burn books
+Contarini,2,na,papacy,2,+1 die for Counter Reformation within 2 spaces of Charles V
+Loyola,4,na,papacy,6,Found Jesuit University for only 2 CP
+Pole,3,na,papacy,5,+1 die for Papacy if present at Council of Trent
+Gardiner,3,na,papacy,7,+1 die in debate in English zone if attacker
+Caraffa,2,na,papacy,5,Target 3 spaces in any zone with burn books
+Canisius,3,na,papacy,6,+1 die for Counter Reformation within 2 spaces of Regensburg
+Aleander,2,na,papacy,1,If concludes debate winner flips an extra space

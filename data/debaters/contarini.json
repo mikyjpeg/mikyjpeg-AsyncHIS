@@ -1,0 +1,9 @@
+{
+  "name": "Contarini",
+  "counter": 2,
+  "type": "papacy",
+  "turn": "2",
+  "bonus": "+1 die for Counter Reformation within 2 spaces of Charles V",
+  "isActive": false,
+  "isExcommunicated": false
+}

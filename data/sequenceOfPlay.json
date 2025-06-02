@@ -1,0 +1,79 @@
+{
+    "turnPhases": [
+
+    ],
+    "turnsActions": [
+        {
+            "turn": 0,
+            "reformers": ["Luther"]
+        },
+        {
+            "turn": 2,
+            "reformers": ["Zwingli"],
+            "debaters": [
+                "Zwingli",
+                "Oekolmpdius",
+                "Tyndale",
+                "Contarini"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 3,
+            "reformer": [],
+            "debaters": [
+                "Bullinger"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 4,
+            "reformers": ["Zwingli","Cranmer"],
+            "debaters": [
+                "Calvin",
+                "Farel",
+                "Cop",
+                "Olivetan",
+                "Cranmer",
+                "Latimer",
+                "Coverdale"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 5,
+            "reformer": [],
+            "debaters": [
+                "Pole",
+                "Caraffa"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 6,
+            "reformer": [],
+            "debaters": [
+                "Loyola",
+                "Faber",
+                "Canisius",
+                "Knox",
+                "Wishart"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 7,
+            "reformer": [],
+            "debaters": [
+                "Gardiner"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+    ]
+}

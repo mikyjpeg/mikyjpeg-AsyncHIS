@@ -1,0 +1,10 @@
+{
+  "name": "Olivetan",
+  "counter": 1,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "Bonus CP for translation in French zone",
+  "language": "french",
+  "isActive": false,
+  "isExcommunicated": false
+}

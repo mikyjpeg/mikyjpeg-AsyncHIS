@@ -1,0 +1,9 @@
+{
+  "name": "Eck",
+  "counter": 3,
+  "type": "papacy",
+  "turn": "1",
+  "bonus": "+1 die in debate attacks",
+  "isActive": false,
+  "isExcommunicated": false
+}

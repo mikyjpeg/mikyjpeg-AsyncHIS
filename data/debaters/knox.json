@@ -1,0 +1,10 @@
+{
+  "name": "Knox",
+  "counter": 3,
+  "type": "protestant",
+  "turn": "6",
+  "bonus": "+1 die for Ref in England or Scotland",
+  "language": "english",
+  "isActive": false,
+  "isExcommunicated": false
+}

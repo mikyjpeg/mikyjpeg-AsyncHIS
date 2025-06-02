@@ -1,0 +1,9 @@
+{
+  "name": "Loyola",
+  "counter": 4,
+  "type": "papacy",
+  "turn": "6",
+  "bonus": "Found Jesuit University for only 2 CP",
+  "isActive": false,
+  "isExcommunicated": false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Cop",
+  "counter": 2,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "+1 die for Ref within 2 spaces of Paris",
+  "language": "french",
+  "isActive": false,
+  "isExcommunicated": false
+}
