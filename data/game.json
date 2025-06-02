@@ -1,0 +1,39 @@
+{
+    "scenarios": [
+        {
+            "name" : "1917",
+            "turns": [1,2,3,4,5,6,7,8,9],
+            "setup": {
+                "england": {
+                    "ruler": "Henry VIII",
+                    "spaces": [
+                        {
+                            "name": "London",
+                            "regulars": 3,
+                            "naval": 1,
+                            "leaders": ["Henry VIII", "Charles Brandon"]
+                        },
+                        {
+                            "name": "Portsmouth",
+                            "naval": 1
+                        },
+                        {
+                            "name": "Bristol",
+                            "regulars": 1
+                        },
+                        {
+                            "name": "Calais",
+                            "regulars": 2
+                        },
+                        {
+                            "name": "York",
+                            "regulars": 1
+                        }
+                    ],
+                    "leaders": ["Henry VIII", "John Dudley"],
+                    "maritalStatus" : "Catherine of Aragon"
+                }
+            }
+        }
+    ]
+}
