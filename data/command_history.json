@@ -910,5 +910,65 @@
     "success": true,
     "errorMessage": null,
     "undone": true
+  },
+  {
+    "commandId": 41,
+    "timestamp": "2025-06-02T21:38:25.572Z",
+    "username": "mikyjpeg",
+    "command": "/add_vp power:England points:3",
+    "type": "add_vp",
+    "data": {
+      "power": "England",
+      "pointsAdded": 3,
+      "newTotal": 3
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 42,
+    "timestamp": "2025-06-02T21:38:42.373Z",
+    "username": "mikyjpeg",
+    "command": "/remove_vp power:England points:2",
+    "type": "remove_vp",
+    "data": {
+      "power": "England",
+      "pointsRemoved": 2,
+      "newTotal": 1
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 43,
+    "timestamp": "2025-06-02T21:39:14.026Z",
+    "username": "mikyjpeg",
+    "command": "/remove_vp power:England points:1",
+    "type": "remove_vp",
+    "data": {
+      "power": "England",
+      "pointsRemoved": 1,
+      "newTotal": 0
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 44,
+    "timestamp": "2025-06-02T21:39:24.079Z",
+    "username": "mikyjpeg",
+    "command": "/add_vp power:Ottoman points:2",
+    "type": "add_vp",
+    "data": {
+      "power": "Ottoman",
+      "pointsAdded": 2,
+      "newTotal": 2
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
   }
 ]

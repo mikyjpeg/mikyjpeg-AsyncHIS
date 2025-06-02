@@ -126,7 +126,10 @@ const COMMAND_TYPES = {
     MAKE_PEACE: 'make_peace',
     DECLARE_WAR: 'declare_war',
     FORM_ALLIANCE: 'form_alliance',
-    TAKE_CONTROL: 'take_control'
+    TAKE_CONTROL: 'take_control',
+    ADD_VP: 'add_vp',
+    REMOVE_VP: 'remove_vp',
+    SET_VP: 'set_vp'
 };
 
 // Factory for creating command history entries

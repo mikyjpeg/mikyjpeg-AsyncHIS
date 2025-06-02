@@ -4,6 +4,7 @@ const rulerManager = require('../../game/rulerManager');
 const rulerSuccessionManager = require('../../game/rulerSuccessionManager');
 const spaceManager = require('../../game/spaceManager');
 const diplomacyManager = require('../../game/diplomacyManager');
+const victoryPointsManager = require('../../game/victoryPointsManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -141,6 +142,29 @@ module.exports = {
                     await spaceManager.updateSpace(spaceName, spaceData);
                     
                     undoMessage = `Removed Jesuite university from ${spaceName}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.ADD_VP: {
+                    const { power, pointsAdded } = commandToUndo.data;
+                    await victoryPointsManager.removeVictoryPoints(power, pointsAdded);
+                    const newTotal = await victoryPointsManager.getVictoryPoints(power);
+                    undoMessage = `Removed ${pointsAdded} victory points from ${power}. New total: ${newTotal}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.REMOVE_VP: {
+                    const { power, pointsRemoved } = commandToUndo.data;
+                    await victoryPointsManager.addVictoryPoints(power, pointsRemoved);
+                    const newTotal = await victoryPointsManager.getVictoryPoints(power);
+                    undoMessage = `Added back ${pointsRemoved} victory points to ${power}. New total: ${newTotal}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.SET_VP: {
+                    const { power, oldTotal } = commandToUndo.data;
+                    await victoryPointsManager.setVictoryPoints(power, oldTotal);
+                    undoMessage = `Restored ${power}'s victory points to ${oldTotal}`;
                     break;
                 }
                 
