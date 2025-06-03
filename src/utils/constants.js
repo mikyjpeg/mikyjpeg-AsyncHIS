@@ -16,7 +16,8 @@ const COMMAND_TYPES = {
     COMMIT_DEBATER: 'commit_debater',
     UNCOMMIT_DEBATER: 'uncommit_debater',
     SET_CURRENT_DEBATER: 'set_current_debater',
-    CLEAR_CURRENT_DEBATER: 'clear_current_debater'
+    CLEAR_CURRENT_DEBATER: 'clear_current_debater',
+    DEPLOY_ELECTORATE: 'deploy_electorate'
 };
 
 module.exports = {

@@ -6,6 +6,8 @@ const spaceManager = require('../../game/spaceManager');
 const diplomacyManager = require('../../game/diplomacyManager');
 const victoryPointsManager = require('../../game/victoryPointsManager');
 const reformerManager = require('../../game/reformerManager');
+const electorateManager = require('../../game/electorateManager');
+const formationManager = require('../../game/formationManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -219,6 +221,39 @@ module.exports = {
                     await spaceManager.updateSpace(spaceName, space);
                     
                     undoMessage = `Added back reformer ${reformer.name} to ${spaceName}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.DEPLOY_ELECTORATE: {
+                    const { electorate, regulars, shouldControl, previousController } = commandToUndo.data;
+                    
+                    // Restore regulars to the electorate
+                    const electorateData = await electorateManager.getElectorate(electorate.name);
+                    electorateData.regulars = regulars;
+                    
+                    // Restore controlMarker if control was changed
+                    if (shouldControl) {
+                        electorateData.controlMarker = true;
+                    }
+                    
+                    await electorateManager.updateElectorate(electorate.name, electorateData);
+                    
+                    // Remove Protestant formation if it was added
+                    if (regulars > 0) {
+                        await formationManager.removeFormation(electorate.name, 'Protestant', regulars, 0, []);
+                    }
+                    
+                    // Restore previous controller if control was changed
+                    let message = `Restored ${regulars} regulars to ${electorate.name}`;
+                    if (shouldControl) {
+                        const space = await spaceManager.getSpace(electorate.name);
+                        space.controllingPower = previousController;
+                        await spaceManager.updateSpace(electorate.name, space);
+                        
+                        const displayPreviousController = previousController || space.homePower;
+                        message += ` and restored control to ${displayPreviousController}`;
+                    }
+                    undoMessage = message;
                     break;
                 }
                 

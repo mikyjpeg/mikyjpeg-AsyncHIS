@@ -129,7 +129,8 @@ const COMMAND_TYPES = {
     TAKE_CONTROL: 'take_control',
     ADD_VP: 'add_vp',
     REMOVE_VP: 'remove_vp',
-    SET_VP: 'set_vp'
+    SET_VP: 'set_vp',
+    DEPLOY_ELECTORATE: 'deploy_electorate'
 };
 
 // Factory for creating command history entries

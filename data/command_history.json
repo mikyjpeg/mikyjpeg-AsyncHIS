@@ -990,5 +990,140 @@
     "success": true,
     "errorMessage": null,
     "undone": true
+  },
+  {
+    "commandId": 46,
+    "timestamp": "2025-06-03T12:25:30.903Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:false",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": true,
+        "regulars": 0
+      },
+      "regulars": 0,
+      "shouldControl": false
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 47,
+    "timestamp": "2025-06-03T12:31:46.209Z",
+    "username": "mikyjpeg",
+    "command": "/add_formation space:Wittenberg power:Protestant regulars:2 secondary:0",
+    "type": "add_formation",
+    "data": {
+      "spaceName": "Wittenberg",
+      "formation": {
+        "power": "Protestant",
+        "regularTroops": 2,
+        "secondaryTroops": 0,
+        "leaders": []
+      }
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 48,
+    "timestamp": "2025-06-03T12:34:33.918Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:false",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": true,
+        "regulars": 0
+      },
+      "regulars": 2,
+      "shouldControl": false,
+      "previousController": null
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 49,
+    "timestamp": "2025-06-03T12:35:00.262Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:true",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": true,
+        "regulars": 0
+      },
+      "regulars": 0,
+      "shouldControl": true,
+      "previousController": null
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": false
+  },
+  {
+    "commandId": 50,
+    "timestamp": "2025-06-03T14:54:17.780Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:true",
+    "type": "deploy_electorate",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": true,
+        "regulars": 0
+      },
+      "regulars": 2,
+      "shouldControl": true,
+      "previousController": null
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 51,
+    "timestamp": "2025-06-03T14:57:24.304Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:true",
+    "type": "deploy_electorate",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": false,
+        "regulars": 0
+      },
+      "regulars": 2,
+      "shouldControl": true,
+      "previousController": null
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
+  },
+  {
+    "commandId": 52,
+    "timestamp": "2025-06-03T14:59:22.159Z",
+    "username": "mikyjpeg",
+    "command": "/deploy_electorate electorate:Wittenberg control:true",
+    "type": "deploy_electorate",
+    "data": {
+      "electorate": {
+        "name": "Wittenberg",
+        "controlMarker": false,
+        "regulars": 0
+      },
+      "regulars": 0,
+      "shouldControl": true,
+      "previousController": "Protestant"
+    },
+    "success": true,
+    "errorMessage": null,
+    "undone": true
   }
 ]
