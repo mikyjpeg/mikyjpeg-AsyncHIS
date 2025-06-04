@@ -1,0 +1,13 @@
+{
+  "id": "55",
+  "name": "Jesuit Education",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "5",
+  "year": null,
+  "isForeignWar": false
+}

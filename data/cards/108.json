@@ -1,0 +1,13 @@
+{
+  "id": "108",
+  "name": "Venetian Alliance",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

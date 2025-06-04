@@ -1,0 +1,13 @@
+{
+  "id": "38",
+  "name": "Halley's Comet",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": true,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "3",
+  "year": 1517,
+  "isForeignWar": false
+}

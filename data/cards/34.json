@@ -1,0 +1,13 @@
+{
+  "id": "34",
+  "name": "Professional Rowers",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": true,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

@@ -15,5 +15,7 @@ The game cover both political and religious control. Religious control is manage
 Factions are defined in data/factions folders. Factions are also often referred to as Power. There are minor powers and major powers.
 Each factions has leaders that are defined in data/leaders. Leaders can be added in spaces via formations.
 Each faction has also rulers, that are defined in data/rulers. There's only a current ruler and we defined ruler succession for all major powers.
-Spaces belongs to europa map and define where formations are and how can they move around.
+Spaces belongs to europ map and define where formations are and how can they move around.
+
+Each bot command is recorded in an history using src/game/commandHistoryManager.js and must be undoable.
 

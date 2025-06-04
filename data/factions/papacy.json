@@ -4,12 +4,13 @@
   "discordUsername": null,
   "cardsPerTurn": 5,
   "victoryPoints": 0,
-  "ruler": "Leo X",
+  "ruler": "Clement VII",
   "isActive": false,
   "alliances": [],
   "atWarWith": [],
   "cardModifier": 0,
   "bonusVP": [],
   "bonusVPTotal": 0,
-  "captiveLeaders": []
+  "captiveLeaders": [],
+  "cards": []
 }

@@ -1,0 +1,13 @@
+{
+  "id": "39",
+  "name": "Augsburg Confession",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "3",
+  "year": 1517,
+  "isForeignWar": false
+}

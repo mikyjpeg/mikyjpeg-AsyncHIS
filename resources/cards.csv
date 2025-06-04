@@ -1,0 +1,117 @@
+id,name,cp,isMandatory,isResponse,isCombat,removeAfterUse,actions,turn,year
+1,Jannissaries,5,false,false,false,false,null,null,null
+2,Holy Roman Empire,5,false,false,false,false,null,null,null
+3,Six Wives of Henry VIII,5,false,false,false,false,null,null,null
+4,Patron of the Arts,5,false,false,false,false,null,null,null
+5,Papal Bull,4,false,false,false,false,null,null,null
+6,Leipzig Debate,3,false,false,false,false,null,null,null
+7,Here I Stand,5,false,false,false,false,null,null,null
+8,Luther's 95 Theses,0,true,false,false,true,null,null,1517
+9,Barbary Pirates,2,true,false,false,true,null,null,1517
+10,Clement VII,2,true,false,false,false,null,null,null
+11,Defender of the Faith,2,true,false,false,true,null,null,1517
+12,Master of Italy,2,true,false,false,false,null,null,null
+13,Schmalkadic League,2,true,false,false,true,null,null,1517
+14,Paul III,2,true,false,false,false,null,"3",null
+15,Society of Jesus,2,true,false,false,true,null,"5",null
+16,Calvin,2,true,false,false,false,null,"6",null
+17,Council of Trent,2,true,false,false,false,null,"6",null
+18,Dragut,2,true,false,false,true,null,"6",null
+19,Edward VI,2,true,false,false,false,null,"6?",null
+20,Henry II,2,true,false,false,false,null,"6",null
+21,Mary I,2,true,false,false,false,null,"6?",null
+22,Julius III,2,true,false,false,false,null,"7",null
+23,Elizabeth I,2,true,false,false,false,null,"?",null
+24,Arquebusiers,1,false,false,true,false,null,null,null
+25,Field Artillery,1,false,false,true,false,null,null,null
+26,Mercenaries Bribed,3,false,false,true,false,null,null,null
+27,Mercenaries Grow Restless,2,false,false,true,false,null,null,null
+28,Siege Mining,1,false,false,true,false,null,null,null
+29,Surprise Attack,2,false,false,true,false,null,null,null
+30,Tercios,2,false,false,true,false,null,null,null
+31,Foul Weather,2,false,true,false,false,null,null,null
+32,Gout,2,false,true,false,false,null,null,null
+33,Lands-knechts,1,false,true,false,false,null,null,null
+34,Professional Rowers,2,false,true,false,false,null,null,null
+35,Siege Artillery,1,false,true,false,false,null,null,null
+36,Swiss Mercenaries,1,false,true,false,false,null,null,null
+37,The Wartburg,2,false,true,false,false,null,null,null
+38,Halley's Comet,2,false,true,false,true,null,"3",1517
+39,Augsburg Confession,4,false,false,false,true,null,"3",1517
+40,Machiavelli: The Prince,3,false,false,false,false,null,"3",null
+41,Marburg Colloquy,5,false,false,false,true,null,"3",1517
+42,Roxelana,4,false,false,false,false,null,"3",null
+43,Zwingli Dons Armor,3,false,false,false,true,null,"3",1517
+44,Affair of the Placards,2,false,false,false,true,null,"4",null
+45,Calvin Expelled,1,false,false,false,true,null,"4",null
+46,Calvin's Institutes,5,false,false,false,true,null,"4",null
+47,Copernicus,5,false,false,false,true,null,"5",null
+48,Galleons,2,false,false,false,false,null,"4",null
+49,Huguenot Raiders,2,false,false,false,false,null,"4",null
+50,Mercator's Map,2,false,false,false,false,null,"4",null
+51,Michael Servertus,4,false,false,false,true,null,"4",null
+52,Michelangelo,4,false,false,false,true,null,"4",null
+53,Plantations,2,false,false,false,false,null,"4",null
+54,Potosi Silver Mines,3,false,false,false,true,null,"4",null
+55,Jesuit Education,3,false,false,false,false,null,"5",null
+56,Papal Inquisition,5,false,false,false,false,null,"5",null
+57,Philip of Hesse's Bigamy,2,false,false,false,true,null,"5",null
+58,Spanish Inquisition,5,false,false,false,false,null,"5",null
+59,Lady Jane Gray,3,false,false,false,true,null,"6",null
+60,Maurice of Saxony,4,false,false,false,false,null,"6",null
+61,Mary Defies Council,1,false,false,false,false,null,"7",null
+62,Book of Common Prayer,2,false,false,false,false,null,"?",null
+63,Dissolution of the Monasteries,4,false,false,false,true,null,"?",null
+64,Pilgrimage of Grace,3,false,false,false,true,null,"?",null
+65,A Mighty Fortress,4,false,false,false,false,null,null,null
+66,Akinji Raiders,3,false,false,false,false,null,null,null
+67,Anabaptists,3,false,false,false,false,null,null,null
+68,Andrea Doria,5,false,false,false,false,null,null,null
+69,Auld Alliance,3,false,false,false,false,null,null,null
+70,Charles Bourbon,4,false,false,false,false,null,null,null
+71,City State Rebels,4,false,false,false,false,null,null,null
+72,Cloth Prices Fluctuate,3,false,false,false,false,null,null,null
+73,Diplomatic Marriage,5,false,false,false,false,null,null,null
+74,Diplomatic Overture,5,false,false,false,false,null,null,null
+75,Erasmus,3,false,false,false,false,null,null,null
+76,Foreign Recruits,4,false,false,false,false,null,null,null
+77,Fountain of Youth,2,false,false,false,false,null,null,null
+78,Frederick the Wise,3,false,false,false,true,null,null,1517
+79,Fuggers,3,false,false,false,false,null,null,null
+80,Gabelle Revolt,1,false,false,false,false,null,null,null
+81,Indulgence Vendor,3,false,false,false,false,null,null,null
+82,Janisseries Rebels,2,false,false,false,false,null,null,null
+83,John Zaplya,3,false,false,false,true,null,null,1517
+84,Julia Gonzaga,1,false,false,false,true,null,null,null
+85,Katherina Bora,3,false,false,false,true,null,null,1517
+86,Knights of St.John,2,false,false,false,false,null,null,null
+87,Mercenaries Demand Pay,2,false,false,false,false,null,null,null
+88,Peasants' War,3,false,false,false,true,null,null,1517
+89,Pirate Haven,3,false,false,false,false,null,null,null
+90,Printing Press,5,false,false,false,false,null,null,null
+91,Ransom,3,false,false,false,false,null,null,null
+92,Revolt in Egypt,3,false,false,false,false,null,null,null
+93,Revolt in Ireland,3,false,false,false,false,null,null,null
+94,Revolt of the Communeros,2,false,false,false,false,null,null,null
+95,Sack of Rome,5,false,false,false,false,null,null,1517
+96,Sale of Moluccas,3,false,false,false,false,null,null,1517
+97,Scots Raids,2,true,false,false,false,null,"3",null
+98,Search for Cibola,2,false,false,false,false,null,null,null
+99,Sebastian Cabot,1,false,false,false,false,null,null,null
+100,Shipbuilding,2,false,false,false,false,null,null,null
+101,Smallpox,4,false,false,false,false,null,null,null
+102,Spring Preparations,3,false,false,false,false,null,null,null
+103,Threat of Power,3,false,false,false,false,null,null,null
+104,Trace Italienne,3,false,false,false,false,null,null,null
+105,Treachery!,5,false,false,false,false,null,null,null
+106,Unpaid Mercenaries,3,false,false,false,false,null,null,null
+107,Unsanitary Camp,2,false,false,false,false,null,null,null
+108,Venetian Alliance,4,false,false,false,false,null,null,null
+109,Venetian Informant,1,false,false,false,false,null,null,null
+110,War in Persia,4,false,false,false,false,null,null,null
+111,Colonial Governor/Native Uprising,2,false,false,false,false,null,null,null
+112,Thomas More,3,false,false,false,false,null,null,1517
+113,Imperial Coronation,2,true,false,false,false,null,"3",1517
+114,La Forêt's Embassy in Instanbul,2,true,false,false,false,null,"3",null
+115,Thomas Cromwell,3,false,true,false,false,null,"4",null
+116,Rough Wooing,3,false,false,false,false,null,"5",null

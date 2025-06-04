@@ -1,0 +1,13 @@
+{
+  "id": "60",
+  "name": "Maurice of Saxony",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "6",
+  "year": null,
+  "isForeignWar": false
+}

@@ -4,12 +4,13 @@
   "discordUsername": null,
   "cardsPerTurn": 4,
   "victoryPoints": 0,
-  "ruler": "Protestant Reformers",
+  "ruler": "Martin Luther",
   "isActive": false,
   "alliances": [],
   "atWarWith": [],
   "cardModifier": 0,
   "bonusVP": [],
   "bonusVPTotal": 0,
-  "captiveLeaders": []
+  "captiveLeaders": [],
+  "cards": []
 }

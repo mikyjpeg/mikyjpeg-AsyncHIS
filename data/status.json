@@ -2,17 +2,10 @@
   "turn": 1,
   "phase": "setup",
   "activePlayer": null,
-  "currentCardIndex": 0,
-  "playedCards": {
-    "turn1": [],
-    "turn2": [],
-    "turn3": [],
-    "turn4": [],
-    "turn5": [],
-    "turn6": [],
-    "turn7": [],
-    "turn8": []
-  },
+  "currentCardIndex": null,
+  "cardDeck": [],
+  "discardedCards": [],
+  "playedCards": [],
   "victoryPoints": {
     "ottoman": 0,
     "hapsburg": 0,
@@ -63,6 +56,5 @@
       "wars": [],
       "alliances": []
     }
-  },
-  "lastUpdated": "2025-05-30T22:47:54.351Z"
+  }
 }

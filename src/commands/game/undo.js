@@ -8,6 +8,8 @@ const victoryPointsManager = require('../../game/victoryPointsManager');
 const reformerManager = require('../../game/reformerManager');
 const electorateManager = require('../../game/electorateManager');
 const formationManager = require('../../game/formationManager');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -254,6 +256,42 @@ module.exports = {
                         message += ` and restored control to ${displayPreviousController}`;
                     }
                     undoMessage = message;
+                    break;
+                }
+
+                case COMMAND_TYPES.SHUFFLE_DECK: {
+                    const { oldState } = commandToUndo.data;
+                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
+                    const status = JSON.parse(fs.readFileSync(statusPath));
+                    
+                    // Restore previous deck state
+                    status.cardDeck = oldState.cardDeck;
+                    status.discardedCards = oldState.discardedCards;
+                    status.playedCards = oldState.playedCards;
+                    status.currentCardIndex = oldState.currentCardIndex;
+                    
+                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+                    
+                    undoMessage = `Restored previous deck state (${oldState.cardDeck.length} cards)`;
+                    break;
+                }
+
+                case COMMAND_TYPES.DRAW_CARDS: {
+                    const { power, oldState } = commandToUndo.data;
+                    
+                    // Restore faction's cards
+                    const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
+                    const faction = JSON.parse(fs.readFileSync(factionPath));
+                    faction.cards = oldState.factionCards;
+                    fs.writeFileSync(factionPath, JSON.stringify(faction, null, 2));
+                    
+                    // Restore deck
+                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
+                    const status = JSON.parse(fs.readFileSync(statusPath));
+                    status.cardDeck = oldState.deckCards;
+                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+                    
+                    undoMessage = `Undid card draw for ${power}`;
                     break;
                 }
                 

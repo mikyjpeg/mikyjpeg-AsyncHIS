@@ -1,0 +1,13 @@
+{
+  "id": "8",
+  "name": "Luther's 95 Theses",
+  "cp": "0",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": null,
+  "year": 1517,
+  "isForeignWar": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "14",
+  "name": "Paul III",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "3",
+  "year": null,
+  "isForeignWar": false
+}

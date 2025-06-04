@@ -130,7 +130,9 @@ const COMMAND_TYPES = {
     ADD_VP: 'add_vp',
     REMOVE_VP: 'remove_vp',
     SET_VP: 'set_vp',
-    DEPLOY_ELECTORATE: 'deploy_electorate'
+    DEPLOY_ELECTORATE: 'deploy_electorate',
+    SHUFFLE_DECK: 'shuffle_deck',
+    DRAW_CARDS: 'draw_cards'
 };
 
 // Factory for creating command history entries

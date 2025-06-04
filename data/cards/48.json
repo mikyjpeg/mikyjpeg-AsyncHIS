@@ -1,0 +1,13 @@
+{
+  "id": "48",
+  "name": "Galleons",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

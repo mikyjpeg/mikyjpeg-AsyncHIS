@@ -1,0 +1,13 @@
+{
+  "id": "59",
+  "name": "Lady Jane Gray",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "6",
+  "year": null,
+  "isForeignWar": false
+}

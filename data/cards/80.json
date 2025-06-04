@@ -1,0 +1,13 @@
+{
+  "id": "80",
+  "name": "Gabelle Revolt",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

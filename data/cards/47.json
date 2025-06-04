@@ -1,0 +1,13 @@
+{
+  "id": "47",
+  "name": "Copernicus",
+  "cp": "5",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "5",
+  "year": null,
+  "isForeignWar": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "43",
+  "name": "Zwingli Dons Armor",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "3",
+  "year": 1517,
+  "isForeignWar": false
+}

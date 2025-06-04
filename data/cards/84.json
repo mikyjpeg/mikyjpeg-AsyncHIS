@@ -1,0 +1,13 @@
+{
+  "id": "84",
+  "name": "Julia Gonzaga",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}
