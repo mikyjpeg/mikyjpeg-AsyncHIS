@@ -4,8 +4,8 @@
   "activePlayer": null,
   "currentCardIndex": null,
   "cardDeck": [],
+  "removedCards": [],
   "discardedCards": [],
-  "playedCards": [],
   "victoryPoints": {
     "ottoman": 0,
     "hapsburg": 0,

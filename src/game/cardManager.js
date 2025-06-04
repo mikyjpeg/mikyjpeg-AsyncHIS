@@ -131,8 +131,8 @@ class CardManager {
     isCardInAnyPile(cardId, status) {
         return (
             status.cardDeck.includes(cardId) ||
-            (status.discardedCards && status.discardedCards.includes(cardId)) ||
-            (status.playedCards && status.playedCards.includes(cardId))
+            (status.removedCards && status.removedCards.includes(cardId)) ||
+            (status.discardedCards && status.discardedCards.includes(cardId))
         );
     }
 
@@ -147,8 +147,8 @@ class CardManager {
         // Store old state
         const oldState = {
             cardDeck: [...status.cardDeck],
+            removedCards: [...(status.removedCards || [])],
             discardedCards: [...(status.discardedCards || [])],
-            playedCards: [...(status.playedCards || [])],
             currentCardIndex: status.currentCardIndex
         };
 
@@ -171,9 +171,9 @@ class CardManager {
             // 1. Include all cards from current deck
             cardsToShuffle.push(...status.cardDeck);
             
-            // 2. Include all cards from played pile
-            if (status.playedCards) {
-                cardsToShuffle.push(...status.playedCards);
+            // 2. Include all cards from discarded pile
+            if (status.discardedCards) {
+                cardsToShuffle.push(...status.discardedCards);
             }
             
             // 3. Add any new cards for this turn from data/cards
@@ -233,8 +233,8 @@ class CardManager {
         
         // Update the status
         status.cardDeck = shuffledDeck;
+        status.removedCards = [];
         status.discardedCards = [];
-        status.playedCards = [];
         status.currentCardIndex = 0;
         
         await this.saveStatus(status);
@@ -243,8 +243,8 @@ class CardManager {
             oldState,
             newState: {
                 cardDeck: [...shuffledDeck],
+                removedCards: [],
                 discardedCards: [],
-                playedCards: [],
                 currentCardIndex: 0
             },
             deckSize: shuffledDeck.length

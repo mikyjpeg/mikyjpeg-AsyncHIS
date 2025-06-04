@@ -266,7 +266,7 @@ module.exports = {
                     
                     // Restore previous deck state
                     status.cardDeck = oldState.cardDeck;
-                    status.playedCards = oldState.playedCards;
+                    status.discardedCards = oldState.discardedCards;
                     status.currentCardIndex = oldState.currentCardIndex;
                     
                     fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
@@ -291,6 +291,31 @@ module.exports = {
                     fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
                     
                     undoMessage = `Undid card draw for ${power}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.PLAY_CARD: {
+                    const { cardId, power, oldState } = commandToUndo.data;
+                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
+                    const status = JSON.parse(fs.readFileSync(statusPath));
+
+                    // Restore current card index
+                    status.currentCardIndex = oldState.currentCardIndex;
+
+                    if (power) {
+                        // If card was played from faction's hand, restore it
+                        const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
+                        const faction = JSON.parse(fs.readFileSync(factionPath));
+                        faction.cards = oldState.factionCards;
+                        fs.writeFileSync(factionPath, JSON.stringify(faction, null, 2));
+                        undoMessage = `Restored card ${cardId} to ${power}'s hand`;
+                    } else {
+                        // If card was played from deck, restore it
+                        status.cardDeck = oldState.cardDeck;
+                        undoMessage = `Restored card ${cardId} to the deck`;
+                    }
+
+                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
                     break;
                 }
                 

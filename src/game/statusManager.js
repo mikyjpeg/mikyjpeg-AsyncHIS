@@ -67,7 +67,7 @@ class StatusManager {
         }
         const status = await this.getStatus();
         const turnKey = `turn${status.turn}`;
-        status.playedCards[turnKey].push({
+        status.discardedCards[turnKey].push({
             power,
             cardId,
             cardIndex: status.currentCardIndex
