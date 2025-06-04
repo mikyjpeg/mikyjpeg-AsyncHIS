@@ -7,7 +7,7 @@ This is the context of the work we're doing: this is a discord bot (developed us
 Here I Stand (HIS) rules are loaded as a pdf in resources/HIS_RULES_2023-Final.pdf
 HIS official site is https://www.gmtgames.com/p-917-here-i-stand-500th-anniversary-reprint-edition-2nd-printing.aspx 
 
-We're maintaining bot commands in src/commands with managers for the various area in src/game.
+We're maintaining bot commands in src/commands with managers for the various area in src/game to manage the actual logic.
 In scripts/ there are script to manipulate the state, or import from files, as una tantum. Ideally should be deleted eventually. in data/ we keep json file representing the status of games and all its components, as well as base configuration.
 
 The game cover both political and religious control. Religious control is managed in space with the boolean field "catholic". By default is true at the start of the game, but can change to false when the space is converted to Protestantism. The field is missing from spaces that are out of scope, as all the Ottoman home spaces.

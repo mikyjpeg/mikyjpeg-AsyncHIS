@@ -266,7 +266,6 @@ module.exports = {
                     
                     // Restore previous deck state
                     status.cardDeck = oldState.cardDeck;
-                    status.discardedCards = oldState.discardedCards;
                     status.playedCards = oldState.playedCards;
                     status.currentCardIndex = oldState.currentCardIndex;
                     

@@ -1604,6 +1604,6 @@
     },
     "success": true,
     "errorMessage": null,
-    "undone": false
+    "undone": true
   }
 ]

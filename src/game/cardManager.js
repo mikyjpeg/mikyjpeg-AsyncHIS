@@ -128,36 +128,20 @@ class CardManager {
         };
     }
 
+    isCardInAnyPile(cardId, status) {
+        return (
+            status.cardDeck.includes(cardId) ||
+            (status.discardedCards && status.discardedCards.includes(cardId)) ||
+            (status.playedCards && status.playedCards.includes(cardId))
+        );
+    }
+
     async shuffleDeck(turn) {
         // Read all card files from data/cards directory
         const cardsDir = path.join(process.cwd(), 'data', 'cards');
         const cardFiles = await fs.readdir(cardsDir);
         
-        // Filter and collect valid cards based on turn
-        const validCards = [];
-        for (const file of cardFiles) {
-            if (!file.endsWith('.json')) continue;
-            
-            const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
-            const cardData = JSON.parse(cardContent);
-            
-            if (turn === 0) {
-                // For turn 0, include all cards that don't have a specific turn
-                if (cardData.turn === null) {
-                    validCards.push(cardData.id);
-                }
-            } else {
-                // For other turns, include cards with matching turn or null turn
-                if (cardData.turn === null || cardData.turn === turn.toString()) {
-                    validCards.push(cardData.id);
-                }
-            }
-        }
-        
-        // Shuffle the valid cards
-        const shuffledDeck = this.shuffleArray([...validCards]);
-        
-        // Read and update the status
+        // Get current status
         const status = await this.getStatus();
         
         // Store old state
@@ -167,6 +151,85 @@ class CardManager {
             playedCards: [...(status.playedCards || [])],
             currentCardIndex: status.currentCardIndex
         };
+
+        let cardsToShuffle = [];
+        
+        if (turn === 0) {
+            // For turn 0, only include cards that don't have a specific turn
+            for (const file of cardFiles) {
+                if (!file.endsWith('.json')) continue;
+                
+                const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
+                const cardData = JSON.parse(cardContent);
+                
+                if (cardData.turn === null) {
+                    cardsToShuffle.push(cardData.id);
+                }
+            }
+        } else {
+            // For other turns:
+            // 1. Include all cards from current deck
+            cardsToShuffle.push(...status.cardDeck);
+            
+            // 2. Include all cards from played pile
+            if (status.playedCards) {
+                cardsToShuffle.push(...status.playedCards);
+            }
+            
+            // 3. Add any new cards for this turn from data/cards
+            for (const file of cardFiles) {
+                if (!file.endsWith('.json')) continue;
+                
+                const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
+                const cardData = JSON.parse(cardContent);
+                
+                // Add cards that match the current turn
+                if (cardData.turn === turn.toString()) {
+                    cardsToShuffle.push(cardData.id);
+                }
+            }
+
+            // 4. Handle special card conditions
+            // Book of Common Prayer (62), Dissolution of the Monasteries (63), Pilgrimage of Grace (64)
+            if ([4,5,6,7,8,9].includes(turn) && status.hasHenryMarriedAnneBoylen) {
+                const henryCards = [62, 63, 64];
+                for (const cardId of henryCards) {
+                    if (!this.isCardInAnyPile(cardId, status)) {
+                        cardsToShuffle.push(cardId);
+                    }
+                }
+            }
+
+            // Edward VI (19)
+            if ([6,7,8,9].includes(turn) && status.hasEdwardVIBorn) {
+                if (!this.isCardInAnyPile(19, status)) {
+                    cardsToShuffle.push(19);
+                }
+            }
+
+            // Mary I (21)
+            if ([6,7,8,9].includes(turn) && 
+                (status.hasEdwardVIBorn === false || status.isSicklyEdwardRuling)) {
+                if (!this.isCardInAnyPile(21, status)) {
+                    cardsToShuffle.push(21);
+                }
+            }
+
+            // Elizabeth I (23)
+            if ([7,8,9].includes(turn) && 
+                status.hasElizabethIborn && 
+                status.isMaryIRuling) {
+                if (!this.isCardInAnyPile(23, status)) {
+                    cardsToShuffle.push(23);
+                }
+            }
+        }
+        
+        // Remove duplicates (in case a card was somehow both in deck and discarded)
+        cardsToShuffle = [...new Set(cardsToShuffle)];
+        
+        // Shuffle the cards
+        const shuffledDeck = this.shuffleArray(cardsToShuffle);
         
         // Update the status
         status.cardDeck = shuffledDeck;
