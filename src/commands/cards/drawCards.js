@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
-const { commandHistory, COMMAND_TYPES } = require('../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()

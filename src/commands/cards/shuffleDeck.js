@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
-const { commandHistory, COMMAND_TYPES } = require('../game/commandHistoryManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -23,19 +23,22 @@ module.exports = {
                 .setMaxValue(9)),
 
     async execute(interaction) {
+        await interaction.deferReply();
+        
         try {
             const turn = interaction.options.getInteger('turn');
             
             // Read all card files from data/cards directory
             const cardsDir = path.join(process.cwd(), 'data', 'cards');
-            const cardFiles = fs.readdirSync(cardsDir);
+            const cardFiles = await fs.readdir(cardsDir);
             
             // Filter and collect valid cards based on turn
             const validCards = [];
             for (const file of cardFiles) {
                 if (!file.endsWith('.json')) continue;
                 
-                const cardData = JSON.parse(fs.readFileSync(path.join(cardsDir, file)));
+                const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
+                const cardData = JSON.parse(cardContent);
                 
                 if (turn === 0) {
                     // For turn 0, include all cards that don't have a specific turn
@@ -55,13 +58,14 @@ module.exports = {
             
             // Read the status.json
             const statusPath = path.join(process.cwd(), 'data', 'status.json');
-            const status = JSON.parse(fs.readFileSync(statusPath));
+            const statusContent = await fs.readFile(statusPath, 'utf8');
+            const status = JSON.parse(statusContent);
             
             // Store old state for history
             const oldState = {
                 cardDeck: [...status.cardDeck],
-                discardedCards: [...status.discardedCards],
-                playedCards: [...status.playedCards],
+                discardedCards: [...(status.discardedCards || [])],
+                playedCards: [...(status.playedCards || [])],
                 currentCardIndex: status.currentCardIndex
             };
             
@@ -71,7 +75,7 @@ module.exports = {
             status.playedCards = [];
             status.currentCardIndex = 0;
             
-            fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+            await fs.writeFile(statusPath, JSON.stringify(status, null, 2));
             
             // Record in command history
             const historyEntry = await commandHistory.recordSlashCommand(
@@ -89,11 +93,14 @@ module.exports = {
                 }
             );
             
-            await interaction.reply(`Deck shuffled for turn ${turn}. ${shuffledDeck.length} cards in deck. (Command ID: ${historyEntry.commandId})`);
+            await interaction.editReply(`Deck shuffled for turn ${turn}. ${shuffledDeck.length} cards in deck. (Command ID: ${historyEntry.commandId})`);
             
         } catch (error) {
-            console.error(error);
-            await interaction.reply({ content: 'There was an error shuffling the deck!', ephemeral: true });
+            console.error('Error in shuffle deck command:', error);
+            await interaction.editReply({ 
+                content: `Error shuffling deck: ${error.message}`,
+                ephemeral: true 
+            });
         }
     },
 }; 
