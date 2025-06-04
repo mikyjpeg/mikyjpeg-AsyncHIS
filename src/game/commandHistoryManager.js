@@ -133,7 +133,8 @@ const COMMAND_TYPES = {
     DEPLOY_ELECTORATE: 'deploy_electorate',
     SHUFFLE_DECK: 'shuffle_deck',
     DRAW_CARDS: 'draw_cards',
-    PLAY_CARD: 'play_card'
+    PLAY_CARD: 'play_card',
+    DISCARD_CARD: 'discard_card'
 };
 
 // Factory for creating command history entries

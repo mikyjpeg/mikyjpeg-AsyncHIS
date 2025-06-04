@@ -318,6 +318,21 @@ module.exports = {
                     fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
                     break;
                 }
+
+                case COMMAND_TYPES.DISCARD_CARD: {
+                    const { cardId, oldState } = commandToUndo.data;
+                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
+                    const status = JSON.parse(fs.readFileSync(statusPath));
+
+                    // Restore all states
+                    status.currentCardIndex = oldState.currentCardIndex;
+                    status.removedCards = oldState.removedCards;
+                    status.discardedCards = oldState.discardedCards;
+
+                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+                    undoMessage = `Undid discard of card ${cardId}`;
+                    break;
+                }
                 
                 default:
                     throw new Error(`Cannot undo command of type: ${commandToUndo.type}`);
