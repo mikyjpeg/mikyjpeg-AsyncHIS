@@ -11,5 +11,6 @@
   "jesuiteUniversity": false,
   "catholic": true,
   "reformers": [],
-  "formations": []
+  "formations": [],
+  "isUnderSiege": false
 }

@@ -10,5 +10,6 @@
   "underSiege": false,
   "jesuiteUniversity": false,
   "reformers": [],
-  "formations": []
+  "formations": [],
+  "isUnderSiege": false
 }
