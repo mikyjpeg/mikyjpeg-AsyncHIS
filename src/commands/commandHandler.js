@@ -61,7 +61,7 @@ class CommandHandler {
         }
     }
 
-    getCommandList() {
+    getCommandsByCategory() {
         const commandsByCategory = {};
         
         // Group commands by category
@@ -73,12 +73,19 @@ class CommandHandler {
             commandsByCategory[command.category].push(`/${name} - ${command.data.description}`);
         }
 
+        return commandsByCategory;
+    }
+
+    getCommandList() {
+        const commandsByCategory = this.getCommandsByCategory();
+
         // Build the formatted list
         let commandList = [];
         for (const category of this.commandCategories) {
             if (commandsByCategory[category]) {
-                commandList.push(`\n${category.charAt(0).toUpperCase() + category.slice(1)} Commands:`);
+                commandList.push(`\n**${category.charAt(0).toUpperCase() + category.slice(1)} Commands:**`);
                 commandList = commandList.concat(commandsByCategory[category].map(cmd => `  ${cmd}`));
+                commandList.push(''); // Add empty line between categories
             }
         }
 

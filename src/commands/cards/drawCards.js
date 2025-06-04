@@ -5,7 +5,7 @@ const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryMana
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('drawcards')
+        .setName('draw_cards')
         .setDescription('Draw cards for a specific power')
         .addStringOption(option =>
             option.setName('power')

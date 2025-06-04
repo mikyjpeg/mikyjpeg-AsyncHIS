@@ -13,7 +13,7 @@ function shuffleArray(array) {
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('shuffledeck')
+        .setName('shuffle_deck')
         .setDescription('Shuffles the deck for a specific turn')
         .addIntegerOption(option =>
             option.setName('turn')
