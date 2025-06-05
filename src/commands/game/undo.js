@@ -38,34 +38,19 @@ module.exports = {
 
             switch (commandToUndo.type) {
                 case COMMAND_TYPES.EXCOMMUNICATION: {
-                    if (commandToUndo.data.ruler) {
-                        const { ruler } = commandToUndo.data;
-                        
-                        // Get the ruler and faction data
-                        const rulerData = await rulerManager(channelName).getRuler(ruler.name);
-                        const faction = await diplomacyManager(channelName).getFaction(ruler.faction);
-                        
-                        // Update ruler's excommunication status
-                        rulerData.excommunicated = false;
-                        await rulerManager(channelName).updateRuler(ruler.name, rulerData);
-                        
-                        // Restore faction's card modifier
-                        faction.cardModifier = (faction.cardModifier || 0) + 1;
-                        await diplomacyManager(channelName).updateFaction(ruler.faction, faction);
-                        
-                        undoMessage = `Undid excommunication of ${ruler.name}\nCard modifier for ${ruler.faction}: +1 (now ${faction.cardModifier})`;
-                    } else {
-                        const { reformer } = commandToUndo.data;
-                        
-                        // Get the reformer data
-                        const reformerData = await reformerManager(channelName).getReformer(reformer.name);
-                        
-                        // Update reformer's excommunication status
-                        reformerData.isExcommunicated = false;
-                        await reformerManager(channelName).updateReformer(reformer.name, reformerData);
-                        
-                        undoMessage = `Undid excommunication of reformer ${reformer.name}`;
-                    }
+                    const { rulerName, oldState, newState } = commandToUndo.data;
+                    
+                    // Get the ruler and faction managers
+                    const rm = rulerManager(channelName);
+                    const dm = diplomacyManager(channelName);
+
+                    // Restore ruler's state
+                    await rm.updateRuler(rulerName, oldState.ruler);
+                    
+                    // Restore faction's state
+                    await dm.updateFaction(oldState.ruler.faction, oldState.faction);
+                    
+                    undoMessage = `Undid excommunication of ${rulerName}\nCard modifier for ${oldState.ruler.faction} restored to ${oldState.faction.cardModifier}`;
                     break;
                 }
                 
@@ -273,6 +258,9 @@ module.exports = {
                 default:
                     throw new Error(`Unsupported command type for undo: ${commandToUndo.type}`);
             }
+
+            // Mark the command as undone
+            await commandHistory(channelName).markCommandAsUndone(commandToUndo.commandId);
 
             await interaction.editReply(`Undo successful: ${undoMessage}`);
         } catch (error) {

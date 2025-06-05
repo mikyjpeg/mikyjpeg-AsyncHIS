@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 const rulerManager = require('../../game/rulerManager');
+const diplomacyManager = require('../../game/diplomacyManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,23 +21,26 @@ module.exports = {
             // Get the channel name
             const channelName = interaction.channel.name;
 
-            // Get the ruler
-            const ruler = await rulerManager(channelName).getRuler(rulerName);
-            
-            if (!ruler) {
-                throw new Error(`Ruler ${rulerName} not found`);
+            // Get the managers
+            const rm = rulerManager(channelName);
+            const dm = diplomacyManager(channelName);
+
+            // Check if ruler can be excommunicated
+            const validation = await rm.canBeExcommunicated(rulerName);
+            if (!validation.valid) {
+                throw new Error(validation.reason);
             }
 
-            if (ruler.isExcommunicated) {
-                throw new Error(`${rulerName} is already excommunicated`);
-            }
+            // Get current states before changes
+            const ruler = await rm.getRuler(rulerName);
+            const faction = await dm.getFaction(ruler.faction);
+            const oldState = {
+                ruler: { ...ruler },
+                faction: { ...faction }
+            };
 
-            // Store old state
-            const oldState = { ...ruler };
-
-            // Update ruler
-            ruler.isExcommunicated = true;
-            await rulerManager(channelName).updateRuler(rulerName, ruler);
+            // Excommunicate the ruler
+            const result = await rm.excommunicate(rulerName);
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
@@ -45,12 +49,18 @@ module.exports = {
                 {
                     rulerName,
                     oldState,
-                    newState: ruler
+                    newState: {
+                        ruler: result.ruler,
+                        faction: await dm.getFaction(ruler.faction)
+                    },
+                    reason: validation.reason
                 }
             );
 
             await interaction.editReply(
-                `${rulerName} has been excommunicated! (Command ID: ${historyEntry.commandId})`
+                `${rulerName} has been excommunicated because: ${validation.reason}!\n` +
+                `Card modifier for ${result.ruler.faction} changed by ${result.cardModifierChange} to ${result.newCardModifier}.\n` +
+                `(Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
             await interaction.editReply(`Failed to excommunicate ruler: ${error.message}`);
