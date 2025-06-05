@@ -4,11 +4,11 @@ const spaceManager = require('../../game/spaceManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('remove_jesuite_university')
-        .setDescription('Remove a Jesuite university from a space')
+        .setName('toggle_religious_control')
+        .setDescription('Toggle religious control of a space between Catholic and Protestant')
         .addStringOption(option =>
             option.setName('space')
-                .setDescription('The space to remove the university from')
+                .setDescription('The space to toggle religious control')
                 .setRequired(true)),
 
     async execute(interaction) {
@@ -24,21 +24,21 @@ module.exports = {
                 throw new Error(`Space ${spaceName} not found`);
             }
 
-            if (!space.hasJesuiteUniversity) {
-                throw new Error(`${spaceName} does not have a Jesuite university`);
+            if (space.catholic === undefined) {
+                throw new Error(`Space ${spaceName} is not eligible for religious control`);
             }
 
             // Store old state
             const oldState = { ...space };
 
-            // Update space
-            space.hasJesuiteUniversity = false;
+            // Toggle religious control
+            space.catholic = !space.catholic;
             await spaceManager(interaction.channelId).updateSpace(spaceName, space);
 
             // Record in command history
             const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
-                COMMAND_TYPES.REMOVE_JESUITE,
+                COMMAND_TYPES.TOGGLE_RELIGIOUS_CONTROL,
                 {
                     spaceName,
                     oldState,
@@ -46,11 +46,12 @@ module.exports = {
                 }
             );
 
+            const newControl = space.catholic ? 'Catholic' : 'Protestant';
             await interaction.editReply(
-                `Removed Jesuite university from ${spaceName} (Command ID: ${historyEntry.commandId})`
+                `Changed religious control of ${spaceName} to ${newControl} (Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
-            await interaction.editReply(`Failed to remove Jesuite university: ${error.message}`);
+            await interaction.editReply(`Failed to toggle religious control: ${error.message}`);
         }
     }
 }; 

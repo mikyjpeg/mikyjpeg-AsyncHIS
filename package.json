@@ -21,7 +21,9 @@
     "dev": "concurrently --names \"BOT,CLIENT\" --prefix-colors \"cyan.bold,green.bold\" --kill-others \"npm run dev:bot\" \"npm run dev:client\"",
     "install:all": "npm install && cd client && npm install",
     "deploy-commands:dev": "NODE_ENV=development node scripts/deploy-commands.js",
-    "deploy-commands:prod": "NODE_ENV=production node scripts/deploy-commands.js"
+    "deploy-commands:prod": "NODE_ENV=production node scripts/deploy-commands.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -34,6 +36,7 @@
     "@eslint/js": "^9.28.0",
     "concurrently": "^8.2.2",
     "eslint": "^9.28.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
   }
 }

@@ -29,7 +29,16 @@ module.exports = {
         }
 
         try {
-            const dm = diplomacyManager(interaction.channelId);
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the diplomacy manager for this game
+            const dm = diplomacyManager(channelName);
+
+            // Get current states
+            const faction1 = await dm.getFaction(power1);
+            const faction2 = await dm.getFaction(power2);
+
             await dm.declareWar(power1, power2);
             await interaction.editReply(`${power1} has declared war on ${power2}!`);
         } catch (error) {

@@ -25,11 +25,14 @@ module.exports = {
         await interaction.deferReply();
         
         try {
+            // Get the channel name
+            const channelName = interaction.channel.name;
+            
             // Get the command to undo
             const commandId = interaction.options.getInteger('command_id');
             const commandToUndo = commandId
-                ? await commandHistory.getCommand(commandId)
-                : await commandHistory.getLastCommand();
+                ? await commandHistory(channelName).getCommand(commandId)
+                : await commandHistory(channelName).getLastCommand();
 
             let undoMessage = '';
 
@@ -39,27 +42,27 @@ module.exports = {
                         const { ruler } = commandToUndo.data;
                         
                         // Get the ruler and faction data
-                        const rulerData = await rulerManager.getRuler(ruler.name);
-                        const faction = await diplomacyManager.getFaction(ruler.faction);
+                        const rulerData = await rulerManager(channelName).getRuler(ruler.name);
+                        const faction = await diplomacyManager(channelName).getFaction(ruler.faction);
                         
                         // Update ruler's excommunication status
                         rulerData.excommunicated = false;
-                        await rulerManager.updateRuler(ruler.name, rulerData);
+                        await rulerManager(channelName).updateRuler(ruler.name, rulerData);
                         
                         // Restore faction's card modifier
                         faction.cardModifier = (faction.cardModifier || 0) + 1;
-                        await diplomacyManager.updateFaction(ruler.faction, faction);
+                        await diplomacyManager(channelName).updateFaction(ruler.faction, faction);
                         
                         undoMessage = `Undid excommunication of ${ruler.name}\nCard modifier for ${ruler.faction}: +1 (now ${faction.cardModifier})`;
                     } else {
                         const { reformer } = commandToUndo.data;
                         
                         // Get the reformer data
-                        const reformerData = await reformerManager.getReformer(reformer.name);
+                        const reformerData = await reformerManager(channelName).getReformer(reformer.name);
                         
                         // Update reformer's excommunication status
                         reformerData.isExcommunicated = false;
-                        await reformerManager.updateReformer(reformer.name, reformerData);
+                        await reformerManager(channelName).updateReformer(reformer.name, reformerData);
                         
                         undoMessage = `Undid excommunication of reformer ${reformer.name}`;
                     }
@@ -71,27 +74,27 @@ module.exports = {
                         const { ruler } = commandToUndo.data;
                         
                         // Get the ruler and faction data
-                        const rulerData = await rulerManager.getRuler(ruler.name);
-                        const faction = await diplomacyManager.getFaction(ruler.faction);
+                        const rulerData = await rulerManager(channelName).getRuler(ruler.name);
+                        const faction = await diplomacyManager(channelName).getFaction(ruler.faction);
                         
                         // Update ruler's excommunication status
                         rulerData.excommunicated = true;
-                        await rulerManager.updateRuler(ruler.name, rulerData);
+                        await rulerManager(channelName).updateRuler(ruler.name, rulerData);
                         
                         // Restore faction's card modifier
                         faction.cardModifier = (faction.cardModifier || 0) - 1;
-                        await diplomacyManager.updateFaction(ruler.faction, faction);
+                        await diplomacyManager(channelName).updateFaction(ruler.faction, faction);
                         
                         undoMessage = `Undid removal of excommunication for ${ruler.name}\nCard modifier for ${ruler.faction}: -1 (now ${faction.cardModifier})`;
                     } else {
                         const { reformer } = commandToUndo.data;
                         
                         // Get the reformer data
-                        const reformerData = await reformerManager.getReformer(reformer.name);
+                        const reformerData = await reformerManager(channelName).getReformer(reformer.name);
                         
                         // Update reformer's excommunication status
                         reformerData.isExcommunicated = true;
-                        await reformerManager.updateReformer(reformer.name, reformerData);
+                        await reformerManager(channelName).updateReformer(reformer.name, reformerData);
                         
                         undoMessage = `Undid removal of excommunication for reformer ${reformer.name}`;
                     }
@@ -103,11 +106,11 @@ module.exports = {
                     
                     // Restore old ruler as current
                     oldRuler.isCurrentRuler = true;
-                    await rulerManager.updateRuler(oldRuler.name, oldRuler);
+                    await rulerManager(channelName).updateRuler(oldRuler.name, oldRuler);
                     
                     // Remove current status from new ruler
                     newRuler.isCurrentRuler = false;
-                    await rulerManager.updateRuler(newRuler.name, newRuler);
+                    await rulerManager(channelName).updateRuler(newRuler.name, newRuler);
                     
                     undoMessage = `Undid ruler change: ${newRuler.name} -> ${oldRuler.name}`;
                     break;
@@ -115,14 +118,14 @@ module.exports = {
 
                 case COMMAND_TYPES.CONVERT_SPACE: {
                     const { space, oldReligion } = commandToUndo.data;
-                    const spaceData = await spaceManager.getSpace(space.name);
+                    const spaceData = await spaceManager(channelName).getSpace(space.name);
                     
                     // Restore previous state
                     spaceData.catholic = space.catholic;
                     spaceData.reformer = space.reformer;
                     spaceData.jesuiteUniversity = space.jesuiteUniversity;
                     
-                    await spaceManager.updateSpace(space.name, spaceData);
+                    await spaceManager(channelName).updateSpace(space.name, spaceData);
                     
                     let message = `Undid conversion of ${space.name} (restored to ${oldReligion})`;
                     if (space.jesuiteUniversity) {
@@ -134,11 +137,11 @@ module.exports = {
 
                 case COMMAND_TYPES.TAKE_CONTROL: {
                     const { spaceName, power, previousController, homePower } = commandToUndo.data;
-                    const spaceData = await spaceManager.getSpace(spaceName);
+                    const spaceData = await spaceManager(channelName).getSpace(spaceName);
                     
                     // Restore previous controller
                     spaceData.controllingPower = previousController;
-                    await spaceManager.updateSpace(spaceName, spaceData);
+                    await spaceManager(channelName).updateSpace(spaceName, spaceData);
                     
                     // Use homePower as fallback when displaying previous controller
                     const displayPreviousController = previousController || homePower;
@@ -148,11 +151,11 @@ module.exports = {
 
                 case COMMAND_TYPES.ADD_FORMATION: {
                     const { spaceName, formation } = commandToUndo.data;
-                    const spaceData = await spaceManager.getSpace(spaceName);
+                    const spaceData = await spaceManager(channelName).getSpace(spaceName);
                     
                     // Remove the formation
                     spaceData.formations = spaceData.formations.filter(f => f.power !== formation.power);
-                    await spaceManager.updateSpace(spaceName, spaceData);
+                    await spaceManager(channelName).updateSpace(spaceName, spaceData);
                     
                     // Format the formation details for display
                     const troopInfo = formation.power === 'Ottoman' ?
@@ -166,206 +169,114 @@ module.exports = {
 
                 case COMMAND_TYPES.ADD_JESUITE: {
                     const { spaceName } = commandToUndo.data;
-                    const spaceData = await spaceManager.getSpace(spaceName);
+                    const spaceData = await spaceManager(channelName).getSpace(spaceName);
                     
                     // Remove the Jesuite university
                     spaceData.jesuiteUniversity = false;
-                    await spaceManager.updateSpace(spaceName, spaceData);
+                    await spaceManager(channelName).updateSpace(spaceName, spaceData);
                     
                     undoMessage = `Removed Jesuite university from ${spaceName}`;
                     break;
                 }
 
                 case COMMAND_TYPES.ADD_VP: {
-                    const { power, pointsAdded } = commandToUndo.data;
-                    await victoryPointsManager.removeVictoryPoints(power, pointsAdded);
-                    const newTotal = await victoryPointsManager.getVictoryPoints(power);
-                    undoMessage = `Removed ${pointsAdded} victory points from ${power}. New total: ${newTotal}`;
+                    const { power, amount } = commandToUndo.data;
+                    const faction = await factionManager(channelName).getFaction(power);
+                    
+                    // Store old state
+                    const oldState = { ...faction };
+                    const oldVP = faction.victoryPoints || 0;
+
+                    // Update VP
+                    faction.victoryPoints = oldVP - amount;
+                    await factionManager(channelName).updateFaction(power, faction);
+                    
+                    undoMessage = `Removed ${amount} VP from ${power}. New total: ${faction.victoryPoints} VP`;
                     break;
                 }
 
                 case COMMAND_TYPES.REMOVE_VP: {
-                    const { power, pointsRemoved } = commandToUndo.data;
-                    await victoryPointsManager.addVictoryPoints(power, pointsRemoved);
-                    const newTotal = await victoryPointsManager.getVictoryPoints(power);
-                    undoMessage = `Added back ${pointsRemoved} victory points to ${power}. New total: ${newTotal}`;
+                    const { power, amount } = commandToUndo.data;
+                    const faction = await factionManager(channelName).getFaction(power);
+                    
+                    // Store old state
+                    const oldState = { ...faction };
+                    const oldVP = faction.victoryPoints || 0;
+
+                    // Update VP
+                    faction.victoryPoints = oldVP + amount;
+                    await factionManager(channelName).updateFaction(power, faction);
+                    
+                    undoMessage = `Added back ${amount} VP to ${power}. New total: ${faction.victoryPoints} VP`;
                     break;
                 }
 
                 case COMMAND_TYPES.SET_VP: {
-                    const { power, oldTotal } = commandToUndo.data;
-                    await victoryPointsManager.setVictoryPoints(power, oldTotal);
-                    undoMessage = `Restored ${power}'s victory points to ${oldTotal}`;
-                    break;
-                }
-
-                case COMMAND_TYPES.ADD_REFORMER: {
-                    const { reformer, spaceName } = commandToUndo.data;
-                    const space = await spaceManager.getSpace(spaceName);
-                    
-                    // Remove the reformer from the space
-                    space.reformers = space.reformers.filter(r => r !== reformer.name);
-                    await spaceManager.updateSpace(spaceName, space);
-                    
-                    undoMessage = `Removed reformer ${reformer.name} from ${spaceName}`;
-                    break;
-                }
-
-                case COMMAND_TYPES.REMOVE_REFORMER: {
-                    const { reformer, spaceName } = commandToUndo.data;
-                    const space = await spaceManager.getSpace(spaceName);
-                    
-                    // Add the reformer back to the space
-                    if (!space.reformers) {
-                        space.reformers = [];
-                    }
-                    space.reformers.push(reformer.name);
-                    await spaceManager.updateSpace(spaceName, space);
-                    
-                    undoMessage = `Added back reformer ${reformer.name} to ${spaceName}`;
+                    const { power, oldState } = commandToUndo.data;
+                    await factionManager(channelName).updateFaction(power, oldState);
+                    undoMessage = `Restored ${power}'s VP to ${oldState.victoryPoints}`;
                     break;
                 }
 
                 case COMMAND_TYPES.DEPLOY_ELECTORATE: {
-                    const { electorate, regulars, shouldControl, previousController } = commandToUndo.data;
-                    
-                    // Restore regulars to the electorate
-                    const electorateData = await electorateManager.getElectorate(electorate.name);
-                    electorateData.regulars = regulars;
-                    
-                    // Restore controlMarker if control was changed
-                    if (shouldControl) {
-                        electorateData.controlMarker = true;
+                    const { electorateName, oldState } = commandToUndo.data;
+                    await electorateManager(channelName).updateElectorate(electorateName, oldState);
+                    undoMessage = `Undid deployment of electorate ${electorateName}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.REMOVE_REFORMER: {
+                    const { reformerName, oldState } = commandToUndo.data;
+                    await reformerManager(channelName).updateReformer(reformerName, oldState);
+                    undoMessage = `Restored reformer ${reformerName} to active status`;
+                    break;
+                }
+
+                case COMMAND_TYPES.SET_RELIGIOUS_INFLUENCE: {
+                    const { spaceName, oldState } = commandToUndo.data;
+                    await spaceManager(channelName).updateSpace(spaceName, oldState);
+                    undoMessage = `Restored religious influence in ${spaceName} to Protestant: ${oldState.protestantInfluence}, Catholic: ${oldState.catholicInfluence}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.TOGGLE_RELIGIOUS_CONTROL: {
+                    const { spaceName, oldState } = commandToUndo.data;
+                    await spaceManager(channelName).updateSpace(spaceName, oldState);
+                    const religion = oldState.catholic ? 'Catholic' : 'Protestant';
+                    undoMessage = `Restored religious control of ${spaceName} to ${religion}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.REMOVE_JESUITE: {
+                    const { spaceName, oldState } = commandToUndo.data;
+                    await spaceManager(channelName).updateSpace(spaceName, oldState);
+                    undoMessage = `Restored Jesuite university to ${spaceName}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.SET_CURRENT_DEBATER: {
+                    const { oldStates } = commandToUndo.data;
+                    for (const { debaterName, oldState } of oldStates) {
+                        await debaterManager(channelName).updateDebater(debaterName, oldState);
                     }
-                    
-                    await electorateManager.updateElectorate(electorate.name, electorateData);
-                    
-                    // Remove Protestant formation if it was added
-                    if (regulars > 0) {
-                        await formationManager.removeFormation(electorate.name, 'Protestant', regulars, 0, []);
-                    }
-                    
-                    // Restore previous controller if control was changed
-                    let message = `Restored ${regulars} regulars to ${electorate.name}`;
-                    if (shouldControl) {
-                        const space = await spaceManager.getSpace(electorate.name);
-                        space.controllingPower = previousController;
-                        await spaceManager.updateSpace(electorate.name, space);
-                        
-                        const displayPreviousController = previousController || space.homePower;
-                        message += ` and restored control to ${displayPreviousController}`;
-                    }
-                    undoMessage = message;
+                    undoMessage = `Restored previous debater state`;
                     break;
                 }
 
-                case COMMAND_TYPES.SHUFFLE_DECK: {
-                    const { oldState } = commandToUndo.data;
-                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
-                    const status = JSON.parse(fs.readFileSync(statusPath));
-                    
-                    // Restore previous deck state
-                    status.cardDeck = oldState.cardDeck;
-                    status.discardedCards = oldState.discardedCards;
-                    status.currentCardIndex = oldState.currentCardIndex;
-                    
-                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
-                    
-                    undoMessage = `Restored previous deck state (${oldState.cardDeck.length} cards)`;
+                case COMMAND_TYPES.CLEAR_CURRENT_DEBATER: {
+                    const { debaterName, oldState } = commandToUndo.data;
+                    await debaterManager(channelName).updateDebater(debaterName, oldState);
+                    undoMessage = `Restored ${debaterName} as current debater`;
                     break;
                 }
 
-                case COMMAND_TYPES.DRAW_CARDS: {
-                    const { power, oldState } = commandToUndo.data;
-                    
-                    // Restore faction's cards
-                    const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
-                    const faction = JSON.parse(fs.readFileSync(factionPath));
-                    faction.cards = oldState.factionCards;
-                    fs.writeFileSync(factionPath, JSON.stringify(faction, null, 2));
-                    
-                    // Restore deck
-                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
-                    const status = JSON.parse(fs.readFileSync(statusPath));
-                    status.cardDeck = oldState.deckCards;
-                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
-                    
-                    undoMessage = `Undid card draw for ${power}`;
-                    break;
-                }
-
-                case COMMAND_TYPES.PLAY_CARD: {
-                    const { cardId, power, oldState } = commandToUndo.data;
-                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
-                    const status = JSON.parse(fs.readFileSync(statusPath));
-
-                    // Restore current card index
-                    status.currentCardIndex = oldState.currentCardIndex;
-
-                    if (power) {
-                        // If card was played from faction's hand, restore it
-                        const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
-                        const faction = JSON.parse(fs.readFileSync(factionPath));
-                        faction.cards = oldState.factionCards;
-                        fs.writeFileSync(factionPath, JSON.stringify(faction, null, 2));
-                        undoMessage = `Restored card ${cardId} to ${power}'s hand`;
-                    } else {
-                        // If card was played from deck, restore it
-                        status.cardDeck = oldState.cardDeck;
-                        undoMessage = `Restored card ${cardId} to the deck`;
-                    }
-
-                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
-                    break;
-                }
-
-                case COMMAND_TYPES.DISCARD_CARD: {
-                    const { cardId, oldState } = commandToUndo.data;
-                    const statusPath = path.join(process.cwd(), 'data', 'status.json');
-                    const status = JSON.parse(fs.readFileSync(statusPath));
-
-                    // Restore all states
-                    status.currentCardIndex = oldState.currentCardIndex;
-                    status.removedCards = oldState.removedCards;
-                    status.discardedCards = oldState.discardedCards;
-
-                    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
-                    undoMessage = `Undid discard of card ${cardId}`;
-                    break;
-                }
-                
                 default:
-                    throw new Error(`Cannot undo command of type: ${commandToUndo.type}`);
+                    throw new Error(`Unsupported command type for undo: ${commandToUndo.type}`);
             }
 
-            // Mark the command as undone in history
-            await commandHistory.markCommandAsUndone(commandToUndo.commandId);
-            
-            // Add information about when the command was originally executed
-            const commandDate = new Date(commandToUndo.timestamp).toLocaleString();
-            const response = [
-                `✅ ${undoMessage}`,
-                '',
-                `Original command: ${commandToUndo.command}`,
-                `Executed by ${commandToUndo.username} on ${commandDate}`,
-                `Command ID: ${commandToUndo.commandId}`
-            ].join('\n');
-
-            await interaction.editReply(response);
-
+            await interaction.editReply(`Undo successful: ${undoMessage}`);
         } catch (error) {
-            console.error('Error in undo command:', error);
-            let errorMessage = 'Failed to undo command';
-            if (error.message === 'No commands in history to undo') {
-                errorMessage = 'No commands to undo';
-            } else if (error.message.includes('Command with ID')) {
-                errorMessage = error.message;
-            }
-            
-            await interaction.editReply({ 
-                content: errorMessage,
-                ephemeral: true 
-            });
+            await interaction.editReply(`Error in undo command: ${error.message}`);
         }
     }
 }; 

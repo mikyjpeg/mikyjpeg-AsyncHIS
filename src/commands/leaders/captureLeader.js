@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
 const leaderManager = require('../../game/leaderManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
@@ -27,8 +27,14 @@ module.exports = {
         const captorPower = interaction.options.getString('captor');
         
         try {
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the leader manager for this game
+            const lm = leaderManager(channelName);
+
             // Get leader data
-            const leader = await leaderManager.getLeader(leaderName);
+            const leader = await lm.getLeader(leaderName);
             if (!leader) {
                 await interaction.editReply(`Leader ${leaderName} not found`);
                 return;
@@ -48,10 +54,10 @@ module.exports = {
 
             // Capture the leader
             leader.capturedBy = captorPower;
-            await leaderManager.updateLeader(leaderName, leader);
+            await lm.updateLeader(leaderName, leader);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.CAPTURE_LEADER,
                 {

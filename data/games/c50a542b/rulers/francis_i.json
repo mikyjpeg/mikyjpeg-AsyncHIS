@@ -7,5 +7,6 @@
   "cardBonus": 1,
   "isCurrentRuler": true,
   "excommunicated": false,
-  "otherinfo": null
+  "otherinfo": null,
+  "isExcommunicated": true
 }

@@ -2,7 +2,9 @@ const spaceManager = require('./spaceManager');
 const leaderManager = require('./leaderManager');
 
 class FormationManager {
-    constructor() {
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.channelId = channelId;
         this.validPowers = ['Protestant', 'Ottoman', 'Hapsburg', 'England', 'France', 'Papacy'];
     }
 
@@ -41,7 +43,7 @@ class FormationManager {
 
     async validateLeaders(power, leaders, space) {
         for (const leaderName of leaders) {
-            const leader = await leaderManager.getLeader(leaderName);
+            const leader = await leaderManager(this.channelId).getLeader(leaderName);
             
             // Check if leader belongs to the power
             if (leader.power !== power) {
@@ -66,7 +68,7 @@ class FormationManager {
     }
 
     async addFormation(spaceName, power, regularTroops, secondaryTroops, leaders = []) {
-        const space = await spaceManager.getSpace(spaceName);
+        const space = await spaceManager(this.channelId).getSpace(spaceName);
         
         const formation = {
             power,
@@ -102,12 +104,12 @@ class FormationManager {
         }
 
         // Update the space
-        await spaceManager.updateSpace(spaceName, space);
+        await spaceManager(this.channelId).updateSpace(spaceName, space);
         return space;
     }
 
     async removeFormation(spaceName, power, regularTroops, secondaryTroops, leaders = []) {
-        const space = await spaceManager.getSpace(spaceName);
+        const space = await spaceManager(this.channelId).getSpace(spaceName);
         
         // Find the formation for this power
         const formationIndex = space.formations.findIndex(f => f.power === power);
@@ -161,14 +163,14 @@ class FormationManager {
         }
 
         // Update the space
-        await spaceManager.updateSpace(spaceName, space);
+        await spaceManager(this.channelId).updateSpace(spaceName, space);
         return space;
     }
 
     async getFormations(spaceName) {
-        const space = await spaceManager.getSpace(spaceName);
+        const space = await spaceManager(this.channelId).getSpace(spaceName);
         return space.formations;
     }
 }
 
-module.exports = new FormationManager(); 
+module.exports = (channelId) => new FormationManager(channelId); 

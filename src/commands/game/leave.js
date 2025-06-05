@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
+const factionManager = require('../../game/factionManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,9 +20,39 @@ module.exports = {
         const userId = interaction.user.id;
 
         try {
-            const gameState = GameState(interaction.channelId);
-            await gameState.leavePower(userId, power);
-            await interaction.editReply(`You have left ${power}!`);
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the faction manager for this game
+            const fm = factionManager(channelName);
+
+            // Get the faction
+            const faction = await fm.getFaction(power);
+            
+            // Check if user is actually controlling this power
+            if (faction.discordUserId !== userId) {
+                await interaction.editReply(`You are not controlling ${power}!`);
+                return;
+            }
+
+            // Update faction data
+            faction.discordUserId = null;
+            faction.discordUsername = null;
+            faction.isActive = false;
+            await fm.updateFaction(power, faction);
+
+            // Record in history
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.LEAVE_POWER,
+                {
+                    power,
+                    userId,
+                    previousFaction: faction
+                }
+            );
+
+            await interaction.editReply(`You have left ${power}! (Command ID: ${historyEntry.commandId})`);
         } catch (error) {
             await interaction.editReply(`Failed to leave ${power}: ${error.message}`);
         }

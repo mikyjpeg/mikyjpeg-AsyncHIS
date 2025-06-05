@@ -1,78 +1,59 @@
 const { SlashCommandBuilder } = require('discord.js');
-const rulerManager = require('../../game/rulerManager');
-const reformerManager = require('../../game/reformerManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const rulerManager = require('../../game/rulerManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('excommunicate')
-        .setDescription('Excommunicate a ruler or reformer')
+        .setDescription('Excommunicate a ruler')
         .addStringOption(option =>
-            option.setName('target')
-                .setDescription('Name of the ruler or reformer to excommunicate')
-                .setRequired(true))
-        .addStringOption(option =>
-            option.setName('type')
-                .setDescription('Whether the target is a ruler or reformer')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'Ruler', value: 'ruler' },
-                    { name: 'Reformer', value: 'reformer' }
-                )),
-        
+            option.setName('ruler')
+                .setDescription('The ruler to excommunicate')
+                .setRequired(true)),
+
     async execute(interaction) {
         await interaction.deferReply();
-        
-        const targetName = interaction.options.getString('target');
-        const targetType = interaction.options.getString('type');
-        
+
+        const rulerName = interaction.options.getString('ruler');
+
         try {
-            let result;
-            let historyData;
+            // Get the channel name
+            const channelName = interaction.channel.name;
 
-            if (targetType === 'ruler') {
-                // First check if ruler can be excommunicated
-                const validation = await rulerManager.canBeExcommunicated(targetName);
-                if (!validation.valid) {
-                    throw new Error(validation.reason);
-                }
-
-                // Proceed with ruler excommunication
-                result = await rulerManager.excommunicate(targetName);
-                historyData = {
-                    ruler: result.ruler,
-                    reason: validation.reason
-                };
-            } else {
-                // Handle reformer excommunication
-                result = await reformerManager.excommunicate(targetName);
-                historyData = {
-                    reformer: result
-                };
-            }
+            // Get the ruler
+            const ruler = await rulerManager(channelName).getRuler(rulerName);
             
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            if (!ruler) {
+                throw new Error(`Ruler ${rulerName} not found`);
+            }
+
+            if (ruler.isExcommunicated) {
+                throw new Error(`${rulerName} is already excommunicated`);
+            }
+
+            // Store old state
+            const oldState = { ...ruler };
+
+            // Update ruler
+            ruler.isExcommunicated = true;
+            await rulerManager(channelName).updateRuler(rulerName, ruler);
+
+            // Record in command history
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.EXCOMMUNICATION,
-                historyData
+                {
+                    rulerName,
+                    oldState,
+                    newState: ruler
+                }
             );
 
-            let response = `${targetName} has been excommunicated`;
-            if (targetType === 'ruler') {
-                response += `\nReason: ${historyData.reason}`;
-                if (result.cardModifierChange) {
-                    response += `\nCard modifier for ${result.ruler.faction}: ${result.cardModifierChange} (now ${result.newCardModifier})`;
-                }
-            }
-            response += ` (Command ID: ${historyEntry.commandId})`;
-
-            await interaction.editReply(response);
+            await interaction.editReply(
+                `${rulerName} has been excommunicated! (Command ID: ${historyEntry.commandId})`
+            );
         } catch (error) {
-            await interaction.editReply({ 
-                content: `Failed to excommunicate ${targetType}: ${error.message}`,
-                ephemeral: true 
-            });
+            await interaction.editReply(`Failed to excommunicate ruler: ${error.message}`);
         }
     }
 }; 

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const spaceManager = require('../../game/spaceManager');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
@@ -27,8 +27,14 @@ module.exports = {
         const power = interaction.options.getString('power');
         
         try {
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the space manager for this game
+            const sm = spaceManager(channelName);
+
             // Get space data
-            const space = await spaceManager.getSpace(spaceName);
+            const space = await sm.getSpace(spaceName);
             if (!space) {
                 await interaction.editReply(`Space ${spaceName} not found`);
                 return;
@@ -39,10 +45,10 @@ module.exports = {
 
             // Update control
             space.controllingPower = power;
-            await spaceManager.updateSpace(spaceName, space);
+            await sm.updateSpace(spaceName, space);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.TAKE_CONTROL,
                 {

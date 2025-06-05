@@ -1,41 +1,56 @@
 const { SlashCommandBuilder } = require('discord.js');
-const reformerManager = require('../../game/reformerManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const reformerManager = require('../../game/reformerManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('remove_reformer')
-        .setDescription('Remove a reformer from their space')
+        .setDescription('Remove a reformer')
         .addStringOption(option =>
             option.setName('reformer')
-                .setDescription('Name of the reformer')
+                .setDescription('The reformer to remove')
                 .setRequired(true)),
-        
+
     async execute(interaction) {
         await interaction.deferReply();
-        
+
         const reformerName = interaction.options.getString('reformer');
-        
+
         try {
-            // Remove reformer from their space
-            const { reformer, space } = await reformerManager.removeReformerFromSpace(reformerName);
+            // Get the reformer
+            const reformer = await reformerManager(interaction.channelId).getReformer(reformerName);
             
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            if (!reformer) {
+                throw new Error(`Reformer ${reformerName} not found`);
+            }
+
+            if (!reformer.isActive) {
+                throw new Error(`${reformerName} is not active`);
+            }
+
+            // Store old state
+            const oldState = { ...reformer };
+
+            // Update reformer
+            reformer.isActive = false;
+            await reformerManager(interaction.channelId).updateReformer(reformerName, reformer);
+
+            // Record in command history
+            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_REFORMER,
                 {
-                    reformer,
-                    spaceName: space.name
+                    reformerName,
+                    oldState,
+                    newState: reformer
                 }
             );
 
-            await interaction.editReply(`Removed ${reformerName} from ${space.name} (Command ID: ${historyEntry.commandId})`);
+            await interaction.editReply(
+                `Removed reformer ${reformerName} (Command ID: ${historyEntry.commandId})`
+            );
         } catch (error) {
-            await interaction.editReply({ 
-                content: `Failed to remove reformer: ${error.message}`,
-                ephemeral: true 
-            });
+            await interaction.editReply(`Failed to remove reformer: ${error.message}`);
         }
     }
 }; 

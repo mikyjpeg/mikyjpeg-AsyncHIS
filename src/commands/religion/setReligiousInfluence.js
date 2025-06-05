@@ -4,17 +4,27 @@ const spaceManager = require('../../game/spaceManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('remove_jesuite_university')
-        .setDescription('Remove a Jesuite university from a space')
+        .setName('set_religious_influence')
+        .setDescription('Set religious influence in a space')
         .addStringOption(option =>
             option.setName('space')
-                .setDescription('The space to remove the university from')
+                .setDescription('The space to set influence in')
+                .setRequired(true))
+        .addIntegerOption(option =>
+            option.setName('protestant')
+                .setDescription('Protestant influence value')
+                .setRequired(true))
+        .addIntegerOption(option =>
+            option.setName('catholic')
+                .setDescription('Catholic influence value')
                 .setRequired(true)),
 
     async execute(interaction) {
         await interaction.deferReply();
 
         const spaceName = interaction.options.getString('space');
+        const protestantInfluence = interaction.options.getInteger('protestant');
+        const catholicInfluence = interaction.options.getInteger('catholic');
 
         try {
             // Get the space
@@ -24,21 +34,18 @@ module.exports = {
                 throw new Error(`Space ${spaceName} not found`);
             }
 
-            if (!space.hasJesuiteUniversity) {
-                throw new Error(`${spaceName} does not have a Jesuite university`);
-            }
-
             // Store old state
             const oldState = { ...space };
 
             // Update space
-            space.hasJesuiteUniversity = false;
+            space.protestantInfluence = protestantInfluence;
+            space.catholicInfluence = catholicInfluence;
             await spaceManager(interaction.channelId).updateSpace(spaceName, space);
 
             // Record in command history
             const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
-                COMMAND_TYPES.REMOVE_JESUITE,
+                COMMAND_TYPES.SET_RELIGIOUS_INFLUENCE,
                 {
                     spaceName,
                     oldState,
@@ -47,10 +54,10 @@ module.exports = {
             );
 
             await interaction.editReply(
-                `Removed Jesuite university from ${spaceName} (Command ID: ${historyEntry.commandId})`
+                `Set religious influence in ${spaceName} to Protestant: ${protestantInfluence}, Catholic: ${catholicInfluence} (Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
-            await interaction.editReply(`Failed to remove Jesuite university: ${error.message}`);
+            await interaction.editReply(`Failed to set religious influence: ${error.message}`);
         }
     }
 }; 

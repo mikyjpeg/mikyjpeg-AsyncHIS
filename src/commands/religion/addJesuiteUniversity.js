@@ -1,56 +1,59 @@
 const { SlashCommandBuilder } = require('discord.js');
-const spaceManager = require('../../game/spaceManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const spaceManager = require('../../game/spaceManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('add_jesuite')
+        .setName('add_jesuite_university')
         .setDescription('Add a Jesuite university to a space')
         .addStringOption(option =>
             option.setName('space')
-                .setDescription('The space to add the Jesuite university to')
+                .setDescription('The space to add the university to')
                 .setRequired(true)),
-        
+
     async execute(interaction) {
         await interaction.deferReply();
-        
+
         const spaceName = interaction.options.getString('space');
-        
+
         try {
-            // Get the space data
-            const space = await spaceManager.getSpace(spaceName);
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get space data
+            const space = await spaceManager(channelName).getSpace(spaceName);
             
-            // Check if space is Catholic
-            if (!space.catholic) {
-                await interaction.editReply(`Cannot add a Jesuite university to ${spaceName} as it is not Catholic`);
-                return;
+            if (!space) {
+                throw new Error(`Space ${spaceName} not found`);
             }
 
-            // Check if university already exists
-            if (space.jesuiteUniversity) {
-                await interaction.editReply(`${spaceName} already has a Jesuite university`);
-                return;
+            if (space.hasJesuiteUniversity) {
+                throw new Error(`${spaceName} already has a Jesuite University`);
             }
 
-            // Add the university
-            space.jesuiteUniversity = true;
-            await spaceManager.updateSpace(spaceName, space);
-            
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            // Store old state
+            const oldState = { ...space };
+
+            // Update space
+            space.hasJesuiteUniversity = true;
+            await spaceManager(channelName).updateSpace(spaceName, space);
+
+            // Record in command history
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_JESUITE,
                 {
-                    spaceName
+                    spaceName,
+                    oldState,
+                    newState: space
                 }
             );
 
-            await interaction.editReply(`Added a Jesuite university to ${spaceName} (Command ID: ${historyEntry.commandId})`);
+            await interaction.editReply(
+                `Added Jesuite university to ${spaceName} (Command ID: ${historyEntry.commandId})`
+            );
         } catch (error) {
-            await interaction.editReply({ 
-                content: `Failed to add Jesuite university: ${error.message}`,
-                ephemeral: true 
-            });
+            await interaction.editReply(`Failed to add Jesuite university: ${error.message}`);
         }
     }
 }; 

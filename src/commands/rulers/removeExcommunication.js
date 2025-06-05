@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 const rulerManager = require('../../game/rulerManager');
 const reformerManager = require('../../game/reformerManager');
-const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,10 +31,38 @@ module.exports = {
             let historyData;
 
             if (targetType === 'ruler') {
-                // Remove excommunication from ruler and update card modifiers
-                result = await rulerManager.removeExcommunication(targetName);
+                // Get the ruler
+                const ruler = await rulerManager(interaction.channelId).getRuler(targetName);
+                
+                if (!ruler) {
+                    throw new Error(`Ruler ${targetName} not found`);
+                }
+
+                if (!ruler.isExcommunicated) {
+                    throw new Error(`${targetName} is not excommunicated`);
+                }
+
+                // Store old state
+                const oldState = { ...ruler };
+
+                // Update ruler
+                ruler.isExcommunicated = false;
+                await rulerManager(interaction.channelId).updateRuler(targetName, ruler);
+
+                // Record in command history
+                const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+                    interaction,
+                    COMMAND_TYPES.REMOVE_EXCOMMUNICATION,
+                    {
+                        rulerName: targetName,
+                        oldState,
+                        newState: ruler
+                    }
+                );
+
+                result = ruler;
                 historyData = {
-                    ruler: result.ruler
+                    ruler: result
                 };
             } else {
                 // Remove excommunication from reformer
@@ -45,7 +73,7 @@ module.exports = {
             }
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_EXCOMMUNICATION,
                 historyData

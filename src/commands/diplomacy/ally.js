@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
-const factionManager = require('../../game/factionManager');
+const diplomacyManager = require('../../game/diplomacyManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,63 +37,40 @@ module.exports = {
                 return;
             }
 
-            // Load current game state
-            const gameState = await GameState.load();
-            
-            // Initialize alliances array if it doesn't exist
-            if (!gameState.alliances) {
-                gameState.alliances = [];
-            }
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the diplomacy manager for this game
+            const dm = diplomacyManager(channelName);
+
+            // Get current states
+            const faction1 = await dm.getFaction(power1);
+            const faction2 = await dm.getFaction(power2);
 
             // Check if they are at war
-            if (gameState.wars && gameState.wars.some(war => 
-                (war.attacker === power1 && war.defender === power2) ||
-                (war.attacker === power2 && war.defender === power1)
-            )) {
+            if (faction1.atWarWith?.includes(power2) || faction2.atWarWith?.includes(power1)) {
                 await interaction.editReply(`${power1} and ${power2} cannot form an alliance while at war`);
                 return;
             }
 
             // Check if alliance already exists
-            if (gameState.alliances.some(alliance => 
-                (alliance.power1 === power1 && alliance.power2 === power2) ||
-                (alliance.power1 === power2 && alliance.power2 === power1)
-            )) {
+            if (faction1.alliances?.includes(power2) || faction2.alliances?.includes(power1)) {
                 await interaction.editReply(`${power1} and ${power2} already have an alliance`);
                 return;
             }
 
-            // Add the alliance to game state
-            const newAlliance = {
-                power1,
-                power2,
-                startTurn: gameState.turn || 1
-            };
-            gameState.alliances.push(newAlliance);
-            await GameState.save(gameState);
-
-            // Update faction files
-            const faction1 = await factionManager.getFaction(power1);
-            const faction2 = await factionManager.getFaction(power2);
-
-            // Add alliance to each faction
-            if (!faction1.alliances) faction1.alliances = [];
-            if (!faction2.alliances) faction2.alliances = [];
-            
-            faction1.alliances.push(power2);
-            faction2.alliances.push(power1);
-
-            await factionManager.updateFaction(power1, faction1);
-            await factionManager.updateFaction(power2, faction2);
+            // Form the alliance
+            const { faction1: updatedFaction1, faction2: updatedFaction2 } = await dm.declareAlliance(power1, power2);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.FORM_ALLIANCE,
                 {
-                    ...newAlliance,
-                    faction1,
-                    faction2
+                    power1,
+                    power2,
+                    faction1: updatedFaction1,
+                    faction2: updatedFaction2
                 }
             );
 

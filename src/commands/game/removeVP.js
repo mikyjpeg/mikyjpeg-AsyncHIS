@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { POWERS } = require('../../game/gameState');
-const victoryPointsManager = require('../../game/victoryPointsManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const factionManager = require('../../game/factionManager');
+const { POWERS } = require('../../game/gameState');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,15 +9,12 @@ module.exports = {
         .setDescription('Remove victory points from a power')
         .addStringOption(option =>
             option.setName('power')
-                .setDescription('The power to remove points from')
+                .setDescription('The power to remove VP from')
                 .setRequired(true)
-                .addChoices(...Object.values(POWERS).map(power => ({
-                    name: power,
-                    value: power
-                }))))
+                .addChoices(...Object.values(POWERS).map(power => ({ name: power, value: power }))))
         .addIntegerOption(option =>
-            option.setName('points')
-                .setDescription('Number of points to remove')
+            option.setName('amount')
+                .setDescription('Amount of VP to remove')
                 .setRequired(true)
                 .setMinValue(1)),
 
@@ -25,40 +22,41 @@ module.exports = {
         await interaction.deferReply();
 
         const power = interaction.options.getString('power');
-        const points = interaction.options.getInteger('points');
+        const amount = interaction.options.getInteger('amount');
 
         try {
-            // Get current points to validate removal
-            const currentPoints = await victoryPointsManager.getVictoryPoints(power);
-            if (points > currentPoints) {
-                throw new Error(`Cannot remove ${points} points. ${power} only has ${currentPoints} points.`);
+            // Get the faction
+            const faction = await factionManager(interaction.channelId).getFaction(power);
+            
+            if (!faction) {
+                throw new Error(`Power ${power} not found`);
             }
 
-            // Remove victory points
-            await victoryPointsManager.removeVictoryPoints(power, points);
+            // Store old state
+            const oldState = { ...faction };
+            const oldVP = faction.victoryPoints || 0;
 
-            // Get updated total
-            const newTotal = await victoryPointsManager.getVictoryPoints(power);
+            // Update VP
+            faction.victoryPoints = Math.max(0, oldVP - amount);
+            await factionManager(interaction.channelId).updateFaction(power, faction);
 
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            // Record in command history
+            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_VP,
                 {
                     power,
-                    pointsRemoved: points,
-                    newTotal
+                    amount,
+                    oldState,
+                    newState: faction
                 }
             );
 
             await interaction.editReply(
-                `Removed ${points} victory points from ${power}. New total: ${newTotal} (Command ID: ${historyEntry.commandId})`
+                `Removed ${amount} VP from ${power}. New total: ${faction.victoryPoints} VP (Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
-            await interaction.editReply({
-                content: `Failed to remove victory points: ${error.message}`,
-                ephemeral: true
-            });
+            await interaction.editReply(`Failed to remove VP: ${error.message}`);
         }
     }
 }; 

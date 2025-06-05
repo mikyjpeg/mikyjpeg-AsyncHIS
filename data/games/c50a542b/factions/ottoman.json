@@ -6,7 +6,9 @@
   "victoryPoints": 0,
   "ruler": "Suleiman",
   "isActive": false,
-  "alliances": [],
+  "alliances": [
+    "France"
+  ],
   "atWarWith": [],
   "cardModifier": 0,
   "bonusVP": [],

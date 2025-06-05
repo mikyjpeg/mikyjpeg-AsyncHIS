@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
-const factionManager = require('../../game/factionManager');
+const diplomacyManager = require('../../game/diplomacyManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,52 +37,34 @@ module.exports = {
                 return;
             }
 
-            // Load current game state
-            const gameState = await GameState.load();
-            
-            // Initialize alliances array if it doesn't exist
-            if (!gameState.alliances) {
-                gameState.alliances = [];
-            }
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the diplomacy manager for this game
+            const dm = diplomacyManager(channelName);
+
+            // Get current states
+            const faction1 = await dm.getFaction(power1);
+            const faction2 = await dm.getFaction(power2);
 
             // Check if alliance exists
-            const allianceIndex = gameState.alliances.findIndex(alliance => 
-                (alliance.power1 === power1 && alliance.power2 === power2) ||
-                (alliance.power1 === power2 && alliance.power2 === power1)
-            );
-
-            if (allianceIndex === -1) {
+            if (!faction1.alliances?.includes(power2) && !faction2.alliances?.includes(power1)) {
                 await interaction.editReply(`${power1} and ${power2} do not have an alliance`);
                 return;
             }
 
-            // Remove the alliance from game state
-            const removedAlliance = gameState.alliances.splice(allianceIndex, 1)[0];
-            await GameState.save(gameState);
-
-            // Update faction files
-            const faction1 = await factionManager.getFaction(power1);
-            const faction2 = await factionManager.getFaction(power2);
-
-            // Remove alliance from each faction
-            if (faction1.alliances) {
-                faction1.alliances = faction1.alliances.filter(p => p !== power2);
-            }
-            if (faction2.alliances) {
-                faction2.alliances = faction2.alliances.filter(p => p !== power1);
-            }
-
-            await factionManager.updateFaction(power1, faction1);
-            await factionManager.updateFaction(power2, faction2);
+            // Break the alliance
+            const { faction1: updatedFaction1, faction2: updatedFaction2 } = await dm.removeAlliance(power1, power2);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.BREAK_ALLIANCE,
                 {
-                    ...removedAlliance,
-                    faction1,
-                    faction2
+                    power1,
+                    power2,
+                    faction1: updatedFaction1,
+                    faction2: updatedFaction2
                 }
             );
 

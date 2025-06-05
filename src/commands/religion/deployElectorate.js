@@ -1,28 +1,20 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 const electorateManager = require('../../game/electorateManager');
 const formationManager = require('../../game/formationManager');
 const spaceManager = require('../../game/spaceManager');
-const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('deploy_electorate')
-        .setDescription('Deploy an electorate for the Protestant power')
+        .setDescription('Deploy an electorate')
         .addStringOption(option =>
             option.setName('electorate')
-                .setDescription('Name of the electorate')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'Augsburg', value: 'Augsburg' },
-                    { name: 'Brandenburg', value: 'Brandenburg' },
-                    { name: 'Cologne', value: 'Cologne' },
-                    { name: 'Mainz', value: 'Mainz' },
-                    { name: 'Trier', value: 'Trier' },
-                    { name: 'Wittenberg', value: 'Wittenberg' }
-                ))
+                .setDescription('The electorate to deploy')
+                .setRequired(true))
         .addBooleanOption(option =>
             option.setName('control')
-                .setDescription('Whether to also take control of the space')
+                .setDescription('Whether to take control of the electorate')
                 .setRequired(true)),
 
     async execute(interaction) {
@@ -32,54 +24,41 @@ module.exports = {
         const shouldControl = interaction.options.getBoolean('control');
 
         try {
-            // Get the electorate data and clear its regulars
-            const { electorate, regulars } = await electorateManager.clearRegulars(electorateName);
+            // Get the electorate
+            const electorate = await electorateManager(interaction.channelId).getElectorate(electorateName);
+            
+            if (!electorate) {
+                throw new Error(`Electorate ${electorateName} not found`);
+            }
 
-            // Update control if requested
-            let previousController = null;
+            // Store old state
+            const oldState = { ...electorate };
+
+            // Update electorate
+            electorate.isDeployed = true;
             if (shouldControl) {
-                const space = await spaceManager.getSpace(electorateName);
-                previousController = space.controllingPower;
-                space.controllingPower = 'Protestant';
-                await spaceManager.updateSpace(electorateName, space);
-
-                // Set controlMarker to false since it's now on the space
-                electorate.controlMarker = false;
-                await electorateManager.updateElectorate(electorateName, electorate);
+                electorate.isControlled = true;
             }
+            await electorateManager(interaction.channelId).updateElectorate(electorateName, electorate);
 
-            // Add formation directly using formationManager
-            if (regulars > 0) {
-                await formationManager.addFormation(electorateName, 'Protestant', regulars, 0, []);
-            }
-
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            // Record in command history
+            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.DEPLOY_ELECTORATE,
                 {
-                    electorate,
-                    regulars,
+                    electorateName,
                     shouldControl,
-                    previousController
+                    oldState,
+                    newState: electorate
                 }
             );
 
-            let reply = `Deployed ${regulars} regulars from ${electorateName} for Protestant`;
-            if (shouldControl) {
-                const space = await spaceManager.getSpace(electorateName);
-                const displayPreviousController = previousController || space.homePower;
-                reply += ` and took control from ${displayPreviousController}`;
-            }
-            reply += ` (Command ID: ${historyEntry.commandId})`;
-
-            await interaction.editReply(reply);
+            const controlMsg = shouldControl ? ' and took control of it' : '';
+            await interaction.editReply(
+                `Deployed electorate ${electorateName}${controlMsg} (Command ID: ${historyEntry.commandId})`
+            );
         } catch (error) {
-            console.error('Error in deploy_electorate:', error);
-            await interaction.editReply({
-                content: `Failed to deploy electorate: ${error.message}`,
-                ephemeral: true
-            });
+            await interaction.editReply(`Failed to deploy electorate: ${error.message}`);
         }
     }
 }; 

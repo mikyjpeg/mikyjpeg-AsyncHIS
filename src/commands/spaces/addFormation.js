@@ -45,11 +45,14 @@ module.exports = {
         const leaders = leadersInput ? leadersInput.split(',').map(l => l.trim()) : [];
         
         try {
+            // Get the channel name instead of ID
+            const channelName = interaction.channel.name;
+            
             // Add the formation
-            const updatedSpace = await formationManager.addFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
+            const updatedSpace = await formationManager(channelName).addFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_FORMATION,
                 {
@@ -75,8 +78,9 @@ module.exports = {
                 `${formation.power}: ${troopInfo}${leaderInfo}`
             );
         } catch (error) {
-            // Record error in history
-            await commandHistory.recordSlashCommand(
+            // Record error in history with channel name
+            const channelName = interaction.channel.name;
+            await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_FORMATION,
                 {

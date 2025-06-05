@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { POWERS } = require('../../game/gameState');
-const victoryPointsManager = require('../../game/victoryPointsManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const factionManager = require('../../game/factionManager');
+const { POWERS } = require('../../game/gameState');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,15 +9,12 @@ module.exports = {
         .setDescription('Set victory points for a power')
         .addStringOption(option =>
             option.setName('power')
-                .setDescription('The power to set points for')
+                .setDescription('The power to set VP for')
                 .setRequired(true)
-                .addChoices(...Object.values(POWERS).map(power => ({
-                    name: power,
-                    value: power
-                }))))
+                .addChoices(...Object.values(POWERS).map(power => ({ name: power, value: power }))))
         .addIntegerOption(option =>
-            option.setName('points')
-                .setDescription('Number of points to set')
+            option.setName('amount')
+                .setDescription('Amount of VP to set')
                 .setRequired(true)
                 .setMinValue(0)),
 
@@ -25,34 +22,43 @@ module.exports = {
         await interaction.deferReply();
 
         const power = interaction.options.getString('power');
-        const points = interaction.options.getInteger('points');
+        const amount = interaction.options.getInteger('amount');
 
         try {
-            // Get current points for history
-            const oldTotal = await victoryPointsManager.getVictoryPoints(power);
+            // Get the channel name
+            const channelName = interaction.channel.name;
 
-            // Set victory points
-            await victoryPointsManager.setVictoryPoints(power, points);
+            // Get faction data
+            const faction = await factionManager(channelName).getFaction(power);
+            
+            if (!faction) {
+                throw new Error(`Power ${power} not found`);
+            }
 
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            // Store old state
+            const oldState = { ...faction };
+
+            // Update VP
+            faction.victoryPoints = amount;
+            await factionManager(channelName).updateFaction(power, faction);
+
+            // Record in command history
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.SET_VP,
                 {
                     power,
-                    oldTotal,
-                    newTotal: points
+                    amount,
+                    oldState,
+                    newState: faction
                 }
             );
 
             await interaction.editReply(
-                `Set ${power}'s victory points to ${points} (was ${oldTotal}) (Command ID: ${historyEntry.commandId})`
+                `Set ${power}'s VP to ${amount} (Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
-            await interaction.editReply({
-                content: `Failed to set victory points: ${error.message}`,
-                ephemeral: true
-            });
+            await interaction.editReply(`Failed to set VP: ${error.message}`);
         }
     }
 }; 

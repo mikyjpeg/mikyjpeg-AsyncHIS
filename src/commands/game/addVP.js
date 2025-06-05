@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { POWERS } = require('../../game/gameState');
-const victoryPointsManager = require('../../game/victoryPointsManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
+const factionManager = require('../../game/factionManager');
+const { POWERS } = require('../../game/gameState');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,15 +9,12 @@ module.exports = {
         .setDescription('Add victory points to a power')
         .addStringOption(option =>
             option.setName('power')
-                .setDescription('The power to add points to')
+                .setDescription('The power to add VP to')
                 .setRequired(true)
-                .addChoices(...Object.values(POWERS).map(power => ({
-                    name: power,
-                    value: power
-                }))))
+                .addChoices(...Object.values(POWERS).map(power => ({ name: power, value: power }))))
         .addIntegerOption(option =>
-            option.setName('points')
-                .setDescription('Number of points to add')
+            option.setName('amount')
+                .setDescription('Amount of VP to add')
                 .setRequired(true)
                 .setMinValue(1)),
 
@@ -25,34 +22,41 @@ module.exports = {
         await interaction.deferReply();
 
         const power = interaction.options.getString('power');
-        const points = interaction.options.getInteger('points');
+        const amount = interaction.options.getInteger('amount');
 
         try {
-            // Add victory points
-            await victoryPointsManager.addVictoryPoints(power, points);
+            // Get the faction
+            const faction = await factionManager(interaction.channelId).getFaction(power);
+            
+            if (!faction) {
+                throw new Error(`Power ${power} not found`);
+            }
 
-            // Get updated total
-            const newTotal = await victoryPointsManager.getVictoryPoints(power);
+            // Store old state
+            const oldState = { ...faction };
+            const oldVP = faction.victoryPoints || 0;
 
-            // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            // Update VP
+            faction.victoryPoints = oldVP + amount;
+            await factionManager(interaction.channelId).updateFaction(power, faction);
+
+            // Record in command history
+            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_VP,
                 {
                     power,
-                    pointsAdded: points,
-                    newTotal
+                    amount,
+                    oldState,
+                    newState: faction
                 }
             );
 
             await interaction.editReply(
-                `Added ${points} victory points to ${power}. New total: ${newTotal} (Command ID: ${historyEntry.commandId})`
+                `Added ${amount} VP to ${power}. New total: ${faction.victoryPoints} VP (Command ID: ${historyEntry.commandId})`
             );
         } catch (error) {
-            await interaction.editReply({
-                content: `Failed to add victory points: ${error.message}`,
-                ephemeral: true
-            });
+            await interaction.editReply(`Failed to add VP: ${error.message}`);
         }
     }
 }; 

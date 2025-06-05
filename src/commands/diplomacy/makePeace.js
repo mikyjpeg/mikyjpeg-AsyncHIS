@@ -29,7 +29,16 @@ module.exports = {
         }
 
         try {
-            const dm = diplomacyManager(interaction.channelId);
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the diplomacy manager for this game
+            const dm = diplomacyManager(channelName);
+
+            // Get current states
+            const faction1 = await dm.getFaction(power1);
+            const faction2 = await dm.getFaction(power2);
+
             await dm.makePeace(power1, power2);
             await interaction.editReply(`${power1} and ${power2} have made peace!`);
         } catch (error) {
