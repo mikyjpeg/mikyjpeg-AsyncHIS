@@ -1,0 +1,13 @@
+{
+  "id": "46",
+  "name": "Calvin's Institutes",
+  "cp": "5",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Protestant",
+  "discordUserId": null,
+  "discordUsername": null,
+  "cardsPerTurn": 4,
+  "victoryPoints": 0,
+  "ruler": "Martin Luther",
+  "isActive": false,
+  "alliances": [],
+  "atWarWith": [],
+  "cardModifier": 0,
+  "bonusVP": [],
+  "bonusVPTotal": 0,
+  "captiveLeaders": [],
+  "cards": []
+}

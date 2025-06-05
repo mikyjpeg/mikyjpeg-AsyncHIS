@@ -1,0 +1,19 @@
+{
+  "name": "Zara",
+  "homePower": "Venice",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Trieste",
+    "Ragusa"
+  ],
+  "passConnectedTo": [
+    "Agram"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

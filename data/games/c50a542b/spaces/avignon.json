@@ -1,0 +1,20 @@
+{
+  "name": "Avignon",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Lyon",
+    "Toulouse",
+    "Marseille"
+  ],
+  "passConnectedTo": [
+    "Barcelona"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

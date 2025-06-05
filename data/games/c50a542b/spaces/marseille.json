@@ -1,0 +1,19 @@
+{
+  "name": "Marseille",
+  "homePower": "France",
+  "language": "french",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Avignon",
+    "Nice"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

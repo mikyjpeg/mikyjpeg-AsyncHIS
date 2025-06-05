@@ -1,0 +1,13 @@
+{
+  "id": "109",
+  "name": "Venetian Informant",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Innsbruck",
+  "homePower": "Hapsburg",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Zürich",
+    "Salzburg"
+  ],
+  "passConnectedTo": [
+    "Augsburg",
+    "Trent"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

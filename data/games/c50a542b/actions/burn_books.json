@@ -1,0 +1,26 @@
+{
+  "name": "Burn books",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 18,
+  "description": "Papal player makes 2 Counter Reformation attempts targeting 1 language zone."
+}

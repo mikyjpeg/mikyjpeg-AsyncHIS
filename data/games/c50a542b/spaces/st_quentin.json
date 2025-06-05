@@ -1,0 +1,19 @@
+{
+  "name": "St. Quentin",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Boulogne",
+    "Brussels",
+    "St. Dizier",
+    "Paris"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Coverdale",
+  "counter": 2,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "Bonus CP for translation in English zone",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "english"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Francis I",
+  "faction": "France",
+  "battleRating": 1,
+  "commandRating": 8,
+  "adminRating": 1,
+  "cardBonus": 1,
+  "isCurrentRuler": true,
+  "excommunicated": false,
+  "otherinfo": null
+}

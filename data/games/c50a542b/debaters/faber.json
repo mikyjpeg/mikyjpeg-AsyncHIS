@@ -1,0 +1,11 @@
+{
+  "name": "Faber",
+  "counter": 3,
+  "type": "papacy",
+  "turn": "6",
+  "bonus": "+2 dice for Contro Reformation against an electorate",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
+}

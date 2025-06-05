@@ -1,0 +1,19 @@
+{
+  "name": "Ragusa",
+  "homePower": "Independent",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Zara",
+    "Scutari"
+  ],
+  "passConnectedTo": [
+    "Belgrade"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

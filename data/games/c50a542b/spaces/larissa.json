@@ -1,0 +1,19 @@
+{
+  "name": "Larissa",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Salonika",
+    "Lepanto",
+    "Athens"
+  ],
+  "passConnectedTo": [
+    "Durazzo"
+  ],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

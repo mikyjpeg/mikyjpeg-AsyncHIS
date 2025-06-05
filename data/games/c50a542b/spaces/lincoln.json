@@ -1,0 +1,17 @@
+{
+  "name": "Lincoln",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "York",
+    "London"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

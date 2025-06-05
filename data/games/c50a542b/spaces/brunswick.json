@@ -1,0 +1,19 @@
+{
+  "name": "Brunswick",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Hamburg",
+    "Bremen",
+    "Kassel",
+    "Magdeburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

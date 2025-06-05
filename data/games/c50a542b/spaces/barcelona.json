@@ -1,0 +1,22 @@
+{
+  "name": "Barcelona",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Zaragoza",
+    "Valencia"
+  ],
+  "passConnectedTo": [
+    "Avignon",
+    "Toulouse"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

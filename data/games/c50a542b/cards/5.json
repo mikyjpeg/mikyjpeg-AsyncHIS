@@ -1,0 +1,13 @@
+{
+  "id": "5",
+  "name": "Papal Bull",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

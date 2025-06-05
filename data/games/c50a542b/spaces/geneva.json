@@ -1,0 +1,21 @@
+{
+  "name": "Geneva",
+  "homePower": "Independent",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Besancon",
+    "Basel",
+    "Lyon",
+    "Grenoble"
+  ],
+  "passConnectedTo": [
+    "Turin"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

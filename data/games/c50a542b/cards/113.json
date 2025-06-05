@@ -1,0 +1,13 @@
+{
+  "id": "113",
+  "name": "Imperial Coronation",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "3",
+  "year": 1517,
+  "isForeignWar": false
+}

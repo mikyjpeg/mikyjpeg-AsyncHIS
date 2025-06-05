@@ -1,0 +1,22 @@
+{
+  "name": "Brussels",
+  "homePower": "Hapsburg",
+  "language": "french",
+  "type": "fortress",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Antwerp",
+    "Liege",
+    "St. Quentin",
+    "St. Dizier",
+    "Calais"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

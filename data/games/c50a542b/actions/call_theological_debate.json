@@ -1,0 +1,27 @@
+{
+  "name": "Call theological debate",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 3
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 3
+    }
+  },
+  "rulesSection": 18,
+  "description": "Initiate theological debate in one language zone."
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Wishart",
+  "counter": 1,
+  "type": "protestant",
+  "turn": "6",
+  "bonus": "+1 die for Ref attempts in Scotland",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "english"
+}

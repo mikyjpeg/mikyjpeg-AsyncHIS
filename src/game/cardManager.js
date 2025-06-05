@@ -1,9 +1,15 @@
 const fs = require('fs').promises;
 const path = require('path');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class CardManager {
-    constructor() {
-        this.statusPath = path.join(process.cwd(), 'data', 'status.json');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        const gamePath = getGamePath(channelId);
+        this.statusPath = path.join(process.cwd(), gamePath, 'status.json');
+        this.cardsDir = path.join(process.cwd(), gamePath, 'cards');
+        this.factionsDir = path.join(process.cwd(), gamePath, 'factions');
+        this.rulersDir = path.join(process.cwd(), gamePath, 'rulers');
     }
 
     async validateTurn() {
@@ -37,20 +43,20 @@ class CardManager {
     }
 
     async getFaction(power) {
-        const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
+        const factionPath = path.join(this.factionsDir, `${power}.json`);
         const content = await fs.readFile(factionPath, 'utf8');
         return JSON.parse(content);
     }
 
     async saveFaction(power, faction) {
-        const factionPath = path.join(process.cwd(), 'data', 'factions', `${power}.json`);
+        const factionPath = path.join(this.factionsDir, `${power}.json`);
         await fs.writeFile(factionPath, JSON.stringify(faction, null, 2));
     }
 
     async getRuler(rulerName) {
         try {
             const rulerFileName = rulerName.toLowerCase().replace(/\s+/g, '_');
-            const rulerPath = path.join(process.cwd(), 'data', 'rulers', `${rulerFileName}.json`);
+            const rulerPath = path.join(this.rulersDir, `${rulerFileName}.json`);
             const content = await fs.readFile(rulerPath, 'utf8');
             return JSON.parse(content);
         } catch (error) {
@@ -60,7 +66,7 @@ class CardManager {
     }
 
     async getCard(cardId) {
-        const cardPath = path.join(process.cwd(), 'data', 'cards', `${cardId}.json`);
+        const cardPath = path.join(this.cardsDir, `${cardId}.json`);
         const content = await fs.readFile(cardPath, 'utf8');
         return JSON.parse(content);
     }
@@ -137,9 +143,8 @@ class CardManager {
     }
 
     async shuffleDeck(turn) {
-        // Read all card files from data/cards directory
-        const cardsDir = path.join(process.cwd(), 'data', 'cards');
-        const cardFiles = await fs.readdir(cardsDir);
+        // Read all card files from cards directory
+        const cardFiles = await fs.readdir(this.cardsDir);
         
         // Get current status
         const status = await this.getStatus();
@@ -159,7 +164,7 @@ class CardManager {
             for (const file of cardFiles) {
                 if (!file.endsWith('.json')) continue;
                 
-                const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
+                const cardContent = await fs.readFile(path.join(this.cardsDir, file), 'utf8');
                 const cardData = JSON.parse(cardContent);
                 
                 if (cardData.turn === null) {
@@ -176,11 +181,11 @@ class CardManager {
                 cardsToShuffle.push(...status.discardedCards);
             }
             
-            // 3. Add any new cards for this turn from data/cards
+            // 3. Add any new cards for this turn from cards directory
             for (const file of cardFiles) {
                 if (!file.endsWith('.json')) continue;
                 
-                const cardContent = await fs.readFile(path.join(cardsDir, file), 'utf8');
+                const cardContent = await fs.readFile(path.join(this.cardsDir, file), 'utf8');
                 const cardData = JSON.parse(cardContent);
                 
                 // Add cards that match the current turn
@@ -260,4 +265,4 @@ class CardManager {
     }
 }
 
-module.exports = new CardManager(); 
+module.exports = (channelId) => new CardManager(channelId); 

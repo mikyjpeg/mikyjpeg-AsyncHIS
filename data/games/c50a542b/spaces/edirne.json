@@ -1,0 +1,20 @@
+{
+  "name": "Edirne",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Varna",
+    "Istanbul",
+    "Sofia",
+    "Salonika"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "57",
+  "name": "Philip of Hesse's Bigamy",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "5",
+  "year": null,
+  "isForeignWar": false
+}

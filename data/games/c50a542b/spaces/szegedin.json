@@ -1,0 +1,19 @@
+{
+  "name": "Szegedin",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Buda",
+    "Belgrade"
+  ],
+  "passConnectedTo": [
+    "Nicopolis"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

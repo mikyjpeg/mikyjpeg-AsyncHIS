@@ -7,14 +7,15 @@ This is the context of the work we're doing: this is a discord bot (developed us
 Here I Stand (HIS) rules are loaded as a pdf in resources/HIS_RULES_2023-Final.pdf
 HIS official site is https://www.gmtgames.com/p-917-here-i-stand-500th-anniversary-reprint-edition-2nd-printing.aspx 
 
-We're maintaining bot commands in src/commands with managers for the various area in src/game to manage the actual logic.
+We're maintaining bot commands in src/commands with managers for the various area in src/game to manage the actual logic. command naming standard is words_separated_by_underlines.
 In scripts/ there are script to manipulate the state, or import from files, as una tantum. Ideally should be deleted eventually. in data/ we keep json file representing the status of games and all its components, as well as base configuration.
 
 The game cover both political and religious control. Religious control is managed in space with the boolean field "catholic". By default is true at the start of the game, but can change to false when the space is converted to Protestantism. The field is missing from spaces that are out of scope, as all the Ottoman home spaces.
 
-Factions are defined in data/factions folders. Factions are also often referred to as Power. There are minor powers and major powers.
-Each factions has leaders that are defined in data/leaders. Leaders can be added in spaces via formations.
-Each faction has also rulers, that are defined in data/rulers. There's only a current ruler and we defined ruler succession for all major powers.
+The both can manage multiple games, all identified by the channel first 8 characters. That's the channelId. all game data is stored in data/games/channelId
+Factions are defined in data/games/channelId/factions folders. Factions are also often referred to as Power. There are minor powers and major powers.
+Each factions has leaders that are defined in data/games/channelId/leaders. Leaders can be added in spaces via formations.
+Each faction has also rulers, that are defined in data/games/channelId/rulers. There's only a current ruler and we defined ruler succession for all major powers.
 Spaces belongs to europ map and define where formations are and how can they move around.
 
 Each bot command is recorded in an history using src/game/commandHistoryManager.js and must be undoable.

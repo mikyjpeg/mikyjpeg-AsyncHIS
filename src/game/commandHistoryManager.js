@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class CommandHistoryManager {
-    constructor() {
-        this.auditFilePath = path.join(__dirname, '../../data/command_history.json');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.auditFilePath = path.join(process.cwd(), getGamePath(channelId), 'command_history.json');
         this.lastCommandId = 0;
         this.initializeAuditFile();
     }
@@ -145,8 +147,11 @@ function createHistoryEntry(type, data) {
     };
 }
 
+// Export factory functions
+const createCommandHistoryManager = (channelId) => new CommandHistoryManager(channelId);
+
 module.exports = {
-    commandHistory: new CommandHistoryManager(),
+    commandHistory: createCommandHistoryManager,
     COMMAND_TYPES,
     createHistoryEntry
 }; 

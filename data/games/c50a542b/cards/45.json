@@ -1,0 +1,13 @@
+{
+  "id": "45",
+  "name": "Calvin Expelled",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

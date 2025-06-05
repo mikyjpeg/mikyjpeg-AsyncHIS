@@ -1,0 +1,22 @@
+{
+  "name": "Bristol",
+  "homePower": "England",
+  "language": "english",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Wales",
+    "Plymouth",
+    "London",
+    "Portsmouth",
+    "Shrewsbury"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

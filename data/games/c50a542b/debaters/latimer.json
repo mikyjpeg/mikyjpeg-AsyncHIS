@@ -1,0 +1,12 @@
+{
+  "name": "Latimer",
+  "counter": 1,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "+1 die for Ref attempts in England",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "english"
+}

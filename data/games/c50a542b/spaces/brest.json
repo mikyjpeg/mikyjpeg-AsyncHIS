@@ -1,0 +1,16 @@
+{
+  "name": "Brest",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Nantes"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

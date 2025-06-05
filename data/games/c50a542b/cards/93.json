@@ -1,0 +1,13 @@
+{
+  "id": "93",
+  "name": "Revolt in Ireland",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": true
+}

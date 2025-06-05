@@ -1,0 +1,13 @@
+{
+  "id": "12",
+  "name": "Master of Italy",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

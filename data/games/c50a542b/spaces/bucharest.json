@@ -1,0 +1,16 @@
+{
+  "name": "Bucharest",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Nicoolis",
+    "Varna"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

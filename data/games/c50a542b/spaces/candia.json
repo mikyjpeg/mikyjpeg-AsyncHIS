@@ -1,0 +1,16 @@
+{
+  "name": "Candia",
+  "homePower": "Venice",
+  "language": "other",
+  "type": "fortress",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

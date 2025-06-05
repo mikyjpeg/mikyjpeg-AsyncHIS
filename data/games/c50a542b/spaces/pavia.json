@@ -1,0 +1,19 @@
+{
+  "name": "Pavia",
+  "homePower": "Independent",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Turin",
+    "Milan",
+    "Modena",
+    "Genoa"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Cerignola",
+  "homePower": "Hapsburg",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Ancona",
+    "Rome",
+    "Taranto"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

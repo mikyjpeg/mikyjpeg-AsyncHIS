@@ -6,6 +6,9 @@ const { token } = require('./config.js');
 const { GameState, POWERS } = require('./game/gameState');
 const commandHandler = require('./commands/commandHandler');
 
+// Default channel ID for web API (you might want to make this configurable)
+const DEFAULT_CHANNEL_ID = 'default00';
+
 // Create Express app
 const app = express();
 app.use(cors());
@@ -25,7 +28,10 @@ app.use('/resources', express.static(resourcesPath));
 // API Routes
 app.get('/api/game/status', async (req, res) => {
     try {
-        const status = await GameState.getGameStatus();
+        // Use channel ID from query parameter or default
+        const channelId = req.query.channelId || DEFAULT_CHANNEL_ID;
+        const gameState = GameState(channelId);
+        const status = await gameState.getGameStatus();
         res.json(status);
     } catch (error) {
         console.error('API error:', error);
@@ -59,8 +65,9 @@ const client = new Client({
 // When the client is ready, run this code (only once)
 client.once('ready', async () => {
     console.log('Here I Stand Bot is ready! 🏰');
-    // Initialize the game state and load commands
-    await GameState.initialize();
+    // Initialize the game state for default channel and load commands
+    const gameState = GameState(DEFAULT_CHANNEL_ID);
+    await gameState.initialize();
     await commandHandler.loadCommands();
 });
 

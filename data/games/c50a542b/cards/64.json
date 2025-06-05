@@ -1,0 +1,13 @@
+{
+  "id": "64",
+  "name": "Pilgrimage of Grace",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "?",
+  "year": null,
+  "isForeignWar": false
+}

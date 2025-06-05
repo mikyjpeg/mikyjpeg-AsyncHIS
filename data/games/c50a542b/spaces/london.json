@@ -1,0 +1,21 @@
+{
+  "name": "London",
+  "homePower": "England",
+  "language": "english",
+  "type": "capital",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Portsmouth",
+    "Bristol",
+    "Lincoln",
+    "Norwich",
+    "Shrewsbury"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

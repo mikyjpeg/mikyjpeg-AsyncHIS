@@ -1,0 +1,23 @@
+{
+  "name": "Genoa",
+  "homePower": "Genoa",
+  "language": "italian",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Turin",
+    "Florence",
+    "Pavia",
+    "Siena"
+  ],
+  "passConnectedTo": [
+    "Nice"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

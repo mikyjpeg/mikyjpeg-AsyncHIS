@@ -1,0 +1,20 @@
+{
+  "name": "Shrewsbury",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Carlisle",
+    "London",
+    "Wales",
+    "York",
+    "Bristol"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

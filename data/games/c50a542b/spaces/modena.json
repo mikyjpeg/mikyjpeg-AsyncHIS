@@ -1,0 +1,21 @@
+{
+  "name": "Modena",
+  "homePower": "Independent",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Trent",
+    "Venice",
+    "Ravenna",
+    "Florence",
+    "Milan",
+    "Pavia"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class DebaterManager {
-    constructor() {
-        this.debatersDir = path.join(__dirname, '../../data/debaters');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.debatersDir = path.join(process.cwd(), getGamePath(channelId), 'debaters');
     }
 
     async #readDebaterFile(name) {
@@ -99,4 +101,4 @@ class DebaterManager {
     }
 }
 
-module.exports = new DebaterManager(); 
+module.exports = (channelId) => new DebaterManager(channelId); 

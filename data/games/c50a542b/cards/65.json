@@ -1,0 +1,13 @@
+{
+  "id": "65",
+  "name": "A Mighty Fortress",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

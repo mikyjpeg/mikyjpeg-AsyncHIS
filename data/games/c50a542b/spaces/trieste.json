@@ -1,0 +1,19 @@
+{
+  "name": "Trieste",
+  "homePower": "Hapsburg",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Venice",
+    "Graz",
+    "Agram",
+    "Zara"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

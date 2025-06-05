@@ -1,0 +1,19 @@
+{
+  "name": "Strasbourg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Metz",
+    "Worms",
+    "Basel",
+    "Besancon"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

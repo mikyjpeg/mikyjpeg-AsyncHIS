@@ -4,34 +4,25 @@ const { GameState, POWERS } = require('../../game/gameState');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('leave')
-        .setDescription('Give up control of a power')
+        .setDescription('Leave your current power')
         .addStringOption(option =>
             option.setName('power')
-                .setDescription('The power you want to give up')
+                .setDescription('The power to leave')
                 .setRequired(true)
-                .addChoices(
-                    ...Object.values(POWERS).map(power => ({
-                        name: power,
-                        value: power
-                    }))
-                )),
-        
+                .addChoices(...Object.values(POWERS).map(power => ({ name: power, value: power })))),
+
     async execute(interaction) {
         await interaction.deferReply();
-        
-        const powerName = interaction.options.getString('power');
-        console.log(`User ${interaction.user.username} attempting to leave ${powerName}`);
-        
+
+        const power = interaction.options.getString('power');
+        const userId = interaction.user.id;
+
         try {
-            await GameState.leavePower(interaction.user.id, powerName);
-            console.log(`Successfully removed ${interaction.user.username} from ${powerName}`);
-            
-            await interaction.editReply(`Successfully removed ${interaction.user.username} from ${powerName}`);
+            const gameState = GameState(interaction.channelId);
+            await gameState.leavePower(userId, power);
+            await interaction.editReply(`You have left ${power}!`);
         } catch (error) {
-            await interaction.editReply({ 
-                content: `Failed to leave ${powerName}: ${error.message}`,
-                ephemeral: true 
-            });
+            await interaction.editReply(`Failed to leave ${power}: ${error.message}`);
         }
     }
 }; 

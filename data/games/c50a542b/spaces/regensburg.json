@@ -1,0 +1,19 @@
+{
+  "name": "Regensburg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Nuremberg",
+    "Augsburg",
+    "Salzburg",
+    "Linz"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

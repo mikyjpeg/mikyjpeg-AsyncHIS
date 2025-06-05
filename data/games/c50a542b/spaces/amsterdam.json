@@ -1,0 +1,17 @@
+{
+  "name": "Amsterdam",
+  "homePower": "Hapsburg",
+  "language": "null",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Münster",
+    "Antwerp"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

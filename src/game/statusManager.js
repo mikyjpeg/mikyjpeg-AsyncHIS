@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class StatusManager {
-    constructor() {
-        this.filepath = path.join(__dirname, '../../data/status.json');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.filepath = path.join(process.cwd(), getGamePath(channelId), 'status.json');
         this.status = null;
         this.MAJOR_POWERS = ['ottoman', 'hapsburg', 'england', 'france', 'papacy', 'protestant'];
         this.MINOR_POWERS = ['venice', 'scotland', 'genoa', 'hungary'];
@@ -207,4 +209,4 @@ class StatusManager {
     }
 }
 
-module.exports = new StatusManager(); 
+module.exports = (channelId) => new StatusManager(channelId); 

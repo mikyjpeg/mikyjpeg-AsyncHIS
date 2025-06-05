@@ -1,0 +1,11 @@
+{
+  "name": "Martin Luther",
+  "faction": "Protestant",
+  "battleRating": 0,
+  "commandRating": 0,
+  "adminRating": 2,
+  "cardBonus": 0,
+  "isCurrentRuler": true,
+  "excommunicated": false,
+  "otherinfo": null
+}

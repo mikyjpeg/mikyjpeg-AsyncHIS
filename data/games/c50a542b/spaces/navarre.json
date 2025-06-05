@@ -1,0 +1,21 @@
+{
+  "name": "Navarre",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Bilbao",
+    "Zaragoza"
+  ],
+  "passConnectedTo": [
+    "Bordeaux"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

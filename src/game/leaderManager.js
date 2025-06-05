@@ -2,10 +2,14 @@ const fs = require('fs').promises;
 const path = require('path');
 const factionManager = require('./factionManager');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class LeaderManager {
-    constructor() {
-        this.leadersDir = path.join(__dirname, '../../data/leaders');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.leadersDir = path.join(process.cwd(), getGamePath(channelId), 'leaders');
+        // Store channelId for creating faction manager instances
+        this.channelId = channelId;
     }
 
     async getLeader(leaderName) {
@@ -26,60 +30,48 @@ class LeaderManager {
     }
 
     async captureLeader(leaderName, capturingFaction) {
-        // Get the leader
         const leader = await this.getLeader(leaderName);
         
-        // Validate the leader isn't already captured
         if (leader.isCaptured) {
             throw new Error(`${leaderName} is already captured`);
         }
 
-        // Get the capturing faction
-        const faction = await factionManager.getFaction(capturingFaction);
+        const faction = await factionManager(this.channelId).getFaction(capturingFaction);
 
-        // Validate the leader isn't from the capturing faction
         if (leader.power === faction.name) {
             throw new Error(`${faction.name} cannot capture their own leader`);
         }
 
-        // Update leader status
         leader.isCaptured = true;
         await this.updateLeader(leaderName, leader);
 
-        // Add leader to faction's captives
         faction.captiveLeaders.push(leaderName);
-        await factionManager.updateFaction(faction.name, faction);
+        await factionManager(this.channelId).updateFaction(faction.name, faction);
 
         return { leader, faction };
     }
 
     async releaseLeader(leaderName, releasingFaction) {
-        // Get the leader
         const leader = await this.getLeader(leaderName);
         
-        // Validate the leader is captured
         if (!leader.isCaptured) {
             throw new Error(`${leaderName} is not captured`);
         }
 
-        // Get the releasing faction
-        const faction = await factionManager.getFaction(releasingFaction);
+        const faction = await factionManager(this.channelId).getFaction(releasingFaction);
 
-        // Validate the faction has the leader captive
         if (!faction.captiveLeaders.includes(leaderName)) {
             throw new Error(`${faction.name} does not have ${leaderName} as captive`);
         }
 
-        // Update leader status
         leader.isCaptured = false;
         await this.updateLeader(leaderName, leader);
 
-        // Remove leader from faction's captives
         faction.captiveLeaders = faction.captiveLeaders.filter(name => name !== leaderName);
-        await factionManager.updateFaction(faction.name, faction);
+        await factionManager(this.channelId).updateFaction(faction.name, faction);
 
         return { leader, faction };
     }
 }
 
-module.exports = new LeaderManager(); 
+module.exports = (channelId) => new LeaderManager(channelId); 

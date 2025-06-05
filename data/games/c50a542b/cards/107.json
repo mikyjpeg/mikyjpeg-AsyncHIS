@@ -1,0 +1,13 @@
+{
+  "id": "107",
+  "name": "Unsanitary Camp",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

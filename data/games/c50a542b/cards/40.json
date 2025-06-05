@@ -1,0 +1,13 @@
+{
+  "id": "40",
+  "name": "Machiavelli: The Prince",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "3",
+  "year": null,
+  "isForeignWar": false
+}

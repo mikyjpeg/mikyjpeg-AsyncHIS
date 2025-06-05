@@ -1,0 +1,17 @@
+{
+  "name": "Wales",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Shrewsbury",
+    "Bristol"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

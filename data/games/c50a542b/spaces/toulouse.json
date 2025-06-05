@@ -1,0 +1,19 @@
+{
+  "name": "Toulouse",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Bordeaux",
+    "Avignon"
+  ],
+  "passConnectedTo": [
+    "Barcelona"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

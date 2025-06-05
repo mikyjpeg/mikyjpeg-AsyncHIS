@@ -1,0 +1,21 @@
+{
+  "name": "Turin",
+  "homePower": "Independent",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Milan",
+    "Genoa",
+    "Pavia"
+  ],
+  "passConnectedTo": [
+    "Grenoble",
+    "Geneva"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Plymouth",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Bristol",
+    "Portsmouth"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

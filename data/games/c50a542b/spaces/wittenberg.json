@@ -1,0 +1,20 @@
+{
+  "name": "Wittenberg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "electorate",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Brandenburg",
+    "Leipzig",
+    "Prague",
+    "Breslau",
+    "Magdeburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

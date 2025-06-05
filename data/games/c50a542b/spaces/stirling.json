@@ -1,0 +1,19 @@
+{
+  "name": "Stirling",
+  "homePower": "Scotland",
+  "language": "english",
+  "type": "fortress",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Edinburgh",
+    "Glasgow"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "110",
+  "name": "War in Persia",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": true
+}

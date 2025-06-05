@@ -1,0 +1,19 @@
+{
+  "name": "Orléans",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Paris",
+    "Dijon",
+    "Lyon",
+    "Tours"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

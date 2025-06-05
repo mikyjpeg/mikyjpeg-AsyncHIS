@@ -1,0 +1,11 @@
+{
+  "name": "Suleiman",
+  "faction": "Ottoman",
+  "battleRating": 2,
+  "commandRating": 12,
+  "adminRating": 2,
+  "cardBonus": 0,
+  "isCurrentRuler": true,
+  "excommunicated": false,
+  "otherinfo": null
+}

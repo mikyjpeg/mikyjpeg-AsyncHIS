@@ -1,0 +1,9 @@
+{
+  "name": "Suleiman",
+  "power": "Ottoman",
+  "battleRating": 2,
+  "commandRating": 12,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Norwich",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "London"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

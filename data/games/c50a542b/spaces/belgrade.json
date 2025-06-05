@@ -1,0 +1,24 @@
+{
+  "name": "Belgrade",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Szegedin",
+    "Mohacs",
+    "Agram",
+    "Nezh",
+    "Nicopolis"
+  ],
+  "passConnectedTo": [
+    "Ragusa"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

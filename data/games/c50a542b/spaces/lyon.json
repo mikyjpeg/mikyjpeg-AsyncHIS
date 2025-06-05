@@ -1,0 +1,23 @@
+{
+  "name": "Lyon",
+  "homePower": "France",
+  "language": "french",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Geneva",
+    "Limoges",
+    "Dijon",
+    "Avignon",
+    "Orléans",
+    "Grenoble"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

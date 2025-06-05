@@ -1,0 +1,13 @@
+{
+  "id": "63",
+  "name": "Dissolution of the Monasteries",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "?",
+  "year": null,
+  "isForeignWar": false
+}

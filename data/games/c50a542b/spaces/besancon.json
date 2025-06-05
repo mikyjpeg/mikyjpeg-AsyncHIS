@@ -1,0 +1,22 @@
+{
+  "name": "Besancon",
+  "homePower": "Hapsburg",
+  "language": "french",
+  "type": "fortress",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Metz",
+    "Strasbourg",
+    "Basel",
+    "Geneva",
+    "Dijon"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

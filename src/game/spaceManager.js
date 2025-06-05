@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 // Define valid powers
 const VALID_POWERS = {
@@ -9,8 +10,9 @@ const VALID_POWERS = {
 };
 
 class SpaceManager {
-    constructor() {
-        this.spacesDir = path.join(__dirname, '../../data/spaces');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.spacesDir = path.join(process.cwd(), getGamePath(channelId), 'spaces');
     }
 
     isValidPower(power) {
@@ -94,4 +96,4 @@ class SpaceManager {
     }
 }
 
-module.exports = new SpaceManager(); 
+module.exports = (channelId) => new SpaceManager(channelId); 

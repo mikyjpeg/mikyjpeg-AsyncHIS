@@ -1,0 +1,17 @@
+{
+  "name": "Pressburg",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Vienna",
+    "Buda"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

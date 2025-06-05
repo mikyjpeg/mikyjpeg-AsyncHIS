@@ -1,0 +1,17 @@
+{
+  "name": "Zürich",
+  "homePower": "Independent",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Basel",
+    "Innsbruck"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

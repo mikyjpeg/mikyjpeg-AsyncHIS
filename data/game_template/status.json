@@ -1,0 +1,65 @@
+{
+  "turn": 0,
+  "phase": "setup",
+  "activePlayer": null,
+  "currentCardIndex": null,
+  "cardDeck": [],
+  "removedCards": [],
+  "discardedCards": [],
+  "victoryPoints": {
+    "ottoman": 0,
+    "hapsburg": 0,
+    "england": 0,
+    "france": 0,
+    "papacy": 0,
+    "protestant": 0
+  },
+  "passedPowers": [],
+  "diplomacy": {
+    "ottoman": {
+      "wars": [],
+      "alliances": []
+    },
+    "hapsburg": {
+      "wars": [],
+      "alliances": []
+    },
+    "england": {
+      "wars": [],
+      "alliances": []
+    },
+    "france": {
+      "wars": [],
+      "alliances": []
+    },
+    "papacy": {
+      "wars": [],
+      "alliances": []
+    },
+    "protestant": {
+      "wars": [],
+      "alliances": []
+    },
+    "venice": {
+      "wars": [],
+      "alliances": []
+    },
+    "scotland": {
+      "wars": [],
+      "alliances": []
+    },
+    "genoa": {
+      "wars": [],
+      "alliances": []
+    },
+    "hungary": {
+      "wars": [],
+      "alliances": []
+    }
+  },
+  "hasHenryMarriedAnneBoylen": false,
+  "hasEdwardVIborn": false,
+  "hasElizabethIborn": false,
+  "isSicklyEdwardRuling": false,
+  "isMaryIRuling": false
+}

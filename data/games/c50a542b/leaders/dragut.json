@@ -1,0 +1,9 @@
+{
+  "name": "Dragut",
+  "power": "Ottoman",
+  "battleRating": 1,
+  "commandRating": 2,
+  "type": "naval",
+  "isCaptured": false,
+  "isActive": true
+}

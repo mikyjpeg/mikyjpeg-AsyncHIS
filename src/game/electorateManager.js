@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class ElectorateManager {
-    constructor() {
-        this.electoratesDir = path.join(__dirname, '../../data/electorates');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.electoratesDir = path.join(process.cwd(), getGamePath(channelId), 'electorates');
     }
 
     async #readElectorateFile(name) {
@@ -41,4 +43,4 @@ class ElectorateManager {
     }
 }
 
-module.exports = new ElectorateManager(); 
+module.exports = (channelId) => new ElectorateManager(channelId); 

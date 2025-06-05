@@ -1,0 +1,26 @@
+{
+  "name": "Initiate piracy in sea zone",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 16,
+  "description": "Resolve a pirate raid in a sea zone containing one or more Ottoman corsairs. Target is a port or naval squadron of another power (other than Papacy, if not at war with Ottomans). Maximum 4 times per turn."
+}

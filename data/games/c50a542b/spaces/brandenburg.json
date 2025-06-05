@@ -1,0 +1,20 @@
+{
+  "name": "Brandenburg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Stettin",
+    "Lübeck",
+    "Magdeburg",
+    "Wittenberg",
+    "Breslau"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Kassel",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Münster",
+    "Brunswick",
+    "Erfurt",
+    "Mainz",
+    "Nuremberg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

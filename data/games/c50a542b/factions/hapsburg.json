@@ -1,0 +1,16 @@
+{
+  "name": "Hapsburg",
+  "discordUserId": null,
+  "discordUsername": null,
+  "cardsPerTurn": 5,
+  "victoryPoints": 0,
+  "ruler": "Charles V",
+  "isActive": false,
+  "alliances": [],
+  "atWarWith": [],
+  "cardModifier": 0,
+  "bonusVP": [],
+  "bonusVPTotal": 0,
+  "captiveLeaders": [],
+  "cards": []
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Assault / foreign war",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 1
+    }
+  },
+  "rulesSection": 17,
+  "description": "Assault a fortress that had been placed under siege in a previous impulse. (Or Ottoman or English player resolves a Foreign War)."
+}

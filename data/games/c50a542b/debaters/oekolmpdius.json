@@ -1,0 +1,12 @@
+{
+  "name": "Oekolmpdius",
+  "counter": 2,
+  "type": "protestant",
+  "turn": "2",
+  "bonus": "+1 die for Ref within 2 spaces of Basel",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "german"
+}

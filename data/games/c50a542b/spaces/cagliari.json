@@ -1,0 +1,14 @@
+{
+  "name": "Cagliari",
+  "homePower": "Hapsburg",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

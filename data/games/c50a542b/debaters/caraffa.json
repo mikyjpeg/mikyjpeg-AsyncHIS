@@ -1,0 +1,11 @@
+{
+  "name": "Caraffa",
+  "counter": 2,
+  "type": "papacy",
+  "turn": "5",
+  "bonus": "Target 3 spaces in any zone with burn books",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
+}

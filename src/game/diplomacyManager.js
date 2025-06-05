@@ -2,10 +2,12 @@ const fs = require('fs').promises;
 const path = require('path');
 const { validateAlliance, canRemoveAlliance } = require('./diplomacyRules');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class DiplomacyManager {
-    constructor() {
-        this.factionsDir = path.join(__dirname, '../../data/factions');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.factionsDir = path.join(process.cwd(), getGamePath(channelId), 'factions');
     }
 
     async getFaction(factionName) {
@@ -113,4 +115,4 @@ class DiplomacyManager {
     }
 }
 
-module.exports = new DiplomacyManager(); 
+module.exports = (channelId) => new DiplomacyManager(channelId); 

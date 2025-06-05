@@ -1,0 +1,17 @@
+{
+  "name": "Cartagena",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Valencia",
+    "Granada"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

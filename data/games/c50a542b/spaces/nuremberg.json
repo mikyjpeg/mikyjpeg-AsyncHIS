@@ -1,0 +1,21 @@
+{
+  "name": "Nuremberg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Kassel",
+    "Mainz",
+    "Worms",
+    "Augsburg",
+    "Regensburg",
+    "Leipzig"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

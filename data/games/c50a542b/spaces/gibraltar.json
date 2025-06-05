@@ -1,0 +1,19 @@
+{
+  "name": "Gibraltar",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "fortress",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Seville",
+    "Granada"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

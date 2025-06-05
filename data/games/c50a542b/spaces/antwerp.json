@@ -1,0 +1,21 @@
+{
+  "name": "Antwerp",
+  "homePower": "Hapsburg",
+  "language": "null",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Amsterdam",
+    "Calais",
+    "Brussels",
+    "Liege"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

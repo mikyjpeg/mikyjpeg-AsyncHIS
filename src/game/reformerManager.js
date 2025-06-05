@@ -2,10 +2,12 @@ const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
 const spaceManager = require('./spaceManager');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class ReformerManager {
-    constructor() {
-        this.reformersDir = path.join(__dirname, '../../data/reformers');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.reformersDir = path.join(process.cwd(), getGamePath(channelId), 'reformers');
     }
 
     async #readReformerFile(name) {
@@ -88,4 +90,4 @@ class ReformerManager {
     }
 }
 
-module.exports = new ReformerManager(); 
+module.exports = (channelId) => new ReformerManager(channelId); 

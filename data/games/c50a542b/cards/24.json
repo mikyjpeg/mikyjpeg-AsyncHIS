@@ -1,0 +1,13 @@
+{
+  "id": "24",
+  "name": "Arquebusiers",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": true,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

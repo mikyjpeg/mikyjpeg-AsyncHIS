@@ -1,0 +1,13 @@
+{
+  "id": "95",
+  "name": "Sack of Rome",
+  "cp": "5",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": 1517,
+  "isForeignWar": false
+}

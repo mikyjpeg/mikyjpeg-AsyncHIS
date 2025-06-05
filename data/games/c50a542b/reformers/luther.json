@@ -1,0 +1,7 @@
+{
+  "name": "Luther",
+  "location": "Wittenberg",
+  "turn": 1,
+  "isActive": false,
+  "isExcommunicated": false
+}

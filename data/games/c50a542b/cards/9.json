@@ -1,0 +1,13 @@
+{
+  "id": "9",
+  "name": "Barbary Pirates",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": null,
+  "year": 1517,
+  "isForeignWar": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "81",
+  "name": "Indulgence Vendor",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

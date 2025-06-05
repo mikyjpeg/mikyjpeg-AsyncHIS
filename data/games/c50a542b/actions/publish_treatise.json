@@ -1,0 +1,27 @@
+{
+  "name": "Publish treatise",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 3
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 2
+    }
+  },
+  "rulesSection": 18,
+  "description": "Protestant: 2 Reformation attempts targeting one language zone (2 CP). England: 2 Reformation attempts in English language zone (3 CP)."
+}

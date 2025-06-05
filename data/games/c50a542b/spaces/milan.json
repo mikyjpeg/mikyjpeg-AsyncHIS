@@ -1,0 +1,21 @@
+{
+  "name": "Milan",
+  "homePower": "Independent",
+  "language": "italian",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Trent",
+    "Pavia",
+    "Modena",
+    "Turin"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "115",
+  "name": "Thomas Cromwell",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": true,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

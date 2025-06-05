@@ -1,0 +1,21 @@
+{
+  "name": "Venice",
+  "homePower": "Venice",
+  "language": "italian",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Ravenna",
+    "Trieste",
+    "Trent",
+    "Modena"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

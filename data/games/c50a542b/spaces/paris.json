@@ -1,0 +1,22 @@
+{
+  "name": "Paris",
+  "homePower": "France",
+  "language": "french",
+  "type": "capital",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Boulogne",
+    "Orléans",
+    "St. Quentin",
+    "Rouen",
+    "Dijon",
+    "St. Dizier"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Durazzo",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Scutari"
+  ],
+  "passConnectedTo": [
+    "Larissa"
+  ],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

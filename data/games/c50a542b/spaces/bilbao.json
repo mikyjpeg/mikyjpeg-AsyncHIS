@@ -1,0 +1,18 @@
+{
+  "name": "Bilbao",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Navarre",
+    "Zaragoza",
+    "Corunna"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

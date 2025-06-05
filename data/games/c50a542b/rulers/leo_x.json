@@ -1,0 +1,11 @@
+{
+  "name": "Leo X",
+  "faction": "Papacy",
+  "battleRating": 0,
+  "commandRating": 0,
+  "adminRating": 0,
+  "cardBonus": 0,
+  "isCurrentRuler": true,
+  "excommunicated": false,
+  "otherinfo": null
+}

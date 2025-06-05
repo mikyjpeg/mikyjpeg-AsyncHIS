@@ -1,0 +1,10 @@
+{
+  "name": "Elizabeth I",
+  "faction": "England",
+  "battleRating": 1,
+  "commandRating": 1,
+  "adminRating": 1,
+  "cardBonus": 0,
+  "isCurrentRuler": false,
+  "excommunicated": false
+}

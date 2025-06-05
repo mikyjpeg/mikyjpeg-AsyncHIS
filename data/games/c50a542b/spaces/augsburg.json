@@ -1,0 +1,21 @@
+{
+  "name": "Augsburg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "electorate",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Worms",
+    "Nuremberg",
+    "Regensburg",
+    "Salzburg"
+  ],
+  "passConnectedTo": [
+    "Innsbruck"
+  ],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

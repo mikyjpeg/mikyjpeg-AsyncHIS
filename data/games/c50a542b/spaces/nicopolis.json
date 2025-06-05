@@ -1,0 +1,19 @@
+{
+  "name": "Nicopolis",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Belgrade",
+    "Bucharest"
+  ],
+  "passConnectedTo": [
+    "Szegedin",
+    "Sofia"
+  ],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

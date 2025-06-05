@@ -1,0 +1,21 @@
+{
+  "name": "York",
+  "homePower": "England",
+  "language": "english",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Berwick",
+    "Carlisle",
+    "Lincoln",
+    "Shrewsbury"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Barbarossa",
+  "power": "Ottoman",
+  "battleRating": 2,
+  "commandRating": 1,
+  "type": "naval",
+  "isCaptured": false,
+  "isActive": true
+}

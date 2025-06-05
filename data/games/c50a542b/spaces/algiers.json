@@ -1,0 +1,15 @@
+{
+  "name": "Algiers",
+  "homePower": "Mixed",
+  "language": "other",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

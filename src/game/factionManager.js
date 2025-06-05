@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class FactionManager {
-    constructor() {
-        this.factionsDir = path.join(__dirname, '../../data/factions');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.factionsDir = path.join(process.cwd(), getGamePath(channelId), 'factions');
         this.factions = {};
         this.defaultFactionData = {
             discordUserId: null,
@@ -144,4 +146,4 @@ class FactionManager {
     }
 }
 
-module.exports = new FactionManager(); 
+module.exports = (channelId) => new FactionManager(channelId); 

@@ -1,0 +1,134 @@
+{
+    "turnPhases": [
+        {
+            "phase": 1,
+            "turn": 1,
+            "title": "Luther's 95 Theses Phase",
+            "rulesSection": "18.1",
+            "steps": [
+                {
+                    "step": 1,
+                    "title": "The protestants player plays the Luther's 95 Theses Mandatory Even card",
+                    "factions": ["protestants"],
+                    "actions": [
+                        "/add_reformer reformer:Luther",
+                        "/convert space:Wittenberg religion:Protestant",
+                        "/add_formation space:Wittenberg power:Protestant regulars:2 secondary:0",
+                        "/deploy_electorate control:false"
+                    ]
+                }
+            ]
+        }  
+    ],
+    "turnsActions": [
+        {
+            "turn": 0,
+            "reformers": ["Luther"]
+        },
+        {
+            "turn": 2,
+            "reformers": ["Zwingli"],
+            "debaters": [
+                "Zwingli",
+                "Oekolmpdius",
+                "Tyndale",
+                "Contarini"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": [10]
+        },
+        {
+            "turn": 3,
+            "reformer": [],
+            "debaters": [
+                "Bullinger"
+            ],
+            "cardsAdded": [97,113,43,39,114,42,14,40,41,38],
+            "mandatoryEvents": [9]
+        },
+        {
+            "turn": 4,
+            "reformers": ["Zwingli","Cranmer"],
+            "debaters": [
+                "Calvin",
+                "Farel",
+                "Cop",
+                "Olivetan"
+            ],
+            "cardsAdded": [44,115,51,45,48,46,49,53,52,54,50],
+            "mandatoryEvents": [13,14]
+        },
+        {
+            "turn": 5,
+            "reformer": [],
+            "debaters": [
+                "Pole",
+                "Caraffa"
+            ],
+            "cardsAdded": [116,56,57,58,47,55,15],
+            "mandatoryEvents": []
+        },
+        {
+            "turn": 6,
+            "reformer": [],
+            "debaters": [
+                "Loyola",
+                "Faber",
+                "Canisius",
+                "Knox",
+                "Wishart"
+            ],
+            "cardsAdded": [59,17,16,20,18,60],
+            "mandatoryEvents": [15]
+        },
+        {
+            "turn": 7,
+            "reformer": [],
+            "debaters": [
+                "Gardiner"
+            ],
+            "cardsAdded": [],
+            "mandatoryEvents": []
+        },
+    ],
+    "conditionalCards": [
+        {
+            "id": 21,
+            "turn": [6],
+            "dependsOn": "Edward VI being born"
+        },
+        {
+            "id": 19,
+            "turn": [6],
+            "dependsOn": "Edward VI being born"
+        },
+        {
+            "id": 23,
+            "turn": [7,8,9],
+            "dependsOn": "Elizabeth I being born, Mary I rules"
+        },
+        {
+            "id": 64,
+            "turn": [3,4,5,6,7,8,9],
+            "dependsOn": "Henry VIII marries Anne Boylen"
+        },
+        {
+            "id": 62,
+            "turn": [3,4,5,6,7,8,9],
+            "dependsOn": "Henry VIII marries Anne Boylen"
+        },
+        {
+            "id": 63,
+            "turn": [3,4,5,6,7,8,9],
+            "dependsOn": "Henry VIII marries Anne Boylen"
+        }
+    ],
+    "conditionalDebaters": {
+        "turn": [4,5,6,7,8,9],
+        "debaters": [
+            "Cranmer",
+            "Latimer",
+            "Coverdale"
+        ]
+    }
+}

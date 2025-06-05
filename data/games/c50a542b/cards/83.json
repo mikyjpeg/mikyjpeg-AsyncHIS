@@ -1,0 +1,13 @@
+{
+  "id": "83",
+  "name": "John Zaplya",
+  "cp": "3",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": null,
+  "year": 1517,
+  "isForeignWar": false
+}

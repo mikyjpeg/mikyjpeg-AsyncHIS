@@ -1,0 +1,14 @@
+{
+  "name": "Palma",
+  "homePower": "Hapsburg",
+  "language": null,
+  "type": "spanish",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

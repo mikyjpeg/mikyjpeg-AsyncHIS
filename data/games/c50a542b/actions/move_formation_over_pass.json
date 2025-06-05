@@ -1,0 +1,31 @@
+{
+  "name": "Move formation over pass",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 2
+    }
+  },
+  "rulesSection": 13,
+  "description": "Cost is to enter the space across the pass. Stacking limit, combat, and siege work the same as in 'Move formation in clear'."
+}

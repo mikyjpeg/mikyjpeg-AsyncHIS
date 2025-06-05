@@ -1,0 +1,13 @@
+{
+  "id": "10",
+  "name": "Clement VII",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

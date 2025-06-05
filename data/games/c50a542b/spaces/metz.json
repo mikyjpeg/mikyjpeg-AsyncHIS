@@ -1,0 +1,20 @@
+{
+  "name": "Metz",
+  "homePower": "Independent",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Liege",
+    "Trier",
+    "Strasbourg",
+    "Besancon",
+    "St. Dizier"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

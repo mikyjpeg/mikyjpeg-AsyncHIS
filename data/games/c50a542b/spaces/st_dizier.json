@@ -1,0 +1,20 @@
+{
+  "name": "St. Dizier",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Brussels",
+    "Metz",
+    "Dijon",
+    "Paris",
+    "St. Quentin"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

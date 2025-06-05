@@ -1,0 +1,12 @@
+{
+  "name": "Calvin",
+  "counter": 4,
+  "type": "protestant",
+  "turn": "4",
+  "bonus": "Target 3 French-speaking spaces with a treatise",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false,
+  "language": "french"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "51",
+  "name": "Michael Servertus",
+  "cp": "4",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

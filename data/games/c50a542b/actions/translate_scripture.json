@@ -1,0 +1,26 @@
+{
+  "name": "Translate scripture",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": true,
+      "cost": 1
+    }
+  },
+  "rulesSection": 18,
+  "description": "Protestant player moves New Testament or Bible marker for one language one space further on track. If translation is complete, Protestant makes 6 Reformation attempts in that language zone. Reformation attempts in that language zone."
+}

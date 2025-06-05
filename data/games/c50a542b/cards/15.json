@@ -1,0 +1,13 @@
+{
+  "id": "15",
+  "name": "Society of Jesus",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "5",
+  "year": null,
+  "isForeignWar": false
+}

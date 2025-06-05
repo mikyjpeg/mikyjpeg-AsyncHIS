@@ -1,0 +1,9 @@
+{
+  "name": "Renegade",
+  "power": "Independent",
+  "battleRating": 1,
+  "commandRating": 6,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": false
+}

@@ -1,0 +1,13 @@
+{
+  "id": "62",
+  "name": "Book of Common Prayer",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "?",
+  "year": null,
+  "isForeignWar": false
+}

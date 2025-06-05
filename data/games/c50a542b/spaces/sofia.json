@@ -1,0 +1,19 @@
+{
+  "name": "Sofia",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Nezh",
+    "Edirne"
+  ],
+  "passConnectedTo": [
+    "Nicopolis",
+    "Salonika"
+  ],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

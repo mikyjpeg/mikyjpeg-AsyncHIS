@@ -1,0 +1,9 @@
+{
+  "name": "Charles V",
+  "power": "Hapsburg",
+  "battleRating": 2,
+  "commandRating": 10,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

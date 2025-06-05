@@ -1,0 +1,19 @@
+{
+  "name": "Mohacs",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Graz",
+    "Agram",
+    "Belgrade",
+    "Buda"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

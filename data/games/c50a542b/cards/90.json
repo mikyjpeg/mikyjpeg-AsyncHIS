@@ -1,0 +1,13 @@
+{
+  "id": "90",
+  "name": "Printing Press",
+  "cp": "5",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

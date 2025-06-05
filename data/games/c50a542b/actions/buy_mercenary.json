@@ -1,0 +1,30 @@
+{
+  "name": "Buy mercenary",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 1
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 17,
+  "description": "Raise 1 mercenary in any home space (friendly-controlled and not enemy occupied)."
+}

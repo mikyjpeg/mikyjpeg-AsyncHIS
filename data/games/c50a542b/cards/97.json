@@ -1,0 +1,13 @@
+{
+  "id": "97",
+  "name": "Scots Raids",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "3",
+  "year": null,
+  "isForeignWar": false
+}

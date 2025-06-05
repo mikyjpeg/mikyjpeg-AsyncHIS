@@ -1,0 +1,13 @@
+{
+  "id": "19",
+  "name": "Edward VI",
+  "cp": "2",
+  "isMandatory": true,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "6?",
+  "year": null,
+  "isForeignWar": false
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Explore",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "France": {
+      "canPerform": true,
+      "cost": 2
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 20,
+  "description": "Place the 'Exploration Underway' marker for this power in the Crossing Atlantic Box. Resolve Voyage of Exploration at the end of turn."
+}

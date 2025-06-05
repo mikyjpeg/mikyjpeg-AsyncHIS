@@ -1,0 +1,19 @@
+{
+  "name": "Worms",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Mainz",
+    "Nuremberg",
+    "Strasbourg",
+    "Augsburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

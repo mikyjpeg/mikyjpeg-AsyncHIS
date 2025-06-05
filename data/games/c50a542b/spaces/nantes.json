@@ -1,0 +1,19 @@
+{
+  "name": "Nantes",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Brest",
+    "Rouen",
+    "Tours",
+    "Bordeaux"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

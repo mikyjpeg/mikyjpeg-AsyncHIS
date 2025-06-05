@@ -1,0 +1,19 @@
+{
+  "name": "Zaragoza",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Madrid",
+    "Navarre",
+    "Bilbao",
+    "Barcelona"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

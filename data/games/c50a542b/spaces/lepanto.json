@@ -1,0 +1,16 @@
+{
+  "name": "Lepanto",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Larissa",
+    "Athens"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

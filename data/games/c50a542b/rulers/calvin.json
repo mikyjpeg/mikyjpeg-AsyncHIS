@@ -1,0 +1,11 @@
+{
+  "name": "Calvin",
+  "faction": "Protestant",
+  "battleRating": 0,
+  "commandRating": 0,
+  "adminRating": 1,
+  "cardBonus": 0,
+  "isCurrentRuler": false,
+  "excommunicated": false,
+  "otherinfo": null
+}

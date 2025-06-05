@@ -1,0 +1,11 @@
+{
+  "name": "Julius III",
+  "faction": "Papacy",
+  "battleRating": 0,
+  "commandRating": 0,
+  "adminRating": 0,
+  "cardBonus": 1,
+  "isCurrentRuler": false,
+  "excommunicated": false,
+  "otherinfo": null
+}

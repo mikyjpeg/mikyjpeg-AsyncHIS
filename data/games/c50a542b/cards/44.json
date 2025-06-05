@@ -1,0 +1,13 @@
+{
+  "id": "44",
+  "name": "Affair of the Placards",
+  "cp": "2",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "4",
+  "year": null,
+  "isForeignWar": false
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Carlisle",
+  "homePower": "England",
+  "language": "english",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Glasgow",
+    "Berwick",
+    "Shrewsbury",
+    "York"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

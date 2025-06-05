@@ -2,4 +2,5 @@ node_modules/
 .env
 .DS_Store
 *.log
-data/command_history.json
+data/games/*/command_history.json
+data/games/*/gameState.json

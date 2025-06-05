@@ -1,0 +1,20 @@
+{
+  "name": "Ravenna",
+  "homePower": "Papacy",
+  "language": "italian",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Venice",
+    "Modena",
+    "Ancona"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

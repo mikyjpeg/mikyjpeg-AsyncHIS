@@ -1,0 +1,7 @@
+{
+  "name": "Cranmer",
+  "location": "London",
+  "turn": 4,
+  "isActive": false,
+  "isExcommunicated": false
+}

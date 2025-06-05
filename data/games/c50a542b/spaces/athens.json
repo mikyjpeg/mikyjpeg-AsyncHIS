@@ -1,0 +1,19 @@
+{
+  "name": "Athens",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Lepanto",
+    "Larissa",
+    "Coron"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

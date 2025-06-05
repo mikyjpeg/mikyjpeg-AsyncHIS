@@ -1,0 +1,20 @@
+{
+  "name": "Scutari",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "fortress",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Ragusa",
+    "Durazzo"
+  ],
+  "passConnectedTo": [
+    "Nezh"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

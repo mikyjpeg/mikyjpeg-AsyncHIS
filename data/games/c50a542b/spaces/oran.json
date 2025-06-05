@@ -1,0 +1,13 @@
+{
+  "name": "Oran",
+  "homePower": "Mixed",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Charles V",
+  "faction": "Hapsburg",
+  "battleRating": 2,
+  "commandRating": 10,
+  "adminRating": 2,
+  "cardBonus": 0,
+  "isCurrentRuler": true,
+  "excommunicated": false,
+  "otherinfo": null
+}

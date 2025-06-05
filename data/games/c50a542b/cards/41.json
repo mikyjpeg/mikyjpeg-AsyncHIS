@@ -1,0 +1,13 @@
+{
+  "id": "41",
+  "name": "Marburg Colloquy",
+  "cp": "5",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": true,
+  "actions": null,
+  "turn": "3",
+  "year": 1517,
+  "isForeignWar": false
+}

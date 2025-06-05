@@ -1,0 +1,19 @@
+{
+  "name": "Lübeck",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Stettin",
+    "Hamburg",
+    "Magdeburg",
+    "Brandenburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

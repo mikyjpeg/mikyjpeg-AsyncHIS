@@ -1,0 +1,20 @@
+{
+  "name": "Magdeburg",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Lübeck",
+    "Brunswick",
+    "Erfurt",
+    "Wittenberg",
+    "Brandenburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

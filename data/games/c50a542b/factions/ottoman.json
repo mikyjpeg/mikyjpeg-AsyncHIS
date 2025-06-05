@@ -1,0 +1,16 @@
+{
+  "name": "Ottoman",
+  "discordUserId": null,
+  "discordUsername": null,
+  "cardsPerTurn": 5,
+  "victoryPoints": 0,
+  "ruler": "Suleiman",
+  "isActive": false,
+  "alliances": [],
+  "atWarWith": [],
+  "cardModifier": 0,
+  "bonusVP": [],
+  "bonusVPTotal": 0,
+  "captiveLeaders": [],
+  "cards": []
+}

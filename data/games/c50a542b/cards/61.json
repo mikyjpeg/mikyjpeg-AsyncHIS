@@ -1,0 +1,13 @@
+{
+  "id": "61",
+  "name": "Mary Defies Council",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": false,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": "7",
+  "year": null,
+  "isForeignWar": false
+}

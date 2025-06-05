@@ -1,0 +1,14 @@
+{
+  "name": "Bastia",
+  "homePower": "Genoa",
+  "language": "italian",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

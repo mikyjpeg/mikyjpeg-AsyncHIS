@@ -1,0 +1,15 @@
+{
+  "name": "Coron",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Athens"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

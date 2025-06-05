@@ -1,0 +1,28 @@
+{
+  "name": "Conquer",
+  "factions": {
+    "Ottoman": {
+      "canPerform": true,
+      "cost": 4
+    },
+    "Hapsburg": {
+      "canPerform": true,
+      "cost": 4
+    },
+    "England": {
+      "canPerform": true,
+      "cost": 4
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": false
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 20,
+  "description": "If Hapsburgs, place their 'Conquest Underway' marker in the Crossing Atlantic Box. If England or France, place and evaluate conquest marker there. Resolve Voyage of Conquest at the end of turn."
+}

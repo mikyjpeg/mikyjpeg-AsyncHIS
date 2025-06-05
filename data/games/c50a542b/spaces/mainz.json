@@ -1,0 +1,20 @@
+{
+  "name": "Mainz",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "electorate",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Trier",
+    "Cologne",
+    "Kassel",
+    "Nuremberg",
+    "Worms"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

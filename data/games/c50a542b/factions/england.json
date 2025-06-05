@@ -1,0 +1,16 @@
+{
+  "name": "England",
+  "discordUserId": "311483939711746048",
+  "discordUsername": "mikyjpeg",
+  "cardsPerTurn": 4,
+  "victoryPoints": 0,
+  "ruler": "Henry VIII",
+  "isActive": true,
+  "alliances": [],
+  "atWarWith": [],
+  "cardModifier": 0,
+  "bonusVP": [],
+  "bonusVPTotal": 0,
+  "captiveLeaders": [],
+  "cards": []
+}

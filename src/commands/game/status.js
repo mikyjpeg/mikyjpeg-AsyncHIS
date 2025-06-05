@@ -12,25 +12,26 @@ module.exports = {
         await interaction.deferReply(); // Let user know we're processing
         
         try {
-            const status = await GameState.getGameStatus();
+            const gameState = GameState(interaction.channelId);
+            const status = await gameState.getGameStatus();
             
             // Format the response based on the game status
             let response = `**Game Status**\n`;
             response += `Turn: ${status.turn}\n`;
             response += `Phase: ${status.phase}\n\n`;
             
-            // Show available powers
-            response += `**Available Powers:**\n`;
-            if (status.availablePowers.length > 0) {
-                response += status.availablePowers.map(power => `- ${power}`).join('\n');
-            } else {
-                response += 'All powers have been claimed\n';
+            // Add active factions info
+            response += '**Active Powers**\n';
+            for (const [power, data] of Object.entries(status.factions)) {
+                if (data.isActive) {
+                    response += `${power}: ${data.discordUsername} (${data.victoryPoints || 0} VP)\n`;
+                }
             }
             
-            // Show faction assignments
-            response += `\n**Power Assignments:**\n`;
-            for (const [power, data] of Object.entries(status.factions)) {
-                response += `${power}: ${data.isActive ? data.discordUsername : 'Unassigned'}\n`;
+            // Add available powers info if any
+            if (status.availablePowers && status.availablePowers.length > 0) {
+                response += '\n**Available Powers**\n';
+                response += status.availablePowers.map(power => `- ${power}`).join('\n');
             }
 
             await interaction.editReply(response);

@@ -1,0 +1,19 @@
+{
+  "name": "Boulogne",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Calais",
+    "St. Quentin",
+    "Rouen",
+    "Paris"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

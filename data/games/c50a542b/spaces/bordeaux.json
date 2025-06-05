@@ -1,0 +1,23 @@
+{
+  "name": "Bordeaux",
+  "homePower": "France",
+  "language": "french",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Nantes",
+    "Tours",
+    "Limoges",
+    "Toulouse"
+  ],
+  "passConnectedTo": [
+    "Navarre"
+  ],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Seville",
+  "homePower": "Hapsburg",
+  "language": "spanish",
+  "type": "key",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Gibraltar",
+    "Córdoba"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

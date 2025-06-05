@@ -1,0 +1,9 @@
+{
+  "name": "Brandon",
+  "power": "England",
+  "battleRating": 1,
+  "commandRating": 6,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

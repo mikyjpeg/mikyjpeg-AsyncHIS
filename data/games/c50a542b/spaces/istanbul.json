@@ -1,0 +1,17 @@
+{
+  "name": "Istanbul",
+  "homePower": "Ottoman",
+  "language": "other",
+  "type": "capital",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Edirne",
+    "Varna"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "reformers": [],
+  "formations": []
+}

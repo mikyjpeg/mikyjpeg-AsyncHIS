@@ -3,6 +3,7 @@ const path = require('path');
 const factionManager = require('./factionManager');
 const statusManager = require('./statusManager');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 const POWERS = {
     OTTOMAN: 'Ottoman',
@@ -22,72 +23,39 @@ const GAME_PHASES = {
 };
 
 class GameState {
-    constructor() {
-        this.filepath = path.join(__dirname, '../../data/gameState.json');
-        this.availablePowers = [...Object.values(POWERS)];
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.channelId = channelId;
         this.initialized = false;
     }
 
     async initialize() {
         if (!this.initialized) {
-            await this.load();
+            await this.getGameStatus();
             this.initialized = true;
         }
     }
 
-    async load() {
-        try {
-            const data = await fs.readFile(this.filepath, 'utf8');
-            if (!data) {
-                // If file is empty, initialize with default state
-                return this.save({ availablePowers: [...Object.values(POWERS)] });
-            }
-            const state = JSON.parse(data);
-            this.availablePowers = state.availablePowers || [...Object.values(POWERS)];
-            return state;
-        } catch (error) {
-            if (error.code === 'ENOENT') {
-                // If file doesn't exist, create with default state
-                return this.save({ availablePowers: [...Object.values(POWERS)] });
-            }
-            console.error('Error loading game state:', error);
-            throw error;
-        }
-    }
-
-    async save(state) {
-        try {
-            await fs.mkdir(path.dirname(this.filepath), { recursive: true });
-            const saveState = {
-                ...state,
-                availablePowers: this.availablePowers
-            };
-            await fs.writeFile(this.filepath, JSON.stringify(saveState, null, FILE_SYSTEM.JSON_INDENT));
-            return saveState;
-        } catch (error) {
-            console.error('Error saving game state:', error);
-            throw error;
-        }
+    async getAvailablePowers() {
+        const allFactions = await factionManager(this.channelId).loadAllFactions();
+        return Object.values(POWERS).filter(power => {
+            const faction = allFactions[power.toLowerCase()];
+            return !faction || !faction.isActive;
+        });
     }
 
     async startGame() {
         await this.initialize();
         
-        // Initialize game status
-        await statusManager.initializeGame();
+        await statusManager(this.channelId).initializeGame();
         
-        // Reset all factions
         for (const power of Object.values(POWERS)) {
-            await factionManager.updateFaction(power, {
+            await factionManager(this.channelId).updateFaction(power, {
                 discordUserId: null,
                 discordUsername: null,
                 isActive: false
             });
         }
-        
-        // Reset available powers
-        this.availablePowers = [...Object.values(POWERS)];
-        const state = await this.save({ availablePowers: this.availablePowers });
         
         return await this.getGameStatus();
     }
@@ -95,26 +63,20 @@ class GameState {
     async assignPower(userId, username, powerName) {
         await this.initialize();
         
-        const status = await statusManager.getStatus();
+        const status = await statusManager(this.channelId).getStatus();
         if (status.phase === 'setup' && status.turn === 1) {
-            // Game is in initial setup phase, proceed with power assignment
-            if (!this.availablePowers.includes(powerName)) {
+            const availablePowers = await this.getAvailablePowers();
+            if (!availablePowers.includes(powerName)) {
                 throw new Error('Power not available');
             }
 
-            // Check if power is already controlled by someone
-            const allFactions = await factionManager.loadAllFactions();
+            const allFactions = await factionManager(this.channelId).loadAllFactions();
             const faction = allFactions[powerName.toLowerCase()];
             if (faction && faction.isActive && faction.discordUserId !== userId) {
                 throw new Error(`${powerName} is already controlled by ${faction.discordUsername}`);
             }
 
-            // Remove the power from available powers
-            this.availablePowers = this.availablePowers.filter(p => p !== powerName);
-            await this.save({ availablePowers: this.availablePowers });
-
-            // Update faction data
-            await factionManager.assignUserToFaction(powerName, userId, username);
+            await factionManager(this.channelId).assignUserToFaction(powerName, userId, username);
             
             return await this.getGameStatus();
         } else {
@@ -125,10 +87,9 @@ class GameState {
     async leavePower(userId, powerName) {
         await this.initialize();
         
-        const status = await statusManager.getStatus();
+        const status = await statusManager(this.channelId).getStatus();
         if (status.phase === 'setup' && status.turn === 1) {
-            // Verify the user controls this power
-            const allFactions = await factionManager.loadAllFactions();
+            const allFactions = await factionManager(this.channelId).loadAllFactions();
             const faction = allFactions[powerName.toLowerCase()];
             
             if (!faction || !faction.isActive) {
@@ -139,18 +100,11 @@ class GameState {
                 throw new Error(`You do not control ${powerName}. It is controlled by ${faction.discordUsername}`);
             }
 
-            // Reset the faction
-            await factionManager.updateFaction(powerName, {
+            await factionManager(this.channelId).updateFaction(powerName, {
                 discordUserId: null,
                 discordUsername: null,
                 isActive: false
             });
-
-            // Make the power available again
-            if (!this.availablePowers.includes(powerName)) {
-                this.availablePowers.push(powerName);
-                await this.save({ availablePowers: this.availablePowers });
-            }
 
             return await this.getGameStatus();
         } else {
@@ -159,22 +113,25 @@ class GameState {
     }
 
     async getGameStatus() {
-        await this.initialize();
-        const status = await statusManager.getStatus();
-        const activeFactions = await factionManager.loadAllFactions();
+        const status = await statusManager(this.channelId).getStatus();
+        const activeFactions = await factionManager(this.channelId).loadAllFactions();
+        const availablePowers = await this.getAvailablePowers();
         
         return {
             ...status,
-            availablePowers: this.availablePowers,
+            availablePowers,
             factions: activeFactions
         };
     }
+
+    async nextTurn() {
+        await this.initialize();
+        return await statusManager(this.channelId).nextTurn();
+    }
 }
 
-const gameState = new GameState();
-
 module.exports = {
-    GameState: gameState,
+    GameState: (channelId) => new GameState(channelId),
     POWERS,
     GAME_PHASES
 }; 

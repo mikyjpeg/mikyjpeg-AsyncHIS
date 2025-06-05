@@ -1,0 +1,11 @@
+{
+  "name": "Pole",
+  "counter": 3,
+  "type": "papacy",
+  "turn": "5",
+  "bonus": "+1 die for Papacy if present at Council of Trent",
+  "isActive": false,
+  "isExcommunicated": false,
+  "isCommitted": false,
+  "isCurrentDebater": false
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Francis I",
+  "power": "France",
+  "battleRating": 1,
+  "commandRating": 8,
+  "type": "land",
+  "isCaptured": false,
+  "isActive": true
+}

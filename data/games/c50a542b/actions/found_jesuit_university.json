@@ -1,0 +1,26 @@
+{
+  "name": "Found Jesuit university",
+  "factions": {
+    "Ottoman": {
+      "canPerform": false
+    },
+    "Hapsburg": {
+      "canPerform": false
+    },
+    "England": {
+      "canPerform": false
+    },
+    "France": {
+      "canPerform": false
+    },
+    "Papacy": {
+      "canPerform": true,
+      "cost": 3
+    },
+    "Protestant": {
+      "canPerform": false
+    }
+  },
+  "rulesSection": 18,
+  "description": "Add a Jesuit university to any Catholic space on the map."
+}

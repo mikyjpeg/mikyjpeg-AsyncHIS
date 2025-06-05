@@ -1,0 +1,20 @@
+{
+  "name": "Vienna",
+  "homePower": "Hapsburg",
+  "language": "german",
+  "type": "capital",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Brunn",
+    "Linz",
+    "Pressburg",
+    "Graz"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

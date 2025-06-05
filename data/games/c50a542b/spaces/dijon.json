@@ -1,0 +1,20 @@
+{
+  "name": "Dijon",
+  "homePower": "France",
+  "language": "french",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "St. Dizier",
+    "Paris",
+    "Besancon",
+    "Lyon",
+    "Orléans"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

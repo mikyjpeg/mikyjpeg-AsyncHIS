@@ -3,10 +3,13 @@ const path = require('path');
 const spaceManager = require('./spaceManager');
 const diplomacyManager = require('./diplomacyManager');
 const { FILE_SYSTEM } = require('../utils/constants');
+const { getGamePath } = require('../utils/gamePathUtils');
 
 class RulerManager {
-    constructor() {
-        this.rulersDir = path.join(__dirname, '../../data/rulers');
+    constructor(channelId) {
+        if (!channelId) throw new Error('Channel ID is required');
+        this.rulersDir = path.join(process.cwd(), getGamePath(channelId), 'rulers');
+        this.channelId = channelId;
         this.excommunicatableRulers = ['Calvin', 'Henry VIII', 'Francis I', 'Henry II', 'Charles V'];
         this.excommunicationRules = `Excommunication Rules:
 1. Must be a current ruler
@@ -50,7 +53,6 @@ class RulerManager {
     }
 
     async canBeExcommunicated(rulerName) {
-        // First check if ruler is in the list of excommunicatable rulers
         if (!this.excommunicatableRulers.includes(rulerName)) {
             return { 
                 valid: false, 
@@ -60,7 +62,6 @@ class RulerManager {
 
         const ruler = await this.getRuler(rulerName);
 
-        // Check if ruler is current
         if (!ruler.isCurrentRuler) {
             return {
                 valid: false,
@@ -70,10 +71,8 @@ class RulerManager {
 
         const faction = ruler.faction;
 
-        // Special case for Henry VIII
         if (rulerName === 'Henry VIII') {
-            // Check if any English space is not catholic
-            const spaces = await spaceManager.getAllSpaces();
+            const spaces = await spaceManager(this.channelId).getAllSpaces();
             const hasNonCatholicEnglishSpace = spaces.some(space => 
                 space.homePower === 'England' && !space.catholic
             );
@@ -86,8 +85,7 @@ class RulerManager {
             }
         }
 
-        // Check if faction is allied with Ottoman
-        const factionData = await diplomacyManager.getFaction(faction);
+        const factionData = await diplomacyManager(this.channelId).getFaction(faction);
         if (factionData.alliances.includes('Ottoman')) {
             return { 
                 valid: true, 
@@ -95,7 +93,6 @@ class RulerManager {
             };
         }
 
-        // Check if faction is at war with Papacy
         if (factionData.atWarWith.includes('Papacy')) {
             return { 
                 valid: true, 
@@ -120,14 +117,12 @@ class RulerManager {
             throw new Error(`${rulerName} is already excommunicated`);
         }
 
-        // Update ruler's excommunication status
         ruler.excommunicated = true;
         await this.updateRuler(rulerName, ruler);
 
-        // Update faction's card modifier
-        const faction = await diplomacyManager.getFaction(ruler.faction);
+        const faction = await diplomacyManager(this.channelId).getFaction(ruler.faction);
         faction.cardModifier = (faction.cardModifier || 0) - 1;
-        await diplomacyManager.updateFaction(ruler.faction, faction);
+        await diplomacyManager(this.channelId).updateFaction(ruler.faction, faction);
 
         return {
             ruler,
@@ -142,14 +137,12 @@ class RulerManager {
             throw new Error(`${rulerName} is not excommunicated`);
         }
 
-        // Update ruler's excommunication status
         ruler.excommunicated = false;
         await this.updateRuler(rulerName, ruler);
 
-        // Update faction's card modifier
-        const faction = await diplomacyManager.getFaction(ruler.faction);
+        const faction = await diplomacyManager(this.channelId).getFaction(ruler.faction);
         faction.cardModifier = (faction.cardModifier || 0) + 1;
-        await diplomacyManager.updateFaction(ruler.faction, faction);
+        await diplomacyManager(this.channelId).updateFaction(ruler.faction, faction);
 
         return {
             ruler,
@@ -194,4 +187,4 @@ class RulerManager {
     }
 }
 
-module.exports = new RulerManager(); 
+module.exports = (channelId) => new RulerManager(channelId); 

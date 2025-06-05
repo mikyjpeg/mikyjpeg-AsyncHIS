@@ -1,0 +1,19 @@
+{
+  "name": "Basel",
+  "homePower": "Independent",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Besancon",
+    "Strasbourg",
+    "Geneva",
+    "Zürich"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

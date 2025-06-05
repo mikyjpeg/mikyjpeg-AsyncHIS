@@ -1,0 +1,7 @@
+{
+  "name": "Zwingli",
+  "location": "Zurich",
+  "turn": 2,
+  "isActive": false,
+  "isExcommunicated": false
+}

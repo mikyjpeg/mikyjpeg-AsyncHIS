@@ -1,0 +1,19 @@
+{
+  "name": "Linz",
+  "homePower": "Hapsburg",
+  "language": "german",
+  "type": "space",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Prague",
+    "Vienna",
+    "Regensburg",
+    "Salzburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}

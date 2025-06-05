@@ -1,0 +1,13 @@
+{
+  "id": "33",
+  "name": "Lands-knechts",
+  "cp": "1",
+  "isMandatory": false,
+  "isResponse": true,
+  "isCombat": false,
+  "removeAfterUse": false,
+  "actions": null,
+  "turn": null,
+  "year": null,
+  "isForeignWar": false
+}

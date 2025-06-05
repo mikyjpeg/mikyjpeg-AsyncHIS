@@ -1,0 +1,21 @@
+{
+  "name": "Prague",
+  "homePower": "Hungary",
+  "language": "other",
+  "type": "key",
+  "hasPorts": false,
+  "controllingPower": null,
+  "connectedTo": [
+    "Leipzig",
+    "Linz",
+    "Wittenberg",
+    "Brunn"
+  ],
+  "passConnectedTo": [],
+  "underSiege": false,
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": [],
+  "isUnderSiege": false
+}

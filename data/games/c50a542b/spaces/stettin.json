@@ -1,0 +1,17 @@
+{
+  "name": "Stettin",
+  "homePower": "Protestant",
+  "language": "german",
+  "type": "space",
+  "hasPorts": true,
+  "controllingPower": null,
+  "connectedTo": [
+    "Lübeck",
+    "Brandenburg"
+  ],
+  "passConnectedTo": [],
+  "jesuiteUniversity": false,
+  "catholic": true,
+  "reformers": [],
+  "formations": []
+}
