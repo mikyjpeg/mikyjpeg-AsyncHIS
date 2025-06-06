@@ -6,55 +6,83 @@ const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryMana
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('leave')
-        .setDescription('Leave your current power')
-        .addStringOption(option =>
-            option.setName('power')
-                .setDescription('The power to leave')
-                .setRequired(true)
-                .addChoices(...Object.values(POWERS).map(power => ({ name: power, value: power })))),
+        .setDescription('Leave the game'),
 
     async execute(interaction) {
         await interaction.deferReply();
 
-        const power = interaction.options.getString('power');
-        const userId = interaction.user.id;
+        let success = false;
+        let errorMessage = null;
 
         try {
-            // Get the channel name
+            // Get the channel name and ensure it's a game channel
             const channelName = interaction.channel.name;
+            if (!channelName.endsWith('_his')) {
+                errorMessage = 'This command can only be used in a game channel (channel name should end with _his).';
+                throw new Error(errorMessage);
+            }
 
             // Get the faction manager for this game
             const fm = factionManager(channelName);
 
-            // Get the faction
-            const faction = await fm.getFaction(power);
-            
-            // Check if user is actually controlling this power
-            if (faction.discordUserId !== userId) {
-                await interaction.editReply(`You are not controlling ${power}!`);
-                return;
+            // Find which faction the user controls
+            const allFactions = await fm.loadAllFactions();
+            const userFaction = Object.values(allFactions).find(f => f.discordUserId === interaction.user.id);
+
+            if (!userFaction) {
+                errorMessage = 'You are not controlling any power in this game.';
+                throw new Error(errorMessage);
             }
 
-            // Update faction data
-            faction.discordUserId = null;
-            faction.discordUsername = null;
-            faction.isActive = false;
-            await fm.updateFaction(power, faction);
+            // Store the previous state for history
+            const previousFaction = { ...userFaction };
+
+            // Get the private channel
+            const privateChannel = interaction.guild.channels.cache.get(userFaction.privateChannelId);
+
+            // Delete the private channel if it exists
+            if (privateChannel) {
+                await privateChannel.delete('Power left the game');
+            }
+
+            // Reset the faction data
+            userFaction.discordUserId = null;
+            userFaction.discordUsername = null;
+            userFaction.isActive = false;
+            userFaction.privateChannelId = null;
+            await fm.updateFaction(userFaction.name, userFaction);
+
+            success = true;
 
             // Record in history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.LEAVE_POWER,
                 {
-                    power,
-                    userId,
-                    previousFaction: faction
-                }
+                    power: userFaction.name,
+                    previousFaction
+                },
+                success,
+                errorMessage
             );
 
-            await interaction.editReply(`You have left ${power}! (Command ID: ${historyEntry.commandId})`);
+            await interaction.editReply(`You have left the game as ${userFaction.name}! (Command ID: ${historyEntry.commandId})`);
+
         } catch (error) {
-            await interaction.editReply(`Failed to leave ${power}: ${error.message}`);
+            // Record the failed attempt in history
+            if (interaction.channel) {
+                await commandHistory(interaction.channel.name).recordSlashCommand(
+                    interaction,
+                    COMMAND_TYPES.LEAVE_POWER,
+                    {
+                        error: error.message
+                    },
+                    false,
+                    error.message
+                );
+            }
+            
+            await interaction.editReply(`Failed to leave the game: ${error.message}`);
         }
     }
 }; 

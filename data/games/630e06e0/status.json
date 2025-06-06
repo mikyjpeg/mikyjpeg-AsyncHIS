@@ -1,5 +1,5 @@
 {
-  "turn": 1,
+  "turn": 0,
   "phase": "setup",
   "activePlayer": null,
   "currentCardIndex": null,

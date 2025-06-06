@@ -12,10 +12,10 @@ In scripts/ there are script to manipulate the state, or import from files, as u
 
 The game cover both political and religious control. Religious control is managed in space with the boolean field "catholic". By default is true at the start of the game, but can change to false when the space is converted to Protestantism. The field is missing from spaces that are out of scope, as all the Ottoman home spaces.
 
-The both can manage multiple games, all identified by the channel first 8 characters. That's the channelId. all game data is stored in data/games/channelId
+The both can manage multiple games, all identified by the channel name first 8 characters. That's the gameId. all game data is stored in data/games/gameId
 Factions are defined in data/games/channelId/factions folders. Factions are also often referred to as Power. There are minor powers and major powers.
-Each factions has leaders that are defined in data/games/channelId/leaders. Leaders can be added in spaces via formations.
-Each faction has also rulers, that are defined in data/games/channelId/rulers. There's only a current ruler and we defined ruler succession for all major powers.
+Each factions has leaders that are defined in data/games/gameId/leaders. Leaders can be added in spaces via formations.
+Each faction has also rulers, that are defined in data/games/gameId/rulers. There's only a current ruler and we defined ruler succession for all major powers.
 Spaces belongs to europ map and define where formations are and how can they move around.
 
 Each bot command is recorded in an history using src/game/commandHistoryManager.js and must be undoable.

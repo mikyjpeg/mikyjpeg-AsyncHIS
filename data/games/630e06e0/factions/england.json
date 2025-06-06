@@ -12,5 +12,12 @@
   "bonusVP": [],
   "bonusVPTotal": 0,
   "captiveLeaders": [],
-  "cards": []
+  "cards": [
+    8,
+    13,
+    113
+  ],
+  "privateThreadId": "1380676740451663952",
+  "threadType": 11,
+  "privateChannelId": "1380677596630487072"
 }

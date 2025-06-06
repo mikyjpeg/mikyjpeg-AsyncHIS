@@ -146,7 +146,8 @@ const COMMAND_TYPES = {
     SHUFFLE_DECK: 'shuffle_deck',
     DRAW_CARDS: 'draw_cards',
     PLAY_CARD: 'play_card',
-    DISCARD_CARD: 'discard_card'
+    DISCARD_CARD: 'discard_card',
+    JOIN_POWER: 'join_power'
 };
 
 // Factory for creating command history entries

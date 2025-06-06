@@ -1,7 +1,7 @@
 {
   "name": "England",
-  "discordUserId": "311483939711746048",
-  "discordUsername": "mikyjpeg",
+  "discordUserId": null,
+  "discordUsername": null,
   "cardsPerTurn": 4,
   "victoryPoints": 0,
   "ruler": "Henry VIII",
