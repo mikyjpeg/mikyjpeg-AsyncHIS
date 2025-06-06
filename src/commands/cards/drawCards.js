@@ -27,25 +27,29 @@ module.exports = {
     async execute(interaction) {
         try {
             const power = interaction.options.getString('power');
+            const channelName = interaction.channel.name;
+            
+            // Get card manager for this game
+            const cm = cardManager(channelName);
             
             // Validate turn and deck state
-            await cardManager.validateTurn();
-            await cardManager.validateDeckNotEmpty();
+            await cm.validateTurn();
+            await cm.validateDeckNotEmpty();
             
             // Get or calculate the number of cards to draw
             let count = interaction.options.getInteger('count');
             if (count === null) {
-                count = await cardManager.calculateDrawCount(power);
+                count = await cm.calculateDrawCount(power);
             }
             
             // Validate we have enough cards
-            await cardManager.validateEnoughCards(count);
+            await cm.validateEnoughCards(count);
             
             // Draw the cards
-            const result = await cardManager.drawCards(power, count);
+            const result = await cm.drawCards(power, count);
             
             // Record in command history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.DRAW_CARDS,
                 {

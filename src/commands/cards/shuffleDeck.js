@@ -18,12 +18,16 @@ module.exports = {
         
         try {
             const turn = interaction.options.getInteger('turn');
+            const channelName = interaction.channel.name;
+            
+            // Get card manager for this game
+            const cm = cardManager(channelName);
             
             // Shuffle the deck
-            const result = await cardManager.shuffleDeck(turn);
+            const result = await cm.shuffleDeck(turn);
             
             // Record in command history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.SHUFFLE_DECK,
                 {

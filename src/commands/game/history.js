@@ -23,7 +23,10 @@ module.exports = {
         try {
             const limit = interaction.options.getInteger('limit') || 20; // Default to 20 entries
             const requestedPage = interaction.options.getInteger('page') || 1;
-            const history = await commandHistory.getCommandHistory(limit);
+            const channelName = interaction.channel.name;
+            
+            // Get command history manager for this game
+            const history = await commandHistory(channelName).getCommandHistory(limit);
 
             if (history.length === 0) {
                 await interaction.editReply('No commands in history');

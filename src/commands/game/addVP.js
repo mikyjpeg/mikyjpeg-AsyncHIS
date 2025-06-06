@@ -23,10 +23,14 @@ module.exports = {
 
         const power = interaction.options.getString('power');
         const amount = interaction.options.getInteger('amount');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get faction manager for this game
+            const fm = factionManager(channelName);
+            
             // Get the faction
-            const faction = await factionManager(interaction.channelId).getFaction(power);
+            const faction = await fm.getFaction(power);
             
             if (!faction) {
                 throw new Error(`Power ${power} not found`);
@@ -38,10 +42,10 @@ module.exports = {
 
             // Update VP
             faction.victoryPoints = oldVP + amount;
-            await factionManager(interaction.channelId).updateFaction(power, faction);
+            await fm.updateFaction(power, faction);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.ADD_VP,
                 {

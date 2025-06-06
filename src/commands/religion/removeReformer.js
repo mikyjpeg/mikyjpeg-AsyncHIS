@@ -15,10 +15,14 @@ module.exports = {
         await interaction.deferReply();
 
         const reformerName = interaction.options.getString('reformer');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get reformer manager for this game
+            const rm = reformerManager(channelName);
+            
             // Get the reformer
-            const reformer = await reformerManager(interaction.channelId).getReformer(reformerName);
+            const reformer = await rm.getReformer(reformerName);
             
             if (!reformer) {
                 throw new Error(`Reformer ${reformerName} not found`);
@@ -33,10 +37,10 @@ module.exports = {
 
             // Update reformer
             reformer.isActive = false;
-            await reformerManager(interaction.channelId).updateReformer(reformerName, reformer);
+            await rm.updateReformer(reformerName, reformer);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_REFORMER,
                 {

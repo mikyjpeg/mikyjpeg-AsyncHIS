@@ -28,6 +28,7 @@ module.exports = {
         
         const power1 = interaction.options.getString('power1');
         const power2 = interaction.options.getString('power2');
+        const channelName = interaction.channel.name;
         
         try {
             // Check if powers are different
@@ -37,7 +38,10 @@ module.exports = {
             }
 
             // Load current game state
-            const gameState = await GameState.load();
+            const gameState = await GameState.load(channelName);
+            
+            // Store old state for history
+            const oldState = { ...gameState };
             
             // Initialize alliances array if it doesn't exist
             if (!gameState.alliances) {
@@ -69,13 +73,19 @@ module.exports = {
                 startTurn: gameState.turn || 1
             };
             gameState.alliances.push(newAlliance);
-            await GameState.save(gameState);
+            await GameState.save(channelName, gameState);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.FORM_ALLIANCE,
-                newAlliance
+                {
+                    power1,
+                    power2,
+                    oldState,
+                    newState: { ...gameState },
+                    alliance: newAlliance
+                }
             );
 
             await interaction.editReply(`Alliance formed between ${power1} and ${power2} (Command ID: ${historyEntry.commandId})`);

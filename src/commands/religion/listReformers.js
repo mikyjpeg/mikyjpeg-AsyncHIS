@@ -14,9 +14,13 @@ module.exports = {
         await interaction.deferReply();
         
         const spaceName = interaction.options.getString('space');
+        const channelName = interaction.channel.name;
         
         try {
-            const space = await spaceManager.getSpace(spaceName);
+            // Get space manager for this game
+            const sm = spaceManager(channelName);
+
+            const space = await sm.getSpace(spaceName);
             if (!space) {
                 await interaction.editReply(`Space ${spaceName} not found`);
                 return;

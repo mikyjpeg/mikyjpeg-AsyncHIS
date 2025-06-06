@@ -30,9 +30,13 @@ module.exports = {
         try {
             const cardId = interaction.options.getInteger('card_id');
             const power = interaction.options.getString('power');
+            const channelName = interaction.channel.name;
+
+            // Get card manager for this game
+            const cm = cardManager(channelName);
 
             // Get current status
-            const status = await cardManager.getStatus();
+            const status = await cm.getStatus();
 
             // Initialize response message parts
             let responseMessage = [];
@@ -44,7 +48,7 @@ module.exports = {
 
             // If power is specified, validate and remove card from faction's hand
             if (power) {
-                const faction = await cardManager.getFaction(power);
+                const faction = await cm.getFaction(power);
                 
                 // Validate card is in faction's hand
                 if (!faction.cards || !faction.cards.includes(cardIdStr)) {
@@ -59,7 +63,7 @@ module.exports = {
 
                 // Remove card from faction's hand
                 faction.cards = faction.cards.filter(id => id !== cardIdStr);
-                await cardManager.saveFaction(power, faction);
+                await cm.saveFaction(power, faction);
 
                 responseMessage.push(`Removed card ${cardId} from ${power}'s hand`);
                 
@@ -93,14 +97,14 @@ module.exports = {
 
             // Set the current card index
             status.currentCardIndex = cardId;
-            await cardManager.saveStatus(status);
+            await cm.saveStatus(status);
 
             // Get card details for the response
-            const card = await cardManager.getCard(cardId);
+            const card = await cm.getCard(cardId);
             responseMessage.push(`Set current card to: ${card.name} (${card.cp} CP)`);
 
             // Record in command history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.PLAY_CARD,
                 {

@@ -14,9 +14,13 @@ module.exports = {
         await interaction.deferReply();
         
         const leaderName = interaction.options.getString('leader');
+        const channelName = interaction.channel.name;
         
         try {
-            const leader = await leaderManager.getLeader(leaderName);
+            // Get leader manager for this game
+            const lm = leaderManager(channelName);
+
+            const leader = await lm.getLeader(leaderName);
             if (!leader) {
                 await interaction.editReply(`Leader ${leaderName} not found`);
                 return;

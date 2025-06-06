@@ -24,10 +24,14 @@ module.exports = {
         
         const spaceName = interaction.options.getString('space');
         const religion = interaction.options.getString('religion');
+        const channelName = interaction.channel.name;
         
         try {
+            // Get the space manager for this game
+            const sm = spaceManager(channelName);
+
             // Get the space data
-            const space = await spaceManager.getSpace(spaceName);
+            const space = await sm.getSpace(spaceName);
             
             // Check if space can be converted (not Ottoman or Mixed)
             if (space.homePower === 'Ottoman' || space.homePower === 'Mixed') {
@@ -44,12 +48,7 @@ module.exports = {
             }
 
             // Store previous state for history
-            const previousState = {
-                name: spaceName,
-                catholic: space.catholic,
-                reformer: space.reformer,
-                jesuiteUniversity: space.jesuiteUniversity
-            };
+            const previousState = { ...space };
 
             // Convert the space
             space.catholic = converting;
@@ -59,17 +58,18 @@ module.exports = {
                 space.jesuiteUniversity = false;
             }
 
-            await spaceManager.updateSpace(spaceName, space);
+            await sm.updateSpace(spaceName, space);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.CONVERT_SPACE,
                 {
-                    space: previousState,
+                    spaceName,
+                    oldState: previousState,
+                    newState: { ...space },
                     oldReligion: previousState.catholic ? 'Catholic' : 'Protestant',
-                    newReligion: converting ? 'Catholic' : 'Protestant',
-                    removedJesuiteUniversity: !converting && previousState.jesuiteUniversity
+                    newReligion: converting ? 'Catholic' : 'Protestant'
                 }
             );
 

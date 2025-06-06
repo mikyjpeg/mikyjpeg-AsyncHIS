@@ -19,10 +19,14 @@ module.exports = {
         await interaction.deferReply();
         
         const power = interaction.options.getString('power');
+        const channelName = interaction.channel.name;
         
         try {
+            // Get space manager for this game
+            const sm = spaceManager(channelName);
+
             // Get all spaces controlled by the power
-            const spaces = await spaceManager.getControlledSpaces(power);
+            const spaces = await sm.getControlledSpaces(power);
             
             if (!spaces || spaces.length === 0) {
                 await interaction.editReply(`${power} does not control any spaces`);
@@ -51,12 +55,21 @@ module.exports = {
                     if (space.isKey) attributes.push('Key');
                     if (space.isCapital) attributes.push('Capital');
                     if (space.fortress) attributes.push('Fortress');
+                    if (space.hasPorts) attributes.push('Port');
                     
                     // Add control status
                     if (space.controllingPower === null) {
                         attributes.push('Home space');
                     } else if (space.homePower !== power) {
                         attributes.push(`Home: ${space.homePower}`);
+                    }
+                    
+                    // Add religious status
+                    if (space.catholic !== undefined) {
+                        attributes.push(space.catholic ? 'Catholic' : 'Protestant');
+                        if (space.catholic && space.jesuiteUniversity) {
+                            attributes.push('Jesuite University');
+                        }
                     }
                     
                     // Add all attributes in parentheses if any exist

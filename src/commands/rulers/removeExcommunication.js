@@ -25,14 +25,18 @@ module.exports = {
         
         const targetName = interaction.options.getString('target');
         const targetType = interaction.options.getString('type');
+        const channelName = interaction.channel.name;
         
         try {
             let result;
             let historyData;
 
             if (targetType === 'ruler') {
+                // Get the ruler manager for this game
+                const rm = rulerManager(channelName);
+                
                 // Get the ruler
-                const ruler = await rulerManager(interaction.channelId).getRuler(targetName);
+                const ruler = await rm.getRuler(targetName);
                 
                 if (!ruler) {
                     throw new Error(`Ruler ${targetName} not found`);
@@ -47,33 +51,33 @@ module.exports = {
 
                 // Update ruler
                 ruler.isExcommunicated = false;
-                await rulerManager(interaction.channelId).updateRuler(targetName, ruler);
-
-                // Record in command history
-                const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
-                    interaction,
-                    COMMAND_TYPES.REMOVE_EXCOMMUNICATION,
-                    {
-                        rulerName: targetName,
-                        oldState,
-                        newState: ruler
-                    }
-                );
+                await rm.updateRuler(targetName, ruler);
 
                 result = ruler;
                 historyData = {
-                    ruler: result
+                    rulerName: targetName,
+                    oldState,
+                    newState: ruler
                 };
             } else {
+                // Get the reformer manager for this game
+                const refm = reformerManager(channelName);
+
+                // Get current state
+                const oldState = await refm.getReformer(targetName);
+                
                 // Remove excommunication from reformer
-                result = await reformerManager.removeExcommunication(targetName);
+                result = await refm.removeExcommunication(targetName);
+                
                 historyData = {
-                    reformer: result
+                    reformerName: targetName,
+                    oldState,
+                    newState: result
                 };
             }
             
             // Record in history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_EXCOMMUNICATION,
                 historyData

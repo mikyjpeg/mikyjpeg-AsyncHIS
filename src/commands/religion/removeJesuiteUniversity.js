@@ -15,16 +15,20 @@ module.exports = {
         await interaction.deferReply();
 
         const spaceName = interaction.options.getString('space');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get space manager for this game
+            const sm = spaceManager(channelName);
+            
             // Get the space
-            const space = await spaceManager(interaction.channelId).getSpace(spaceName);
+            const space = await sm.getSpace(spaceName);
             
             if (!space) {
                 throw new Error(`Space ${spaceName} not found`);
             }
 
-            if (!space.hasJesuiteUniversity) {
+            if (!space.jesuiteUniversity) {
                 throw new Error(`${spaceName} does not have a Jesuite university`);
             }
 
@@ -32,11 +36,11 @@ module.exports = {
             const oldState = { ...space };
 
             // Update space
-            space.hasJesuiteUniversity = false;
-            await spaceManager(interaction.channelId).updateSpace(spaceName, space);
+            space.jesuiteUniversity = false;
+            await sm.updateSpace(spaceName, space);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_JESUITE,
                 {

@@ -8,6 +8,8 @@ const victoryPointsManager = require('../../game/victoryPointsManager');
 const reformerManager = require('../../game/reformerManager');
 const electorateManager = require('../../game/electorateManager');
 const formationManager = require('../../game/formationManager');
+const factionManager = require('../../game/factionManager');
+const debaterManager = require('../../game/debaterManager');
 const path = require('path');
 const fs = require('fs');
 
@@ -239,6 +241,17 @@ module.exports = {
                     break;
                 }
 
+                case COMMAND_TYPES.ADD_REFORMER: {
+                    const { reformerName, spaceName } = commandToUndo.data;
+                    const rm = reformerManager(channelName);
+                    
+                    // Remove the reformer using the proper method that handles both fields
+                    await rm.removeReformerFromSpace(reformerName);
+                    
+                    undoMessage = `Removed reformer ${reformerName} from ${spaceName}`;
+                    break;
+                }
+
                 case COMMAND_TYPES.SET_CURRENT_DEBATER: {
                     const { oldStates } = commandToUndo.data;
                     for (const { debaterName, oldState } of oldStates) {
@@ -252,6 +265,59 @@ module.exports = {
                     const { debaterName, oldState } = commandToUndo.data;
                     await debaterManager(channelName).updateDebater(debaterName, oldState);
                     undoMessage = `Restored ${debaterName} as current debater`;
+                    break;
+                }
+
+                case COMMAND_TYPES.DECLARE_WAR: {
+                    const { power1, power2, oldState } = commandToUndo.data;
+                    const dm = diplomacyManager(channelName);
+
+                    // Restore both factions to their previous state
+                    await dm.updateFaction(power1, oldState.faction1);
+                    await dm.updateFaction(power2, oldState.faction2);
+                    
+                    undoMessage = `Undid war declaration between ${power1} and ${power2}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.MAKE_PEACE: {
+                    const { power1, power2, oldState } = commandToUndo.data;
+                    const dm = diplomacyManager(channelName);
+
+                    // Restore both factions to their previous state
+                    await dm.updateFaction(power1, oldState.faction1);
+                    await dm.updateFaction(power2, oldState.faction2);
+                    
+                    undoMessage = `Undid peace treaty between ${power1} and ${power2}`;
+                    break;
+                }
+
+                case COMMAND_TYPES.REMOVE_FORMATION: {
+                    const { spaceName, oldState } = commandToUndo.data;
+                    const sm = spaceManager(channelName);
+
+                    // Restore space to previous state
+                    await sm.updateSpace(spaceName, oldState);
+                    
+                    undoMessage = `Restored formations in ${spaceName} to previous state`;
+                    break;
+                }
+
+                case COMMAND_TYPES.UNCOMMIT_DEBATER: {
+                    const { debaterName, oldState } = commandToUndo.data;
+                    // Ensure name is included in the state
+                    const stateWithName = { ...oldState, name: debaterName };
+                    await debaterManager(channelName).updateDebater(debaterName, stateWithName);
+                    undoMessage = `Restored ${debaterName} to committed status`;
+                    break;
+                }
+
+                case COMMAND_TYPES.COMMIT_DEBATER: {
+                    const { debaterName, oldState } = commandToUndo.data;
+                    // Ensure name is included in the state
+                    const stateWithName = { ...oldState, name: debaterName };
+                    await debaterManager(channelName).updateDebater(debaterName, stateWithName);
+                    undoMessage = `Restored ${debaterName} to uncommitted status`;
                     break;
                 }
 

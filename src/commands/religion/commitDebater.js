@@ -15,10 +15,14 @@ module.exports = {
         await interaction.deferReply();
 
         const debaterName = interaction.options.getString('debater');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get debater manager for this game
+            const dm = debaterManager(channelName);
+            
             // Get the debater
-            const debater = await debaterManager(interaction.channelId).getDebater(debaterName);
+            const debater = await dm.getDebater(debaterName);
             
             if (!debater) {
                 throw new Error(`Debater ${debaterName} not found`);
@@ -33,10 +37,10 @@ module.exports = {
 
             // Update debater
             debater.isCommitted = true;
-            await debaterManager(interaction.channelId).updateDebater(debaterName, debater);
+            await dm.updateDebater(debaterName, debater);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.COMMIT_DEBATER,
                 {

@@ -16,8 +16,13 @@ module.exports = {
 
     async execute(interaction) {
         try {
+            const channelName = interaction.channel.name;
+            
+            // Get card manager for this game
+            const cm = cardManager(channelName);
+
             // Get current status
-            const status = await cardManager.getStatus();
+            const status = await cm.getStatus();
 
             // Initialize response message parts
             let responseMessage = [];
@@ -50,17 +55,17 @@ module.exports = {
                     responseMessage.push(`Removed card ${cardId} from the deck`);
                 } else {
                     // Check all factions
-                    const factionsDir = path.join(process.cwd(), 'data', 'factions');
+                    const factionsDir = path.join(process.cwd(), 'data', 'games', channelName, 'factions');
                     const factionFiles = await fs.readdir(factionsDir);
                     let found = false;
 
                     for (const file of factionFiles) {
                         if (!file.endsWith('.json')) continue;
 
-                        const faction = await cardManager.getFaction(file.replace('.json', ''));
+                        const faction = await cm.getFaction(file.replace('.json', ''));
                         if (faction.cards && faction.cards.includes(cardIdStr)) {
                             faction.cards = faction.cards.filter(id => id !== cardIdStr);
-                            await cardManager.saveFaction(file.replace('.json', ''), faction);
+                            await cm.saveFaction(file.replace('.json', ''), faction);
                             responseMessage.push(`Removed card ${cardId} from ${file.replace('.json', '')}'s hand`);
                             found = true;
                             
@@ -77,7 +82,7 @@ module.exports = {
             }
 
             // Get card details to check removeAfterUse
-            const card = await cardManager.getCard(cardId);
+            const card = await cm.getCard(cardId);
 
             // Determine where to move the card
             if (card.removeAfterUse) {
@@ -97,7 +102,7 @@ module.exports = {
             }
 
             // Save the new state
-            await cardManager.saveStatus(status);
+            await cm.saveStatus(status);
 
             // Update new state for history
             newState = {
@@ -108,7 +113,7 @@ module.exports = {
             };
 
             // Record in command history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.DISCARD_CARD,
                 {

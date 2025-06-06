@@ -8,19 +8,24 @@ class CommandHistoryManager {
         if (!channelId) throw new Error('Channel ID is required');
         this.auditFilePath = path.join(process.cwd(), getGamePath(channelId), 'command_history.json');
         this.lastCommandId = 0;
-        this.initializeAuditFile();
+        this.initialized = false;
     }
 
-    async initializeAuditFile() {
-        try {
-            // Try to read the existing file to get the last command ID
-            const history = await this.readAuditFile();
-            if (history.length > 0) {
-                this.lastCommandId = history[history.length - 1].commandId;
+    async initialize() {
+        if (!this.initialized) {
+            try {
+                // Try to read the existing file to get the last command ID
+                const history = await this.readAuditFile();
+                if (history.length > 0) {
+                    // Find the highest command ID in case commands were deleted
+                    this.lastCommandId = Math.max(...history.map(cmd => cmd.commandId));
+                }
+                this.initialized = true;
+            } catch (error) {
+                // If file doesn't exist, create it with empty array
+                await this.writeAuditFile([]);
+                this.initialized = true;
             }
-        } catch (error) {
-            // If file doesn't exist, create it with empty array
-            await this.writeAuditFile([]);
         }
     }
 
@@ -34,6 +39,7 @@ class CommandHistoryManager {
     }
 
     async addToHistory(commandEntry, username, commandString, success = true, errorMessage = null) {
+        await this.initialize();
         const history = await this.readAuditFile();
         this.lastCommandId++;
 
@@ -55,6 +61,7 @@ class CommandHistoryManager {
     }
 
     async getLastCommand() {
+        await this.initialize();
         const history = await this.readAuditFile();
         // Filter out undone commands and get the last one
         const validCommands = history.filter(cmd => !cmd.undone);
@@ -67,6 +74,7 @@ class CommandHistoryManager {
     }
 
     async getCommand(commandId) {
+        await this.initialize();
         const history = await this.readAuditFile();
         const command = history.find(cmd => cmd.commandId === commandId && !cmd.undone);
         
@@ -78,6 +86,7 @@ class CommandHistoryManager {
     }
 
     async markCommandAsUndone(commandId) {
+        await this.initialize();
         const history = await this.readAuditFile();
         const commandIndex = history.findIndex(cmd => cmd.commandId === commandId);
         
@@ -90,6 +99,7 @@ class CommandHistoryManager {
     }
 
     async getCommandHistory(limit = null) {
+        await this.initialize();
         const history = await this.readAuditFile();
         if (limit) {
             return history.slice(-limit);

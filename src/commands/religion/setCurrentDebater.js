@@ -15,10 +15,14 @@ module.exports = {
         await interaction.deferReply();
 
         const debaterName = interaction.options.getString('debater');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get debater manager for this game
+            const dm = debaterManager(channelName);
+
             // Get all debaters
-            const allDebaters = await debaterManager(interaction.channelId).getAllDebaters();
+            const allDebaters = await dm.getAllDebaters();
             
             // Get the target debater
             const debater = allDebaters.find(d => d.name === debaterName);
@@ -41,7 +45,7 @@ module.exports = {
                 });
                 // Clear current debater
                 currentDebater.isCurrentDebater = false;
-                await debaterManager(interaction.channelId).updateDebater(currentDebater.name, currentDebater);
+                await dm.updateDebater(currentDebater.name, currentDebater);
             }
 
             // Store old state of new debater
@@ -52,10 +56,10 @@ module.exports = {
 
             // Set new current debater
             debater.isCurrentDebater = true;
-            await debaterManager(interaction.channelId).updateDebater(debater.name, debater);
+            await dm.updateDebater(debater.name, debater);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.SET_CURRENT_DEBATER,
                 {

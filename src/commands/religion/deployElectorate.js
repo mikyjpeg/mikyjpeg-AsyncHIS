@@ -22,10 +22,14 @@ module.exports = {
 
         const electorateName = interaction.options.getString('electorate');
         const shouldControl = interaction.options.getBoolean('control');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get electorate manager for this game
+            const em = electorateManager(channelName);
+            
             // Get the electorate
-            const electorate = await electorateManager(interaction.channelId).getElectorate(electorateName);
+            const electorate = await em.getElectorate(electorateName);
             
             if (!electorate) {
                 throw new Error(`Electorate ${electorateName} not found`);
@@ -39,10 +43,10 @@ module.exports = {
             if (shouldControl) {
                 electorate.isControlled = true;
             }
-            await electorateManager(interaction.channelId).updateElectorate(electorateName, electorate);
+            await em.updateElectorate(electorateName, electorate);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.DEPLOY_ELECTORATE,
                 {

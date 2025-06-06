@@ -25,19 +25,23 @@ module.exports = {
         
         const power = interaction.options.getString('power');
         const successorName = interaction.options.getString('name');
+        const channelName = interaction.channel.name;
         
         try {
+            // Get ruler succession manager for this game
+            const rsm = rulerSuccessionManager(channelName);
+
             // Validate the faction has defined succession rules
-            if (!rulerSuccessionManager.isValidFaction(power)) {
+            if (!rsm.isValidFaction(power)) {
                 await interaction.editReply(`No succession rules defined for ${power}`);
                 return;
             }
 
             // Change ruler using succession manager
-            const { oldRuler, newRuler } = await rulerSuccessionManager.changeRuler(power, successorName);
+            const { oldRuler, newRuler } = await rsm.changeRuler(power, successorName);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.RULER_CHANGE,
                 {

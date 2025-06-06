@@ -15,10 +15,14 @@ module.exports = {
         await interaction.deferReply();
 
         const spaceName = interaction.options.getString('space');
+        const channelName = interaction.channel.name;
 
         try {
+            // Get space manager for this game
+            const sm = spaceManager(channelName);
+            
             // Get the space
-            const space = await spaceManager(interaction.channelId).getSpace(spaceName);
+            const space = await sm.getSpace(spaceName);
             
             if (!space) {
                 throw new Error(`Space ${spaceName} not found`);
@@ -33,10 +37,10 @@ module.exports = {
 
             // Toggle religious control
             space.catholic = !space.catholic;
-            await spaceManager(interaction.channelId).updateSpace(spaceName, space);
+            await sm.updateSpace(spaceName, space);
 
             // Record in command history
-            const historyEntry = await commandHistory(interaction.channelId).recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.TOGGLE_RELIGIOUS_CONTROL,
                 {

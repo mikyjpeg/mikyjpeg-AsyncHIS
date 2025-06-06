@@ -19,7 +19,36 @@ class DebaterManager {
         }
     }
 
-    async #updateDebater(name, debaterData) {
+    async getDebater(name) {
+        const { data: debater } = await this.#readDebaterFile(name);
+        return debater;
+    }
+
+    async getAllDebaters() {
+        try {
+            const files = await fs.readdir(this.debatersDir);
+            const debaters = [];
+            
+            for (const file of files) {
+                if (!file.endsWith('.json')) continue;
+                
+                const filePath = path.join(this.debatersDir, file);
+                const data = await fs.readFile(filePath, 'utf8');
+                const debater = JSON.parse(data);
+                // Add the name from filename if not present
+                if (!debater.name) {
+                    debater.name = file.slice(0, -5).replace(/_/g, ' '); // Remove .json and replace underscores with spaces
+                }
+                debaters.push(debater);
+            }
+            
+            return debaters;
+        } catch (error) {
+            throw new Error(`Failed to get all debaters: ${error.message}`);
+        }
+    }
+
+    async updateDebater(name, debaterData) {
         const filePath = path.join(this.debatersDir, `${name.toLowerCase().replace(/\s+/g, '_')}.json`);
         await fs.writeFile(filePath, JSON.stringify(debaterData, null, FILE_SYSTEM.JSON_INDENT));
         return debaterData;
@@ -55,7 +84,7 @@ class DebaterManager {
         }
 
         debater.isCommitted = true;
-        await this.#updateDebater(name, debater);
+        await this.updateDebater(name, debater);
         return debater;
     }
 
@@ -67,7 +96,7 @@ class DebaterManager {
         }
 
         debater.isCommitted = false;
-        await this.#updateDebater(name, debater);
+        await this.updateDebater(name, debater);
         return debater;
     }
 
@@ -83,7 +112,7 @@ class DebaterManager {
 
         // Set this debater as current
         debater.isCurrentDebater = true;
-        await this.#updateDebater(name, debater);
+        await this.updateDebater(name, debater);
         
         return { debater, previousDebater };
     }
@@ -96,7 +125,7 @@ class DebaterManager {
         }
 
         debater.isCurrentDebater = false;
-        await this.#updateDebater(name, debater);
+        await this.updateDebater(name, debater);
         return debater;
     }
 }

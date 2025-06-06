@@ -20,13 +20,18 @@ module.exports = {
         await interaction.deferReply();
         
         const power = interaction.options.getString('power');
+        const channelName = interaction.channel.name;
         
         try {
+            // Get managers for this game
+            const rm = rulerManager(channelName);
+            const rsm = rulerSuccessionManager(channelName);
+
             let response = '';
             
             if (power) {
                 // Get rulers for specific power
-                const rulers = await rulerManager.getRulersByPower(power);
+                const rulers = await rm.getRulersByPower(power);
                 if (!rulers || rulers.length === 0) {
                     await interaction.editReply(`No rulers found for ${power}`);
                     return;
@@ -35,7 +40,7 @@ module.exports = {
                 response = `**Rulers of ${power}:**\n`;
                 
                 // Get succession paths for ordering
-                const successionPaths = rulerSuccessionManager.successionPaths[power] || [];
+                const successionPaths = rsm.successionPaths[power] || [];
                 const orderedRulers = [];
                 
                 // Start with current ruler
@@ -82,7 +87,7 @@ module.exports = {
                 });
             } else {
                 // Get all rulers grouped by power
-                const allRulers = await rulerManager.getAllRulers();
+                const allRulers = await rm.getAllRulers();
                 const rulersByPower = {};
                 
                 // Group rulers by power
@@ -98,7 +103,7 @@ module.exports = {
                     response += `\n**${powerName}:**\n`;
                     
                     // Get succession paths for ordering
-                    const successionPaths = rulerSuccessionManager.successionPaths[powerName] || [];
+                    const successionPaths = rsm.successionPaths[powerName] || [];
                     const orderedRulers = [];
                     
                     // Start with current ruler

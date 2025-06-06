@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { GameState, POWERS } = require('../../game/gameState');
+const { POWERS } = require('../../game/gameState');
 const diplomacyManager = require('../../game/diplomacyManager');
+const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -35,12 +36,36 @@ module.exports = {
             // Get the diplomacy manager for this game
             const dm = diplomacyManager(channelName);
 
-            // Get current states
+            // Get current states before changes
             const faction1 = await dm.getFaction(power1);
             const faction2 = await dm.getFaction(power2);
+            const oldState = {
+                faction1: { ...faction1 },
+                faction2: { ...faction2 }
+            };
 
+            // Declare war
             await dm.declareWar(power1, power2);
-            await interaction.editReply(`${power1} has declared war on ${power2}!`);
+
+            // Get updated states
+            const newState = {
+                faction1: await dm.getFaction(power1),
+                faction2: await dm.getFaction(power2)
+            };
+
+            // Record in command history
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
+                interaction,
+                COMMAND_TYPES.DECLARE_WAR,
+                {
+                    power1,
+                    power2,
+                    oldState,
+                    newState
+                }
+            );
+
+            await interaction.editReply(`${power1} has declared war on ${power2}! (Command ID: ${historyEntry.commandId})`);
         } catch (error) {
             await interaction.editReply(`Failed to declare war: ${error.message}`);
         }

@@ -27,7 +27,7 @@ module.exports = {
                 throw new Error(`Space ${spaceName} not found`);
             }
 
-            if (space.hasJesuiteUniversity) {
+            if (space.jesuiteUniversity) {
                 throw new Error(`${spaceName} already has a Jesuite University`);
             }
 
@@ -35,7 +35,7 @@ module.exports = {
             const oldState = { ...space };
 
             // Update space
-            space.hasJesuiteUniversity = true;
+            space.jesuiteUniversity = true;
             await spaceManager(channelName).updateSpace(spaceName, space);
 
             // Record in command history

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const formationManager = require('../../game/formationManager');
+const spaceManager = require('../../game/spaceManager');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 const { POWERS } = require('../../game/gameState');
 
@@ -45,17 +46,29 @@ module.exports = {
         const leaders = leadersInput ? leadersInput.split(',').map(l => l.trim()) : [];
         
         try {
+            // Get the channel name
+            const channelName = interaction.channel.name;
+
+            // Get the managers for this game
+            const fm = formationManager(channelName);
+            const sm = spaceManager(channelName);
+
+            // Get current state before changes
+            const oldState = await sm.getSpace(spaceName);
+
             // Remove from formation
-            const updatedSpace = await formationManager.removeFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
+            const updatedSpace = await fm.removeFormation(spaceName, power, regularTroops, secondaryTroops, leaders);
             
             // Record in history
-            const historyEntry = await commandHistory.recordSlashCommand(
+            const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
                 COMMAND_TYPES.REMOVE_FORMATION,
                 {
                     spaceName,
-                    formation: {
-                        power,
+                    power,
+                    oldState,
+                    newState: updatedSpace,
+                    removed: {
                         regularTroops,
                         secondaryTroops,
                         leaders
@@ -87,23 +100,6 @@ module.exports = {
                 statusMessage
             );
         } catch (error) {
-            // Record error in history
-            await commandHistory.recordSlashCommand(
-                interaction,
-                COMMAND_TYPES.REMOVE_FORMATION,
-                {
-                    spaceName,
-                    formation: {
-                        power,
-                        regularTroops,
-                        secondaryTroops,
-                        leaders
-                    }
-                },
-                false,
-                error.message
-            );
-            
             await interaction.editReply({ 
                 content: `Failed to remove formation: ${error.message}`,
                 ephemeral: true 
