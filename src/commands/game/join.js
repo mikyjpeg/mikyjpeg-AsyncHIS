@@ -45,13 +45,11 @@ module.exports = {
                 throw new Error(errorMessage);
             }
 
-            // Check if user is already playing as another power
+            // Check if user is already controlling other powers and include that in the welcome message
             const allFactions = await fm.loadAllFactions();
-            const userFaction = Object.values(allFactions).find(f => f.discordUserId === userId);
-            if (userFaction) {
-                errorMessage = `You are already playing as ${userFaction.name}!`;
-                throw new Error(errorMessage);
-            }
+            const userOtherFactions = Object.values(allFactions)
+                .filter(f => f.discordUserId === userId && f.name !== power)
+                .map(f => f.name);
 
             // Create private channel for the power
             const powerChannelName = `${gameId}_his-${power.toLowerCase()}`;
@@ -91,8 +89,14 @@ module.exports = {
 
             success = true;
 
+            // Prepare welcome message
+            let welcomeMessage = `Welcome to your private channel, ${username}! This is your command center as ${power}.`;
+            if (userOtherFactions.length > 0) {
+                welcomeMessage += `\nYou are also controlling: ${userOtherFactions.join(', ')}.`;
+            }
+
             // Send welcome message in private channel
-            await powerChannel.send(`Welcome to your private channel, ${username}! This is your command center as ${power}.`);
+            await powerChannel.send(welcomeMessage);
 
             // Record in history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
@@ -103,13 +107,21 @@ module.exports = {
                     userId,
                     username,
                     previousFaction,
-                    privateChannelId: powerChannel.id
+                    privateChannelId: powerChannel.id,
+                    otherControlledPowers: userOtherFactions
                 },
                 success,
                 errorMessage
             );
 
-            await interaction.editReply(`You have joined the game as ${power}! Check your private channel ${powerChannel.toString()} (Command ID: ${historyEntry.commandId})`);
+            // Prepare response message
+            let responseMessage = `You have joined the game as ${power}! Check your private channel ${powerChannel.toString()}`;
+            if (userOtherFactions.length > 0) {
+                responseMessage += `\nYou are now controlling: ${[power, ...userOtherFactions].join(', ')}`;
+            }
+            responseMessage += ` (Command ID: ${historyEntry.commandId})`;
+
+            await interaction.editReply(responseMessage);
 
         } catch (error) {
             // Record the failed attempt in history
