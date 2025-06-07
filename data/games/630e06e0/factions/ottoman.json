@@ -1,11 +1,11 @@
 {
   "name": "Ottoman",
-  "discordUserId": null,
-  "discordUsername": null,
+  "discordUserId": "311483939711746048",
+  "discordUsername": "mikyjpeg",
   "cardsPerTurn": 5,
   "victoryPoints": 0,
   "ruler": "Suleiman",
-  "isActive": false,
+  "isActive": true,
   "alliances": [],
   "atWarWith": [],
   "cardModifier": 0,
@@ -13,11 +13,10 @@
   "bonusVPTotal": 0,
   "captiveLeaders": [],
   "cards": [
-    "70",
     "11",
     "77",
     "96",
     "4"
   ],
-  "privateChannelId": "1380669608637370510"
+  "privateChannelId": "1380854033241083937"
 }

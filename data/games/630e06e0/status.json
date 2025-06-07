@@ -2,10 +2,10 @@
   "turn": 2,
   "phase": "Spring Deployment",
   "currentImpulse": {
-    "cardIndex": 81,
-    "availableCP": 1
+    "cardIndex": 70,
+    "availableCP": 4
   },
-  "activePlayer": null,
+  "activePlayer": "Ottoman",
   "cardDeck": [
     "24",
     "35",

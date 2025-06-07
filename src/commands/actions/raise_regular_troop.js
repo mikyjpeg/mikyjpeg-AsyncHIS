@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { commandHistory, COMMAND_TYPES } = require('../../game/commandHistoryManager');
 const actionsManager = require('../../game/actionsManager');
-const factionManager = require('../../game/factionManager');
+const spaceManager = require('../../game/spaceManager');
+const formationManager = require('../../game/formationManager');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,33 +12,47 @@ module.exports = {
             option.setName('power')
                 .setDescription('The power performing the action')
                 .setRequired(true)
-                .addChoices(                    { name: 'Ottoman', value: 'Ottoman' },
+                .addChoices(
+                    { name: 'Ottoman', value: 'Ottoman' },
                     { name: 'Hapsburg', value: 'Hapsburg' },
                     { name: 'England', value: 'England' },
                     { name: 'France', value: 'France' },
                     { name: 'Papacy', value: 'Papacy' }))
-        
-        .addIntegerOption(option =>
-            option.setName('cp_spent')
-                .setDescription('Number of CP to spend')
-                .setRequired(true)
-                .setMinValue(1)),
+        .addStringOption(option =>
+            option.setName('space')
+                .setDescription('Space to add the regular to')
+                .setRequired(true)),
 
     async execute(interaction) {
         try {
             const power = interaction.options.getString('power');
-            
-            const cpSpent = interaction.options.getInteger('cp_spent');
+            const spaceName = interaction.options.getString('space');
             const channelName = interaction.channel.name;
 
-            // Get actions manager for this game
+            // Get managers for this game
             const am = actionsManager(channelName);
+            const sm = spaceManager(channelName);
+            const fm = formationManager(channelName);
 
             // Validate the action exists and can be performed by this power
             await am.validateAction('raise_regular_troop', power);
 
-            // Get the action cost
-            const cost = await am.getActionCost('raise_regular_troop', power);
+            // Validate and spend CP
+            const { cost, remainingCP } = await am.validateAndSpendCP('raise_regular_troop', power);
+
+            // Get the space and validate it's a valid target
+            const space = await sm.getSpace(spaceName);
+            
+            // Check if space is a home space of the power and uncontrolled
+            if (space.homePower !== power) {
+                throw new Error(`${spaceName} is not a home space of ${power}`);
+            }
+            if (space.controllingPower !== null) {
+                throw new Error(`${spaceName} is controlled by ${space.controllingPower}`);
+            }
+
+            // Add the regular (1 regular, 0 mercenary, no leaders)
+            const updatedSpace = await fm.addFormation(spaceName, power, 1, 0, []);
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
@@ -46,15 +61,15 @@ module.exports = {
                 {
                     actionId: 'raise_regular_troop',
                     power,
-                    
-                    cpSpent,
-                    cost
+                    spaceName,
+                    cost,
+                    remainingCP
                 }
             );
 
-            // For now, just acknowledge the command
+            // Send response
             await interaction.reply({
-                content: `Action: raise_regular_troop\nPower: ${power}\n\nCP Spent: ${cpSpent}\n(Cost: ${cost})\n(Command ID: ${historyEntry.commandId})`,
+                content: `Added 1 regular for ${power} in ${spaceName} (Cost: ${cost} CP, ${remainingCP} CP remaining)\n(Command ID: ${historyEntry.commandId})`,
                 ephemeral: true
             });
 

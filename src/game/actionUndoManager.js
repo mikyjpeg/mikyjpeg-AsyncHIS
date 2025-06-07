@@ -139,13 +139,31 @@ class ActionUndoManager {
     }
 
     async undoRaiseCavalrySipahi(data) {
-        // TODO: Implement undo logic
-        throw new Error('Undo not yet implemented for raise_cavalry_sipahi');
+        // Get managers
+        const fm = formationManager(this.channelId);
+        const cm = cardManager(this.channelId);
+
+        // Remove the cavalry from the space (0 regular, 1 cavalry)
+        await fm.removeFormation(data.spaceName, data.power, 0, 1, []);
+
+        // Restore the CP
+        const status = await cm.getStatus();
+        status.currentImpulse.availableCP += data.cost;
+        await cm.saveStatus(status);
     }
 
     async undoRaiseRegularTroop(data) {
-        // TODO: Implement undo logic
-        throw new Error('Undo not yet implemented for raise_regular_troop');
+        // Get managers
+        const fm = formationManager(this.channelId);
+        const cm = cardManager(this.channelId);
+
+        // Remove the regular from the space
+        await fm.removeFormation(data.spaceName, data.power, 1, 0, []);
+
+        // Restore the CP
+        const status = await cm.getStatus();
+        status.currentImpulse.availableCP += data.cost;
+        await cm.saveStatus(status);
     }
 
     async undoTranslateScripture(data) {

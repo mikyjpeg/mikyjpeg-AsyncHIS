@@ -58,7 +58,8 @@ module.exports = {
                 // Store old state
                 oldState = {
                     factionCards: [...faction.cards],
-                    currentImpulse: status.currentImpulse
+                    currentImpulse: status.currentImpulse,
+                    activePlayer: status.activePlayer
                 };
 
                 // Remove card from faction's hand
@@ -70,14 +71,18 @@ module.exports = {
                 // Get card details
                 const card = await cm.getCard(cardId);
                 
-                // Update new state with currentImpulse
+                // Update new state with currentImpulse and activePlayer
                 newState = {
                     factionCards: [...faction.cards],
                     currentImpulse: {
                         cardIndex: cardId,
                         availableCP: card.cp
-                    }
+                    },
+                    activePlayer: power
                 };
+
+                // Set the active player
+                status.activePlayer = power;
             } else {
                 // Playing from deck - validate card is in deck
                 if (!status.cardDeck.includes(cardIdStr)) {
@@ -87,7 +92,8 @@ module.exports = {
                 // Store old state
                 oldState = {
                     cardDeck: [...status.cardDeck],
-                    currentImpulse: status.currentImpulse
+                    currentImpulse: status.currentImpulse,
+                    activePlayer: status.activePlayer
                 };
 
                 // Remove card from deck
@@ -103,7 +109,8 @@ module.exports = {
                     currentImpulse: {
                         cardIndex: cardId,
                         availableCP: card.cp
-                    }
+                    },
+                    activePlayer: status.activePlayer
                 };
             }
 
@@ -117,6 +124,9 @@ module.exports = {
             // Get card details for the response
             const card = await cm.getCard(cardId);
             responseMessage.push(`Set current card to: ${card.name} (${card.cp} CP available)`);
+            if (power) {
+                responseMessage.push(`Set active player to: ${power}`);
+            }
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
