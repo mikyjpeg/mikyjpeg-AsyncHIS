@@ -147,7 +147,28 @@ const COMMAND_TYPES = {
     DRAW_CARDS: 'draw_cards',
     PLAY_CARD: 'play_card',
     DISCARD_CARD: 'discard_card',
-    JOIN_POWER: 'join_power'
+    JOIN_POWER: 'join_power',
+    // Action-specific command types
+    ACTION_ASSAULT_FOREIGN_WAR: 'action_assault_foreign_war',
+    ACTION_BUILD_CORSAIR: 'action_build_corsair',
+    ACTION_BUILD_NAVAL_SQUADRON: 'action_build_naval_squadron',
+    ACTION_BUILD_SAINT_PETERS: 'action_build_saint_peters',
+    ACTION_BURN_BOOKS: 'action_burn_books',
+    ACTION_BUY_MERCENARY: 'action_buy_mercenary',
+    ACTION_CALL_THEOLOGICAL_DEBATE: 'action_call_theological_debate',
+    ACTION_COLONIZE: 'action_colonize',
+    ACTION_CONQUER: 'action_conquer',
+    ACTION_CONTROL_UNFORTIFIED_SPACE: 'action_control_unfortified_space',
+    ACTION_EXPLORE: 'action_explore',
+    ACTION_FOUND_JESUIT_UNIVERSITY: 'action_found_jesuit_university',
+    ACTION_INITIATE_PIRACY_IN_SEA_ZONE: 'action_initiate_piracy_in_sea_zone',
+    ACTION_MOVE_FORMATION_IN_CLEAR: 'action_move_formation_in_clear',
+    ACTION_MOVE_FORMATION_OVER_PASS: 'action_move_formation_over_pass',
+    ACTION_NAVAL_MOVE: 'action_naval_move',
+    ACTION_PUBLISH_TREATISE: 'action_publish_treatise',
+    ACTION_RAISE_CAVALRY_SIPAHI: 'action_raise_cavalry_sipahi',
+    ACTION_RAISE_REGULAR_TROOP: 'action_raise_regular_troop',
+    ACTION_TRANSLATE_SCRIPTURE: 'action_translate_scripture'
 };
 
 // Factory for creating command history entries

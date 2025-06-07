@@ -72,9 +72,12 @@ class StatusManager {
         status.discardedCards[turnKey].push({
             power,
             cardId,
-            cardIndex: status.currentCardIndex
+            cardIndex: status.currentImpulse.cardIndex
         });
-        status.currentCardIndex++;
+        status.currentImpulse = {
+            cardIndex: status.currentImpulse.cardIndex + 1,
+            availableCP: null
+        };
         return await this.saveStatus(status);
     }
 
@@ -109,7 +112,10 @@ class StatusManager {
 
     async nextCard() {
         const status = await this.getStatus();
-        status.currentCardIndex++;
+        status.currentImpulse = {
+            cardIndex: status.currentImpulse.cardIndex + 1,
+            availableCP: null
+        };
         status.passedPowers = [];
         return await this.saveStatus(status);
     }
@@ -118,7 +124,10 @@ class StatusManager {
         const status = await this.getStatus();
         if (status.turn < 8) {
             status.turn += 1;
-            status.currentCardIndex = 0;
+            status.currentImpulse = {
+                cardIndex: 0,
+                availableCP: null
+            };
             status.passedPowers = [];
             status.activePlayer = null;
         }

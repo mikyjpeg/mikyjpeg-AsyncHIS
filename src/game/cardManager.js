@@ -154,7 +154,7 @@ class CardManager {
             cardDeck: [...status.cardDeck],
             removedCards: [...(status.removedCards || [])],
             discardedCards: [...(status.discardedCards || [])],
-            currentCardIndex: status.currentCardIndex
+            currentImpulse: status.currentImpulse
         };
 
         let cardsToShuffle = [];
@@ -240,7 +240,10 @@ class CardManager {
         status.cardDeck = shuffledDeck;
         status.removedCards = [];
         status.discardedCards = [];
-        status.currentCardIndex = 0;
+        status.currentImpulse = {
+            cardIndex: 0,
+            availableCP: null
+        };
         
         await this.saveStatus(status);
         
@@ -250,7 +253,10 @@ class CardManager {
                 cardDeck: [...shuffledDeck],
                 removedCards: [],
                 discardedCards: [],
-                currentCardIndex: 0
+                currentImpulse: {
+                    cardIndex: 0,
+                    availableCP: null
+                }
             },
             deckSize: shuffledDeck.length
         };

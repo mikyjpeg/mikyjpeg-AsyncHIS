@@ -1,8 +1,11 @@
 {
   "turn": 0,
   "phase": "setup",
+  "currentImpulse": {
+    "cardIndex": null,
+    "availableCP": null
+  },
   "activePlayer": null,
-  "currentCardIndex": null,
   "cardDeck": [],
   "removedCards": [],
   "discardedCards": [],

@@ -58,7 +58,7 @@ module.exports = {
                 // Store old state
                 oldState = {
                     factionCards: [...faction.cards],
-                    currentCardIndex: status.currentCardIndex
+                    currentImpulse: status.currentImpulse
                 };
 
                 // Remove card from faction's hand
@@ -67,10 +67,16 @@ module.exports = {
 
                 responseMessage.push(`Removed card ${cardId} from ${power}'s hand`);
                 
-                // Update new state
+                // Get card details
+                const card = await cm.getCard(cardId);
+                
+                // Update new state with currentImpulse
                 newState = {
                     factionCards: [...faction.cards],
-                    currentCardIndex: cardId
+                    currentImpulse: {
+                        cardIndex: cardId,
+                        availableCP: card.cp
+                    }
                 };
             } else {
                 // Playing from deck - validate card is in deck
@@ -81,27 +87,36 @@ module.exports = {
                 // Store old state
                 oldState = {
                     cardDeck: [...status.cardDeck],
-                    currentCardIndex: status.currentCardIndex
+                    currentImpulse: status.currentImpulse
                 };
 
                 // Remove card from deck
                 status.cardDeck = status.cardDeck.filter(id => id !== cardIdStr);
                 responseMessage.push(`Removed card ${cardId} from the deck`);
 
-                // Update new state
+                // Get card details
+                const card = await cm.getCard(cardId);
+
+                // Update new state with currentImpulse
                 newState = {
                     cardDeck: [...status.cardDeck],
-                    currentCardIndex: cardId
+                    currentImpulse: {
+                        cardIndex: cardId,
+                        availableCP: card.cp
+                    }
                 };
             }
 
-            // Set the current card index
-            status.currentCardIndex = cardId;
+            // Set the current impulse
+            status.currentImpulse = {
+                cardIndex: cardId,
+                availableCP: (await cm.getCard(cardId)).cp
+            };
             await cm.saveStatus(status);
 
             // Get card details for the response
             const card = await cm.getCard(cardId);
-            responseMessage.push(`Set current card to: ${card.name} (${card.cp} CP)`);
+            responseMessage.push(`Set current card to: ${card.name} (${card.cp} CP available)`);
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
