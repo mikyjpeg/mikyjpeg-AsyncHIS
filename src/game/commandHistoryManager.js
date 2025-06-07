@@ -168,7 +168,9 @@ const COMMAND_TYPES = {
     ACTION_PUBLISH_TREATISE: 'action_publish_treatise',
     ACTION_RAISE_CAVALRY_SIPAHI: 'action_raise_cavalry_sipahi',
     ACTION_RAISE_REGULAR_TROOP: 'action_raise_regular_troop',
-    ACTION_TRANSLATE_SCRIPTURE: 'action_translate_scripture'
+    ACTION_TRANSLATE_SCRIPTURE: 'action_translate_scripture',
+    ADD_SQUADRON_TO_PORT: 'add_squadron_to_port',
+    ADD_CORSAIR_TO_PORT: 'add_corsair_to_port',
 };
 
 // Factory for creating command history entries

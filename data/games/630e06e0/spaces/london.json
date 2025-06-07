@@ -17,6 +17,16 @@
   "jesuiteUniversity": false,
   "catholic": true,
   "reformers": [],
-  "formations": [],
+  "formations": [
+    {
+      "power": "England",
+      "regulars": 1,
+      "mercenaries": 1,
+      "cavalry": 0,
+      "leaders": [
+        "Henry VIII"
+      ]
+    }
+  ],
   "squadrons": []
 }

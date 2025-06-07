@@ -1,6 +1,7 @@
 const { COMMAND_TYPES } = require('./commandHistoryManager');
 const formationManager = require('./formationManager');
 const cardManager = require('./cardManager');
+const navalManager = require('./navalManager');
 
 class ActionUndoManager {
     constructor(channelId) {
@@ -38,7 +39,9 @@ class ActionUndoManager {
             [COMMAND_TYPES.ACTION_PUBLISH_TREATISE]: this.undoPublishTreatise.bind(this),
             [COMMAND_TYPES.ACTION_RAISE_CAVALRY_SIPAHI]: this.undoRaiseCavalrySipahi.bind(this),
             [COMMAND_TYPES.ACTION_RAISE_REGULAR_TROOP]: this.undoRaiseRegularTroop.bind(this),
-            [COMMAND_TYPES.ACTION_TRANSLATE_SCRIPTURE]: this.undoTranslateScripture.bind(this)
+            [COMMAND_TYPES.ACTION_TRANSLATE_SCRIPTURE]: this.undoTranslateScripture.bind(this),
+            [COMMAND_TYPES.ADD_SQUADRON_TO_PORT]: this.undoAddSquadronToPort.bind(this),
+            [COMMAND_TYPES.ADD_CORSAIR_TO_PORT]: this.undoAddCorsairToPort.bind(this)
         };
         return handlers[type];
     }
@@ -169,6 +172,36 @@ class ActionUndoManager {
     async undoTranslateScripture(data) {
         // TODO: Implement undo logic
         throw new Error('Undo not yet implemented for translate_scripture');
+    }
+
+    async undoAddSquadronToPort(data) {
+        // Get managers
+        const nm = navalManager(this.channelId);
+
+        // Create squadron object to remove
+        const squadron = {
+            power: data.power,
+            squadron: data.squadron.squadron,
+            loans: data.squadron.loans || []
+        };
+
+        // Remove the squadron
+        await nm.removeSquadronFromPort(data.spaceName, squadron);
+    }
+
+    async undoAddCorsairToPort(data) {
+        // Get managers
+        const nm = navalManager(this.channelId);
+
+        // Create corsair object to remove
+        const squadron = {
+            power: 'Ottoman',
+            corsair: data.squadron.corsair,
+            loans: []
+        };
+
+        // Remove the corsair
+        await nm.removeSquadronFromPort(data.spaceName, squadron);
     }
 }
 

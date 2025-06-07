@@ -20,14 +20,9 @@ module.exports = {
             // Get the command to undo
             const command = commandId ? await ch.getCommand(commandId) : await ch.getLastCommand();
 
-            // Check if it's an action command
-            if (command.type.startsWith('action_')) {
-                const au = actionUndo(channelName);
-                await au.undoAction(command);
-            } else {
-                // Handle other command types here
-                throw new Error('Undo not yet implemented for this command type');
-            }
+            // Try to undo using actionUndo manager
+            const au = actionUndo(channelName);
+            await au.undoAction(command);
 
             // Mark the command as undone
             await ch.markCommandAsUndone(command.commandId);
