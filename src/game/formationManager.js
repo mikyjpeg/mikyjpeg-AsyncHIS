@@ -1,5 +1,6 @@
 const spaceManager = require('./spaceManager');
 const leaderManager = require('./leaderManager');
+const cardManager = require('./cardManager');
 
 class FormationManager {
     constructor(channelId) {
@@ -170,6 +171,25 @@ class FormationManager {
     async getFormations(spaceName) {
         const space = await spaceManager(this.channelId).getSpace(spaceName);
         return space.formations;
+    }
+
+    async hasEnemyFormations(spaceName, power) {
+        const space = await spaceManager(this.channelId).getSpace(spaceName);
+        const status = await cardManager(this.channelId).getStatus();
+
+        // Get alliances for the power
+        const powerAlliances = status.diplomacy[power.toLowerCase()]?.alliances || [];
+
+        // Check each formation in the space
+        for (const formation of space.formations) {
+            // Skip formations of the power itself or its allies
+            if (formation.power === power || powerAlliances.includes(formation.power.toLowerCase())) {
+                continue;
+            }
+            // If we find any other formation, it's an enemy
+            return true;
+        }
+        return false;
     }
 }
 

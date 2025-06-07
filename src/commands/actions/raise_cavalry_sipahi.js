@@ -19,38 +19,40 @@ module.exports = {
             const spaceName = interaction.options.getString('space');
             const channelName = interaction.channel.name;
 
-            // Get managers for this game
-            const am = actionsManager(channelName);
+            // Get managers
             const sm = spaceManager(channelName);
             const fm = formationManager(channelName);
+            const am = actionsManager(channelName);
 
-            // Validate the action exists and can be performed by Ottoman
-            await am.validateAction('raise_cavalry_sipahi', power);
-
-            // Validate and spend CP
-            const { cost, remainingCP } = await am.validateAndSpendCP('raise_cavalry_sipahi', power);
-
-            // Get the space and validate it's a valid target
+            // Get the space
             const space = await sm.getSpace(spaceName);
-            
-            // Check if space is a home space of Ottoman and uncontrolled
+
+            // Validate it's a home space
             if (space.homePower !== power) {
-                throw new Error(`${spaceName} is not a home space of ${power}`);
+                throw new Error(`${spaceName} is not a home space for ${power}`);
             }
-            if (space.controllingPower !== null) {
+
+            // Validate it's not controlled by another power
+            if (space.controllingPower && space.controllingPower !== power) {
                 throw new Error(`${spaceName} is controlled by ${space.controllingPower}`);
             }
 
-            // Add the cavalry (0 regular, 1 cavalry, no leaders)
-            // Note: For Ottoman, secondaryTroops parameter is used for cavalry
+            // Check for enemy formations
+            if (await fm.hasEnemyFormations(spaceName, power)) {
+                throw new Error(`${spaceName} contains enemy formations`);
+            }
+
+            // Validate and spend CP
+            const { cost, remainingCP } = await am.validateAndSpendCP(power);
+
+            // Add the cavalry (0 regulars, 1 cavalry, no leaders)
             const updatedSpace = await fm.addFormation(spaceName, power, 0, 1, []);
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
-                COMMAND_TYPES.ACTION_RAISE_CAVALRY_SIPAHI,
+                COMMAND_TYPES.RAISE_CAVALRY_SIPAHI,
                 {
-                    actionId: 'raise_cavalry_sipahi',
                     power,
                     spaceName,
                     cost,
@@ -58,17 +60,15 @@ module.exports = {
                 }
             );
 
-            // Send response
-            await interaction.reply({
-                content: `Added 1 cavalry for Ottoman in ${spaceName} (Cost: ${cost} CP, ${remainingCP} CP remaining)\n(Command ID: ${historyEntry.commandId})`,
-                ephemeral: true
-            });
+            await interaction.reply(
+                `Added 1 cavalry to ${spaceName} for ${power}. Cost: ${cost} CP. Remaining CP: ${remainingCP}. ` +
+                `(Command ID: ${historyEntry.commandId})`
+            );
 
         } catch (error) {
-            console.error('Error in raise_cavalry_sipahi command:', error);
-            await interaction.reply({
-                content: error.message || 'There was an error executing the action!',
-                ephemeral: true
+            await interaction.reply({ 
+                content: `Failed to raise cavalry: ${error.message}`,
+                ephemeral: true 
             });
         }
     }

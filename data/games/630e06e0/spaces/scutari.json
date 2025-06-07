@@ -16,5 +16,6 @@
   "jesuiteUniversity": false,
   "reformers": [],
   "formations": [],
-  "isUnderSiege": false
+  "isUnderSiege": false,
+  "squadrons": []
 }

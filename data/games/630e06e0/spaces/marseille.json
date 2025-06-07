@@ -15,5 +15,6 @@
   "catholic": true,
   "reformers": [],
   "formations": [],
-  "isUnderSiege": false
+  "isUnderSiege": false,
+  "squadrons": []
 }

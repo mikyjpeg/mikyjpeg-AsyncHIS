@@ -17,7 +17,9 @@ module.exports = {
                     { name: 'Hapsburg', value: 'Hapsburg' },
                     { name: 'England', value: 'England' },
                     { name: 'France', value: 'France' },
-                    { name: 'Papacy', value: 'Papacy' }))
+                    { name: 'Papacy', value: 'Papacy' },
+                    { name: 'Protestant', value: 'Protestant' }
+                ))
         .addStringOption(option =>
             option.setName('space')
                 .setDescription('Space to add the regular to')
@@ -29,37 +31,40 @@ module.exports = {
             const spaceName = interaction.options.getString('space');
             const channelName = interaction.channel.name;
 
-            // Get managers for this game
-            const am = actionsManager(channelName);
+            // Get managers
             const sm = spaceManager(channelName);
             const fm = formationManager(channelName);
+            const am = actionsManager(channelName);
 
-            // Validate the action exists and can be performed by this power
-            await am.validateAction('raise_regular_troop', power);
-
-            // Validate and spend CP
-            const { cost, remainingCP } = await am.validateAndSpendCP('raise_regular_troop', power);
-
-            // Get the space and validate it's a valid target
+            // Get the space
             const space = await sm.getSpace(spaceName);
-            
-            // Check if space is a home space of the power and uncontrolled
+
+            // Validate it's a home space
             if (space.homePower !== power) {
-                throw new Error(`${spaceName} is not a home space of ${power}`);
+                throw new Error(`${spaceName} is not a home space for ${power}`);
             }
-            if (space.controllingPower !== null) {
+
+            // Validate it's not controlled by another power
+            if (space.controllingPower && space.controllingPower !== power) {
                 throw new Error(`${spaceName} is controlled by ${space.controllingPower}`);
             }
 
-            // Add the regular (1 regular, 0 mercenary, no leaders)
+            // Check for enemy formations
+            if (await fm.hasEnemyFormations(spaceName, power)) {
+                throw new Error(`${spaceName} contains enemy formations`);
+            }
+
+            // Validate and spend CP
+            const { cost, remainingCP } = await am.validateAndSpendCP(power);
+
+            // Add the regular troop
             const updatedSpace = await fm.addFormation(spaceName, power, 1, 0, []);
 
             // Record in command history
             const historyEntry = await commandHistory(channelName).recordSlashCommand(
                 interaction,
-                COMMAND_TYPES.ACTION_RAISE_REGULAR_TROOP,
+                COMMAND_TYPES.RAISE_REGULAR_TROOP,
                 {
-                    actionId: 'raise_regular_troop',
                     power,
                     spaceName,
                     cost,
@@ -67,17 +72,15 @@ module.exports = {
                 }
             );
 
-            // Send response
-            await interaction.reply({
-                content: `Added 1 regular for ${power} in ${spaceName} (Cost: ${cost} CP, ${remainingCP} CP remaining)\n(Command ID: ${historyEntry.commandId})`,
-                ephemeral: true
-            });
+            await interaction.reply(
+                `Added 1 regular troop to ${spaceName} for ${power}. Cost: ${cost} CP. Remaining CP: ${remainingCP}. ` +
+                `(Command ID: ${historyEntry.commandId})`
+            );
 
         } catch (error) {
-            console.error('Error in raise_regular_troop command:', error);
-            await interaction.reply({
-                content: error.message || 'There was an error executing the action!',
-                ephemeral: true
+            await interaction.reply({ 
+                content: `Failed to raise regular troop: ${error.message}`,
+                ephemeral: true 
             });
         }
     }
