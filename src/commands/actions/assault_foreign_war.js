@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('assault_foreign_war')
-        .setDescription('Assault a fortress that had been placed under siege in a previous impulse. (Or Ottoman or English player resolves a Foreign War).')
+        .setDescription('Assault a besieged fortress, or resolve Ottoman/English Foreign War.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

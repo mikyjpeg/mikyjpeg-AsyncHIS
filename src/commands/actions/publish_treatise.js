@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('publish_treatise')
-        .setDescription('Protestant: 2 Reformation attempts targeting one language zone (2 CP). England: 2 Reformation attempts in English language zone (3 CP).')
+        .setDescription('Make 2 Reformation attempts in a language zone. Protestant: 2 CP, England: 3 CP.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

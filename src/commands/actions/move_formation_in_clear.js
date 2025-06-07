@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('move_formation_in_clear')
-        .setDescription('Cost is per space entered. 4 units allowed in formation (Exception: with leaders, limit is sum of command values of 1 or 2 leaders). If enemy space is entered, field battle initiated at no additional cost. If enter enemy fortified space with 4 or fewer defending troops, defenders can withdraw into fortifications and be placed under siege.')
+        .setDescription('Move formation through clear terrain. Can trigger battles or sieges.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

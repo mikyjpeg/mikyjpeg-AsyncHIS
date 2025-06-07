@@ -3,6 +3,7 @@ const path = require('path');
 const { FILE_SYSTEM } = require('../utils/constants');
 const { getGamePath } = require('../utils/gamePathUtils');
 const factionManager = require('./factionManager');
+const cardManager = require('./cardManager');
 
 class ActionsManager {
     constructor(channelId) {
@@ -53,6 +54,34 @@ class ActionsManager {
     async getActionCost(actionId, power) {
         const action = await this.getAction(actionId);
         return action.factions[power]?.cost || 1; // Default to 1 if not specified
+    }
+
+    async validateAndSpendCP(actionId, power) {
+        // Get card manager for this game
+        const cm = cardManager(this.channelId);
+
+        // Get current status to check available CP
+        const status = await cm.getStatus();
+        if (!status.currentImpulse?.availableCP) {
+            throw new Error('No CP available. Play a card first.');
+        }
+
+        // Get the action cost
+        const cost = await this.getActionCost(actionId, power);
+
+        // Check if we have enough CP
+        if (status.currentImpulse.availableCP < cost) {
+            throw new Error(`Not enough CP available. Action costs ${cost} CP but only ${status.currentImpulse.availableCP} CP remaining.`);
+        }
+
+        // Reduce available CP
+        status.currentImpulse.availableCP -= cost;
+        await cm.saveStatus(status);
+
+        return {
+            cost,
+            remainingCP: status.currentImpulse.availableCP
+        };
     }
 }
 

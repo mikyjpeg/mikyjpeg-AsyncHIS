@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('conquer')
-        .setDescription('If Hapsburgs, place their 'Conquest Underway' marker in the Crossing Atlantic Box. If England or France, place and evaluate conquest marker there. Resolve Voyage of Conquest at the end of turn.')
+        .setDescription('Start conquest in the New World. Resolves at end of turn.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

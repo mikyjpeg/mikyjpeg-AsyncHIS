@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('build_saint_peter_s')
-        .setDescription('Papal player moves St Peter's construction marker one space on track. If reaches rightmost space, add 1 VP and reset marker to 0 CP.')
+        .setDescription('Advance St. Peter\'s construction marker. Rightmost space grants 1 VP and resets marker.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

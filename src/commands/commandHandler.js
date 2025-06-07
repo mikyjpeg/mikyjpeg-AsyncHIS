@@ -5,7 +5,7 @@ const { Collection } = require('discord.js');
 class CommandHandler {
     constructor() {
         this.commands = new Collection();
-        this.commandCategories = ['diplomacy', 'spaces', 'game', 'religion', 'rulers', 'cards'];
+        this.commandCategories = ['diplomacy', 'spaces', 'game', 'religion', 'rulers', 'cards', 'actions'];
     }
 
     async loadCommands() {

@@ -12,6 +12,12 @@
   "bonusVP": [],
   "bonusVPTotal": 0,
   "captiveLeaders": [],
-  "cards": [],
+  "cards": [
+    "70",
+    "11",
+    "77",
+    "96",
+    "4"
+  ],
   "privateChannelId": "1380669608637370510"
 }

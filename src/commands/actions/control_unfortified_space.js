@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('control_unfortified_space')
-        .setDescription('Flip control on unfortified space if either (a) friendly land units are in the space, or (b) friendly land units are adjacent and no enemy units are adjacent to the space. Action also used to remove unrest.')
+        .setDescription('Take control of unfortified space with units in/adjacent to it. Also removes unrest.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

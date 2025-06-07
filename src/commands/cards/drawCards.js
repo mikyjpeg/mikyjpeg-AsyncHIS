@@ -63,7 +63,7 @@ module.exports = {
             
             // Format card names for display
             const cardList = result.drawnCardDetails.map(card => 
-                `${card.name} (${card.cp} CP)`
+                `${card.name} (ID: ${card.id}, ${card.cp} CP)`
             );
             
             // Send response

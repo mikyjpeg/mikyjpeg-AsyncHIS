@@ -1,4 +1,6 @@
 const { COMMAND_TYPES } = require('./commandHistoryManager');
+const formationManager = require('./formationManager');
+const cardManager = require('./cardManager');
 
 class ActionUndoManager {
     constructor(channelId) {
@@ -68,8 +70,17 @@ class ActionUndoManager {
     }
 
     async undoBuyMercenary(data) {
-        // TODO: Implement undo logic
-        throw new Error('Undo not yet implemented for buy_mercenary');
+        // Get managers
+        const fm = formationManager(this.channelId);
+        const cm = cardManager(this.channelId);
+
+        // Remove the mercenary from the space
+        await fm.removeFormation(data.spaceName, data.power, 0, 1, []);
+
+        // Restore the CP
+        const status = await cm.getStatus();
+        status.currentImpulse.availableCP += data.cost;
+        await cm.saveStatus(status);
     }
 
     async undoCallTheologicalDebate(data) {

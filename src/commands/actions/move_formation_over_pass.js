@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('move_formation_over_pass')
-        .setDescription('Cost is to enter the space across the pass. Stacking limit, combat, and siege work the same as in 'Move formation in clear'.')
+        .setDescription('Move formation across a pass. Uses same rules as regular movement but costs more CP.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

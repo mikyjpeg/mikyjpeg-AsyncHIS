@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('initiate_piracy_in_sea_zone')
-        .setDescription('Resolve a pirate raid in a sea zone containing one or more Ottoman corsairs. Target is a port or naval squadron of another power (other than Papacy, if not at war with Ottomans). Maximum 4 times per turn.')
+        .setDescription('Ottoman corsair raid on a port or naval squadron. Max 4 times per turn.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

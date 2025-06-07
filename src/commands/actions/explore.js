@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('explore')
-        .setDescription('Place the 'Exploration Underway' marker for this power in the Crossing Atlantic Box. Resolve Voyage of Exploration at the end of turn.')
+        .setDescription('Start exploration in the New World. Resolves at end of turn.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

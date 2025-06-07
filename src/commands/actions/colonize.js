@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('colonize')
-        .setDescription('Add a colony in the New World (limit 3 for Hapsburgs, 2 for England, 2 for France). Cost is 2 CP for Hapsburgs, 3 for others.')
+        .setDescription('Add colony in New World. Hapsburg: max 3 (2 CP), others: max 2 (3 CP).')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')

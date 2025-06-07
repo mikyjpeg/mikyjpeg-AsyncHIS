@@ -6,7 +6,7 @@ const factionManager = require('../../game/factionManager');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('translate_scripture')
-        .setDescription('Protestant player moves New Testament or Bible marker for one language one space further on track. If translation is complete, Protestant makes 6 Reformation attempts in that language zone. Reformation attempts in that language zone.')
+        .setDescription('Advance Bible translation. When complete, make 6 Reformation attempts in that language zone.')
         .addStringOption(option =>
             option.setName('power')
                 .setDescription('The power performing the action')
