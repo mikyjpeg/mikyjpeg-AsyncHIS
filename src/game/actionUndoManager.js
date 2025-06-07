@@ -41,7 +41,9 @@ class ActionUndoManager {
             [COMMAND_TYPES.ACTION_RAISE_REGULAR_TROOP]: this.undoRaiseRegularTroop.bind(this),
             [COMMAND_TYPES.ACTION_TRANSLATE_SCRIPTURE]: this.undoTranslateScripture.bind(this),
             [COMMAND_TYPES.ADD_SQUADRON_TO_PORT]: this.undoAddSquadronToPort.bind(this),
-            [COMMAND_TYPES.ADD_CORSAIR_TO_PORT]: this.undoAddCorsairToPort.bind(this)
+            [COMMAND_TYPES.ADD_CORSAIR_TO_PORT]: this.undoAddCorsairToPort.bind(this),
+            [COMMAND_TYPES.ADD_SQUADRONS_TO_SEAZONE]: this.undoAddSquadronsToSeazone.bind(this),
+            [COMMAND_TYPES.ADD_CORSAIRS_TO_SEAZONE]: this.undoAddCorsairsToSeazone.bind(this)
         };
         return handlers[type];
     }
@@ -180,7 +182,7 @@ class ActionUndoManager {
 
         // Create squadron object to remove
         const squadron = {
-            power: data.power,
+            power: data.squadron.power,
             squadron: data.squadron.squadron,
             loans: data.squadron.loans || []
         };
@@ -202,6 +204,36 @@ class ActionUndoManager {
 
         // Remove the corsair
         await nm.removeSquadronFromPort(data.spaceName, squadron);
+    }
+
+    async undoAddSquadronsToSeazone(data) {
+        // Get managers
+        const nm = navalManager(this.channelId);
+
+        // Create squadron object to remove
+        const squadron = {
+            power: data.squadron.power,
+            squadron: data.squadron.squadron,
+            loans: data.squadron.loans || []
+        };
+
+        // Remove the squadron
+        await nm.removeSquadronFromSeaZone(data.seaZoneName, squadron);
+    }
+
+    async undoAddCorsairsToSeazone(data) {
+        // Get managers
+        const nm = navalManager(this.channelId);
+
+        // Create corsair object to remove
+        const squadron = {
+            power: 'Ottoman',
+            corsair: data.squadron.corsair,
+            loans: []
+        };
+
+        // Remove the corsair
+        await nm.removeSquadronFromSeaZone(data.seaZoneName, squadron);
     }
 }
 

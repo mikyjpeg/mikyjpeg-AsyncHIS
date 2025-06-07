@@ -6,7 +6,9 @@
   "victoryPoints": 0,
   "ruler": "Henry VIII",
   "isActive": true,
-  "alliances": [],
+  "alliances": [
+    "Ottoman"
+  ],
   "atWarWith": [],
   "cardModifier": 0,
   "bonusVP": [],

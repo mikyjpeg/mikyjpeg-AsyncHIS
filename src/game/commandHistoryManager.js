@@ -171,6 +171,8 @@ const COMMAND_TYPES = {
     ACTION_TRANSLATE_SCRIPTURE: 'action_translate_scripture',
     ADD_SQUADRON_TO_PORT: 'add_squadron_to_port',
     ADD_CORSAIR_TO_PORT: 'add_corsair_to_port',
+    ADD_SQUADRONS_TO_SEAZONE: 'add_squadrons_to_seazone',
+    ADD_CORSAIRS_TO_SEAZONE: 'add_corsairs_to_seazone',
 };
 
 // Factory for creating command history entries
