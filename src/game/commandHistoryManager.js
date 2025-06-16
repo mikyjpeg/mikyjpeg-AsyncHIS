@@ -173,6 +173,7 @@ const COMMAND_TYPES = {
     ADD_CORSAIR_TO_PORT: 'add_corsair_to_port',
     ADD_SQUADRONS_TO_SEAZONE: 'add_squadrons_to_seazone',
     ADD_CORSAIRS_TO_SEAZONE: 'add_corsairs_to_seazone',
+    SET_PIRACY_TOKEN: 'set_piracy_token',
 };
 
 // Factory for creating command history entries

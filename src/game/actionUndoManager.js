@@ -43,7 +43,8 @@ class ActionUndoManager {
             [COMMAND_TYPES.ADD_SQUADRON_TO_PORT]: this.undoAddSquadronToPort.bind(this),
             [COMMAND_TYPES.ADD_CORSAIR_TO_PORT]: this.undoAddCorsairToPort.bind(this),
             [COMMAND_TYPES.ADD_SQUADRONS_TO_SEAZONE]: this.undoAddSquadronsToSeazone.bind(this),
-            [COMMAND_TYPES.ADD_CORSAIRS_TO_SEAZONE]: this.undoAddCorsairsToSeazone.bind(this)
+            [COMMAND_TYPES.ADD_CORSAIRS_TO_SEAZONE]: this.undoAddCorsairsToSeazone.bind(this),
+            [COMMAND_TYPES.SET_PIRACY_TOKEN]: this.undoSetPiracyToken.bind(this)
         };
         return handlers[type];
     }
@@ -234,6 +235,13 @@ class ActionUndoManager {
 
         // Remove the corsair
         await nm.removeSquadronFromSeaZone(data.seaZoneName, squadron);
+    }
+
+    async undoSetPiracyToken(data) {
+        const nm = navalManager(this.channelId);
+        // If removed is true, it means we need to add back the token
+        // If removed is false or undefined, it means we need to remove the token
+        await nm.setPiracyToken(data.seaZoneName, data.removed);
     }
 }
 

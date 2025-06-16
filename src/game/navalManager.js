@@ -351,6 +351,13 @@ class NavalManager {
         await sm.updateSpace(spaceName, space);
         return space;
     }
+
+    async setPiracyToken(seaZoneName, hasPiracyToken) {
+        const seaZone = await this.getSeaZone(seaZoneName);
+        seaZone.hasPiracyToken = hasPiracyToken;
+        await this.updateSeaZone(seaZoneName, seaZone);
+        return seaZone;
+    }
 }
 
 module.exports = (channelId) => new NavalManager(channelId); 
