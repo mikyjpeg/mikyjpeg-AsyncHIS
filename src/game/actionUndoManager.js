@@ -56,8 +56,17 @@ class ActionUndoManager {
     }
 
     async undoBuildCorsair(data) {
-        // TODO: Implement undo logic
-        throw new Error('Undo not yet implemented for build_corsair');
+        const { spaceName, squadron, cost } = data;
+        const nm = navalManager(this.channelId);
+        const cm = cardManager(this.channelId);
+        
+        // Remove the corsair from the port
+        await nm.removeSquadronFromPort(spaceName, squadron);
+
+        // Restore the CP
+        const status = await cm.getStatus();
+        status.currentImpulse.availableCP += cost;
+        await cm.saveStatus(status);
     }
 
     async undoBuildNavalSquadron(data) {

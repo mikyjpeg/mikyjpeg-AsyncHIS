@@ -229,6 +229,18 @@ class NavalManager {
             throw new Error(`${spaceName} does not have ports`);
         }
 
+        // For corsairs, validate it's a home space for Ottoman and not occupied by enemies
+        if (squadron.corsair !== undefined) {
+            if (spaceName !== 'Algiers') {
+                if (!space.homePower || space.homePower !== 'Ottoman') {
+                    throw new Error(`${spaceName} is not a home space for Ottoman`);
+                }
+            }
+            if (space.occupiedBy && space.occupiedBy !== 'Ottoman') {
+                throw new Error(`${spaceName} is occupied by enemies`);
+            }
+        }
+
         // Initialize squadrons array if it doesn't exist
         if (!space.squadrons) {
             space.squadrons = [];
