@@ -15,7 +15,6 @@ module.exports = {
 
     async execute(interaction) {
         try {
-            const power = 'Ottoman'; // Only Ottoman can build corsairs
             const spaceName = interaction.options.getString('space');
             const channelName = interaction.channel.name;
 
@@ -29,15 +28,12 @@ module.exports = {
             if (!status.activePlayer) {
                 throw new Error('No active player in the current game state');
             }
-            if (status.activePlayer.toLowerCase() !== power.toLowerCase()) {
-                throw new Error(`Only ${power} can perform this action during their impulse`);
-            }
 
             // Validate the action exists and can be performed by this power
-            await am.validateAction('build_corsair', power);
+            await am.validateAction('build_corsair', status.activePlayer);
 
             // Get the action cost
-            const cost = await am.getActionCost('build_corsair', power);
+            const cost = await am.getActionCost('build_corsair', status.activePlayer);
 
             // Check if there are enough CP
             if (status.currentImpulse.availableCP < cost) {
@@ -46,7 +42,7 @@ module.exports = {
 
             // Create corsair object
             const squadron = {
-                power,
+                power: status.activePlayer,
                 corsair: 1,
                 loans: []
             };
@@ -64,7 +60,7 @@ module.exports = {
                 COMMAND_TYPES.ACTION_BUILD_CORSAIR,
                 {
                     actionId: 'build_corsair',
-                    power,
+                    power: status.activePlayer,
                     spaceName,
                     squadron,
                     cost
@@ -72,7 +68,7 @@ module.exports = {
             );
 
             // Format response message
-            const message = `Added 1 corsair to ${spaceName} for ${power}. Cost: ${cost} CP. (Command ID: ${historyEntry.commandId})`;
+            const message = `Added 1 corsair to ${spaceName} for ${status.activePlayer}. Cost: ${cost} CP. (Command ID: ${historyEntry.commandId})`;
 
             await interaction.reply(message);
 
