@@ -5,7 +5,7 @@
   "cardsPerTurn": 5,
   "victoryPoints": 0,
   "ruler": "Clement VII",
-  "isActive": false,
+  "isActive": true,
   "alliances": [],
   "atWarWith": [],
   "cardModifier": 0,

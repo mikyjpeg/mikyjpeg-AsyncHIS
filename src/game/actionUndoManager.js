@@ -2,6 +2,7 @@ const { COMMAND_TYPES } = require('./commandHistoryManager');
 const formationManager = require('./formationManager');
 const cardManager = require('./cardManager');
 const navalManager = require('./navalManager');
+const spaceManager = require('./spaceManager');
 
 class ActionUndoManager {
     constructor(channelId) {
@@ -133,8 +134,17 @@ class ActionUndoManager {
     }
 
     async undoFoundJesuitUniversity(data) {
-        // TODO: Implement undo logic
-        throw new Error('Undo not yet implemented for found_jesuit_university');
+        // Get managers
+        const sm = spaceManager(this.channelId);
+        const cm = cardManager(this.channelId);
+
+        // Restore the space to its previous state
+        await sm.updateSpace(data.spaceName, data.oldState);
+
+        // Restore the CP
+        const status = await cm.getStatus();
+        status.currentImpulse.availableCP += data.cost;
+        await cm.saveStatus(status);
     }
 
     async undoInitiatePiracyInSeaZone(data) {
